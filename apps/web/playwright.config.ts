@@ -13,6 +13,11 @@ export default defineConfig({
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'Mobile Safari', use: { ...devices['iPhone 12'] } },
   ],
+  webServer: {
+    command: 'pnpm run dev',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+  },
 });

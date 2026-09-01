@@ -1,16 +1,24 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { WhatsappService } from './whatsapp.service';
-import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { WhatsappService, CheckoutRequest } from './whatsapp.service';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('WhatsApp Checkout')
+@ApiTags('Checkout & WhatsApp')
 @Controller('whatsapp')
 export class WhatsappController {
   constructor(private readonly whatsappService: WhatsappService) {}
 
   @Post('checkout')
-  @ApiOperation({ summary: 'Generar enlace estructurado de WhatsApp' })
-  @ApiBody({ schema: { example: { customerName: 'Juan', items: [{ variantId: 'uuid-1', quantity: 1 }] } } })
-  generateLink(@Body() body: { items: { variantId: string, quantity: number }[], customerName: string }) {
+  @ApiOperation({ summary: 'Validar carrito, registrar orden en Supabase y generar enlace de WhatsApp' })
+  checkout(@Body() body: CheckoutRequest) {
     return this.whatsappService.generateCheckoutLink(body);
+  }
+
+  @Get('coupon/validate')
+  @ApiOperation({ summary: 'Verificar cupón y calcular descuento' })
+  validateCoupon(
+    @Query('code') code: string,
+    @Query('subtotal') subtotal: string,
+  ) {
+    return this.whatsappService.validateCoupon(code, Number(subtotal) || 0);
   }
 }

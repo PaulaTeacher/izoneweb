@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 
 @ApiTags('Catalog')
 @Controller('catalog')
@@ -9,8 +9,23 @@ export class CatalogController {
 
   @Get('products')
   @ApiOperation({ summary: 'Listar productos con filtros' })
-  getProducts(@Query('category') categorySlug?: string, @Query('search') search?: string) {
-    return this.catalogService.getProducts({ categorySlug, search });
+  @ApiQuery({ name: 'category', required: false })
+  @ApiQuery({ name: 'search', required: false })
+  @ApiQuery({ name: 'tag', required: false })
+  @ApiQuery({ name: 'brand', required: false })
+  getProducts(
+    @Query('category') categorySlug?: string,
+    @Query('search') search?: string,
+    @Query('tag') tagSlug?: string,
+    @Query('brand') brandSlug?: string,
+  ) {
+    return this.catalogService.getProducts({ categorySlug, search, tagSlug, brandSlug });
+  }
+
+  @Get('categories')
+  @ApiOperation({ summary: 'Listar todas las categorías' })
+  getCategories() {
+    return this.catalogService.getCategories();
   }
 
   @Get('products/:slug')

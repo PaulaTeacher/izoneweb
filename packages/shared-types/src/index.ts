@@ -56,6 +56,7 @@ export interface Variant {
   compareAtPrice?: number;
   sku: string;
   stock: number;
+  featuredImage?: string;
   images?: string[];
   createdAt: string;
   updatedAt: string;

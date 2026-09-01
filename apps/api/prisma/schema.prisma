@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model AdminUser {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("EDITOR")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Customer {
+  id            String   @id @default(uuid())
+  name          String
+  document      String?
+  email         String?  @unique
+  phone         String?
+  erp_client_id String?  @unique
+  orders        Order[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Brand {
+  id       String    @id @default(uuid())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Tag {
+  id       String    @id @default(uuid())
+  name     String
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id             String      @id @default(uuid())
+  name           String
+  slug           String      @unique
+  description    String
+  imageUrl       String?
+  seoTitle       String?
+  seoDescription String?
+  brandId        String
+  brand          Brand       @relation(fields: [brandId], references: [id])
+  categoryId     String
+  category       Category    @relation(fields: [categoryId], references: [id])
+  tags           Tag[]
+  variants       Variant[]
+  reviews        Review[]
+  orderItems     OrderItem[]
+  erp_product_id String?     @unique
+  sync_status    String      @default("pending_sync")
+  last_sync_at   DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+}
+
+model Variant {
+  id              String      @id @default(uuid())
+  productId       String
+  product         Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  color           String?
+  storage         String?
+  price           Decimal
+  featuredImage   String?
+  sku             String      @unique
+  stock           Int         @default(0)
+  orderItems      OrderItem[]
+  erp_variant_sku String?     @unique
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model Review {
+  id           String   @id @default(uuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  customerName String
+  rating       Int
+  comment      String
+  isApproved   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+model Coupon {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  description   String?
+  discountType  String   @default("percentage") // "percentage" or "fixed"
+  discountValue Decimal
+  minOrderAmount Decimal?
+  maxUses       Int?
+  usedCount     Int      @default(0)
+  isActive      Boolean  @default(true)
+  validFrom     DateTime @default(now())
+  validUntil    DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model Order {
+  id                 String      @id @default(uuid())
+  customerId         String?
+  customer           Customer?   @relation(fields: [customerId], references: [id])
+  subtotal           Decimal     @default(0)
+  discount           Decimal     @default(0)
+  totalAmount        Decimal
+  couponCode         String?
+  paymentMethod      String      @default("whatsapp")
+  status             String      @default("pending")
+  shippingName       String?
+  shippingPhone      String?
+  shippingAddress    String?
+  shippingCity       String?
+  shippingNotes      String?
+  items              OrderItem[]
+  idempotencyKey     String      @unique @default(uuid())
+  erp_transaction_id String?     @unique
+  sync_status        String      @default("pending_sync")
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+}
+
+model OrderItem {
+  id         String   @id @default(uuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  variantId  String?
+  variant    Variant? @relation(fields: [variantId], references: [id])
+  name       String
+  quantity   Int
+  price      Decimal
+}

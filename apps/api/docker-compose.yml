@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: izone_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: izone_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - izone_pgdata:/var/lib/postgresql/data
+volumes:
+  izone_pgdata:

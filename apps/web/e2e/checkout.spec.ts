@@ -21,16 +21,15 @@ test('Flujo de Checkout con Cupón', async ({ page }) => {
   await expect(addToCartBtn).toBeVisible({ timeout: 10000 });
   await addToCartBtn.click({ force: true });
 
-  // 4. Abrir carrito
-  const cartIcon = page.locator('header button').filter({ hasText: /0|1|2|3/i }).first();
-  if (await cartIcon.isVisible()) {
-    await cartIcon.click();
+  // 4. Verificar que el carrito esté abierto (addItem lo abre automáticamente)
+  const couponInput = page.getByPlaceholder(/cupón/i).or(page.getByPlaceholder(/código/i));
+  if (!(await couponInput.isVisible())) {
+    const cartIcon = page.locator('header button[aria-label="Ver carrito de compras"]').first();
+    await cartIcon.click({ force: true });
   }
 
   // 5. Aplicar cupón
-  // El input de cupón
-  const couponInput = page.getByPlaceholder(/cupón/i).or(page.getByPlaceholder(/código/i));
-  await expect(couponInput).toBeVisible();
+  await expect(couponInput).toBeVisible({ timeout: 10000 });
   await couponInput.fill('WELCOME10');
   
   const applyBtn = page.getByRole('button', { name: /aplicar/i });

@@ -30,7 +30,9 @@ async function main() {
       description: 'El iPhone con la pantalla más grande y la mayor duración de batería.',
       seoTitle: 'Comprar iPhone 16 Pro Max en Bogotá | iZone Tech',
       seoDescription: 'Encuentra el nuevo iPhone 16 Pro Max al mejor precio en Colombia.',
-
+      images: [
+        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop'
+      ],
       brandId: brandApple.id,
       categoryId: catSmartphones.id,
       erp_product_id: 'ERP-IPH16PROMAX',
@@ -51,7 +53,9 @@ async function main() {
       description: 'Diseñado con titanio. Superpotenciado por el chip A18 Pro.',
       seoTitle: 'Comprar iPhone 16 Pro en Bogotá | iZone Tech',
       seoDescription: 'Encuentra el nuevo iPhone 16 Pro al mejor precio en Colombia.',
-
+      images: [
+        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop'
+      ],
       brandId: brandApple.id,
       categoryId: catSmartphones.id,
       erp_product_id: 'ERP-IPH16PRO',
@@ -70,7 +74,9 @@ async function main() {
       name: 'MacBook Air M3',
       slug: 'macbook-air-m3',
       description: 'Súper ligera. Súper chip M3.',
-
+      images: [
+        'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1000&auto=format&fit=crop'
+      ],
       brandId: brandApple.id,
       categoryId: catLaptops.id,
       erp_product_id: 'ERP-MBAIRM3',
@@ -89,7 +95,9 @@ async function main() {
       name: 'AirPods Pro (2.ª generación)',
       slug: 'airpods-pro-2',
       description: 'Cancelación Activa de Ruido hasta 2 veces mejor.',
-
+      images: [
+        'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=1000&auto=format&fit=crop'
+      ],
       brandId: brandApple.id,
       categoryId: catAudio.id,
       erp_product_id: 'ERP-AIRPRO2',
@@ -112,7 +120,7 @@ async function main() {
     }
   });
 
-  console.log('✅ Base de datos inicializada con productos semilla (Catálogo Apple).');
+  console.log('✅ Base de datos Supabase poblada exitosamente.');
 }
 
 main()

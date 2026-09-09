@@ -71,13 +71,22 @@ model Customer {
 // ======================== CATALOG ========================
 
 model Category {
-  id          String    @id @default(uuid())
+  id          String     @id @default(uuid())
   name        String
-  slug        String    @unique
+  slug        String     @unique
   description String?
   image       String?
-  sortOrder   Int       @default(0)
+  badge       String?
+  highlight   Boolean    @default(false)
+  isActive    Boolean    @default(true)
+  sortOrder   Int        @default(0)
+  parentId    String?
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id], onDelete: Restrict)
+  children    Category[] @relation("CategoryHierarchy")
   products    Product[]
+
+  @@index([parentId])
+  @@index([parentId, sortOrder])
 }
 
 model Brand {

@@ -1,4 +1,4 @@
-import { getProducts } from '@/lib/api';
+import { getProducts, productMatchesCategory } from '@/lib/api';
 import { ProductGrid } from '@/components/home/ProductGrid';
 import { CategoryModelCarousel } from '@/components/shop/CategoryModelCarousel';
 import { CATEGORY_MODELS } from '@/lib/category-models';
@@ -26,10 +26,10 @@ export default async function ShopPage({
       filteredProducts = products.filter((p) => p.isFeatured || p.tags?.some(t => t.slug === 'oferta-especial' || t.slug === 'destacado'));
     } else {
       filteredProducts = products.filter(
-        (p) => 
-          p.category?.slug.toLowerCase() === categoryFilter ||
+        (p) =>
+          productMatchesCategory(p, categoryFilter) ||
           p.name.toLowerCase().includes(categoryFilter) ||
-          p.tags?.some(t => t.slug?.toLowerCase() === categoryFilter || t.name?.toLowerCase().includes(categoryFilter))
+          p.tags?.some((t) => t.slug?.toLowerCase() === categoryFilter || t.name?.toLowerCase().includes(categoryFilter)),
       );
     }
   }

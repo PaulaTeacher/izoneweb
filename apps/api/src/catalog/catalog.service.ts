@@ -13,9 +13,38 @@ interface GetProductsParams {
   sort?: string;
 }
 
+const FAMILY_HREF: Record<string, string> = {
+  mac: '/mac',
+  iphone: '/iphone',
+  ipad: '/ipad',
+  'apple-watch': '/watch',
+  audio: '/audio',
+  accesorios: '/shop?category=accesorios',
+  ofertas: '/shop?category=ofertas',
+};
+
+function formatCOP(price: number): string {
+  return `$ ${price.toLocaleString('es-CO', { maximumFractionDigits: 0 })}`;
+}
+
+function familyHref(slug: string): string {
+  return FAMILY_HREF[slug] ?? `/${slug}`;
+}
+
 @Injectable()
 export class CatalogService {
   constructor(private prisma: PrismaService) {}
+
+  /** Family (iphone) or leaf (iphone-16-pro) → that node plus children. */
+  private async resolveCategoryAndDescendantIds(slug: string): Promise<string[]> {
+    const aliases = slug === 'watch' ? ['watch', 'apple-watch'] : [slug];
+    const category = await this.prisma.category.findFirst({
+      where: { slug: { in: aliases }, isActive: true },
+      include: { children: { where: { isActive: true }, select: { id: true } } },
+    });
+    if (!category) return [];
+    return [category.id, ...category.children.map((c) => c.id)];
+  }
 
   async getProducts(params: GetProductsParams) {
     const {
@@ -46,16 +75,23 @@ export class CatalogService {
     if (sort === 'name_asc') orderBy = { name: 'asc' };
     if (sort === 'newest') orderBy = { createdAt: 'desc' };
 
+    const categoryIds = categorySlug
+      ? await this.resolveCategoryAndDescendantIds(categorySlug)
+      : undefined;
+
+    if (categorySlug && categoryIds && categoryIds.length === 0) {
+      return [];
+    }
+
     const products = await this.prisma.product.findMany({
       where: {
         isActive: true,
-        category: categorySlug ? { slug: categorySlug } : undefined,
+        categoryId: categoryIds ? { in: categoryIds } : undefined,
         brand: brandSlug ? { slug: brandSlug } : undefined,
         tags: tagSlug ? { some: { slug: tagSlug } } : undefined,
         name: search
           ? { contains: search, mode: 'insensitive' }
           : undefined,
-        // Filter products that have at least one matching variant
         ...(Object.keys(variantFilter).length > 0
           ? { variants: { some: variantFilter } }
           : {}),
@@ -64,7 +100,7 @@ export class CatalogService {
         variants: {
           orderBy: { price: 'asc' },
         },
-        category: true,
+        category: { include: { parent: true } },
         brand: true,
         tags: true,
       },
@@ -92,13 +128,77 @@ export class CatalogService {
 
   async getCategories() {
     return this.prisma.category.findMany({
+      where: { parentId: null, isActive: true },
       orderBy: { sortOrder: 'asc' },
       include: {
+        children: {
+          where: { isActive: true },
+          orderBy: { sortOrder: 'asc' },
+        },
         _count: {
           select: { products: true },
         },
       },
     });
+  }
+
+  async getMenu() {
+    const families = await this.prisma.category.findMany({
+      where: { parentId: null, isActive: true },
+      orderBy: { sortOrder: 'asc' },
+      include: {
+        children: {
+          where: { isActive: true },
+          orderBy: { sortOrder: 'asc' },
+        },
+      },
+    });
+
+    const menu = [];
+    for (const family of families) {
+      const familyCategoryIds = [family.id, ...family.children.map((c) => c.id)];
+      const href = familyHref(family.slug);
+
+      const featured = await this.prisma.product.findFirst({
+        where: {
+          categoryId: { in: familyCategoryIds },
+          isFeatured: true,
+          isActive: true,
+        },
+        include: { variants: { orderBy: { price: 'asc' }, take: 1 } },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      let featuredProduct: unknown = undefined;
+      if (featured) {
+        const minPrice = featured.variants[0]
+          ? Number(featured.variants[0].price)
+          : 0;
+        featuredProduct = {
+          name: featured.name,
+          description: featured.description,
+          image: featured.images?.[0] ?? '',
+          href: `/product/${featured.slug}`,
+          price: minPrice ? `Desde ${formatCOP(minPrice)}` : '',
+        };
+      }
+
+      menu.push({
+        name: family.name,
+        slug: family.slug,
+        href,
+        badge: family.badge ?? undefined,
+        highlight: family.highlight,
+        subcategories: family.children.map((child) => ({
+          title: child.name,
+          href,
+          description: child.description ?? undefined,
+        })),
+        featuredProduct,
+      });
+    }
+
+    return menu;
   }
 
   async getBrands() {
@@ -118,7 +218,7 @@ export class CatalogService {
         variants: {
           orderBy: { price: 'asc' },
         },
-        category: true,
+        category: { include: { parent: true } },
         brand: true,
         tags: true,
         specs: {
@@ -173,7 +273,7 @@ export class CatalogService {
           take: 1,
         },
         brand: true,
-        category: true,
+        category: { include: { parent: true } },
         specs: {
           include: { spec: true },
           orderBy: { spec: { sortOrder: 'asc' } },

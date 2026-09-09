@@ -1,11 +1,25 @@
 import type {
   Product,
   Category,
+  MenuCategory,
   WhatsappCheckoutResponse,
 } from '@izone/shared-types';
 import { MOCK_PRODUCTS } from './mock-products';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
+const FAMILY_ALIASES: Record<string, string[]> = {
+  watch: ['watch', 'apple-watch'],
+  'apple-watch': ['watch', 'apple-watch'],
+};
+
+export function productMatchesCategory(product: Product, category: string): boolean {
+  const needle = category.toLowerCase();
+  const slugs = FAMILY_ALIASES[needle] || [needle];
+  const own = product.category?.slug?.toLowerCase();
+  const parent = product.category?.parent?.slug?.toLowerCase();
+  return slugs.some((s) => own === s || parent === s);
+}
 
 export async function getProducts(params?: {
   category?: string;
@@ -38,7 +52,7 @@ export async function getProducts(params?: {
     const cat = params.category.toLowerCase();
     results = results.filter(
       (p) =>
-        p.category?.slug.toLowerCase() === cat ||
+        productMatchesCategory(p, cat) ||
         p.name.toLowerCase().includes(cat) ||
         (cat === 'iphone' && p.name.toLowerCase().startsWith('iphone')) ||
         (cat === 'mac' && p.name.toLowerCase().includes('mac'))
@@ -85,6 +99,21 @@ export async function getCategories(): Promise<Category[]> {
     { id: 'cat-audio', name: 'Audio', slug: 'audio', sortOrder: 5 },
     { id: 'cat-acc', name: 'Accesorios', slug: 'accesorios', sortOrder: 6 },
   ];
+}
+
+export async function getMenu(): Promise<MenuCategory[]> {
+  try {
+    const res = await fetch(`${API_URL}/catalog/menu`, {
+      next: { revalidate: 300 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    }
+  } catch {
+    // Header sigue hardcodeado; este cliente es para la siguiente fase.
+  }
+  return [];
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {

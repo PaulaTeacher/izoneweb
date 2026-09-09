@@ -42,9 +42,15 @@ export class CatalogController {
   }
 
   @Get('categories')
-  @ApiOperation({ summary: 'Listar todas las categorías' })
+  @ApiOperation({ summary: 'Listar familias de categoría (con subcategorías)' })
   getCategories() {
     return this.catalogService.getCategories();
+  }
+
+  @Get('menu')
+  @ApiOperation({ summary: 'Árbol de navegación (familias + subcategorías + destacado)' })
+  getMenu() {
+    return this.catalogService.getMenu();
   }
 
   @Get('brands')

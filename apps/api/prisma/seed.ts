@@ -1,6 +1,123 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
+interface SubcategorySeed {
+  name: string;
+  slug: string;
+  description?: string;
+}
+
+interface FamilySeed {
+  name: string;
+  slug: string;
+  sortOrder: number;
+  description?: string;
+  badge?: string;
+  highlight?: boolean;
+  children: SubcategorySeed[];
+}
+
+/** Familias + hojas alineadas al Header y a las PLP actuales (no iPhone 16-only). */
+const TAXONOMY: FamilySeed[] = [
+  {
+    name: 'Mac',
+    slug: 'mac',
+    sortOrder: 1,
+    description: 'Potencia y rendimiento en cada modelo.',
+    children: [
+      { name: 'MacBook Air', slug: 'macbook-air', description: 'Chip M2 y M3' },
+      { name: 'MacBook Pro', slug: 'macbook-pro', description: 'Chip M3, M3 Pro y M3 Max' },
+      { name: 'iMac', slug: 'imac', description: '24 pulgadas' },
+      { name: 'Mac mini', slug: 'mac-mini', description: 'Chip M2 y M2 Pro' },
+      { name: 'Mac Studio', slug: 'mac-studio', description: 'Chip M2 Max y M2 Ultra' },
+      { name: 'Mac Pro', slug: 'mac-pro' },
+      { name: 'Monitores', slug: 'monitores', description: 'Studio Display y Pro Display XDR' },
+    ],
+  },
+  {
+    name: 'iPhone',
+    slug: 'iphone',
+    sortOrder: 2,
+    badge: 'Nuevo',
+    description: 'La línea de smartphones más avanzada del mundo.',
+    children: [
+      { name: 'iPhone 17 Pro', slug: 'iphone-17-pro', description: 'Titanio y chip A19 Pro' },
+      { name: 'iPhone 17', slug: 'iphone-17', description: 'Potente y colorido' },
+      { name: 'iPhone 17e', slug: 'iphone-17e', description: 'La opción esencial' },
+      { name: 'iPhone Air', slug: 'iphone-air', description: 'El más delgado' },
+      { name: 'iPhone 16 Pro', slug: 'iphone-16-pro', description: 'Titanio con chip A18 Pro' },
+      { name: 'iPhone 16', slug: 'iphone-16', description: 'Control de cámara y chip A18' },
+      { name: 'iPhone 16e', slug: 'iphone-16e' },
+      { name: 'iPhone 15', slug: 'iphone-15' },
+      { name: 'iPhone 14', slug: 'iphone-14' },
+      { name: 'iPhone 13', slug: 'iphone-13' },
+      { name: 'iPhone SE', slug: 'iphone-se' },
+    ],
+  },
+  {
+    name: 'iPad',
+    slug: 'ipad',
+    sortOrder: 3,
+    description: 'Tu siguiente computadora no es una computadora.',
+    children: [
+      { name: 'iPad Pro', slug: 'ipad-pro', description: 'El más avanzado' },
+      { name: 'iPad Air', slug: 'ipad-air', description: 'Ligero y potente' },
+      { name: 'iPad', slug: 'ipad-11', description: '10.ª / 11.ª generación' },
+      { name: 'iPad mini', slug: 'ipad-mini', description: 'Potencia en tu mano' },
+    ],
+  },
+  {
+    name: 'Apple Watch',
+    slug: 'apple-watch',
+    sortOrder: 4,
+    description: 'El reloj inteligente más avanzado.',
+    children: [
+      { name: 'Apple Watch Ultra 3', slug: 'apple-watch-ultra-3' },
+      { name: 'Apple Watch Series 11', slug: 'apple-watch-series-11' },
+      { name: 'Apple Watch Series 10', slug: 'apple-watch-series-10' },
+      { name: 'Apple Watch SE 3', slug: 'apple-watch-se-3' },
+    ],
+  },
+  {
+    name: 'Audio',
+    slug: 'audio',
+    sortOrder: 5,
+    description: 'AirPods y accesorios de audio premium.',
+    children: [
+      { name: 'AirPods Pro', slug: 'airpods-pro', description: '2.ª generación' },
+      { name: 'AirPods 4', slug: 'airpods-4' },
+      { name: 'AirPods Max', slug: 'airpods-max' },
+      { name: 'HomePod', slug: 'homepod' },
+      { name: 'HomePod mini', slug: 'homepod-mini' },
+    ],
+  },
+  {
+    name: 'Accesorios',
+    slug: 'accesorios',
+    sortOrder: 6,
+    description: 'Fundas, cargadores y más.',
+    children: [
+      { name: 'Fundas y Protección', slug: 'fundas' },
+      { name: 'Energía y Cables', slug: 'energia' },
+      { name: 'MagSafe', slug: 'magsafe' },
+      { name: 'Almacenamiento', slug: 'almacenamiento' },
+    ],
+  },
+  {
+    name: 'Ofertas',
+    slug: 'ofertas',
+    sortOrder: 7,
+    highlight: true,
+    badge: 'Hot',
+    description: 'Descuentos y oportunidades del mes.',
+    children: [
+      { name: 'Descuentos del Mes', slug: 'descuentos' },
+      { name: 'Combos & Bundles', slug: 'combos' },
+      { name: 'Outlet', slug: 'outlet' },
+    ],
+  },
+];
+
 async function main() {
   // Clean up in dependency order
   await prisma.tradeInRequest.deleteMany();
@@ -14,6 +131,7 @@ async function main() {
   await prisma.coupon.deleteMany();
   await prisma.variant.deleteMany();
   await prisma.product.deleteMany();
+  await prisma.category.updateMany({ data: { parentId: null } });
   await prisma.category.deleteMany();
   await prisma.brand.deleteMany();
   await prisma.tag.deleteMany();
@@ -24,25 +142,35 @@ async function main() {
     data: { name: 'Apple', slug: 'apple', logoUrl: null },
   });
 
-  // ======================== CATEGORIES ========================
-  const catSmartphones = await prisma.category.create({
-    data: { name: 'iPhone', slug: 'iphone', description: 'La línea de smartphones más avanzada del mundo.', sortOrder: 1 },
-  });
-  const catLaptops = await prisma.category.create({
-    data: { name: 'Mac', slug: 'mac', description: 'Potencia y rendimiento en cada modelo.', sortOrder: 2 },
-  });
-  const catTablets = await prisma.category.create({
-    data: { name: 'iPad', slug: 'ipad', description: 'Tu siguiente computadora no es una computadora.', sortOrder: 3 },
-  });
-  const catWearables = await prisma.category.create({
-    data: { name: 'Apple Watch', slug: 'apple-watch', description: 'El reloj inteligente más avanzado.', sortOrder: 4 },
-  });
-  const catAudio = await prisma.category.create({
-    data: { name: 'Audio', slug: 'audio', description: 'AirPods y accesorios de audio premium.', sortOrder: 5 },
-  });
-  const catAccessories = await prisma.category.create({
-    data: { name: 'Accesorios', slug: 'accesorios', description: 'Fundas, cargadores y más.', sortOrder: 6 },
-  });
+  // ======================== CATEGORIES (familia → hoja) ========================
+  const catId: Record<string, string> = {};
+  for (const fam of TAXONOMY) {
+    const family = await prisma.category.create({
+      data: {
+        name: fam.name,
+        slug: fam.slug,
+        description: fam.description,
+        sortOrder: fam.sortOrder,
+        badge: fam.badge,
+        highlight: fam.highlight ?? false,
+      },
+    });
+    catId[fam.slug] = family.id;
+
+    let childOrder = 1;
+    for (const sub of fam.children) {
+      const child = await prisma.category.create({
+        data: {
+          name: sub.name,
+          slug: sub.slug,
+          description: sub.description,
+          sortOrder: childOrder++,
+          parentId: family.id,
+        },
+      });
+      catId[sub.slug] = child.id;
+    }
+  }
 
   // ======================== TAGS ========================
   const tagNew = await prisma.tag.create({ data: { name: 'Nuevo', slug: 'nuevo' } });
@@ -100,7 +228,7 @@ async function main() {
         'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop',
       ],
       brandId: brandApple.id,
-      categoryId: catSmartphones.id,
+      categoryId: catId['iphone-16-pro'],
       erp_product_id: 'ERP-IPH16PROMAX',
       tags: { connect: [{ id: tagNew.id }, { id: tagPro.id }] },
       variants: {
@@ -149,7 +277,7 @@ async function main() {
         'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop',
       ],
       brandId: brandApple.id,
-      categoryId: catSmartphones.id,
+      categoryId: catId['iphone-16-pro'],
       erp_product_id: 'ERP-IPH16PRO',
       tags: { connect: [{ id: tagNew.id }, { id: tagPro.id }] },
       variants: {
@@ -192,7 +320,7 @@ async function main() {
         'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1000&auto=format&fit=crop',
       ],
       brandId: brandApple.id,
-      categoryId: catLaptops.id,
+      categoryId: catId['macbook-air'],
       erp_product_id: 'ERP-MBAIRM3',
       tags: { connect: [{ id: tagNew.id }, { id: tagBestSeller.id }] },
       variants: {
@@ -223,7 +351,7 @@ async function main() {
         'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=1000&auto=format&fit=crop',
       ],
       brandId: brandApple.id,
-      categoryId: catAudio.id,
+      categoryId: catId['airpods-pro'],
       erp_product_id: 'ERP-AIRPRO2',
       tags: { connect: [{ id: tagPro.id }, { id: tagBestSeller.id }] },
       variants: {
@@ -324,7 +452,10 @@ async function main() {
     },
   });
 
-  console.log('✅ Base de datos Supabase poblada exitosamente con esquema v2.');
+  console.log('✅ Base de datos poblada con taxonomía jerárquica.');
+  const familias = TAXONOMY.length;
+  const subcats = TAXONOMY.reduce((n, f) => n + f.children.length, 0);
+  console.log(`   🌳 ${familias} familias, ${subcats} subcategorías`);
   console.log('   📦 4 productos con variantes (nuevos + seminuevos + open box)');
   console.log('   📊 Especificaciones técnicas para comparador');
   console.log('   📱 6 modelos de Trade-In con 4 preguntas de evaluación');

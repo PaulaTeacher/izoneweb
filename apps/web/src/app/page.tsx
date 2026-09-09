@@ -1,4 +1,4 @@
-import { getProducts } from '@/lib/api';
+import { getProducts, productMatchesCategory } from '@/lib/api';
 import { HeroCarousel } from '@/components/home/HeroCarousel';
 import { CategoryCarousel } from '@/components/home/CategoryCarousel';
 import { FavoritesCarousel } from '@/components/home/FavoritesCarousel';
@@ -12,17 +12,25 @@ export default async function Home() {
   
   // En un caso real, podríamos filtrar los productos por categoría
   // Para el demo, dividiremos la lista actual
-  const macProducts = products.filter(p => p.category?.slug === 'mac' || p.name.toLowerCase().includes('mac'));
-  const iphoneProducts = products.filter(p => p.category?.slug === 'iphone' || p.name.toLowerCase().includes('iphone'));
-  const accessoriesProducts = products.filter(p => p.category?.slug === 'accesorios' || p.name.toLowerCase().includes('airpods') || p.name.toLowerCase().includes('cable') || p.name.toLowerCase().includes('cargador') || p.name.toLowerCase().includes('case'));
-  const otherProducts = products.filter(p => 
-    p.category?.slug !== 'mac' && 
-    p.category?.slug !== 'iphone' && 
-    p.category?.slug !== 'accesorios' &&
-    !p.name.toLowerCase().includes('mac') && 
-    !p.name.toLowerCase().includes('iphone') &&
-    !p.name.toLowerCase().includes('airpods') &&
-    !p.name.toLowerCase().includes('cable')
+  const macProducts = products.filter((p) => productMatchesCategory(p, 'mac') || p.name.toLowerCase().includes('mac'));
+  const iphoneProducts = products.filter((p) => productMatchesCategory(p, 'iphone') || p.name.toLowerCase().includes('iphone'));
+  const accessoriesProducts = products.filter(
+    (p) =>
+      productMatchesCategory(p, 'accesorios') ||
+      p.name.toLowerCase().includes('airpods') ||
+      p.name.toLowerCase().includes('cable') ||
+      p.name.toLowerCase().includes('cargador') ||
+      p.name.toLowerCase().includes('case'),
+  );
+  const otherProducts = products.filter(
+    (p) =>
+      !productMatchesCategory(p, 'mac') &&
+      !productMatchesCategory(p, 'iphone') &&
+      !productMatchesCategory(p, 'accesorios') &&
+      !p.name.toLowerCase().includes('mac') &&
+      !p.name.toLowerCase().includes('iphone') &&
+      !p.name.toLowerCase().includes('airpods') &&
+      !p.name.toLowerCase().includes('cable'),
   );
 
   return (

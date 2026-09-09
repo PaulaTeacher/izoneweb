@@ -28,6 +28,12 @@ export class CatalogController {
     return this.catalogService.getCategories();
   }
 
+  @Get('menu')
+  @ApiOperation({ summary: 'Árbol de navegación (familias + subcategorías + destacado)' })
+  getMenu() {
+    return this.catalogService.getMenu();
+  }
+
   @Get('products/:slug')
   @ApiOperation({ summary: 'Obtener un producto por slug' })
   getProductBySlug(@Param('slug') slug: string) {

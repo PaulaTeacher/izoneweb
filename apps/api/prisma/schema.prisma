@@ -47,10 +47,20 @@ model Customer {
 }
 
 model Category {
-  id       String    @id @default(uuid())
-  name     String
-  slug     String    @unique
-  products Product[]
+  id          String     @id @default(uuid())
+  name        String
+  slug        String     @unique
+  description String?
+  image       String?
+  icon        String?
+  badge       String?
+  highlight   Boolean    @default(false)
+  order       Int        @default(0)
+  isActive    Boolean    @default(true)
+  parentId    String?
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryHierarchy")
+  products    Product[]
 }
 
 model Brand {
@@ -83,6 +93,8 @@ model Product {
   variants       Variant[]
   reviews        Review[]
   orderItems     OrderItem[]
+  isFeatured     Boolean     @default(false)
+  isActive       Boolean     @default(true)
   erp_product_id String?     @unique
   sync_status    SyncStatus  @default(pending_sync)
   last_sync_at   DateTime?

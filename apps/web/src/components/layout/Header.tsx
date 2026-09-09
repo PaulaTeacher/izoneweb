@@ -12,133 +12,22 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
+import type { MenuCategory } from '@izone/shared-types';
 
-interface CategoryItem {
-  name: string;
-  href: string;
-  badge?: string;
-  highlight?: boolean;
-  subcategories?: { title: string; href: string; description?: string }[];
-  featuredProduct?: {
-    name: string;
-    description: string;
-    image: string;
-    href: string;
-    price: string;
-  };
-}
-
-const categories: CategoryItem[] = [
-  {
-    name: 'Mac',
-    href: '/#macbooks',
-    subcategories: [
-      { title: 'MacBook Air M3', href: '/#macbooks', description: 'Increíblemente delgada y rápida' },
-      { title: 'MacBook Pro 14" y 16"', href: '/#macbooks', description: 'Potencia profesional extrema' },
-      { title: 'iMac 24"', href: '/#macbooks', description: 'Todo en uno con pantalla 4.5K' },
-      { title: 'Mac Studio & Mac mini', href: '/#macbooks', description: 'Rendimiento modular sin límites' },
-    ],
-    featuredProduct: {
-      name: 'MacBook Air M3',
-      description: 'Potencia sin límites en un diseño ultraligero.',
-      image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop',
-      href: '/#macbooks',
-      price: 'Desde $ 5.699.000',
-    },
-  },
-  {
-    name: 'iPhone',
-    href: '/#smartphones',
-    badge: 'Nuevo',
-    subcategories: [
-      { title: 'iPhone 16 Pro & Pro Max', href: '/product/iphone-16-pro', description: 'Titanio con chip A18 Pro' },
-      { title: 'iPhone 16 & 16 Plus', href: '/#smartphones', description: 'Control de cámara y chip A18' },
-      { title: 'iPhone 15 & 15 Plus', href: '/#smartphones', description: 'Dynamic Island y cámara de 48 MP' },
-      { title: 'Comparar modelos', href: '/#smartphones', description: 'Encuentra el iPhone ideal para ti' },
-    ],
-    featuredProduct: {
-      name: 'iPhone 16 Pro Max',
-      description: 'El diseño definitivo en titanio y control de cámara profesional.',
-      image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop',
-      href: '/product/iphone-16-pro',
-      price: 'Desde $ 5.499.000',
-    },
-  },
-  {
-    name: 'iPad',
-    href: '/#ipad',
-    subcategories: [
-      { title: 'iPad Pro M4', href: '/#ipad', description: 'Pantalla OLED Ultra Retina XDR' },
-      { title: 'iPad Air M2', href: '/#ipad', description: 'Rendimiento versátil en 11" y 13"' },
-      { title: 'iPad 10ma Gen', href: '/#ipad', description: 'El iPad esencial para todo' },
-      { title: 'Apple Pencil & Teclados', href: '/#accesorios', description: 'Accesorios oficiales' },
-    ],
-    featuredProduct: {
-      name: 'iPad Pro M4',
-      description: 'Ultradelgado y con el poder sin precedentes del chip M4.',
-      image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=800&auto=format&fit=crop',
-      href: '/#ipad',
-      price: 'Desde $ 4.899.000',
-    },
-  },
-  {
-    name: 'Watch',
-    href: '/#apple-watch',
-    subcategories: [
-      { title: 'Apple Watch Ultra 2', href: '/#apple-watch', description: 'Aventura y resistencia extrema' },
-      { title: 'Apple Watch Series 10', href: '/#apple-watch', description: 'Diseño más delgado y pantalla mayor' },
-      { title: 'Apple Watch SE', href: '/#apple-watch', description: 'Grandes funciones a precio accesible' },
-      { title: 'Correas & Cargas', href: '/#accesorios', description: 'Personaliza tu estilo' },
-    ],
-    featuredProduct: {
-      name: 'Apple Watch Series 10',
-      description: 'Una pantalla monumental en el diseño más delgado jamás creado.',
-      image: 'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=800&auto=format&fit=crop',
-      href: '/#apple-watch',
-      price: 'Desde $ 2.199.000',
-    },
-  },
-  {
-    name: 'Audio',
-    href: '/#audio',
-    subcategories: [
-      { title: 'AirPods Pro 2', href: '/#audio', description: 'Cancelación activa de ruido pro' },
-      { title: 'AirPods 4 con ANC', href: '/#audio', description: 'Audio espacial personalizado' },
-      { title: 'AirPods Max', href: '/#audio', description: 'Alta fidelidad acústica' },
-      { title: 'HomePod & HomePod mini', href: '/#audio', description: 'Sonido envolvente para el hogar' },
-    ],
-    featuredProduct: {
-      name: 'AirPods Pro (2.ª Gen)',
-      description: 'Audio adaptativo y cancelación de ruido hasta el doble de potente.',
-      image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=800&auto=format&fit=crop',
-      href: '/#audio',
-      price: 'Desde $ 1.149.000',
-    },
-  },
-  {
-    name: 'Accesorios',
-    href: '/#accesorios',
-    subcategories: [
-      { title: 'Fundas y Protección MagSafe', href: '/#accesorios', description: 'Silicona, cuero fino y acrílico' },
-      { title: 'Cargadores y Cables', href: '/#accesorios', description: 'Adaptadores USB-C 20W y 35W' },
-      { title: 'Baterías Portátiles MagSafe', href: '/#accesorios', description: 'Energía extra en cualquier lugar' },
-      { title: 'Soportes y Adaptadores', href: '/#accesorios', description: 'Hubs multipuerto y docks' },
-    ],
-  },
-  {
-    name: 'Ofertas',
-    href: '/#ofertas',
-    highlight: true,
-    badge: 'Hot',
-    subcategories: [
-      { title: 'Descuentos del Mes', href: '/#ofertas', description: 'Ahorra hasta $800.000 en referencias selectas' },
-      { title: 'Reacondicionados Grado A+', href: '/#ofertas', description: '100% funcionales con garantía directa' },
-      { title: 'Combos & Bundles', href: '/#ofertas', description: 'iPhone + Case + Cargador con precio especial' },
-    ],
-  },
+// Fallback mínimo si el API de menú no responde (resiliencia SSR).
+const FALLBACK_MENU: MenuCategory[] = [
+  { name: 'Mac', slug: 'mac', href: '/#catalogo' },
+  { name: 'iPhone', slug: 'iphone', href: '/#catalogo', badge: 'Nuevo' },
+  { name: 'iPad', slug: 'ipad', href: '/#catalogo' },
+  { name: 'Apple Watch', slug: 'apple-watch', href: '/#catalogo' },
+  { name: 'Audio', slug: 'audio', href: '/#catalogo' },
+  { name: 'TV & Hogar', slug: 'tv-hogar', href: '/#catalogo' },
+  { name: 'Accesorios', slug: 'accesorios', href: '/#catalogo' },
+  { name: 'Ofertas', slug: 'ofertas', href: '/#catalogo', highlight: true, badge: 'Hot' },
 ];
 
-export default function Header() {
+export default function Header({ menu }: { menu?: MenuCategory[] }) {
+  const categories: MenuCategory[] = menu && menu.length > 0 ? menu : FALLBACK_MENU;
   const { openCart, totalCount } = useCart();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);

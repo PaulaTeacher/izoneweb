@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp';
 import CartDrawer from '@/components/cart/CartDrawer';
 import { CartProvider } from '@/lib/cart-context';
+import { getMenu } from '@/lib/api';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -63,11 +64,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const menu = await getMenu();
+
   return (
     <html lang="es" className={inter.variable}>
       <head>
@@ -78,8 +81,8 @@ export default function RootLayout({
           {/* 1. Top Announcement Bar */}
           <TopAnnouncementBar />
 
-          {/* 2. Header & Mega Menu */}
-          <Header />
+          {/* 2. Header & Mega Menu (data-driven desde /catalog/menu) */}
+          <Header menu={menu} />
 
           {/* 3. Main Content Container */}
           <main className="flex-1">{children}</main>

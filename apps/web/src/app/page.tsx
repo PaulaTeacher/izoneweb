@@ -77,7 +77,7 @@ export default async function Home() {
       </section>
 
       {/* Bento Grid de Catálogo */}
-      <section className="container mx-auto px-4 mt-8">
+      <section id="catalogo" className="container mx-auto px-4 mt-8 scroll-mt-24">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-3xl font-bold tracking-tight">Catálogo Disponible</h2>

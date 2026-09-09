@@ -39,6 +39,40 @@ export interface Category {
   slug: string;
   description?: string;
   image?: string;
+  icon?: string;
+  badge?: string;
+  highlight?: boolean;
+  order?: number;
+  isActive?: boolean;
+  parentId?: string | null;
+  parent?: Category | null;
+  children?: Category[];
+}
+
+// ======================== NAVIGATION / MENU ========================
+
+export interface MenuSubcategory {
+  title: string;
+  href: string;
+  description?: string;
+}
+
+export interface MenuFeaturedProduct {
+  name: string;
+  description: string;
+  image: string;
+  href: string;
+  price: string;
+}
+
+export interface MenuCategory {
+  name: string;
+  slug: string;
+  href: string;
+  badge?: string;
+  highlight?: boolean;
+  subcategories?: MenuSubcategory[];
+  featuredProduct?: MenuFeaturedProduct;
 }
 
 export interface Tag {

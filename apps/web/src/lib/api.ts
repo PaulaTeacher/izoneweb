@@ -1,6 +1,7 @@
 import type {
   Product,
   Category,
+  MenuCategory,
   WhatsappCheckoutResponse,
 } from '@izone/shared-types';
 
@@ -31,6 +32,18 @@ export async function getProducts(params?: {
 export async function getCategories(): Promise<Category[]> {
   try {
     const res = await fetch(`${API_URL}/catalog/categories`, {
+      next: { revalidate: 300 },
+    });
+    if (!res.ok) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
+}
+
+export async function getMenu(): Promise<MenuCategory[]> {
+  try {
+    const res = await fetch(`${API_URL}/catalog/menu`, {
       next: { revalidate: 300 },
     });
     if (!res.ok) return [];

@@ -77,7 +77,7 @@ export class WhatsappService {
       productId: string;
       variantId: string;
       name: string;
-      color?: string | null;
+      colorName?: string | null;
       storage?: string | null;
       quantity: number;
       unitPrice: number;
@@ -96,7 +96,7 @@ export class WhatsappService {
 
       if (variant.stock < item.quantity) {
         throw new BadRequestException(
-          `Stock insuficiente para ${variant.product.name} (${variant.color || ''}). Disponible: ${variant.stock}`,
+          `Stock insuficiente para ${variant.product.name} (${variant.colorName || ''}). Disponible: ${variant.stock}`,
         );
       }
 
@@ -108,7 +108,7 @@ export class WhatsappService {
         productId: variant.productId,
         variantId: variant.id,
         name: variant.product.name,
-        color: variant.color,
+        colorName: variant.colorName,
         storage: variant.storage,
         quantity: item.quantity,
         unitPrice: priceNum,
@@ -152,12 +152,12 @@ export class WhatsappService {
         shippingCity: data.shipping?.city,
         shippingNotes: data.shipping?.notes,
         paymentMethod: 'whatsapp',
-        status: 'pending',
+        status: 'reserved',
         items: {
           create: validatedItems.map((i) => ({
             productId: i.productId,
             variantId: i.variantId,
-            name: `${i.name} (${[i.color, i.storage].filter(Boolean).join(' - ')})`,
+            name: `${i.name} (${[i.colorName, i.storage].filter(Boolean).join(' - ')})`,
             quantity: i.quantity,
             price: i.unitPrice,
           })),
@@ -187,7 +187,7 @@ export class WhatsappService {
     message += `\n📦 *Productos:*\n`;
 
     for (const item of validatedItems) {
-      const details = [item.color, item.storage].filter(Boolean).join(' / ');
+      const details = [item.colorName, item.storage].filter(Boolean).join(' / ');
       message += `• *${item.quantity}x* ${item.name} ${details ? `(${details})` : ''}\n  Precio: ${formatCOP(item.unitPrice)}\n`;
     }
 

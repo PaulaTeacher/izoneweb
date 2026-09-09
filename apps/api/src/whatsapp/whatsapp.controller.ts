@@ -1,9 +1,11 @@
 import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { WhatsappService, CheckoutRequest } from './whatsapp.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Public } from '../auth/decorators';
 
 @ApiTags('Checkout & WhatsApp')
 @Controller('whatsapp')
+@Public()
 export class WhatsappController {
   constructor(private readonly whatsappService: WhatsappService) {}
 

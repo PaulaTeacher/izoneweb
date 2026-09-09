@@ -8,6 +8,8 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+// ======================== ENUMS ========================
+
 enum SyncStatus {
   synced
   pending_sync
@@ -15,48 +17,74 @@ enum SyncStatus {
 }
 
 enum OrderStatus {
-  pending
+  draft
+  reserved
+  wa_contacted
+  payment_pending
+  paid
+  preparing
+  shipped
+  delivered
   completed
   cancelled
 }
 
 enum Role {
   SUPERADMIN
+  ADMIN_INVENTARIO
+  ASESOR_VENTAS
   EDITOR
 }
+
+enum ProductCondition {
+  NUEVO_SELLADO
+  SEMINUEVO_CERTIFICADO
+  OPEN_BOX
+}
+
+// ======================== AUTH & USERS ========================
 
 model AdminUser {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
+  name      String?
   role      Role     @default(EDITOR)
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Customer {
-  id            String   @id @default(uuid())
-  name          String
-  document      String?
-  email         String?  @unique
-  phone         String?
-  erp_client_id String?  @unique
-  orders        Order[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id              String          @id @default(uuid())
+  name            String
+  document        String?
+  email           String?         @unique
+  phone           String?
+  erp_client_id   String?         @unique
+  orders          Order[]
+  tradeInRequests TradeInRequest[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 }
 
+// ======================== CATALOG ========================
+
 model Category {
-  id       String    @id @default(uuid())
-  name     String
-  slug     String    @unique
-  products Product[]
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  sortOrder   Int       @default(0)
+  products    Product[]
 }
 
 model Brand {
   id       String    @id @default(uuid())
   name     String
   slug     String    @unique
+  logoUrl  String?
   products Product[]
 }
 
@@ -68,43 +96,125 @@ model Tag {
 }
 
 model Product {
-  id             String      @id @default(uuid())
-  name           String
-  slug           String      @unique
-  description    String
-  images         String[]
-  seoTitle       String?
-  seoDescription String?
-  brandId        String
-  brand          Brand       @relation(fields: [brandId], references: [id])
-  categoryId     String
-  category       Category    @relation(fields: [categoryId], references: [id])
-  tags           Tag[]
-  variants       Variant[]
-  reviews        Review[]
-  orderItems     OrderItem[]
-  erp_product_id String?     @unique
-  sync_status    SyncStatus  @default(pending_sync)
-  last_sync_at   DateTime?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  id                String           @id @default(uuid())
+  name              String
+  slug              String           @unique
+  subtitle          String?
+  heroBadge         String?
+  description       String
+  images            String[]
+  isFeatured        Boolean          @default(false)
+  isActive          Boolean          @default(true)
+  isTradeInEligible Boolean          @default(false)
+  warrantyMonths    Int              @default(12)
+  seoTitle          String?
+  seoDescription    String?
+  brandId           String
+  brand             Brand            @relation(fields: [brandId], references: [id])
+  categoryId        String
+  category          Category         @relation(fields: [categoryId], references: [id])
+  tags              Tag[]
+  variants          Variant[]
+  specs             ProductSpec[]
+  reviews           Review[]
+  orderItems        OrderItem[]
+  erp_product_id    String?          @unique
+  sync_status       SyncStatus       @default(pending_sync)
+  last_sync_at      DateTime?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 }
 
 model Variant {
-  id              String      @id @default(uuid())
+  id              String           @id @default(uuid())
   productId       String
-  product         Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
-  color           String?
+  product         Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorName       String?
+  colorHex        String?
   storage         String?
+  condition       ProductCondition @default(NUEVO_SELLADO)
   price           Decimal
+  comparePrice    Decimal?
   featuredImage   String?
-  sku             String      @unique
-  stock           Int         @default(0)
+  sku             String           @unique
+  stock           Int              @default(0)
+  reservedStock   Int              @default(0)
   orderItems      OrderItem[]
-  erp_variant_sku String?     @unique
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  erp_variant_sku String?          @unique
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
+
+// ======================== SPECS (Comparator) ========================
+
+model SpecDefinition {
+  id        String        @id @default(uuid())
+  groupName String
+  label     String
+  unit      String?
+  sortOrder Int           @default(0)
+  specs     ProductSpec[]
+
+  @@unique([groupName, label])
+}
+
+model ProductSpec {
+  id        String         @id @default(uuid())
+  productId String
+  product   Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  specId    String
+  spec      SpecDefinition @relation(fields: [specId], references: [id], onDelete: Cascade)
+  value     String
+
+  @@unique([productId, specId])
+}
+
+// ======================== TRADE-IN ========================
+
+model TradeInModel {
+  id            String            @id @default(uuid())
+  name          String
+  slug          String            @unique
+  brandSlug     String
+  categorySlug  String
+  baseValue     Decimal
+  maxValue      Decimal
+  image         String?
+  isActive      Boolean           @default(true)
+  requests      TradeInRequest[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model TradeInQuestion {
+  id          String  @id @default(uuid())
+  question    String
+  description String?
+  sortOrder   Int     @default(0)
+  /// JSON: [{ "label": "Sí", "deductionPercent": 0 }, { "label": "No", "deductionPercent": 25 }]
+  options     String
+  isActive    Boolean @default(true)
+}
+
+model TradeInRequest {
+  id              String       @id @default(uuid())
+  customerId      String?
+  customer        Customer?    @relation(fields: [customerId], references: [id])
+  tradeInModelId  String
+  tradeInModel    TradeInModel @relation(fields: [tradeInModelId], references: [id])
+  customerName    String
+  customerPhone   String?
+  customerEmail   String?
+  /// JSON: { "questionId": "answerId", ... }
+  answers         String
+  estimatedValue  Decimal
+  status          String       @default("pending")
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+// ======================== REVIEWS ========================
 
 model Review {
   id           String   @id @default(uuid())
@@ -117,11 +227,13 @@ model Review {
   createdAt    DateTime @default(now())
 }
 
+// ======================== COUPONS ========================
+
 model Coupon {
   id             String    @id @default(uuid())
   code           String    @unique
   description    String?
-  discountType   String    @default("percentage") // "percentage" or "fixed"
+  discountType   String    @default("percentage")
   discountValue  Decimal
   minOrderAmount Decimal?
   maxUses        Int?
@@ -132,16 +244,21 @@ model Coupon {
   createdAt      DateTime  @default(now())
 }
 
+// ======================== ORDERS ========================
+
 model Order {
   id                 String      @id @default(uuid())
+  orderRef           String      @unique @default(uuid())
   customerId         String?
   customer           Customer?   @relation(fields: [customerId], references: [id])
   subtotal           Decimal     @default(0)
   discount           Decimal     @default(0)
+  shippingCost       Decimal     @default(0)
   totalAmount        Decimal
   couponCode         String?
   paymentMethod      String      @default("whatsapp")
-  status             OrderStatus @default(pending)
+  status             OrderStatus @default(draft)
+  reservedUntil      DateTime?
   shippingName       String?
   shippingPhone      String?
   shippingAddress    String?

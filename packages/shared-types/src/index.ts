@@ -1,13 +1,17 @@
 // ============================================================
-// iZone Tech — Shared Types & DTOs
+// iZone Tech — Shared Types & DTOs (v2)
 // Paquete compartido entre frontend (Next.js) y backend (NestJS)
 // ============================================================
 
 // ======================== ENUMS ========================
 
 export enum OrderStatus {
-  PENDING = 'pending',
-  CONFIRMED = 'confirmed',
+  DRAFT = 'draft',
+  RESERVED = 'reserved',
+  WA_CONTACTED = 'wa_contacted',
+  PAYMENT_PENDING = 'payment_pending',
+  PAID = 'paid',
+  PREPARING = 'preparing',
   SHIPPED = 'shipped',
   DELIVERED = 'delivered',
   COMPLETED = 'completed',
@@ -16,6 +20,8 @@ export enum OrderStatus {
 
 export enum Role {
   SUPERADMIN = 'SUPERADMIN',
+  ADMIN_INVENTARIO = 'ADMIN_INVENTARIO',
+  ASESOR_VENTAS = 'ASESOR_VENTAS',
   EDITOR = 'EDITOR',
 }
 
@@ -25,20 +31,28 @@ export enum SyncStatus {
   ERROR = 'error',
 }
 
+export enum ProductCondition {
+  NUEVO_SELLADO = 'NUEVO_SELLADO',
+  SEMINUEVO_CERTIFICADO = 'SEMINUEVO_CERTIFICADO',
+  OPEN_BOX = 'OPEN_BOX',
+}
+
 // ======================== ENTITIES ========================
 
 export interface Brand {
   id: string;
   name: string;
   slug: string;
+  logoUrl?: string | null;
 }
 
 export interface Category {
   id: string;
   name: string;
   slug: string;
-  description?: string;
-  image?: string;
+  description?: string | null;
+  image?: string | null;
+  sortOrder: number;
 }
 
 export interface Tag {
@@ -50,16 +64,34 @@ export interface Tag {
 export interface Variant {
   id: string;
   productId: string;
-  color?: string;
-  storage?: string;
+  colorName?: string | null;
+  colorHex?: string | null;
+  storage?: string | null;
+  condition: ProductCondition;
   price: number;
-  compareAtPrice?: number;
+  comparePrice?: number | null;
   sku: string;
   stock: number;
-  featuredImage?: string;
-  images?: string[];
+  reservedStock: number;
+  featuredImage?: string | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface SpecDefinition {
+  id: string;
+  groupName: string;
+  label: string;
+  unit?: string | null;
+  sortOrder: number;
+}
+
+export interface ProductSpec {
+  id: string;
+  productId: string;
+  specId: string;
+  spec: SpecDefinition;
+  value: string;
 }
 
 export interface Review {
@@ -76,19 +108,25 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
+  subtitle?: string | null;
+  heroBadge?: string | null;
   description: string;
   images?: string[];
-  seoTitle?: string;
-  seoDescription?: string;
+  isFeatured: boolean;
+  isActive: boolean;
+  isTradeInEligible: boolean;
+  warrantyMonths: number;
+  seoTitle?: string | null;
+  seoDescription?: string | null;
   brandId: string;
   brand: Brand;
   categoryId: string;
   category: Category;
   tags: Tag[];
   variants: Variant[];
+  specs: ProductSpec[];
   reviews: Review[];
-  isFeatured: boolean;
-  isActive: boolean;
+  groupedSpecs?: Record<string, { label: string; value: string; unit?: string | null }[]>;
   createdAt: string;
   updatedAt: string;
 }
@@ -97,12 +135,15 @@ export interface ProductListItem {
   id: string;
   name: string;
   slug: string;
+  subtitle?: string | null;
+  heroBadge?: string | null;
   description: string;
   images?: string[];
   brand: Brand;
   category: Category;
-  variants: Pick<Variant, 'id' | 'color' | 'storage' | 'price' | 'stock'>[];
+  variants: Pick<Variant, 'id' | 'colorName' | 'colorHex' | 'storage' | 'condition' | 'price' | 'comparePrice' | 'stock'>[];
   isFeatured: boolean;
+  isTradeInEligible: boolean;
 }
 
 export interface Customer {
@@ -129,15 +170,18 @@ export interface OrderItem {
 
 export interface Order {
   id: string;
+  orderRef: string;
   customerId?: string;
   customer?: Customer;
   items: OrderItem[];
   subtotal: number;
   discount: number;
+  shippingCost: number;
   totalAmount: number;
   couponCode?: string;
   paymentMethod: string;
   status: OrderStatus;
+  reservedUntil?: string | null;
   shippingName?: string;
   shippingPhone?: string;
   shippingAddress?: string;
@@ -165,9 +209,78 @@ export interface Coupon {
 export interface AdminUser {
   id: string;
   email: string;
+  name?: string | null;
   role: Role;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+// ======================== TRADE-IN ========================
+
+export interface TradeInModel {
+  id: string;
+  name: string;
+  slug: string;
+  brandSlug: string;
+  categorySlug: string;
+  baseValue: number;
+  maxValue: number;
+  image?: string | null;
+  isActive: boolean;
+}
+
+export interface TradeInQuestionOption {
+  label: string;
+  deductionPercent: number;
+}
+
+export interface TradeInQuestion {
+  id: string;
+  question: string;
+  description?: string | null;
+  sortOrder: number;
+  options: TradeInQuestionOption[];
+  isActive: boolean;
+}
+
+export interface TradeInRequest {
+  id: string;
+  customerId?: string;
+  tradeInModelId: string;
+  tradeInModel: TradeInModel;
+  customerName: string;
+  customerPhone?: string;
+  customerEmail?: string;
+  answers: Record<string, string>;
+  estimatedValue: number;
+  status: string;
+  notes?: string;
+  createdAt: string;
+}
+
+// ======================== COMPARATOR ========================
+
+export interface ComparisonSpec {
+  group: string;
+  label: string;
+  unit?: string | null;
+  values: string[];
+}
+
+export interface ComparisonProduct {
+  id: string;
+  name: string;
+  slug: string;
+  image?: string;
+  startingPrice: number | null;
+  brand: string;
+  category: string;
+}
+
+export interface ComparisonResult {
+  products: ComparisonProduct[];
+  specs: ComparisonSpec[];
 }
 
 // ======================== DTOs ========================
@@ -190,14 +303,19 @@ export interface WhatsappCheckoutDto {
 }
 
 export interface WhatsappCheckoutResponse {
+  orderId: string;
+  orderRef: string;
   url: string;
+  subtotal: number;
+  discount: number;
   total: number;
-  formattedTotal: string;
 }
 
 export interface CreateProductDto {
   name: string;
   slug: string;
+  subtitle?: string;
+  heroBadge?: string;
   description: string;
   images?: string[];
   seoTitle?: string;
@@ -206,17 +324,20 @@ export interface CreateProductDto {
   categoryId: string;
   tagIds?: string[];
   isFeatured?: boolean;
+  isTradeInEligible?: boolean;
+  warrantyMonths?: number;
   variants: CreateVariantDto[];
 }
 
 export interface CreateVariantDto {
-  color?: string;
+  colorName?: string;
+  colorHex?: string;
   storage?: string;
+  condition?: ProductCondition;
   price: number;
-  compareAtPrice?: number;
+  comparePrice?: number;
   sku: string;
   stock: number;
-  images?: string[];
 }
 
 export interface UpdateProductDto extends Partial<CreateProductDto> {}
@@ -247,7 +368,20 @@ export interface LoginDto {
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
-  user: Omit<AdminUser, 'createdAt' | 'updatedAt'>;
+  user: {
+    id: string;
+    email: string;
+    name?: string | null;
+    role: Role;
+  };
+}
+
+export interface TradeInEstimateDto {
+  tradeInModelId: string;
+  answers: Record<string, string>;
+  customerName: string;
+  customerPhone?: string;
+  customerEmail?: string;
 }
 
 // ======================== API RESPONSES ========================
@@ -266,6 +400,7 @@ export interface CatalogFilters {
   category?: string;
   brand?: string;
   search?: string;
+  condition?: ProductCondition;
   minPrice?: number;
   maxPrice?: number;
   inStock?: boolean;
@@ -293,9 +428,28 @@ export function formatCOP(price: number): string {
 
 /**
  * Genera un label legible para una variante.
- * Ejemplo: "Titanio Natural - 256GB"
+ * Ejemplo: "Titanio Natural – 256GB"
  */
-export function variantLabel(variant: Pick<Variant, 'color' | 'storage'>): string {
-  const parts = [variant.color, variant.storage].filter(Boolean);
+export function variantLabel(variant: Pick<Variant, 'colorName' | 'storage'>): string {
+  const parts = [variant.colorName, variant.storage].filter(Boolean);
   return parts.join(' – ') || 'Estándar';
+}
+
+/**
+ * Returns the condition label in Spanish.
+ */
+export function conditionLabel(condition: ProductCondition): string {
+  const labels: Record<ProductCondition, string> = {
+    [ProductCondition.NUEVO_SELLADO]: 'Nuevo Sellado',
+    [ProductCondition.SEMINUEVO_CERTIFICADO]: 'Seminuevo Certificado',
+    [ProductCondition.OPEN_BOX]: 'Open Box',
+  };
+  return labels[condition] || condition;
+}
+
+/**
+ * Returns the available stock (total stock minus reserved).
+ */
+export function availableStock(variant: Pick<Variant, 'stock' | 'reservedStock'>): number {
+  return Math.max(0, variant.stock - variant.reservedStock);
 }

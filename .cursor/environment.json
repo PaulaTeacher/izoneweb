@@ -1,0 +1,16 @@
+{
+  "name": "iZone Tech E-Commerce",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "bash .cursor/dev.sh",
+      "description": "Runs the Next.js frontend (http://localhost:3000) and NestJS API (http://localhost:3001) together via `pnpm dev` (Turborepo)."
+    }
+  ],
+  "ports": [
+    { "name": "web", "port": 3000 },
+    { "name": "api", "port": 3001 }
+  ]
+}

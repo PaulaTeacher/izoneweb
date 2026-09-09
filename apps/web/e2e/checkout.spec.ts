@@ -7,8 +7,8 @@ test('Flujo de Checkout con Cupón', async ({ page }) => {
   // Verificar que estamos en la home
   await expect(page).toHaveTitle(/iZone/i);
 
-  // 2. Ir a un producto (simulamos clic en el primer enlace que tenga href a /product/)
-  const productLink = page.locator('a[href^="/product/"]').first();
+  // 2. Ir a un producto (buscamos un enlace de producto dentro de la grilla de productos)
+  const productLink = page.locator('a[href^="/product/"]').filter({ hasText: /Desde/i }).first();
   await expect(productLink).toBeVisible();
   await productLink.click();
 

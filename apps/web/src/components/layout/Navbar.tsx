@@ -10,11 +10,11 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'iPhone', href: '/#smartphones' },
-    { name: 'Mac', href: '/#macbooks' },
-    { name: 'iPad', href: '/#ipad' },
-    { name: 'Apple Watch', href: '/#apple-watch' },
-    { name: 'Audio', href: '/#audio' },
+    { name: 'Mac', href: '/mac' },
+    { name: 'iPhone', href: '/iphone' },
+    { name: 'iPad', href: '/ipad' },
+    { name: 'Watch', href: '/watch' },
+    { name: 'Audio', href: '/audio' },
   ];
 
   return (

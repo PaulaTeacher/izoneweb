@@ -67,7 +67,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         );
       }
 
-      const details = [variant.color, variant.storage].filter(Boolean).join(' • ');
+      const details = [variant.colorName, variant.storage].filter(Boolean).join(' • ');
       const newItem: CartItem = {
         id: `${product.id}-${variant.id}`,
         productId: product.id,

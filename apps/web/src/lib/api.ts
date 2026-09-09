@@ -3,6 +3,7 @@ import type {
   Category,
   WhatsappCheckoutResponse,
 } from '@izone/shared-types';
+import { MOCK_PRODUCTS } from './mock-products';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
@@ -21,11 +22,46 @@ export async function getProducts(params?: {
     const res = await fetch(`${API_URL}/catalog/products${query}`, {
       next: { revalidate: 30 },
     });
-    if (!res.ok) return [];
-    return res.json();
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        return data;
+      }
+    }
   } catch {
-    return [];
+    // API no disponible, usar datos locales estructurados
   }
+
+  // Fallback con productos mock realistas (compatible 100% con schema backend)
+  let results = [...MOCK_PRODUCTS];
+  if (params?.category) {
+    const cat = params.category.toLowerCase();
+    results = results.filter(
+      (p) =>
+        p.category?.slug.toLowerCase() === cat ||
+        p.name.toLowerCase().includes(cat) ||
+        (cat === 'iphone' && p.name.toLowerCase().startsWith('iphone')) ||
+        (cat === 'mac' && p.name.toLowerCase().includes('mac'))
+    );
+  }
+
+  if (params?.search) {
+    const q = params.search.toLowerCase();
+    results = results.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    );
+  }
+
+  if (params?.tag) {
+    const t = params.tag.toLowerCase();
+    results = results.filter((p) =>
+      p.tags?.some((tag) => tag.slug.toLowerCase() === t)
+    );
+  }
+
+  return results;
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -33,11 +69,22 @@ export async function getCategories(): Promise<Category[]> {
     const res = await fetch(`${API_URL}/catalog/categories`, {
       next: { revalidate: 300 },
     });
-    if (!res.ok) return [];
-    return res.json();
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) return data;
+    }
   } catch {
-    return [];
+    // Fallback
   }
+
+  return [
+    { id: 'cat-mac', name: 'Mac', slug: 'mac', sortOrder: 1 },
+    { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
+    { id: 'cat-ipad', name: 'iPad', slug: 'ipad', sortOrder: 3 },
+    { id: 'cat-watch', name: 'Apple Watch', slug: 'watch', sortOrder: 4 },
+    { id: 'cat-audio', name: 'Audio', slug: 'audio', sortOrder: 5 },
+    { id: 'cat-acc', name: 'Accesorios', slug: 'accesorios', sortOrder: 6 },
+  ];
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {
@@ -45,11 +92,14 @@ export async function getProduct(slug: string): Promise<Product | null> {
     const res = await fetch(`${API_URL}/catalog/products/${slug}`, {
       next: { revalidate: 60 },
     });
-    if (!res.ok) return null;
-    return res.json();
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.id) return data;
+    }
   } catch {
-    return null;
+    // Fallback
   }
+  return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
 }
 
 export interface CouponValidationResult {

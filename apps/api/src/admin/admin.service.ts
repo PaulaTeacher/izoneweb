@@ -1,8 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, ProductKind } from '@prisma/client';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import {
+  AccessoryMaterial,
+  Prisma,
+  ProductCondition,
+  ProductKind,
+} from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   CreateProductDto,
+  CreateVariantDto,
+  UpdateProductBundleDto,
   UpdateProductDto,
   UpdateVariantDto,
 } from './dto/admin-catalog.dto';
@@ -77,41 +88,178 @@ export class AdminService {
     });
   }
 
+  /**
+   * Actualiza producto + variantes en una sola transacción.
+   * Evita que la tienda quede con precio nuevo y stock viejo (o viceversa).
+   */
+  async updateProductBundle(id: string, data: UpdateProductBundleDto) {
+    await this.ensureProduct(id);
+
+    try {
+      await this.prisma.$transaction(async (tx) => {
+        await tx.product.update({
+          where: { id },
+          data: {
+            name: data.name,
+            subtitle: data.subtitle,
+            description: data.description,
+            isActive: data.isActive,
+            isFeatured: data.isFeatured,
+            images: data.images ? this.cleanImages(data.images) : undefined,
+            seoTitle: data.seoTitle,
+            seoDescription: data.seoDescription,
+            warrantyMonths: data.warrantyMonths,
+          },
+        });
+
+        for (const v of data.variants || []) {
+          const variantData = {
+            sku: v.sku.trim(),
+            price: v.price,
+            comparePrice: v.comparePrice ?? null,
+            stock: v.stock ?? 0,
+            colorName: v.colorName ?? null,
+            colorHex: v.colorHex ?? null,
+            storage: v.storage ?? null,
+            featuredImage: v.featuredImage ?? null,
+            condition: (v.condition as ProductCondition) || undefined,
+            material: v.material === undefined
+              ? undefined
+              : v.material === null
+                ? null
+                : (v.material as AccessoryMaterial),
+          };
+
+          if (v.id) {
+            const owned = await tx.variant.findFirst({
+              where: { id: v.id, productId: id },
+              select: { id: true },
+            });
+            if (!owned) {
+              throw new NotFoundException(`Variante ${v.id} no pertenece al producto`);
+            }
+            await tx.variant.update({
+              where: { id: v.id },
+              data: variantData,
+            });
+          } else {
+            await tx.variant.create({
+              data: {
+                productId: id,
+                ...variantData,
+                condition:
+                  (v.condition as ProductCondition) || ProductCondition.NUEVO_SELLADO,
+                material: v.material ? (v.material as AccessoryMaterial) : null,
+                stock: v.stock ?? 0,
+              },
+            });
+          }
+        }
+      });
+    } catch (error) {
+      this.rethrowUnique(error, 'Slug o SKU ya existe');
+    }
+
+    return this.getProduct(id);
+  }
+
   async updateVariant(id: string, data: UpdateVariantDto) {
     const variant = await this.prisma.variant.findUnique({ where: { id } });
     if (!variant) throw new NotFoundException('Variante no encontrada');
 
-    return this.prisma.variant.update({
-      where: { id },
-      data: {
-        price: data.price,
-        comparePrice: data.comparePrice === undefined ? undefined : data.comparePrice,
-        stock: data.stock,
-        colorName: data.colorName,
-        featuredImage: data.featuredImage,
-      },
-      include: { product: { select: { id: true, slug: true, name: true } } },
-    });
+    try {
+      return await this.prisma.variant.update({
+        where: { id },
+        data: {
+          sku: data.sku,
+          price: data.price,
+          comparePrice: data.comparePrice === undefined ? undefined : data.comparePrice,
+          stock: data.stock,
+          colorName: data.colorName,
+          colorHex: data.colorHex,
+          storage: data.storage,
+          featuredImage: data.featuredImage,
+          condition: data.condition as ProductCondition | undefined,
+          material:
+            data.material === undefined
+              ? undefined
+              : data.material === null
+                ? null
+                : (data.material as AccessoryMaterial),
+        },
+        include: { product: { select: { id: true, slug: true, name: true } } },
+      });
+    } catch (error) {
+      this.rethrowUnique(error, 'SKU ya existe');
+    }
+  }
+
+  async createVariant(productId: string, data: CreateVariantDto) {
+    await this.ensureProduct(productId);
+    try {
+      return await this.prisma.variant.create({
+        data: {
+          productId,
+          sku: data.sku.trim(),
+          price: data.price,
+          comparePrice: data.comparePrice ?? null,
+          stock: data.stock ?? 0,
+          colorName: data.colorName ?? null,
+          colorHex: data.colorHex ?? null,
+          storage: data.storage ?? null,
+          featuredImage: data.featuredImage ?? null,
+          condition: (data.condition as ProductCondition) || ProductCondition.NUEVO_SELLADO,
+          material: data.material ? (data.material as AccessoryMaterial) : null,
+        },
+        include: { product: { select: { id: true, slug: true, name: true } } },
+      });
+    } catch (error) {
+      this.rethrowUnique(error, 'SKU ya existe');
+    }
   }
 
   async createProduct(data: CreateProductDto) {
-    return this.prisma.product.create({
-      data: {
-        name: data.name,
-        slug: data.slug,
-        description: data.description,
-        brandId: data.brandId,
-        categoryId: data.categoryId,
-        productKind: (data.productKind as ProductKind) || ProductKind.equipment,
-        images: data.images || [],
-        isActive: true,
-      },
-      include: {
-        brand: true,
-        category: true,
-        variants: true,
-      },
-    });
+    try {
+      return await this.prisma.product.create({
+        data: {
+          name: data.name.trim(),
+          slug: data.slug.trim(),
+          description: data.description.trim(),
+          brandId: data.brandId,
+          categoryId: data.categoryId,
+          productKind: (data.productKind as ProductKind) || ProductKind.equipment,
+          images: this.cleanImages(data.images),
+          isActive: data.isActive ?? true,
+          isFeatured: data.isFeatured ?? false,
+          seoTitle: data.seoTitle ?? null,
+          seoDescription: data.seoDescription ?? null,
+          variants: data.variants?.length
+            ? {
+                create: data.variants.map((v) => ({
+                  sku: v.sku.trim(),
+                  price: v.price,
+                  comparePrice: v.comparePrice ?? null,
+                  stock: v.stock ?? 0,
+                  colorName: v.colorName ?? null,
+                  colorHex: v.colorHex ?? null,
+                  storage: v.storage ?? null,
+                  featuredImage: v.featuredImage ?? null,
+                  condition:
+                    (v.condition as ProductCondition) || ProductCondition.NUEVO_SELLADO,
+                  material: v.material ? (v.material as AccessoryMaterial) : null,
+                })),
+              }
+            : undefined,
+        },
+        include: {
+          brand: true,
+          category: true,
+          variants: { orderBy: { price: 'asc' } },
+        },
+      });
+    } catch (error) {
+      this.rethrowUnique(error, 'Slug o SKU ya existe');
+    }
   }
 
   listBrands() {
@@ -126,11 +274,26 @@ export class AdminService {
     });
   }
 
+  private cleanImages(images?: string[]) {
+    if (!images?.length) return [];
+    return images.map((url) => url.trim()).filter(Boolean);
+  }
+
   private async ensureProduct(id: string) {
     const exists = await this.prisma.product.findUnique({
       where: { id },
       select: { id: true },
     });
     if (!exists) throw new NotFoundException('Producto no encontrado');
+  }
+
+  private rethrowUnique(error: unknown, message: string): never {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === 'P2002'
+    ) {
+      throw new ConflictException(message);
+    }
+    throw error;
   }
 }

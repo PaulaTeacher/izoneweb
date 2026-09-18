@@ -290,9 +290,9 @@
     "semantic_hash": "84a9b9e21c31ebe1611bc86a6d15f31d"
   },
   "apps/web/src/app/(shop)/page.tsx": {
-    "mtime": 1788987431.7960346,
-    "ast_hash": "5730f53cca3cd6d416a15c56154d4d7d",
-    "semantic_hash": "5730f53cca3cd6d416a15c56154d4d7d"
+    "mtime": 1789694575.400792,
+    "ast_hash": "5c4b06ce856606dca5b90dc31129ebfc",
+    "semantic_hash": ""
   },
   "apps/web/src/app/(shop)/product/[slug]/page.tsx": {
     "mtime": 1789693182.5809782,
@@ -390,9 +390,9 @@
     "semantic_hash": "adf4ad964381821024cb29b2907bf9cd"
   },
   "apps/web/src/components/layout/Footer.tsx": {
-    "mtime": 1789690148.0854847,
-    "ast_hash": "1b616aab94b4054fcb3d8d889c0e53d0",
-    "semantic_hash": "1b616aab94b4054fcb3d8d889c0e53d0"
+    "mtime": 1789694608.965567,
+    "ast_hash": "3d1e3dff59d23859ea3d02d783db19a5",
+    "semantic_hash": ""
   },
   "apps/web/src/components/layout/Header.tsx": {
     "mtime": 1789690462.2456295,
@@ -495,9 +495,9 @@
     "semantic_hash": "7e2ca6606fb747d9cc1e6f49b350ab9c"
   },
   "apps/web/src/lib/site.ts": {
-    "mtime": 1789692235.6360593,
-    "ast_hash": "8d974edd9a4d7b81f6c883f2eebe5c1c",
-    "semantic_hash": "8d974edd9a4d7b81f6c883f2eebe5c1c"
+    "mtime": 1789694570.2959437,
+    "ast_hash": "9e5fd6ba1cd3db7ec3d8ede229e46d61",
+    "semantic_hash": ""
   },
   "apps/web/src/lib/utils.ts": {
     "mtime": 1788276828.2670755,
@@ -533,5 +533,195 @@
     "mtime": 1788276793.971353,
     "ast_hash": "aca57fb75c6e255c991b4938a15f5a4f",
     "semantic_hash": "aca57fb75c6e255c991b4938a15f5a4f"
+  },
+  "apps/web/src/components/home/SocialFollow.tsx": {
+    "mtime": 1789694574.1707523,
+    "ast_hash": "fed88e6178f88610ba65469464a7c3b2",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/ui-ux-pro-max/SKILL.md": {
+    "mtime": 1789688395.5994244,
+    "ast_hash": "9a05e2d49e962e177715637185a2f7f7",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1788276925.5166721,
+    "ast_hash": "9bbca656aa8a90a815cc37587213066f",
+    "semantic_hash": ""
+  },
+  "apps/api/.agents/skills/prisma-composer/SKILL.md": {
+    "mtime": 1788273789.0893989,
+    "ast_hash": "a1ee4a7206f6e592bd39b0503782fa4a",
+    "semantic_hash": ""
+  },
+  "apps/api/.claude/skills/prisma-composer/SKILL.md": {
+    "mtime": 1788273789.0882914,
+    "ast_hash": "a1ee4a7206f6e592bd39b0503782fa4a",
+    "semantic_hash": ""
+  },
+  "apps/api/.cursor/skills/prisma-composer/SKILL.md": {
+    "mtime": 1788273789.0888045,
+    "ast_hash": "a1ee4a7206f6e592bd39b0503782fa4a",
+    "semantic_hash": ""
+  },
+  "apps/api/.devin/skills/prisma-composer/SKILL.md": {
+    "mtime": 1788273789.0900009,
+    "ast_hash": "a1ee4a7206f6e592bd39b0503782fa4a",
+    "semantic_hash": ""
+  },
+  "apps/api/README.md": {
+    "mtime": 1788273242.2782974,
+    "ast_hash": "dd491f17419192ee572a4b919e49aeb1",
+    "semantic_hash": ""
+  },
+  "apps/api/docker-compose.yml": {
+    "mtime": 1788275950.896027,
+    "ast_hash": "359f1d94b456b73af3f438b310c350e1",
+    "semantic_hash": ""
+  },
+  "apps/web/README.md": {
+    "mtime": 1788273287.5720644,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": ""
+  },
+  "docs/adr/001-monorepo-architecture.md": {
+    "mtime": 1788277009.7496035,
+    "ast_hash": "8b8b62229988202951da2a36bb6e0758",
+    "semantic_hash": ""
+  },
+  "docs/adr/002-whatsapp-checkout-mvp.md": {
+    "mtime": 1788277024.0603878,
+    "ast_hash": "ec8a9f9da3d347b2e50266ecf4b4a5e1",
+    "semantic_hash": ""
+  },
+  "docs/ishop_architecture_benchmark.md": {
+    "mtime": 1788376994.1240363,
+    "ast_hash": "2b62ae40108e01afad4cf1471604dab8",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1788276784.4905682,
+    "ast_hash": "4051832c515adc91a9765a08459ed876",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/accessories.png": {
+    "mtime": 1788287895.8082416,
+    "ast_hash": "4c5aea10d7a83ba225d21e71f02e7b4a",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/compare.png": {
+    "mtime": 1788287895.6516669,
+    "ast_hash": "cea94f89e117d3cea515280dafb9acef",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/ios-27.png": {
+    "mtime": 1788287896.0322492,
+    "ast_hash": "1c8bd4cb29c330026c3535e75e642651",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/iphone-16.png": {
+    "mtime": 1788287895.549832,
+    "ast_hash": "e24b035e737f10bfceeb716ae8a5975c",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/iphone-17-pro.png": {
+    "mtime": 1788287895.1436288,
+    "ast_hash": "1c4f2df06739f2a36b7b5a7da9eeef4e",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/iphone-17.png": {
+    "mtime": 1788287895.3223078,
+    "ast_hash": "a3125bd25d357288cedccc9215bb7585",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/iphone-17e.png": {
+    "mtime": 1788287895.4065278,
+    "ast_hash": "8589dabe2db3c8135efdd47897649302",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/iphone-air.png": {
+    "mtime": 1788287895.2252321,
+    "ast_hash": "169d1f3a80393101e09c4d642720aec5",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/chapternav/shop-iphone.png": {
+    "mtime": 1788287895.9323478,
+    "ast_hash": "8de8604628f34d4595cb51d36f3cc8ca",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/products/iphone-17-orange.jpg": {
+    "mtime": 1788286540.011174,
+    "ast_hash": "a4b586b55090092c46237b6c76e04b34",
+    "semantic_hash": ""
+  },
+  "apps/web/public/images/products/iphone-17-silver.jpg": {
+    "mtime": 1788286540.0078917,
+    "ast_hash": "9d8e7596e9ad3ff8f032a91f96ce41e7",
+    "semantic_hash": ""
+  },
+  "docs/ishop_benchmark.png": {
+    "mtime": 1788370873.4020824,
+    "ast_hash": "ba4d5f04e3c532a3d76f7ffd232b4daa",
+    "semantic_hash": ""
+  },
+  "docs/ishop_macbook_pdp_benchmark.png": {
+    "mtime": 1788372907.381279,
+    "ast_hash": "4a2c57faed797f999e186a893db355a1",
+    "semantic_hash": ""
+  },
+  "docs/ishop_pdp_benchmark.png": {
+    "mtime": 1788372743.217375,
+    "ast_hash": "04166a5b2960ee1b0addc1be8e585dcd",
+    "semantic_hash": ""
+  },
+  "docs/local_ipad_result.png": {
+    "mtime": 1788371598.8164282,
+    "ast_hash": "1bbbed008eee1ba31ca1c83bdd4fc65d",
+    "semantic_hash": ""
+  },
+  "docs/local_iphone_benchmark_result.png": {
+    "mtime": 1788371165.0375247,
+    "ast_hash": "76c81e2694a504e9b26ce89b8f453f48",
+    "semantic_hash": ""
+  },
+  "docs/local_iphone_products_scroll.png": {
+    "mtime": 1788371218.2744803,
+    "ast_hash": "3a003d76c1d70b0e9104b80db75fe086",
+    "semantic_hash": ""
+  },
+  "docs/local_mac_result.png": {
+    "mtime": 1788371657.7962584,
+    "ast_hash": "1a127397a52a0abd6fd8e8072ac84770",
+    "semantic_hash": ""
+  },
+  "docs/local_macbook_pdp_result.png": {
+    "mtime": 1788376515.7258139,
+    "ast_hash": "ffa8c4d56b3cfb28b28a97aa4f987ceb",
+    "semantic_hash": ""
+  },
+  "docs/local_macbook_pdp_top.png": {
+    "mtime": 1788376681.4251404,
+    "ast_hash": "39da2fcbe6c04cf37f6db9543a5cf14a",
+    "semantic_hash": ""
+  },
+  "docs/local_macbook_specs_bottom.png": {
+    "mtime": 1788376841.7212474,
+    "ast_hash": "3d3789e87c24c75121abbea2f7fc05a9",
+    "semantic_hash": ""
+  },
+  "docs/local_macbook_specs_result.png": {
+    "mtime": 1788376765.2420747,
+    "ast_hash": "4c5fa8b1ca7919e883b2bd694738ac22",
+    "semantic_hash": ""
+  },
+  "docs/local_pdp_result.png": {
+    "mtime": 1788376104.8479156,
+    "ast_hash": "031baba1905a244f7e5b7afa36d578ff",
+    "semantic_hash": ""
+  },
+  "docs/local_pdp_top_result.png": {
+    "mtime": 1788376257.7538269,
+    "ast_hash": "7594cde069988cb08e6dea343919b9aa",
+    "semantic_hash": ""
   }
 }

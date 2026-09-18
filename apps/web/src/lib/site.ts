@@ -24,7 +24,7 @@ export function absoluteUrl(path = '/') {
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
-/** Metadata helpers with a clean canonical (no tracking / filter noise). */
+/** Lightweight metadata helper (canonical + OG). Prefer buildPageMetadata from @/lib/seo for richer pages. */
 export function pageMetadata({
   title,
   description,
@@ -45,6 +45,7 @@ export function pageMetadata({
     alternates: { canonical },
     openGraph: {
       url: canonical,
+      locale: 'es_CO',
       ...(title ? { title } : {}),
       ...(description ? { description } : {}),
       ...(images?.length ? { images: images.map((url) => ({ url })) } : {}),
@@ -78,11 +79,15 @@ export const organizationJsonLd = {
 export const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ElectronicsStore',
+  '@id': `${getSiteUrl()}/#store`,
   name: 'iZone Tech',
   image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200',
   url: getSiteUrl(),
   telephone: `+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '573001234567'}`,
   priceRange: '$$$',
+  currenciesAccepted: 'COP',
+  paymentAccepted: 'Cash, Credit Card, Debit Card, PSE',
+  sameAs: [SOCIAL_LINKS.instagram.href, SOCIAL_LINKS.tiktok.href],
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Cra. 15 # 93-60, Chicó Norte',
@@ -111,8 +116,14 @@ export const localBusinessJsonLd = {
       closes: '19:00',
     },
   ],
-  areaServed: {
-    '@type': 'Country',
-    name: 'Colombia',
-  },
+  areaServed: [
+    {
+      '@type': 'City',
+      name: 'Bogotá',
+    },
+    {
+      '@type': 'Country',
+      name: 'Colombia',
+    },
+  ],
 };

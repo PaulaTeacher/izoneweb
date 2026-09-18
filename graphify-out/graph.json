@@ -2300,7 +2300,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_admin_admin_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "admin.module.ts"
     },
     {
@@ -2310,7 +2310,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_api_src_admin_admin_module_adminmodule",
-      "community": 12,
+      "community": 41,
       "norm_label": "adminmodule"
     },
     {
@@ -2320,7 +2320,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_admin_admin_module_ts_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "module"
     },
     {
@@ -2360,7 +2360,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_api_src_admin_admin_service_adminservice_constructor",
-      "community": 6,
+      "community": 3,
       "norm_label": ".constructor()"
     },
     {
@@ -2650,7 +2650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_app_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "app.module.ts"
     },
     {
@@ -2660,7 +2660,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "apps_api_src_app_module_appmodule",
-      "community": 12,
+      "community": 41,
       "norm_label": "appmodule"
     },
     {
@@ -2670,7 +2670,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_app_module_ts_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "module"
     },
     {
@@ -2720,7 +2720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_controller",
-      "community": 2,
+      "community": 60,
       "norm_label": "auth.controller.ts"
     },
     {
@@ -2880,7 +2880,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_module",
-      "community": 2,
+      "community": 54,
       "norm_label": "auth.module.ts"
     },
     {
@@ -2890,7 +2890,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_module_authmodule",
-      "community": 2,
+      "community": 54,
       "norm_label": "authmodule"
     },
     {
@@ -2900,7 +2900,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_module_ts_module",
-      "community": 2,
+      "community": 54,
       "norm_label": "module"
     },
     {
@@ -2910,7 +2910,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_service",
-      "community": 2,
+      "community": 52,
       "norm_label": "auth.service.ts"
     },
     {
@@ -2940,7 +2940,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_api_src_auth_auth_service_authservice_constructor",
-      "community": 6,
+      "community": 2,
       "norm_label": ".constructor()"
     },
     {
@@ -2990,7 +2990,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_decorators",
-      "community": 2,
+      "community": 23,
       "norm_label": "decorators.ts"
     },
     {
@@ -3000,7 +3000,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_api_src_auth_decorators_public",
-      "community": 2,
+      "community": 23,
       "norm_label": "public()"
     },
     {
@@ -3010,7 +3010,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_api_src_auth_decorators_roles",
-      "community": 2,
+      "community": 3,
       "norm_label": "roles()"
     },
     {
@@ -3020,7 +3020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_dto_auth_dto",
-      "community": 2,
+      "community": 60,
       "norm_label": "auth.dto.ts"
     },
     {
@@ -3030,7 +3030,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_api_src_auth_dto_auth_dto_logindto",
-      "community": 2,
+      "community": 60,
       "norm_label": "logindto"
     },
     {
@@ -3040,7 +3040,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "isemail",
-      "community": 2,
+      "community": 60,
       "norm_label": "isemail"
     },
     {
@@ -3050,7 +3050,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_dto_auth_dto_ts_isstring",
-      "community": 2,
+      "community": 60,
       "norm_label": "isstring"
     },
     {
@@ -3060,7 +3060,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_dto_auth_dto_ts_minlength",
-      "community": 2,
+      "community": 60,
       "norm_label": "minlength"
     },
     {
@@ -3070,7 +3070,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_api_src_auth_dto_auth_dto_refreshtokendto",
-      "community": 2,
+      "community": 60,
       "norm_label": "refreshtokendto"
     },
     {
@@ -3080,7 +3080,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_index",
-      "community": 2,
+      "community": 23,
       "norm_label": "index.ts"
     },
     {
@@ -3090,7 +3090,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_auth_guard",
-      "community": 2,
+      "community": 23,
       "norm_label": "jwt-auth.guard.ts"
     },
     {
@@ -3100,7 +3100,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_auth_guard_jwtauthguard",
-      "community": 2,
+      "community": 23,
       "norm_label": "jwtauthguard"
     },
     {
@@ -3110,7 +3110,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_auth_guard_ts_injectable",
-      "community": 2,
+      "community": 23,
       "norm_label": "injectable"
     },
     {
@@ -3120,7 +3120,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_auth_guard_jwtauthguard_constructor",
-      "community": 2,
+      "community": 23,
       "norm_label": ".constructor()"
     },
     {
@@ -3130,7 +3130,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_auth_guard_jwtauthguard_canactivate",
-      "community": 2,
+      "community": 23,
       "norm_label": ".canactivate()"
     },
     {
@@ -3140,7 +3140,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_secret",
-      "community": 2,
+      "community": 54,
       "norm_label": "jwt-secret.ts"
     },
     {
@@ -3150,7 +3150,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_secret_getjwtsecret",
-      "community": 2,
+      "community": 54,
       "norm_label": "getjwtsecret()"
     },
     {
@@ -3160,7 +3160,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy",
-      "community": 2,
+      "community": 54,
       "norm_label": "jwt.strategy.ts"
     },
     {
@@ -3170,7 +3170,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy_jwtpayload",
-      "community": 2,
+      "community": 54,
       "norm_label": "jwtpayload"
     },
     {
@@ -3180,7 +3180,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy_jwtstrategy",
-      "community": 2,
+      "community": 54,
       "norm_label": "jwtstrategy"
     },
     {
@@ -3190,7 +3190,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy_ts_injectable",
-      "community": 2,
+      "community": 54,
       "norm_label": "injectable"
     },
     {
@@ -3200,7 +3200,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy_jwtstrategy_constructor",
-      "community": 2,
+      "community": 54,
       "norm_label": ".constructor()"
     },
     {
@@ -3210,7 +3210,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_api_src_auth_jwt_strategy_jwtstrategy_validate",
-      "community": 2,
+      "community": 54,
       "norm_label": ".validate()"
     },
     {
@@ -3220,7 +3220,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_auth_roles_guard",
-      "community": 2,
+      "community": 23,
       "norm_label": "roles.guard.ts"
     },
     {
@@ -3230,7 +3230,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_api_src_auth_roles_guard_rolesguard",
-      "community": 2,
+      "community": 23,
       "norm_label": "rolesguard"
     },
     {
@@ -3240,7 +3240,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_auth_roles_guard_ts_injectable",
-      "community": 2,
+      "community": 23,
       "norm_label": "injectable"
     },
     {
@@ -3250,7 +3250,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_api_src_auth_roles_guard_rolesguard_constructor",
-      "community": 2,
+      "community": 23,
       "norm_label": ".constructor()"
     },
     {
@@ -3260,7 +3260,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_api_src_auth_roles_guard_rolesguard_canactivate",
-      "community": 2,
+      "community": 23,
       "norm_label": ".canactivate()"
     },
     {
@@ -3270,7 +3270,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_catalog_catalog_controller",
-      "community": 2,
+      "community": 23,
       "norm_label": "catalog.controller.ts"
     },
     {
@@ -3660,7 +3660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_main",
-      "community": 12,
+      "community": 41,
       "norm_label": "main.ts"
     },
     {
@@ -3670,7 +3670,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_api_src_main_bootstrap",
-      "community": 12,
+      "community": 41,
       "norm_label": "bootstrap()"
     },
     {
@@ -3680,7 +3680,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "prisma.module.ts"
     },
     {
@@ -3690,7 +3690,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_module_prismamodule",
-      "community": 12,
+      "community": 41,
       "norm_label": "prismamodule"
     },
     {
@@ -3700,7 +3700,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "global",
-      "community": 12,
+      "community": 41,
       "norm_label": "global"
     },
     {
@@ -3710,7 +3710,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_module_ts_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "module"
     },
     {
@@ -3720,7 +3720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_service",
-      "community": 6,
+      "community": 52,
       "norm_label": "prisma.service.ts"
     },
     {
@@ -3730,7 +3730,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_service_prismaservice",
-      "community": 6,
+      "community": 52,
       "norm_label": "prismaservice"
     },
     {
@@ -3740,7 +3740,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_service_ts_injectable",
-      "community": 6,
+      "community": 52,
       "norm_label": "injectable"
     },
     {
@@ -3750,7 +3750,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_api_src_prisma_prisma_service_prismaservice_onmoduleinit",
-      "community": 6,
+      "community": 52,
       "norm_label": ".onmoduleinit()"
     },
     {
@@ -3900,7 +3900,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller",
-      "community": 2,
+      "community": 23,
       "norm_label": "whatsapp.controller.ts"
     },
     {
@@ -3910,7 +3910,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_whatsappcontroller",
-      "community": 6,
+      "community": 51,
       "norm_label": "whatsappcontroller"
     },
     {
@@ -3920,7 +3920,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_apitags",
-      "community": 6,
+      "community": 51,
       "norm_label": "apitags"
     },
     {
@@ -3930,7 +3930,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_controller",
-      "community": 6,
+      "community": 51,
       "norm_label": "controller"
     },
     {
@@ -3940,7 +3940,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_public",
-      "community": 6,
+      "community": 51,
       "norm_label": "public"
     },
     {
@@ -3950,7 +3950,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_post",
-      "community": 6,
+      "community": 51,
       "norm_label": "post"
     },
     {
@@ -3960,7 +3960,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_apioperation",
-      "community": 6,
+      "community": 51,
       "norm_label": "apioperation"
     },
     {
@@ -3970,7 +3970,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_body",
-      "community": 6,
+      "community": 51,
       "norm_label": "body"
     },
     {
@@ -3980,7 +3980,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_get",
-      "community": 6,
+      "community": 51,
       "norm_label": "get"
     },
     {
@@ -3990,7 +3990,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_ts_query",
-      "community": 6,
+      "community": 51,
       "norm_label": "query"
     },
     {
@@ -4000,7 +4000,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_whatsappcontroller_constructor",
-      "community": 6,
+      "community": 51,
       "norm_label": ".constructor()"
     },
     {
@@ -4010,7 +4010,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_whatsappcontroller_checkout",
-      "community": 6,
+      "community": 51,
       "norm_label": ".checkout()"
     },
     {
@@ -4020,7 +4020,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_controller_whatsappcontroller_validatecoupon",
-      "community": 6,
+      "community": 51,
       "norm_label": ".validatecoupon()"
     },
     {
@@ -4030,7 +4030,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "whatsapp.module.ts"
     },
     {
@@ -4040,7 +4040,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_module_whatsappmodule",
-      "community": 12,
+      "community": 41,
       "norm_label": "whatsappmodule"
     },
     {
@@ -4050,7 +4050,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_module_ts_module",
-      "community": 12,
+      "community": 41,
       "norm_label": "module"
     },
     {
@@ -4060,7 +4060,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_spec",
-      "community": 6,
+      "community": 52,
       "norm_label": "whatsapp.service.spec.ts"
     },
     {
@@ -4070,7 +4070,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service",
-      "community": 6,
+      "community": 52,
       "norm_label": "whatsapp.service.ts"
     },
     {
@@ -4080,7 +4080,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_whatsappservice",
-      "community": 6,
+      "community": 52,
       "norm_label": "whatsappservice"
     },
     {
@@ -4090,7 +4090,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_ts_injectable",
-      "community": 6,
+      "community": 52,
       "norm_label": "injectable"
     },
     {
@@ -4100,7 +4100,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_whatsappservice_constructor",
-      "community": 6,
+      "community": 52,
       "norm_label": ".constructor()"
     },
     {
@@ -4110,7 +4110,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_whatsappservice_validatecoupon",
-      "community": 6,
+      "community": 51,
       "norm_label": ".validatecoupon()"
     },
     {
@@ -4120,7 +4120,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_whatsappservice_generatecheckoutlink",
-      "community": 6,
+      "community": 52,
       "norm_label": ".generatecheckoutlink()"
     },
     {
@@ -4130,7 +4130,7 @@
       "source_location": "L217",
       "_origin": "ast",
       "id": "apps_api_src_whatsapp_whatsapp_service_whatsappservice_validatecouponintx",
-      "community": 6,
+      "community": 52,
       "norm_label": ".validatecouponintx()"
     },
     {
@@ -4140,7 +4140,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_api_test_app_e2e_spec",
-      "community": 12,
+      "community": 41,
       "norm_label": "app.e2e-spec.ts"
     },
     {
@@ -4660,7 +4660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_package",
-      "community": 23,
+      "community": 57,
       "norm_label": "package.json"
     },
     {
@@ -4670,7 +4670,7 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "apps_web_package_name",
-      "community": 23,
+      "community": 57,
       "norm_label": "name"
     },
     {
@@ -4680,7 +4680,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "apps_web_package_version",
-      "community": 23,
+      "community": 57,
       "norm_label": "version"
     },
     {
@@ -4690,7 +4690,7 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "apps_web_package_private",
-      "community": 23,
+      "community": 57,
       "norm_label": "private"
     },
     {
@@ -4700,7 +4700,7 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "apps_web_package_scripts",
-      "community": 23,
+      "community": 57,
       "norm_label": "scripts"
     },
     {
@@ -4710,7 +4710,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_web_package_scripts_dev",
-      "community": 23,
+      "community": 57,
       "norm_label": "dev"
     },
     {
@@ -4720,7 +4720,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_web_package_scripts_build",
-      "community": 23,
+      "community": 57,
       "norm_label": "build"
     },
     {
@@ -4730,7 +4730,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "apps_web_package_scripts_start",
-      "community": 23,
+      "community": 57,
       "norm_label": "start"
     },
     {
@@ -4740,7 +4740,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "apps_web_package_scripts_lint",
-      "community": 23,
+      "community": 57,
       "norm_label": "lint"
     },
     {
@@ -4750,7 +4750,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_web_package_scripts_test_e2e",
-      "community": 23,
+      "community": 57,
       "norm_label": "test:e2e"
     },
     {
@@ -4830,7 +4830,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_web_package_dependencies_embla_carousel_react",
-      "community": 38,
+      "community": 62,
       "norm_label": "embla-carousel-react"
     },
     {
@@ -4840,7 +4840,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "embla_carousel_react",
-      "community": 38,
+      "community": 62,
       "norm_label": "embla-carousel-react"
     },
     {
@@ -4910,7 +4910,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "apps_web_package_dependencies_react",
-      "community": 39,
+      "community": 63,
       "norm_label": "react"
     },
     {
@@ -4920,7 +4920,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "react",
-      "community": 39,
+      "community": 63,
       "norm_label": "react"
     },
     {
@@ -5000,7 +5000,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_web_package_devdependencies_types_node",
-      "community": 41,
+      "community": 65,
       "norm_label": "@types/node"
     },
     {
@@ -5010,7 +5010,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_web_package_json_types_node",
-      "community": 41,
+      "community": 65,
       "norm_label": "@types/node"
     },
     {
@@ -5120,7 +5120,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "apps_web_package_devdependencies_postcss",
-      "community": 40,
+      "community": 64,
       "norm_label": "postcss"
     },
     {
@@ -5130,7 +5130,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "postcss",
-      "community": 40,
+      "community": 64,
       "norm_label": "postcss"
     },
     {
@@ -5210,7 +5210,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_accesorios_page",
-      "community": 20,
+      "community": 0,
       "norm_label": "page.tsx"
     },
     {
@@ -5220,7 +5220,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_accesorios_page_metadata",
-      "community": 20,
+      "community": 0,
       "norm_label": "metadata"
     },
     {
@@ -5230,7 +5230,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_accesorios_page_accesoriospage",
-      "community": 20,
+      "community": 0,
       "norm_label": "accesoriospage()"
     },
     {
@@ -5360,7 +5360,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_layout",
-      "community": 24,
+      "community": 55,
       "norm_label": "layout.tsx"
     },
     {
@@ -5370,7 +5370,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_layout_cartdrawer",
-      "community": 24,
+      "community": 55,
       "norm_label": "cartdrawer"
     },
     {
@@ -5380,7 +5380,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_layout_floatingwhatsapp",
-      "community": 24,
+      "community": 55,
       "norm_label": "floatingwhatsapp"
     },
     {
@@ -5390,7 +5390,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_layout_shoplayout",
-      "community": 24,
+      "community": 55,
       "norm_label": "shoplayout()"
     },
     {
@@ -5447,7 +5447,7 @@
       "label": "Home()",
       "file_type": "code",
       "source_file": "apps/web/src/app/(shop)/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "apps_web_src_app_shop_page_home",
       "community": 14,
@@ -5790,7 +5790,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_cart_cartdrawer",
-      "community": 19,
+      "community": 25,
       "norm_label": "cartdrawer.tsx"
     },
     {
@@ -5800,7 +5800,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_web_src_components_cart_cartdrawer_cartdrawer",
-      "community": 19,
+      "community": 25,
       "norm_label": "cartdrawer()"
     },
     {
@@ -5930,7 +5930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_home_productgrid",
-      "community": 25,
+      "community": 28,
       "norm_label": "productgrid.tsx"
     },
     {
@@ -5950,7 +5950,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "apps_web_src_components_home_productgrid_productgrid",
-      "community": 25,
+      "community": 28,
       "norm_label": "productgrid()"
     },
     {
@@ -5972,6 +5972,66 @@
       "id": "apps_web_src_components_home_promobanners_promobanners",
       "community": 14,
       "norm_label": "promobanners()"
+    },
+    {
+      "label": "SocialFollow.tsx",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow",
+      "community": 20,
+      "norm_label": "socialfollow.tsx"
+    },
+    {
+      "label": "InstagramIcon()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow_instagramicon",
+      "community": 20,
+      "norm_label": "instagramicon()"
+    },
+    {
+      "label": "TikTokIcon()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow_tiktokicon",
+      "community": 20,
+      "norm_label": "tiktokicon()"
+    },
+    {
+      "label": "platforms",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow_platforms",
+      "community": 20,
+      "norm_label": "platforms"
+    },
+    {
+      "label": "stats",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow_stats",
+      "community": 20,
+      "norm_label": "stats"
+    },
+    {
+      "label": "SocialFollow()",
+      "file_type": "code",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L49",
+      "_origin": "ast",
+      "id": "apps_web_src_components_home_socialfollow_socialfollow",
+      "community": 20,
+      "norm_label": "socialfollow()"
     },
     {
       "label": "TrustBanner.tsx",
@@ -6030,17 +6090,17 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_footer",
-      "community": 24,
+      "community": 55,
       "norm_label": "footer.tsx"
     },
     {
       "label": "Footer()",
       "file_type": "code",
       "source_file": "apps/web/src/components/layout/Footer.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_footer_footer",
-      "community": 24,
+      "community": 55,
       "norm_label": "footer()"
     },
     {
@@ -6050,7 +6110,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_header",
-      "community": 26,
+      "community": 19,
       "norm_label": "header.tsx"
     },
     {
@@ -6060,7 +6120,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_header_categorygroup",
-      "community": 26,
+      "community": 19,
       "norm_label": "categorygroup"
     },
     {
@@ -6070,7 +6130,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_header_categoryitem",
-      "community": 26,
+      "community": 19,
       "norm_label": "categoryitem"
     },
     {
@@ -6080,7 +6140,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_header_categories",
-      "community": 26,
+      "community": 19,
       "norm_label": "categories"
     },
     {
@@ -6090,7 +6150,7 @@
       "source_location": "L241",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_header_header",
-      "community": 26,
+      "community": 19,
       "norm_label": "header()"
     },
     {
@@ -6120,7 +6180,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_topannouncementbar",
-      "community": 24,
+      "community": 55,
       "norm_label": "topannouncementbar.tsx"
     },
     {
@@ -6130,7 +6190,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_topannouncementbar_announcements",
-      "community": 24,
+      "community": 55,
       "norm_label": "announcements"
     },
     {
@@ -6140,7 +6200,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "apps_web_src_components_layout_topannouncementbar_topannouncementbar",
-      "community": 24,
+      "community": 55,
       "norm_label": "topannouncementbar()"
     },
     {
@@ -6150,7 +6210,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_motion_fadein",
-      "community": 26,
+      "community": 20,
       "norm_label": "fadein.tsx"
     },
     {
@@ -6160,7 +6220,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "apps_web_src_components_motion_fadein_easeout",
-      "community": 26,
+      "community": 20,
       "norm_label": "easeout"
     },
     {
@@ -6180,7 +6240,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_web_src_components_motion_fadein_usemotionduration",
-      "community": 26,
+      "community": 20,
       "norm_label": "usemotionduration()"
     },
     {
@@ -6220,7 +6280,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_product_recommendedaccessories",
-      "community": 26,
+      "community": 20,
       "norm_label": "recommendedaccessories.tsx"
     },
     {
@@ -6230,7 +6290,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_web_src_components_product_recommendedaccessories_recommendedaccessoriesprops",
-      "community": 28,
+      "community": 20,
       "norm_label": "recommendedaccessoriesprops"
     },
     {
@@ -6240,7 +6300,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_web_src_components_product_recommendedaccessories_recommendedaccessories",
-      "community": 26,
+      "community": 20,
       "norm_label": "recommendedaccessories()"
     },
     {
@@ -6280,7 +6340,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_product_variantselector",
-      "community": 19,
+      "community": 25,
       "norm_label": "variantselector.tsx"
     },
     {
@@ -6290,7 +6350,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "apps_web_src_components_product_variantselector_variantselectorprops",
-      "community": 19,
+      "community": 28,
       "norm_label": "variantselectorprops"
     },
     {
@@ -6300,7 +6360,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "apps_web_src_components_product_variantselector_variantselector",
-      "community": 19,
+      "community": 25,
       "norm_label": "variantselector()"
     },
     {
@@ -6330,7 +6390,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_accessoriesfinder",
-      "community": 20,
+      "community": 0,
       "norm_label": "accessoriesfinder.tsx"
     },
     {
@@ -6340,7 +6400,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_accessoriesfinder_chip",
-      "community": 20,
+      "community": 0,
       "norm_label": "chip()"
     },
     {
@@ -6350,7 +6410,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_accessoriesfinder_accessoriesfinder",
-      "community": 20,
+      "community": 0,
       "norm_label": "accessoriesfinder()"
     },
     {
@@ -6450,7 +6510,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_iphonecomparison",
-      "community": 25,
+      "community": 19,
       "norm_label": "iphonecomparison.tsx"
     },
     {
@@ -6460,7 +6520,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_iphonecomparison_comparemodel",
-      "community": 25,
+      "community": 19,
       "norm_label": "comparemodel"
     },
     {
@@ -6470,7 +6530,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_iphonecomparison_comparison_models",
-      "community": 25,
+      "community": 19,
       "norm_label": "comparison_models"
     },
     {
@@ -6480,7 +6540,7 @@
       "source_location": "L196",
       "_origin": "ast",
       "id": "apps_web_src_components_shop_iphonecomparison_iphonecomparison",
-      "community": 25,
+      "community": 19,
       "norm_label": "iphonecomparison()"
     },
     {
@@ -6520,7 +6580,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories",
-      "community": 20,
+      "community": 0,
       "norm_label": "accessories.ts"
     },
     {
@@ -6530,7 +6590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories_accesoriosquery",
-      "community": 20,
+      "community": 0,
       "norm_label": "accesoriosquery"
     },
     {
@@ -6540,7 +6600,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories_accessory_types",
-      "community": 20,
+      "community": 0,
       "norm_label": "accessory_types"
     },
     {
@@ -6550,7 +6610,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories_material_chips",
-      "community": 20,
+      "community": 0,
       "norm_label": "material_chips"
     },
     {
@@ -6560,7 +6620,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories_accessorieshref",
-      "community": 20,
+      "community": 0,
       "norm_label": "accessorieshref()"
     },
     {
@@ -6570,7 +6630,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "apps_web_src_lib_accessories_patchaccesoriosquery",
-      "community": 20,
+      "community": 0,
       "norm_label": "patchaccesoriosquery()"
     },
     {
@@ -6730,7 +6790,7 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "apps_web_src_lib_api_getdevicemodels",
-      "community": 20,
+      "community": 0,
       "norm_label": "getdevicemodels()"
     },
     {
@@ -6760,7 +6820,7 @@
       "source_location": "L191",
       "_origin": "ast",
       "id": "apps_web_src_lib_api_validatecoupon",
-      "community": 19,
+      "community": 25,
       "norm_label": "validatecoupon()"
     },
     {
@@ -6780,7 +6840,7 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "apps_web_src_lib_api_checkoutwhatsapp",
-      "community": 19,
+      "community": 25,
       "norm_label": "checkoutwhatsapp()"
     },
     {
@@ -6810,7 +6870,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "apps_web_src_lib_cart_context_cartcontexttype",
-      "community": 19,
+      "community": 28,
       "norm_label": "cartcontexttype"
     },
     {
@@ -6830,7 +6890,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "apps_web_src_lib_cart_context_cartprovider",
-      "community": 24,
+      "community": 55,
       "norm_label": "cartprovider()"
     },
     {
@@ -6894,10 +6954,20 @@
       "norm_label": "site.ts"
     },
     {
+      "label": "SOCIAL_LINKS",
+      "file_type": "code",
+      "source_file": "apps/web/src/lib/site.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "apps_web_src_lib_site_social_links",
+      "community": 55,
+      "norm_label": "social_links"
+    },
+    {
       "label": "getSiteUrl()",
       "file_type": "code",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L3",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "apps_web_src_lib_site_getsiteurl",
       "community": 0,
@@ -6907,7 +6977,7 @@
       "label": "absoluteUrl()",
       "file_type": "code",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L7",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "apps_web_src_lib_site_absoluteurl",
       "community": 0,
@@ -6917,7 +6987,7 @@
       "label": "pageMetadata()",
       "file_type": "code",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L14",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "apps_web_src_lib_site_pagemetadata",
       "community": 0,
@@ -6927,7 +6997,7 @@
       "label": "organizationJsonLd",
       "file_type": "code",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L44",
+      "source_location": "L58",
       "_origin": "ast",
       "id": "apps_web_src_lib_site_organizationjsonld",
       "community": 0,
@@ -6937,7 +7007,7 @@
       "label": "localBusinessJsonLd",
       "file_type": "code",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L67",
+      "source_location": "L78",
       "_origin": "ast",
       "id": "apps_web_src_lib_site_localbusinessjsonld",
       "community": 0,
@@ -7590,7 +7660,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "packages_shared_types_src_index_variant",
-      "community": 19,
+      "community": 28,
       "norm_label": "variant"
     },
     {
@@ -7920,7 +7990,7 @@
       "source_location": "L511",
       "_origin": "ast",
       "id": "packages_shared_types_src_index_variantlabel",
-      "community": 19,
+      "community": 25,
       "norm_label": "variantlabel()"
     },
     {
@@ -8192,6 +8262,1686 @@
       "id": "turbo_db_generate_cache",
       "community": 13,
       "norm_label": "cache"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill",
+      "community": 24,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "ui-ux-pro-max",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "community": 24,
+      "norm_label": "ui-ux-pro-max"
+    },
+    {
+      "label": "Prerequisites",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_prerequisites",
+      "community": 24,
+      "norm_label": "prerequisites"
+    },
+    {
+      "label": "How to Use This Skill",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "community": 24,
+      "norm_label": "how to use this skill"
+    },
+    {
+      "label": "Step 1: Analyze User Requirements",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_1_analyze_user_requirements",
+      "community": 24,
+      "norm_label": "step 1: analyze user requirements"
+    },
+    {
+      "label": "Step 2: Generate Design System (REQUIRED)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L44",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_2_generate_design_system_required",
+      "community": 24,
+      "norm_label": "step 2: generate design system (required)"
+    },
+    {
+      "label": "Step 2b: Persist Design System (Master + Overrides Pattern)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_2b_persist_design_system_master_overrides_pattern",
+      "community": 24,
+      "norm_label": "step 2b: persist design system (master + overrides pattern)"
+    },
+    {
+      "label": "Step 3: Supplement with Detailed Searches (as needed)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_3_supplement_with_detailed_searches_as_needed",
+      "community": 24,
+      "norm_label": "step 3: supplement with detailed searches (as needed)"
+    },
+    {
+      "label": "Step 4: Stack Guidelines (Default: html-tailwind)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_4_stack_guidelines_default_html_tailwind",
+      "community": 24,
+      "norm_label": "step 4: stack guidelines (default: html-tailwind)"
+    },
+    {
+      "label": "Search Reference",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_search_reference",
+      "community": 24,
+      "norm_label": "search reference"
+    },
+    {
+      "label": "Available Domains",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L120",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_available_domains",
+      "community": 24,
+      "norm_label": "available domains"
+    },
+    {
+      "label": "Available Stacks",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L135",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_available_stacks",
+      "community": 24,
+      "norm_label": "available stacks"
+    },
+    {
+      "label": "Example Workflow",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L152",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "community": 24,
+      "norm_label": "example workflow"
+    },
+    {
+      "label": "Step 1: Analyze Requirements",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L156",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_1_analyze_requirements",
+      "community": 24,
+      "norm_label": "step 1: analyze requirements"
+    },
+    {
+      "label": "Step 2: Generate Design System (REQUIRED)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L162",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_2_generate_design_system_required_162",
+      "community": 24,
+      "norm_label": "step 2: generate design system (required)"
+    },
+    {
+      "label": "Step 3: Supplement with Detailed Searches (as needed)",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L170",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_3_supplement_with_detailed_searches_as_needed_170",
+      "community": 24,
+      "norm_label": "step 3: supplement with detailed searches (as needed)"
+    },
+    {
+      "label": "Step 4: Stack Guidelines",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L180",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_step_4_stack_guidelines",
+      "community": 24,
+      "norm_label": "step 4: stack guidelines"
+    },
+    {
+      "label": "Output Formats",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L190",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_output_formats",
+      "community": 24,
+      "norm_label": "output formats"
+    },
+    {
+      "label": "Tips for Better Results",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L204",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_tips_for_better_results",
+      "community": 24,
+      "norm_label": "tips for better results"
+    },
+    {
+      "label": "Common Rules for Professional UI",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L215",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "community": 24,
+      "norm_label": "common rules for professional ui"
+    },
+    {
+      "label": "Icons & Visual Elements",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_icons_visual_elements",
+      "community": 24,
+      "norm_label": "icons & visual elements"
+    },
+    {
+      "label": "Interaction & Cursor",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L228",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_interaction_cursor",
+      "community": 24,
+      "norm_label": "interaction & cursor"
+    },
+    {
+      "label": "Light/Dark Mode Contrast",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L236",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_light_dark_mode_contrast",
+      "community": 24,
+      "norm_label": "light/dark mode contrast"
+    },
+    {
+      "label": "Layout & Spacing",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L245",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_layout_spacing",
+      "community": 24,
+      "norm_label": "layout & spacing"
+    },
+    {
+      "label": "Pre-Delivery Checklist",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L255",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "community": 24,
+      "norm_label": "pre-delivery checklist"
+    },
+    {
+      "label": "Visual Quality",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L259",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_visual_quality",
+      "community": 24,
+      "norm_label": "visual quality"
+    },
+    {
+      "label": "Interaction",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L266",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_interaction",
+      "community": 24,
+      "norm_label": "interaction"
+    },
+    {
+      "label": "Light/Dark Mode",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L272",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_light_dark_mode",
+      "community": 24,
+      "norm_label": "light/dark mode"
+    },
+    {
+      "label": "Layout",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L278",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_layout",
+      "community": 24,
+      "norm_label": "layout"
+    },
+    {
+      "label": "Accessibility",
+      "file_type": "document",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L284",
+      "_origin": "ast",
+      "id": "cursor_skills_ui_ux_pro_max_skill_accessibility",
+      "community": 24,
+      "norm_label": "accessibility"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 56,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "iZone Tech \u2014 E-Commerce Platform",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_izone_tech_e_commerce_platform",
+      "community": 56,
+      "norm_label": "izone tech \u2014 e-commerce platform"
+    },
+    {
+      "label": "Arquitectura",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "readme_arquitectura",
+      "community": 56,
+      "norm_label": "arquitectura"
+    },
+    {
+      "label": "Estructura de Directorios",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "readme_estructura_de_directorios",
+      "community": 56,
+      "norm_label": "estructura de directorios"
+    },
+    {
+      "label": "Requisitos Previos",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "readme_requisitos_previos",
+      "community": 56,
+      "norm_label": "requisitos previos"
+    },
+    {
+      "label": "Instalaci\u00f3n y Setup",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "readme_instalaci\u00f3n_y_setup",
+      "community": 56,
+      "norm_label": "instalacion y setup"
+    },
+    {
+      "label": "Comandos Principales",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "readme_comandos_principales",
+      "community": 56,
+      "norm_label": "comandos principales"
+    },
+    {
+      "label": "Variables de Entorno",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "id": "readme_variables_de_entorno",
+      "community": 56,
+      "norm_label": "variables de entorno"
+    },
+    {
+      "label": "API Docs",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "readme_api_docs",
+      "community": 56,
+      "norm_label": "api docs"
+    },
+    {
+      "label": "Integraci\u00f3n con Conectik ERP (Future-Proof)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "readme_integraci\u00f3n_con_conectik_erp_future_proof",
+      "community": 56,
+      "norm_label": "integracion con conectik erp (future-proof)"
+    },
+    {
+      "label": "Licencia",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L108",
+      "_origin": "ast",
+      "id": "readme_licencia",
+      "community": 56,
+      "norm_label": "licencia"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill",
+      "community": 26,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Writing apps with Prisma Composer",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "community": 26,
+      "norm_label": "writing apps with prisma composer"
+    },
+    {
+      "label": "tsconfig and import specifiers",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "community": 26,
+      "norm_label": "tsconfig and import specifiers"
+    },
+    {
+      "label": "Anatomy of a service",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_anatomy_of_a_service",
+      "community": 26,
+      "norm_label": "anatomy of a service"
+    },
+    {
+      "label": "The root module",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_the_root_module",
+      "community": 26,
+      "norm_label": "the root module"
+    },
+    {
+      "label": "Builds are yours",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_builds_are_yours",
+      "community": 26,
+      "norm_label": "builds are yours"
+    },
+    {
+      "label": "Deploy config",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_deploy_config",
+      "community": 26,
+      "norm_label": "deploy config"
+    },
+    {
+      "label": "Databases",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_databases",
+      "community": 26,
+      "norm_label": "databases"
+    },
+    {
+      "label": "Object Storage",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_object_storage",
+      "community": 26,
+      "norm_label": "object storage"
+    },
+    {
+      "label": "Reusable Modules",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_reusable_modules",
+      "community": 26,
+      "norm_label": "reusable modules"
+    },
+    {
+      "label": "The building blocks you can compose",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "community": 26,
+      "norm_label": "the building blocks you can compose"
+    },
+    {
+      "label": "Service input",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_service_input",
+      "community": 26,
+      "norm_label": "service input"
+    },
+    {
+      "label": "Testing",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_testing",
+      "community": 26,
+      "norm_label": "testing"
+    },
+    {
+      "label": "Running locally",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_running_locally",
+      "community": 26,
+      "norm_label": "running locally"
+    },
+    {
+      "label": "Deploying",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_deploying",
+      "community": 26,
+      "norm_label": "deploying"
+    },
+    {
+      "label": "What a deploy prints",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_what_a_deploy_prints",
+      "community": 26,
+      "norm_label": "what a deploy prints"
+    },
+    {
+      "label": "The connection contract is checked at deploy",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "community": 26,
+      "norm_label": "the connection contract is checked at deploy"
+    },
+    {
+      "label": "Driving deploys from code",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_driving_deploys_from_code",
+      "community": 26,
+      "norm_label": "driving deploys from code"
+    },
+    {
+      "label": "Production pitfalls",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_production_pitfalls",
+      "community": 26,
+      "norm_label": "production pitfalls"
+    },
+    {
+      "label": "What Composer doesn't do yet",
+      "file_type": "document",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "_origin": "ast",
+      "id": "apps_api_agents_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "community": 26,
+      "norm_label": "what composer doesn't do yet"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill",
+      "community": 38,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Writing apps with Prisma Composer",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "community": 38,
+      "norm_label": "writing apps with prisma composer"
+    },
+    {
+      "label": "tsconfig and import specifiers",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "community": 38,
+      "norm_label": "tsconfig and import specifiers"
+    },
+    {
+      "label": "Anatomy of a service",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_anatomy_of_a_service",
+      "community": 38,
+      "norm_label": "anatomy of a service"
+    },
+    {
+      "label": "The root module",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_the_root_module",
+      "community": 38,
+      "norm_label": "the root module"
+    },
+    {
+      "label": "Builds are yours",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_builds_are_yours",
+      "community": 38,
+      "norm_label": "builds are yours"
+    },
+    {
+      "label": "Deploy config",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_deploy_config",
+      "community": 38,
+      "norm_label": "deploy config"
+    },
+    {
+      "label": "Databases",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_databases",
+      "community": 38,
+      "norm_label": "databases"
+    },
+    {
+      "label": "Object Storage",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_object_storage",
+      "community": 38,
+      "norm_label": "object storage"
+    },
+    {
+      "label": "Reusable Modules",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_reusable_modules",
+      "community": 38,
+      "norm_label": "reusable modules"
+    },
+    {
+      "label": "The building blocks you can compose",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "community": 38,
+      "norm_label": "the building blocks you can compose"
+    },
+    {
+      "label": "Service input",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_service_input",
+      "community": 38,
+      "norm_label": "service input"
+    },
+    {
+      "label": "Testing",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_testing",
+      "community": 38,
+      "norm_label": "testing"
+    },
+    {
+      "label": "Running locally",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_running_locally",
+      "community": 38,
+      "norm_label": "running locally"
+    },
+    {
+      "label": "Deploying",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_deploying",
+      "community": 38,
+      "norm_label": "deploying"
+    },
+    {
+      "label": "What a deploy prints",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_what_a_deploy_prints",
+      "community": 38,
+      "norm_label": "what a deploy prints"
+    },
+    {
+      "label": "The connection contract is checked at deploy",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "community": 38,
+      "norm_label": "the connection contract is checked at deploy"
+    },
+    {
+      "label": "Driving deploys from code",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_driving_deploys_from_code",
+      "community": 38,
+      "norm_label": "driving deploys from code"
+    },
+    {
+      "label": "Production pitfalls",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_production_pitfalls",
+      "community": 38,
+      "norm_label": "production pitfalls"
+    },
+    {
+      "label": "What Composer doesn't do yet",
+      "file_type": "document",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "_origin": "ast",
+      "id": "apps_api_claude_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "community": 38,
+      "norm_label": "what composer doesn't do yet"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill",
+      "community": 39,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Writing apps with Prisma Composer",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "community": 39,
+      "norm_label": "writing apps with prisma composer"
+    },
+    {
+      "label": "tsconfig and import specifiers",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "community": 39,
+      "norm_label": "tsconfig and import specifiers"
+    },
+    {
+      "label": "Anatomy of a service",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_anatomy_of_a_service",
+      "community": 39,
+      "norm_label": "anatomy of a service"
+    },
+    {
+      "label": "The root module",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_the_root_module",
+      "community": 39,
+      "norm_label": "the root module"
+    },
+    {
+      "label": "Builds are yours",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_builds_are_yours",
+      "community": 39,
+      "norm_label": "builds are yours"
+    },
+    {
+      "label": "Deploy config",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_deploy_config",
+      "community": 39,
+      "norm_label": "deploy config"
+    },
+    {
+      "label": "Databases",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_databases",
+      "community": 39,
+      "norm_label": "databases"
+    },
+    {
+      "label": "Object Storage",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_object_storage",
+      "community": 39,
+      "norm_label": "object storage"
+    },
+    {
+      "label": "Reusable Modules",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_reusable_modules",
+      "community": 39,
+      "norm_label": "reusable modules"
+    },
+    {
+      "label": "The building blocks you can compose",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "community": 39,
+      "norm_label": "the building blocks you can compose"
+    },
+    {
+      "label": "Service input",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_service_input",
+      "community": 39,
+      "norm_label": "service input"
+    },
+    {
+      "label": "Testing",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_testing",
+      "community": 39,
+      "norm_label": "testing"
+    },
+    {
+      "label": "Running locally",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_running_locally",
+      "community": 39,
+      "norm_label": "running locally"
+    },
+    {
+      "label": "Deploying",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_deploying",
+      "community": 39,
+      "norm_label": "deploying"
+    },
+    {
+      "label": "What a deploy prints",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_what_a_deploy_prints",
+      "community": 39,
+      "norm_label": "what a deploy prints"
+    },
+    {
+      "label": "The connection contract is checked at deploy",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "community": 39,
+      "norm_label": "the connection contract is checked at deploy"
+    },
+    {
+      "label": "Driving deploys from code",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_driving_deploys_from_code",
+      "community": 39,
+      "norm_label": "driving deploys from code"
+    },
+    {
+      "label": "Production pitfalls",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_production_pitfalls",
+      "community": 39,
+      "norm_label": "production pitfalls"
+    },
+    {
+      "label": "What Composer doesn't do yet",
+      "file_type": "document",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "_origin": "ast",
+      "id": "apps_api_cursor_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "community": 39,
+      "norm_label": "what composer doesn't do yet"
+    },
+    {
+      "label": "SKILL.md",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill",
+      "community": 40,
+      "norm_label": "skill.md"
+    },
+    {
+      "label": "Writing apps with Prisma Composer",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "community": 40,
+      "norm_label": "writing apps with prisma composer"
+    },
+    {
+      "label": "tsconfig and import specifiers",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "community": 40,
+      "norm_label": "tsconfig and import specifiers"
+    },
+    {
+      "label": "Anatomy of a service",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_anatomy_of_a_service",
+      "community": 40,
+      "norm_label": "anatomy of a service"
+    },
+    {
+      "label": "The root module",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_the_root_module",
+      "community": 40,
+      "norm_label": "the root module"
+    },
+    {
+      "label": "Builds are yours",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_builds_are_yours",
+      "community": 40,
+      "norm_label": "builds are yours"
+    },
+    {
+      "label": "Deploy config",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_deploy_config",
+      "community": 40,
+      "norm_label": "deploy config"
+    },
+    {
+      "label": "Databases",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_databases",
+      "community": 40,
+      "norm_label": "databases"
+    },
+    {
+      "label": "Object Storage",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_object_storage",
+      "community": 40,
+      "norm_label": "object storage"
+    },
+    {
+      "label": "Reusable Modules",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_reusable_modules",
+      "community": 40,
+      "norm_label": "reusable modules"
+    },
+    {
+      "label": "The building blocks you can compose",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "community": 40,
+      "norm_label": "the building blocks you can compose"
+    },
+    {
+      "label": "Service input",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_service_input",
+      "community": 40,
+      "norm_label": "service input"
+    },
+    {
+      "label": "Testing",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_testing",
+      "community": 40,
+      "norm_label": "testing"
+    },
+    {
+      "label": "Running locally",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_running_locally",
+      "community": 40,
+      "norm_label": "running locally"
+    },
+    {
+      "label": "Deploying",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_deploying",
+      "community": 40,
+      "norm_label": "deploying"
+    },
+    {
+      "label": "What a deploy prints",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_what_a_deploy_prints",
+      "community": 40,
+      "norm_label": "what a deploy prints"
+    },
+    {
+      "label": "The connection contract is checked at deploy",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "community": 40,
+      "norm_label": "the connection contract is checked at deploy"
+    },
+    {
+      "label": "Driving deploys from code",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_driving_deploys_from_code",
+      "community": 40,
+      "norm_label": "driving deploys from code"
+    },
+    {
+      "label": "Production pitfalls",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_production_pitfalls",
+      "community": 40,
+      "norm_label": "production pitfalls"
+    },
+    {
+      "label": "What Composer doesn't do yet",
+      "file_type": "document",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "_origin": "ast",
+      "id": "apps_api_devin_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "community": 40,
+      "norm_label": "what composer doesn't do yet"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_api_readme",
+      "community": 53,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Description",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "apps_api_readme_description",
+      "community": 53,
+      "norm_label": "description"
+    },
+    {
+      "label": "Project setup",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L28",
+      "_origin": "ast",
+      "id": "apps_api_readme_project_setup",
+      "community": 53,
+      "norm_label": "project setup"
+    },
+    {
+      "label": "Compile and run the project",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "apps_api_readme_compile_and_run_the_project",
+      "community": 53,
+      "norm_label": "compile and run the project"
+    },
+    {
+      "label": "Run tests",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "apps_api_readme_run_tests",
+      "community": 53,
+      "norm_label": "run tests"
+    },
+    {
+      "label": "Deployment",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "apps_api_readme_deployment",
+      "community": 53,
+      "norm_label": "deployment"
+    },
+    {
+      "label": "Observability",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L73",
+      "_origin": "ast",
+      "id": "apps_api_readme_observability",
+      "community": 53,
+      "norm_label": "observability"
+    },
+    {
+      "label": "Resources",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "apps_api_readme_resources",
+      "community": 53,
+      "norm_label": "resources"
+    },
+    {
+      "label": "Support",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L102",
+      "_origin": "ast",
+      "id": "apps_api_readme_support",
+      "community": 53,
+      "norm_label": "support"
+    },
+    {
+      "label": "Stay in touch",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "apps_api_readme_stay_in_touch",
+      "community": 53,
+      "norm_label": "stay in touch"
+    },
+    {
+      "label": "License",
+      "file_type": "document",
+      "source_file": "apps/api/README.md",
+      "source_location": "L112",
+      "_origin": "ast",
+      "id": "apps_api_readme_license",
+      "community": 53,
+      "norm_label": "license"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "apps/web/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_web_readme",
+      "community": 61,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "Getting Started",
+      "file_type": "document",
+      "source_file": "apps/web/README.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "apps_web_readme_getting_started",
+      "community": 61,
+      "norm_label": "getting started"
+    },
+    {
+      "label": "Learn More",
+      "file_type": "document",
+      "source_file": "apps/web/README.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "apps_web_readme_learn_more",
+      "community": 61,
+      "norm_label": "learn more"
+    },
+    {
+      "label": "Deploy on Vercel",
+      "file_type": "document",
+      "source_file": "apps/web/README.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "apps_web_readme_deploy_on_vercel",
+      "community": 61,
+      "norm_label": "deploy on vercel"
+    },
+    {
+      "label": "001-monorepo-architecture.md",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture",
+      "community": 58,
+      "norm_label": "001-monorepo-architecture.md"
+    },
+    {
+      "label": "ADR-001: Arquitectura Monorepo con Turborepo + pnpm",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "community": 58,
+      "norm_label": "adr-001: arquitectura monorepo con turborepo + pnpm"
+    },
+    {
+      "label": "Estado",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_estado",
+      "community": 58,
+      "norm_label": "estado"
+    },
+    {
+      "label": "Fecha",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_fecha",
+      "community": 58,
+      "norm_label": "fecha"
+    },
+    {
+      "label": "Contexto",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_contexto",
+      "community": 58,
+      "norm_label": "contexto"
+    },
+    {
+      "label": "Opciones Consideradas",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_opciones_consideradas",
+      "community": 58,
+      "norm_label": "opciones consideradas"
+    },
+    {
+      "label": "Decisi\u00f3n",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_decisi\u00f3n",
+      "community": 58,
+      "norm_label": "decision"
+    },
+    {
+      "label": "Justificaci\u00f3n",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_justificaci\u00f3n",
+      "community": 58,
+      "norm_label": "justificacion"
+    },
+    {
+      "label": "Consecuencias",
+      "file_type": "document",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "docs_adr_001_monorepo_architecture_consecuencias",
+      "community": 58,
+      "norm_label": "consecuencias"
+    },
+    {
+      "label": "002-whatsapp-checkout-mvp.md",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp",
+      "community": 59,
+      "norm_label": "002-whatsapp-checkout-mvp.md"
+    },
+    {
+      "label": "ADR-002: Checkout MVP v\u00eda WhatsApp (sin pasarela de pagos)",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "community": 59,
+      "norm_label": "adr-002: checkout mvp via whatsapp (sin pasarela de pagos)"
+    },
+    {
+      "label": "Estado",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_estado",
+      "community": 59,
+      "norm_label": "estado"
+    },
+    {
+      "label": "Fecha",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_fecha",
+      "community": 59,
+      "norm_label": "fecha"
+    },
+    {
+      "label": "Contexto",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_contexto",
+      "community": 59,
+      "norm_label": "contexto"
+    },
+    {
+      "label": "Opciones Consideradas",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_opciones_consideradas",
+      "community": 59,
+      "norm_label": "opciones consideradas"
+    },
+    {
+      "label": "Decisi\u00f3n",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_decisi\u00f3n",
+      "community": 59,
+      "norm_label": "decision"
+    },
+    {
+      "label": "Justificaci\u00f3n",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_justificaci\u00f3n",
+      "community": 59,
+      "norm_label": "justificacion"
+    },
+    {
+      "label": "Consecuencias",
+      "file_type": "document",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "docs_adr_002_whatsapp_checkout_mvp_consecuencias",
+      "community": 59,
+      "norm_label": "consecuencias"
+    },
+    {
+      "label": "ishop_architecture_benchmark.md",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark",
+      "community": 50,
+      "norm_label": "ishop_architecture_benchmark.md"
+    },
+    {
+      "label": "Benchmark de Arquitectura y M\u00f3dulos de iShop Colombia",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "community": 50,
+      "norm_label": "benchmark de arquitectura y modulos de ishop colombia"
+    },
+    {
+      "label": "1. Mapa Global de Arquitectura del Sitio",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_1_mapa_global_de_arquitectura_del_sitio",
+      "community": 50,
+      "norm_label": "1. mapa global de arquitectura del sitio"
+    },
+    {
+      "label": "2. Design Tokens y Sistema Visual de iShop",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_2_design_tokens_y_sistema_visual_de_ishop",
+      "community": 50,
+      "norm_label": "2. design tokens y sistema visual de ishop"
+    },
+    {
+      "label": "3. Desglose Detallado de M\u00f3dulos (Benchmark LOB)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "community": 50,
+      "norm_label": "3. desglose detallado de modulos (benchmark lob)"
+    },
+    {
+      "label": "M\u00f3dulo 1: Navigation Stripe (`#shopify-section-navigation_stripe`)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L76",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_m\u00f3dulo_1_navigation_stripe_shopify_section_navigation_stripe",
+      "community": 50,
+      "norm_label": "modulo 1: navigation stripe (`#shopify-section-navigation_stripe`)"
+    },
+    {
+      "label": "M\u00f3dulo 2: Hero Slider Comercial (`.slider_clickable`)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_m\u00f3dulo_2_hero_slider_comercial_slider_clickable",
+      "community": 50,
+      "norm_label": "modulo 2: hero slider comercial (`.slider_clickable`)"
+    },
+    {
+      "label": "M\u00f3dulo 3: LOB Showcase Rows (`.lob-module`)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L97",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_m\u00f3dulo_3_lob_showcase_rows_lob_module",
+      "community": 50,
+      "norm_label": "modulo 3: lob showcase rows (`.lob-module`)"
+    },
+    {
+      "label": "M\u00f3dulo 4: Contenido Editorial y SEO (`.multicolumn_sec`)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L111",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_m\u00f3dulo_4_contenido_editorial_y_seo_multicolumn_sec",
+      "community": 50,
+      "norm_label": "modulo 4: contenido editorial y seo (`.multicolumn_sec`)"
+    },
+    {
+      "label": "M\u00f3dulo 5: Preguntas Frecuentes Desplegables (FAQ Accordion)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_m\u00f3dulo_5_preguntas_frecuentes_desplegables_faq_accordion",
+      "community": 50,
+      "norm_label": "modulo 5: preguntas frecuentes desplegables (faq accordion)"
+    },
+    {
+      "label": "4. Desglose de Ficha de Producto (Benchmark PDP)",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_4_desglose_de_ficha_de_producto_benchmark_pdp",
+      "community": 50,
+      "norm_label": "4. desglose de ficha de producto (benchmark pdp)"
+    },
+    {
+      "label": "5. Implementaci\u00f3n Aplicada en iZone Tech",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L151",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_5_implementaci\u00f3n_aplicada_en_izone_tech",
+      "community": 50,
+      "norm_label": "5. implementacion aplicada en izone tech"
+    },
+    {
+      "label": "A. M\u00f3dulos de Categor\u00eda (LOB Hubs):",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L155",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_a_m\u00f3dulos_de_categor\u00eda_lob_hubs",
+      "community": 50,
+      "norm_label": "a. modulos de categoria (lob hubs):"
+    },
+    {
+      "label": "B. M\u00f3dulos de Ficha de Producto (PDP):",
+      "file_type": "document",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L160",
+      "_origin": "ast",
+      "id": "docs_ishop_architecture_benchmark_b_m\u00f3dulos_de_ficha_de_producto_pdp",
+      "community": 50,
+      "norm_label": "b. modulos de ficha de producto (pdp):"
     }
   ],
   "links": [
@@ -16871,7 +18621,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/app/(shop)/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0,
       "source": "apps_web_src_app_shop_page",
       "target": "apps_web_src_app_shop_page_home",
@@ -16970,7 +18720,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/app/(shop)/page.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_web_src_app_shop_page",
       "target": "apps_web_src_components_home_promobanners",
@@ -16981,10 +18731,32 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/app/(shop)/page.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "apps_web_src_app_shop_page",
       "target": "apps_web_src_components_home_promobanners_promobanners",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/app/(shop)/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_web_src_app_shop_page",
+      "target": "apps_web_src_components_home_socialfollow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/app/(shop)/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_web_src_app_shop_page",
+      "target": "apps_web_src_components_home_socialfollow_socialfollow",
       "confidence_score": 1.0
     },
     {
@@ -18758,6 +20530,102 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "indirect_call",
+      "confidence": "INFERRED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "context": "collection",
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_home_socialfollow_instagramicon",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_home_socialfollow_platforms",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_home_socialfollow_socialfollow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_home_socialfollow_stats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "indirect_call",
+      "confidence": "INFERRED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "context": "collection",
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_home_socialfollow_tiktokicon",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_motion_fadein",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_components_motion_fadein_easeout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_lib_site",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/home/SocialFollow.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "apps_web_src_components_home_socialfollow",
+      "target": "apps_web_src_lib_site_social_links",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/components/home/TrustBanner.tsx",
@@ -18791,10 +20659,32 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/components/layout/Footer.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "apps_web_src_components_layout_footer",
       "target": "apps_web_src_components_layout_footer_footer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/layout/Footer.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_web_src_components_layout_footer",
+      "target": "apps_web_src_lib_site",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/components/layout/Footer.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_web_src_components_layout_footer",
+      "target": "apps_web_src_lib_site_social_links",
       "confidence_score": 1.0
     },
     {
@@ -20520,7 +22410,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L7",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "apps_web_src_lib_site",
       "target": "apps_web_src_lib_site_absoluteurl",
@@ -20530,7 +22420,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L3",
+      "source_location": "L17",
       "weight": 1.0,
       "source": "apps_web_src_lib_site",
       "target": "apps_web_src_lib_site_getsiteurl",
@@ -20540,7 +22430,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L67",
+      "source_location": "L78",
       "weight": 1.0,
       "source": "apps_web_src_lib_site",
       "target": "apps_web_src_lib_site_localbusinessjsonld",
@@ -20550,7 +22440,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L44",
+      "source_location": "L58",
       "weight": 1.0,
       "source": "apps_web_src_lib_site",
       "target": "apps_web_src_lib_site_organizationjsonld",
@@ -20560,10 +22450,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L14",
+      "source_location": "L28",
       "weight": 1.0,
       "source": "apps_web_src_lib_site",
       "target": "apps_web_src_lib_site_pagemetadata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/src/lib/site.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "apps_web_src_lib_site",
+      "target": "apps_web_src_lib_site_social_links",
       "confidence_score": 1.0
     },
     {
@@ -20582,7 +22482,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L8",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "apps_web_src_lib_site_absoluteurl",
       "target": "apps_web_src_lib_site_getsiteurl",
@@ -20593,7 +22493,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/web/src/lib/site.ts",
-      "source_location": "L27",
+      "source_location": "L41",
       "weight": 1.0,
       "source": "apps_web_src_lib_site_pagemetadata",
       "target": "apps_web_src_lib_site_absoluteurl",
@@ -21803,8 +23703,1578 @@
       "source": "turbo_tasks_db_generate",
       "target": "turbo_db_generate_cache",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L215",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L152",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L190",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_output_formats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L255",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_prerequisites",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_search_reference",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L204",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_ui_ux_pro_max",
+      "target": "cursor_skills_ui_ux_pro_max_skill_tips_for_better_results",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_1_analyze_user_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_2_generate_design_system_required",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_2b_persist_design_system_master_overrides_pattern",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_3_supplement_with_detailed_searches_as_needed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_how_to_use_this_skill",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_4_stack_guidelines_default_html_tailwind",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L120",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_search_reference",
+      "target": "cursor_skills_ui_ux_pro_max_skill_available_domains",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_search_reference",
+      "target": "cursor_skills_ui_ux_pro_max_skill_available_stacks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_1_analyze_requirements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_2_generate_design_system_required_162",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_3_supplement_with_detailed_searches_as_needed_170",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L180",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_example_workflow",
+      "target": "cursor_skills_ui_ux_pro_max_skill_step_4_stack_guidelines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "target": "cursor_skills_ui_ux_pro_max_skill_icons_visual_elements",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L228",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "target": "cursor_skills_ui_ux_pro_max_skill_interaction_cursor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L245",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "target": "cursor_skills_ui_ux_pro_max_skill_layout_spacing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_common_rules_for_professional_ui",
+      "target": "cursor_skills_ui_ux_pro_max_skill_light_dark_mode_contrast",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L284",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "target": "cursor_skills_ui_ux_pro_max_skill_accessibility",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L266",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "target": "cursor_skills_ui_ux_pro_max_skill_interaction",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L278",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "target": "cursor_skills_ui_ux_pro_max_skill_layout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L272",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "target": "cursor_skills_ui_ux_pro_max_skill_light_dark_mode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".cursor/skills/ui-ux-pro-max/SKILL.md",
+      "source_location": "L259",
+      "weight": 1.0,
+      "source": "cursor_skills_ui_ux_pro_max_skill_pre_delivery_checklist",
+      "target": "cursor_skills_ui_ux_pro_max_skill_visual_quality",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "readme",
+      "target": "readme_izone_tech_e_commerce_platform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_api_docs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_arquitectura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_comandos_principales",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_instalaci\u00f3n_y_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_integraci\u00f3n_con_conectik_erp_future_proof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_licencia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_requisitos_previos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "readme_izone_tech_e_commerce_platform",
+      "target": "readme_variables_de_entorno",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "readme_arquitectura",
+      "target": "readme_estructura_de_directorios",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill",
+      "target": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_anatomy_of_a_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_builds_are_yours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_databases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_deploy_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_deploying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_object_storage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_production_pitfalls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_reusable_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_running_locally",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_service_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_the_root_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_agents_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_reusable_modules",
+      "target": "apps_api_agents_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_agents_skills_prisma_composer_skill_driving_deploys_from_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_agents_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.agents/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "weight": 1.0,
+      "source": "apps_api_agents_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_agents_skills_prisma_composer_skill_what_a_deploy_prints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill",
+      "target": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_anatomy_of_a_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_builds_are_yours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_databases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_deploy_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_deploying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_object_storage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_production_pitfalls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_reusable_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_running_locally",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_service_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_the_root_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_claude_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_reusable_modules",
+      "target": "apps_api_claude_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_claude_skills_prisma_composer_skill_driving_deploys_from_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_claude_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.claude/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "weight": 1.0,
+      "source": "apps_api_claude_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_claude_skills_prisma_composer_skill_what_a_deploy_prints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_anatomy_of_a_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_builds_are_yours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_databases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_deploy_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_deploying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_object_storage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_production_pitfalls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_reusable_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_running_locally",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_service_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_the_root_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_reusable_modules",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_driving_deploys_from_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.cursor/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "weight": 1.0,
+      "source": "apps_api_cursor_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_cursor_skills_prisma_composer_skill_what_a_deploy_prints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill",
+      "target": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_anatomy_of_a_service",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_builds_are_yours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L307",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_databases",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L281",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_deploy_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L638",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_deploying",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L365",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_object_storage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L761",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_production_pitfalls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L385",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_reusable_modules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L601",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_running_locally",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L460",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_service_input",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L531",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_testing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L219",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_the_root_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_tsconfig_and_import_specifiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L791",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_writing_apps_with_prisma_composer",
+      "target": "apps_api_devin_skills_prisma_composer_skill_what_composer_doesn_t_do_yet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L421",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_reusable_modules",
+      "target": "apps_api_devin_skills_prisma_composer_skill_the_building_blocks_you_can_compose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L722",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_devin_skills_prisma_composer_skill_driving_deploys_from_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L697",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_devin_skills_prisma_composer_skill_the_connection_contract_is_checked_at_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/.devin/skills/prisma-composer/SKILL.md",
+      "source_location": "L670",
+      "weight": 1.0,
+      "source": "apps_api_devin_skills_prisma_composer_skill_deploying",
+      "target": "apps_api_devin_skills_prisma_composer_skill_what_a_deploy_prints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_compile_and_run_the_project",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_deployment",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_description",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_license",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_observability",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_project_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_resources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_run_tests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_stay_in_touch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/api/README.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "apps_api_readme",
+      "target": "apps_api_readme_support",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/README.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "apps_web_readme",
+      "target": "apps_web_readme_deploy_on_vercel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/README.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "apps_web_readme",
+      "target": "apps_web_readme_getting_started",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/web/README.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "apps_web_readme",
+      "target": "apps_web_readme_learn_more",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture",
+      "target": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_consecuencias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_contexto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_decisi\u00f3n",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_estado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_fecha",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_justificaci\u00f3n",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/001-monorepo-architecture.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "docs_adr_001_monorepo_architecture_adr_001_arquitectura_monorepo_con_turborepo_pnpm",
+      "target": "docs_adr_001_monorepo_architecture_opciones_consideradas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_consecuencias",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_contexto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_decisi\u00f3n",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_estado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_fecha",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_justificaci\u00f3n",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/adr/002-whatsapp-checkout-mvp.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "docs_adr_002_whatsapp_checkout_mvp_adr_002_checkout_mvp_v\u00eda_whatsapp_sin_pasarela_de_pagos",
+      "target": "docs_adr_002_whatsapp_checkout_mvp_opciones_consideradas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark",
+      "target": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "target": "docs_ishop_architecture_benchmark_1_mapa_global_de_arquitectura_del_sitio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "target": "docs_ishop_architecture_benchmark_2_design_tokens_y_sistema_visual_de_ishop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "target": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "target": "docs_ishop_architecture_benchmark_4_desglose_de_ficha_de_producto_benchmark_pdp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L151",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_benchmark_de_arquitectura_y_m\u00f3dulos_de_ishop_colombia",
+      "target": "docs_ishop_architecture_benchmark_5_implementaci\u00f3n_aplicada_en_izone_tech",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "target": "docs_ishop_architecture_benchmark_m\u00f3dulo_1_navigation_stripe_shopify_section_navigation_stripe",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "target": "docs_ishop_architecture_benchmark_m\u00f3dulo_2_hero_slider_comercial_slider_clickable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "target": "docs_ishop_architecture_benchmark_m\u00f3dulo_3_lob_showcase_rows_lob_module",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "target": "docs_ishop_architecture_benchmark_m\u00f3dulo_4_contenido_editorial_y_seo_multicolumn_sec",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_3_desglose_detallado_de_m\u00f3dulos_benchmark_lob",
+      "target": "docs_ishop_architecture_benchmark_m\u00f3dulo_5_preguntas_frecuentes_desplegables_faq_accordion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_5_implementaci\u00f3n_aplicada_en_izone_tech",
+      "target": "docs_ishop_architecture_benchmark_a_m\u00f3dulos_de_categor\u00eda_lob_hubs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ishop_architecture_benchmark.md",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "docs_ishop_architecture_benchmark_5_implementaci\u00f3n_aplicada_en_izone_tech",
+      "target": "docs_ishop_architecture_benchmark_b_m\u00f3dulos_de_ficha_de_producto_pdp",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8c0b826c6d9e4acfaad59e3ddfb9d00bc09c28c6"
+  "built_at_commit": "031d9e3e66d6a3ca0e8cba9232f4015d2f216251"
 }

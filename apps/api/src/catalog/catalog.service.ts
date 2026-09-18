@@ -16,6 +16,8 @@ interface GetProductsParams {
   material?: string;
   deviceBrand?: string;
   deviceKind?: string;
+  featured?: boolean;
+  take?: number;
 }
 
 const FAMILY_HREF: Record<string, string> = {
@@ -66,6 +68,8 @@ export class CatalogService {
       material,
       deviceBrand,
       deviceKind,
+      featured,
+      take,
     } = params;
 
     const variantFilter: Prisma.VariantWhereInput = {};
@@ -86,9 +90,13 @@ export class CatalogService {
     }
 
     // Build sort
-    let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: 'desc' };
+    let orderBy: Prisma.ProductOrderByWithRelationInput | Prisma.ProductOrderByWithRelationInput[] =
+      { createdAt: 'desc' };
     if (sort === 'name_asc') orderBy = { name: 'asc' };
     if (sort === 'newest') orderBy = { createdAt: 'desc' };
+    if (featured || sort === 'featured') {
+      orderBy = [{ isFeatured: 'desc' }, { updatedAt: 'desc' }];
+    }
 
     const categoryIds = categorySlug
       ? await this.resolveCategoryAndDescendantIds(categorySlug)
@@ -101,6 +109,7 @@ export class CatalogService {
     const products = await this.prisma.product.findMany({
       where: {
         isActive: true,
+        isFeatured: featured ? true : undefined,
         categoryId: categoryIds ? { in: categoryIds } : undefined,
         brand: brandSlug ? { slug: brandSlug } : undefined,
         tags: tagSlug ? { some: { slug: tagSlug } } : undefined,
@@ -141,6 +150,7 @@ export class CatalogService {
         tags: true,
       },
       orderBy,
+      take: take ? Math.min(Math.max(take, 1), 48) : undefined,
     });
 
     // Post-query sort by price if needed (since price is on variants)
@@ -293,6 +303,11 @@ export class CatalogService {
     });
 
     if (!product) {
+      throw new NotFoundException(`Producto "${slug}" no encontrado`);
+    }
+
+    // Storefront público: productos ocultos desde Admin no deben romper ni indexarse
+    if (!product.isActive) {
       throw new NotFoundException(`Producto "${slug}" no encontrado`);
     }
 

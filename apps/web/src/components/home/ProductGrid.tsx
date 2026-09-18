@@ -1,34 +1,42 @@
 import React from 'react';
 import Link from 'next/link';
 import { formatCOP, type Product } from '@izone/shared-types';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 interface ProductGridProps {
   title: string;
   subtitle?: string;
   products: Product[];
+  compact?: boolean;
 }
 
-export function ProductGrid({ title, subtitle, products }: ProductGridProps) {
+export function ProductGrid({ title, subtitle, products, compact }: ProductGridProps) {
   if (!products?.length) return null;
 
   return (
-    <section className="container mx-auto px-4 py-16">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-        <div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
-          {subtitle && (
-            <p className="text-sm md:text-base text-neutral-500 mt-2 font-medium">
-              {subtitle}
-            </p>
+    <section className={compact ? 'w-full' : 'container mx-auto px-4 py-16'}>
+      {(title || subtitle) && (
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            {title ? (
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{title}</h2>
+            ) : null}
+            {subtitle && (
+              <p className="text-sm md:text-base text-neutral-500 mt-2 font-medium">
+                {subtitle}
+              </p>
+            )}
+          </div>
+          {!compact && (
+            <Link
+              href="/shop"
+              className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center transition"
+            >
+              Ver todo el catálogo →
+            </Link>
           )}
         </div>
-        <Link 
-          href="/shop" 
-          className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center transition"
-        >
-          Ver todo el catálogo →
-        </Link>
-      </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((p) => {
@@ -55,10 +63,12 @@ export function ProductGrid({ title, subtitle, products }: ProductGridProps) {
 
               {/* Imagen del producto (Usando placeholder por ahora si no hay img) */}
               <div className="relative aspect-square mb-6 overflow-hidden rounded-xl bg-neutral-50 dark:bg-neutral-800 flex items-center justify-center">
-                <img
-                  src={p.images?.[0] || 'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?q=80&w=600&auto=format&fit=crop'}
+                <SmartImage
+                  src={p.images?.[0]}
                   alt={p.name}
-                  className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -67,6 +77,21 @@ export function ProductGrid({ title, subtitle, products }: ProductGridProps) {
                 <h3 className="text-lg font-bold mb-1 group-hover:text-blue-600 transition-colors line-clamp-2">
                   {p.name}
                 </h3>
+                {compact && p.variants?.some((v) => v.colorHex) ? (
+                  <div className="flex items-center gap-1.5 mt-2" aria-label="Colores disponibles">
+                    {p.variants
+                      .filter((v) => v.colorHex)
+                      .slice(0, 6)
+                      .map((v) => (
+                        <span
+                          key={v.id}
+                          title={v.colorName || undefined}
+                          className="w-3 h-3 rounded-full border border-black/10"
+                          style={{ backgroundColor: v.colorHex || undefined }}
+                        />
+                      ))}
+                  </div>
+                ) : null}
                 
                 <div className="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-end justify-between">
                   <div>

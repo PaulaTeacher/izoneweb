@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 export interface ModelCarouselItem {
   id: string;
@@ -105,13 +106,14 @@ export function CategoryModelCarousel({
                   style={{ width: '220px' }}
                 >
                   {/* Miniatura Oficial del Dispositivo (84x84 exactamente como iShop) */}
-                  <div className="w-[84px] h-[84px] flex items-center justify-center flex-shrink-0">
+                  <div className="relative w-[84px] h-[84px] flex-shrink-0">
                     {item.img ? (
-                      <img
+                      <SmartImage
                         src={item.img}
                         alt={item.name}
-                        className="w-[84px] h-[84px] object-contain transition-transform duration-300 group-hover:scale-105"
-                        loading="lazy"
+                        fill
+                        sizes="84px"
+                        className="object-contain transition-transform duration-300 group-hover:scale-105"
                       />
                     ) : (
                       <div className="w-[84px] h-[84px] bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center">

@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 const slides = [
   {
@@ -64,11 +65,13 @@ export function HeroCarousel() {
         <div className="flex touch-pan-y">
           {slides.map((slide) => (
             <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 min-h-[600px] md:min-h-[700px]">
-              {/* Background Image */}
-              <img
+              <SmartImage
                 src={slide.image}
                 alt={slide.title}
-                className="absolute inset-0 w-full h-full object-cover object-center"
+                fill
+                priority={slide.id === 1}
+                sizes="100vw"
+                className="object-cover object-center"
               />
               
               {/* Dark overlay for dark theme slides */}

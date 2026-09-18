@@ -5,6 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/lib/cart-context';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 const favoriteProducts = [
   {
@@ -103,10 +104,12 @@ export function FavoritesCarousel() {
                     {/* Contenedor de Imagen */}
                     <Link href={product.link} className="w-full">
                       <div className="w-full aspect-square border border-neutral-200 dark:border-neutral-800 rounded-2xl flex items-center justify-center p-8 bg-white dark:bg-neutral-900 transition-all group-hover:border-neutral-300 dark:group-hover:border-neutral-700 group-hover:shadow-sm mb-5 relative">
-                        <img 
-                          src={product.image} 
+                        <SmartImage
+                          src={product.image}
                           alt={product.name}
-                          className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          className="object-contain p-8 mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
                     </Link>

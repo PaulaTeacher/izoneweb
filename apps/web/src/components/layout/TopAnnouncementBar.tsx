@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Truck, CreditCard, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Truck, ShieldCheck, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 const announcements = [
@@ -14,13 +14,6 @@ const announcements = [
   },
   {
     id: 2,
-    icon: CreditCard,
-    text: 'Paga a cuotas con 0% de interés con Addi, Bancolombia o PSE',
-    badge: 'Financiación',
-    link: '/#medios-pago',
-  },
-  {
-    id: 3,
     icon: ShieldCheck,
     text: 'Garantía Oficial Apple de 1 año en todos nuestros equipos',
     badge: '100% Original',

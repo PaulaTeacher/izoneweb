@@ -98,7 +98,9 @@ const TAXONOMY: FamilySeed[] = [
     description: 'Fundas, cargadores y más.',
     children: [
       { name: 'Fundas y Protección', slug: 'fundas' },
-      { name: 'Energía y Cables', slug: 'energia' },
+      { name: 'Energía y Power Banks', slug: 'energia' },
+      { name: 'Cables y Hubs', slug: 'cables-hubs' },
+      { name: 'Accesorios Mac', slug: 'accesorios-mac' },
       { name: 'MagSafe', slug: 'magsafe' },
       { name: 'Almacenamiento', slug: 'almacenamiento' },
     ],
@@ -120,6 +122,7 @@ const TAXONOMY: FamilySeed[] = [
 
 async function main() {
   // Clean up in dependency order
+  await prisma.productCompatibility.deleteMany();
   await prisma.tradeInRequest.deleteMany();
   await prisma.tradeInQuestion.deleteMany();
   await prisma.tradeInModel.deleteMany();
@@ -131,6 +134,7 @@ async function main() {
   await prisma.coupon.deleteMany();
   await prisma.variant.deleteMany();
   await prisma.product.deleteMany();
+  await prisma.deviceModel.deleteMany();
   await prisma.category.updateMany({ data: { parentId: null } });
   await prisma.category.deleteMany();
   await prisma.brand.deleteMany();
@@ -140,6 +144,21 @@ async function main() {
   // ======================== BRANDS ========================
   const brandApple = await prisma.brand.create({
     data: { name: 'Apple', slug: 'apple', logoUrl: null },
+  });
+  const brandSamsung = await prisma.brand.create({
+    data: { name: 'Samsung', slug: 'samsung' },
+  });
+  const brandXiaomi = await prisma.brand.create({
+    data: { name: 'Xiaomi', slug: 'xiaomi' },
+  });
+  const brandSpigen = await prisma.brand.create({
+    data: { name: 'Spigen', slug: 'spigen' },
+  });
+  const brandAnker = await prisma.brand.create({
+    data: { name: 'Anker', slug: 'anker' },
+  });
+  const brandIzone = await prisma.brand.create({
+    data: { name: 'iZone', slug: 'izone' },
   });
 
   // ======================== CATEGORIES (familia → hoja) ========================
@@ -209,6 +228,51 @@ async function main() {
   });
 
   // ======================== PRODUCTS ========================
+
+  // --- iPhone 17 Pro ---
+  const iphone17Pro = await prisma.product.create({
+    data: {
+      name: 'iPhone 17 Pro',
+      slug: 'iphone-17-pro',
+      subtitle: 'Titanio. Chip A19 Pro. El iPhone Pro más avanzado.',
+      heroBadge: 'NUEVO',
+      description: 'iPhone 17 Pro con chip A19 Pro, diseño en titanio y Control de la Cámara. Pantalla Super Retina XDR y sistema de cámaras Pro de 48 MP.',
+      isFeatured: true,
+      isActive: true,
+      isTradeInEligible: true,
+      warrantyMonths: 12,
+      seoTitle: 'Comprar iPhone 17 Pro en Bogotá | iZone Tech',
+      seoDescription: 'iPhone 17 Pro con chip A19 Pro y titanio. Garantía oficial de 1 año y envíos a toda Colombia.',
+      images: [
+        'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=800',
+      ],
+      brandId: brandApple.id,
+      categoryId: catId['iphone-17-pro'],
+      erp_product_id: 'ERP-IPH17PRO',
+      tags: { connect: [{ id: tagNew.id }, { id: tagPro.id }] },
+      variants: {
+        create: [
+          { colorName: 'Titanio Natural', colorHex: '#BEB4A8', storage: '256GB', condition: 'NUEVO_SELLADO', price: 5749000, comparePrice: 6499000, sku: 'IPH17PRO-NAT-256', stock: 10, erp_variant_sku: 'V-IPH17PRO-NAT-256' },
+          { colorName: 'Titanio Negro', colorHex: '#3C3C3C', storage: '256GB', condition: 'NUEVO_SELLADO', price: 5749000, comparePrice: 6499000, sku: 'IPH17PRO-BLK-256', stock: 8, erp_variant_sku: 'V-IPH17PRO-BLK-256' },
+          { colorName: 'Titanio Blanco', colorHex: '#F5F5F0', storage: '512GB', condition: 'NUEVO_SELLADO', price: 6749000, comparePrice: 7499000, sku: 'IPH17PRO-WHT-512', stock: 4, erp_variant_sku: 'V-IPH17PRO-WHT-512' },
+        ],
+      },
+    },
+  });
+
+  await prisma.productSpec.createMany({
+    data: [
+      { productId: iphone17Pro.id, specId: specChip.id, value: 'A19 Pro' },
+      { productId: iphone17Pro.id, specId: specDisplay.id, value: '6.3' },
+      { productId: iphone17Pro.id, specId: specDisplayType.id, value: 'Super Retina XDR OLED, ProMotion 120Hz, Always-On' },
+      { productId: iphone17Pro.id, specId: specMainCamera.id, value: '48 MP (Principal) + 48 MP (Ultra angular) + 12 MP (Teleobjetivo 5x)' },
+      { productId: iphone17Pro.id, specId: specFrontCamera.id, value: '12' },
+      { productId: iphone17Pro.id, specId: specBattery.id, value: 'Hasta 28 horas de reproducción de video' },
+      { productId: iphone17Pro.id, specId: specBiometric.id, value: 'Face ID' },
+      { productId: iphone17Pro.id, specId: specResistance.id, value: 'IP68 (6 metros, 30 minutos)' },
+      { productId: iphone17Pro.id, specId: specConnectivity.id, value: '5G, Wi-Fi 7, Bluetooth 5.3, USB-C 3.0, NFC' },
+    ],
+  });
 
   // --- iPhone 16 Pro Max ---
   const iphone16ProMax = await prisma.product.create({
@@ -362,6 +426,208 @@ async function main() {
     },
   });
 
+  // ======================== DEVICE MODELS (finder de accesorios) ========================
+  const deviceModels = await Promise.all(
+    [
+      { name: 'iPhone 17 Pro', slug: 'iphone-17-pro', kind: 'phone' as const, year: 2025, brandId: brandApple.id, sortOrder: 1 },
+      { name: 'iPhone 16 Pro Max', slug: 'iphone-16-pro-max', kind: 'phone' as const, year: 2024, brandId: brandApple.id, sortOrder: 2 },
+      { name: 'iPhone 16 Pro', slug: 'iphone-16-pro', kind: 'phone' as const, year: 2024, brandId: brandApple.id, sortOrder: 3 },
+      { name: 'Galaxy S24 Ultra', slug: 'galaxy-s24-ultra', kind: 'phone' as const, year: 2024, brandId: brandSamsung.id, sortOrder: 4 },
+      { name: 'Galaxy S24', slug: 'galaxy-s24', kind: 'phone' as const, year: 2024, brandId: brandSamsung.id, sortOrder: 5 },
+      { name: 'Xiaomi 14', slug: 'xiaomi-14', kind: 'phone' as const, year: 2024, brandId: brandXiaomi.id, sortOrder: 6 },
+      { name: 'MacBook Air 13" M3', slug: 'macbook-air-13-m3', kind: 'laptop' as const, year: 2024, brandId: brandApple.id, sortOrder: 7 },
+      { name: 'iPad Pro 11"', slug: 'ipad-pro-11', kind: 'tablet' as const, year: 2024, brandId: brandApple.id, sortOrder: 8 },
+    ].map((dm) => prisma.deviceModel.create({ data: dm })),
+  );
+  const dmId = Object.fromEntries(deviceModels.map((d) => [d.slug, d.id]));
+
+  await prisma.product.update({
+    where: { slug: 'iphone-17-pro' },
+    data: { deviceModelId: dmId['iphone-17-pro'] },
+  });
+  await prisma.product.update({
+    where: { slug: 'iphone-16-pro-max' },
+    data: { deviceModelId: dmId['iphone-16-pro-max'] },
+  });
+  await prisma.product.update({
+    where: { slug: 'iphone-16-pro' },
+    data: { deviceModelId: dmId['iphone-16-pro'] },
+  });
+  await prisma.product.update({
+    where: { slug: 'macbook-air-m3' },
+    data: { deviceModelId: dmId['macbook-air-13-m3'] },
+  });
+
+  // ======================== ACCESSORIES ========================
+  const caseSilicone = await prisma.product.create({
+    data: {
+      name: 'Funda Silicona MagSafe',
+      slug: 'funda-silicona-magsafe',
+      subtitle: 'Ajuste preciso. Colores vivos. MagSafe.',
+      heroBadge: 'NUEVO',
+      description: 'Funda de silicona con imanes MagSafe. Compatible con varios iPhone Pro. Colores y SKU por variante.',
+      isFeatured: true,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 6,
+      images: ['https://images.unsplash.com/photo-1601593346740-925612d1d395?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandSpigen.id,
+      categoryId: catId['fundas'],
+      erp_product_id: 'ERP-CASE-SIL-MS',
+      variants: {
+        create: [
+          { colorName: 'Negro', colorHex: '#1D1D1F', material: 'silicona', condition: 'NUEVO_SELLADO', price: 89000, sku: 'CASE-SIL-BLK', stock: 40 },
+          { colorName: 'Azul', colorHex: '#0071E3', material: 'silicona', condition: 'NUEVO_SELLADO', price: 89000, sku: 'CASE-SIL-BLU', stock: 28 },
+          { colorName: 'Rosa', colorHex: '#E8A0BF', material: 'silicona', condition: 'NUEVO_SELLADO', price: 89000, sku: 'CASE-SIL-PNK', stock: 18 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [
+      { productId: caseSilicone.id, deviceModelId: dmId['iphone-16-pro'] },
+      { productId: caseSilicone.id, deviceModelId: dmId['iphone-16-pro-max'] },
+      { productId: caseSilicone.id, deviceModelId: dmId['iphone-17-pro'] },
+    ],
+  });
+
+  const caseLeather = await prisma.product.create({
+    data: {
+      name: 'Funda de Cuero iZone',
+      slug: 'funda-cuero-izone',
+      subtitle: 'Cuero genuino. Perfil fino.',
+      description: 'Funda de cuero con interior de microfibra. Tacto premium para iPhone 16 Pro.',
+      isFeatured: false,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 6,
+      images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a31?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandIzone.id,
+      categoryId: catId['fundas'],
+      erp_product_id: 'ERP-CASE-LTH',
+      variants: {
+        create: [
+          { colorName: 'Marrón', colorHex: '#6B4F3A', material: 'cuero', condition: 'NUEVO_SELLADO', price: 149000, sku: 'CASE-LTH-BRN', stock: 12 },
+          { colorName: 'Negro', colorHex: '#1D1D1F', material: 'cuero', condition: 'NUEVO_SELLADO', price: 149000, sku: 'CASE-LTH-BLK', stock: 10 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [{ productId: caseLeather.id, deviceModelId: dmId['iphone-16-pro'] }],
+  });
+
+  const caseSamsung = await prisma.product.create({
+    data: {
+      name: 'Funda Diseño Galaxy',
+      slug: 'funda-diseno-galaxy',
+      subtitle: 'Prints exclusivos para Galaxy S24.',
+      description: 'Fundas con diseño gráfico para Galaxy S24 y S24 Ultra. Varios colores y referencias.',
+      isFeatured: true,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 3,
+      images: ['https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandIzone.id,
+      categoryId: catId['fundas'],
+      erp_product_id: 'ERP-CASE-GAL',
+      variants: {
+        create: [
+          { colorName: 'Abstracto Azul', colorHex: '#3B82F6', material: 'diseno', condition: 'NUEVO_SELLADO', price: 59000, sku: 'CASE-GAL-ABS', stock: 22 },
+          { colorName: 'Mármol', colorHex: '#E7E5E4', material: 'diseno', condition: 'NUEVO_SELLADO', price: 59000, sku: 'CASE-GAL-MRB', stock: 16 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [
+      { productId: caseSamsung.id, deviceModelId: dmId['galaxy-s24'] },
+      { productId: caseSamsung.id, deviceModelId: dmId['galaxy-s24-ultra'] },
+    ],
+  });
+
+  const powerBank = await prisma.product.create({
+    data: {
+      name: 'Power Bank Anker 10.000 mAh',
+      slug: 'power-bank-anker-10000',
+      subtitle: 'Carga rápida USB-C. Compacto.',
+      heroBadge: 'MÁS VENDIDO',
+      description: 'Batería portátil de 10.000 mAh con USB-C. Sirve para iPhone, Galaxy y Xiaomi.',
+      isFeatured: true,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 12,
+      images: ['https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandAnker.id,
+      categoryId: catId['energia'],
+      erp_product_id: 'ERP-PB-ANK-10K',
+      variants: {
+        create: [
+          { colorName: 'Negro', colorHex: '#111111', material: 'otro', condition: 'NUEVO_SELLADO', price: 189000, sku: 'PB-ANK-10K-BLK', stock: 30 },
+          { colorName: 'Blanco', colorHex: '#F5F5F7', material: 'otro', condition: 'NUEVO_SELLADO', price: 189000, sku: 'PB-ANK-10K-WHT', stock: 14 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [
+      { productId: powerBank.id, deviceModelId: dmId['iphone-16-pro'] },
+      { productId: powerBank.id, deviceModelId: dmId['iphone-17-pro'] },
+      { productId: powerBank.id, deviceModelId: dmId['galaxy-s24'] },
+      { productId: powerBank.id, deviceModelId: dmId['xiaomi-14'] },
+    ],
+  });
+
+  const macHub = await prisma.product.create({
+    data: {
+      name: 'Hub USB-C 7 en 1',
+      slug: 'hub-usbc-7en1',
+      subtitle: 'HDMI, SD y USB-A para MacBook.',
+      description: 'Hub USB-C compacto para MacBook Air M3: HDMI 4K, lectora SD y puertos USB-A.',
+      isFeatured: true,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 12,
+      images: ['https://images.unsplash.com/photo-1625948515291-69613efd103f?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandAnker.id,
+      categoryId: catId['accesorios-mac'],
+      erp_product_id: 'ERP-HUB-USB7',
+      variants: {
+        create: [
+          { colorName: 'Gris espacial', colorHex: '#4B5563', material: 'otro', condition: 'NUEVO_SELLADO', price: 219000, sku: 'HUB-USB7-SPG', stock: 20 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [{ productId: macHub.id, deviceModelId: dmId['macbook-air-13-m3'] }],
+  });
+
+  const macSleeve = await prisma.product.create({
+    data: {
+      name: 'Funda Neopreno MacBook Air 13"',
+      slug: 'funda-macbook-air-13',
+      subtitle: 'Protección ligera para el día a día.',
+      description: 'Sleeve de neopreno para MacBook Air 13" M3. Interior suave y cierre elástico.',
+      isFeatured: false,
+      isActive: true,
+      productKind: 'accessory',
+      warrantyMonths: 3,
+      images: ['https://images.unsplash.com/photo-1541807084-5980d6e0c4e0?q=80&w=800&auto=format&fit=crop'],
+      brandId: brandIzone.id,
+      categoryId: catId['accesorios-mac'],
+      erp_product_id: 'ERP-SLV-MBA13',
+      variants: {
+        create: [
+          { colorName: 'Gris', colorHex: '#6B7280', material: 'otro', condition: 'NUEVO_SELLADO', price: 79000, sku: 'SLV-MBA13-GRY', stock: 15 },
+        ],
+      },
+    },
+  });
+  await prisma.productCompatibility.createMany({
+    data: [{ productId: macSleeve.id, deviceModelId: dmId['macbook-air-13-m3'] }],
+  });
+
   // ======================== TRADE-IN MODELS ========================
   await prisma.tradeInModel.create({
     data: { name: 'iPhone 15 Pro Max', slug: 'iphone-15-pro-max', brandSlug: 'apple', categorySlug: 'iphone', baseValue: 3200000, maxValue: 3800000 },
@@ -456,7 +722,8 @@ async function main() {
   const familias = TAXONOMY.length;
   const subcats = TAXONOMY.reduce((n, f) => n + f.children.length, 0);
   console.log(`   🌳 ${familias} familias, ${subcats} subcategorías`);
-  console.log('   📦 4 productos con variantes (nuevos + seminuevos + open box)');
+  console.log('   📦 Productos Apple + 6 accesorios de ejemplo (colores/materiales)');
+  console.log('   📱 8 device models (Apple, Samsung, Xiaomi) para finder');
   console.log('   📊 Especificaciones técnicas para comparador');
   console.log('   📱 6 modelos de Trade-In con 4 preguntas de evaluación');
   console.log('   🎟️ 2 cupones activos');

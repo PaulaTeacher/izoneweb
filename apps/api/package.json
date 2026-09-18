@@ -23,6 +23,8 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
+    "db:import": "ts-node prisma/import-catalog.ts",
+    "db:create-admin": "ts-node prisma/create-admin.ts",
     "postinstall": "prisma generate || exit 0"
   },
   "dependencies": {

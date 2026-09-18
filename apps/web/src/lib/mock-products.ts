@@ -1,6 +1,73 @@
 import type { Product } from '@izone/shared-types';
 
 export const MOCK_PRODUCTS: Product[] = ([
+  // ===================== IPHONE 17 PRO =====================
+  {
+    id: 'prod-iphone-17-pro',
+    name: 'iPhone 17 Pro',
+    slug: 'iphone-17-pro',
+    description: 'iPhone 17 Pro con chip A19 Pro, diseño en titanio y Control de la Cámara. Pantalla Super Retina XDR y sistema de cámaras Pro de 48 MP.',
+    seoTitle: 'Comprar iPhone 17 Pro en Bogotá | iZone Tech',
+    seoDescription: 'iPhone 17 Pro con chip A19 Pro y titanio. Garantía oficial de 1 año y envíos a toda Colombia.',
+    brandId: 'brand-apple',
+    brand: { id: 'brand-apple', name: 'Apple', slug: 'apple' },
+    categoryId: 'cat-iphone',
+    category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
+    images: [
+      'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=800',
+    ],
+    tags: [
+      { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
+      { id: 'tag-pro', name: 'Pro', slug: 'pro' },
+    ],
+    isFeatured: true,
+    isActive: true,
+    createdAt: '2025-09-09T00:00:00.000Z',
+    updatedAt: '2025-09-09T00:00:00.000Z',
+    reviews: [],
+    variants: [
+      {
+        id: 'var-17p-natural-256',
+        productId: 'prod-iphone-17-pro',
+        colorName: 'Titanio Natural',
+        storage: '256GB',
+        price: 5749000,
+        comparePrice: 6499000,
+        sku: 'IPH17PRO-NAT-256',
+        stock: 10,
+        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        createdAt: '2025-09-09T00:00:00.000Z',
+        updatedAt: '2025-09-09T00:00:00.000Z',
+      },
+      {
+        id: 'var-17p-black-256',
+        productId: 'prod-iphone-17-pro',
+        colorName: 'Titanio Negro',
+        storage: '256GB',
+        price: 5749000,
+        comparePrice: 6499000,
+        sku: 'IPH17PRO-BLK-256',
+        stock: 8,
+        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        createdAt: '2025-09-09T00:00:00.000Z',
+        updatedAt: '2025-09-09T00:00:00.000Z',
+      },
+      {
+        id: 'var-17p-white-512',
+        productId: 'prod-iphone-17-pro',
+        colorName: 'Titanio Blanco',
+        storage: '512GB',
+        price: 6749000,
+        comparePrice: 7499000,
+        sku: 'IPH17PRO-WHT-512',
+        stock: 4,
+        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        createdAt: '2025-09-09T00:00:00.000Z',
+        updatedAt: '2025-09-09T00:00:00.000Z',
+      },
+    ],
+  },
+
   // ===================== IPHONE 16 PRO MAX =====================
   {
     id: 'prod-iphone-16-pro-max',
@@ -249,7 +316,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     slug: 'iphone-16',
     description: 'Conoce el iPhone 16 con el botón de Control de la Cámara, botón de Acción personalizable, chip A18 ultra veloz y cámara 2 en 1 de 48 MP.',
     seoTitle: 'Comprar iPhone 16 en Bogotá | Distribuidor Oficial iZone',
-    seoDescription: 'Nuevo iPhone 16 en colores ultramar, verde azulado, rosa, blanco y negro. Financiación disponible.',
+    seoDescription: 'Nuevo iPhone 16 en colores ultramar, verde azulado, rosa, blanco y negro. Garantía oficial de 1 año.',
     brandId: 'brand-apple',
     brand: { id: 'brand-apple', name: 'Apple', slug: 'apple' },
     categoryId: 'cat-iphone',

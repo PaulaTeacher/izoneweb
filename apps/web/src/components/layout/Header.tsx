@@ -1,16 +1,18 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   ShoppingBag,
   Search,
   User,
   Menu,
   X,
-  Sparkles,
 } from 'lucide-react';
 import { useCart } from '@/lib/cart-context';
+import { easeOut } from '@/components/motion/FadeIn';
 
 interface CategoryGroup {
   title: string;
@@ -46,9 +48,8 @@ const categories: CategoryItem[] = [
         title: 'Comprar Mac',
         items: [
           { title: 'Comprar Mac', href: '/mac' },
-          { title: 'Accesorios para Mac', href: '/shop?category=accesorios' },
+          { title: 'Accesorios para Mac', href: '/accesorios?tipo=accesorios-mac' },
           { title: 'Plan Retoma', href: '/shop?category=ofertas' },
-          { title: 'Financiación', href: '/shop?category=ofertas' },
         ]
       },
       {
@@ -82,8 +83,8 @@ const categories: CategoryItem[] = [
         title: 'Comprar iPhone',
         items: [
           { title: 'Comprar iPhone', href: '/iphone' },
-          { title: 'Accesorios para iPhone', href: '/shop?category=accesorios' },
-          { title: 'MagSafe', href: '/shop?category=accesorios' },
+          { title: 'Accesorios para iPhone', href: '/accesorios?brand=apple&kind=phone' },
+          { title: 'MagSafe', href: '/accesorios?tipo=magsafe' },
           { title: 'Plan Retoma', href: '/shop?category=ofertas' },
         ]
       },
@@ -113,9 +114,9 @@ const categories: CategoryItem[] = [
       {
         title: 'Accesorios para iPad',
         items: [
-          { title: 'Apple Pencil', href: '/shop?category=accesorios' },
-          { title: 'Teclados', href: '/shop?category=accesorios', description: 'Magic Keyboard' },
-          { title: 'Fundas', href: '/shop?category=accesorios' },
+          { title: 'Apple Pencil', href: '/accesorios' },
+          { title: 'Teclados', href: '/accesorios?tipo=accesorios-mac', description: 'Magic Keyboard' },
+          { title: 'Fundas', href: '/accesorios?tipo=fundas' },
         ]
       },
       {
@@ -144,8 +145,8 @@ const categories: CategoryItem[] = [
       {
         title: 'Comprar',
         items: [
-          { title: 'Correas', href: '/shop?category=accesorios' },
-          { title: 'Cargadores magnéticos', href: '/shop?category=accesorios' },
+          { title: 'Correas', href: '/accesorios' },
+          { title: 'Cargadores magnéticos', href: '/accesorios?tipo=energia' },
         ]
       },
       {
@@ -190,25 +191,25 @@ const categories: CategoryItem[] = [
   },
   {
     name: 'Accesorios',
-    href: '/shop?category=accesorios',
+    href: '/accesorios',
     groups: [
       {
         title: 'Por Categoría',
         items: [
-          { title: 'Fundas y Protección', href: '/shop?category=accesorios' },
-          { title: 'Energía y Cables', href: '/shop?category=accesorios' },
-          { title: 'Audio y Música', href: '/shop?category=accesorios' },
-          { title: 'Almacenamiento', href: '/shop?category=accesorios' },
-          { title: 'MagSafe', href: '/shop?category=accesorios' },
+          { title: 'Fundas y Protección', href: '/accesorios?tipo=fundas' },
+          { title: 'Energía y Power Banks', href: '/accesorios?tipo=energia' },
+          { title: 'Cables y Hubs', href: '/accesorios?tipo=cables-hubs' },
+          { title: 'Almacenamiento', href: '/accesorios?tipo=almacenamiento' },
+          { title: 'MagSafe', href: '/accesorios?tipo=magsafe' },
         ]
       },
       {
         title: 'Por Dispositivo',
         items: [
-          { title: 'Accesorios para Mac', href: '/shop?category=accesorios' },
-          { title: 'Accesorios para iPad', href: '/shop?category=accesorios' },
-          { title: 'Accesorios para iPhone', href: '/shop?category=accesorios' },
-          { title: 'Accesorios para Apple Watch', href: '/shop?category=accesorios' },
+          { title: 'Accesorios para Mac', href: '/accesorios?tipo=accesorios-mac' },
+          { title: 'Accesorios para iPad', href: '/accesorios?kind=tablet' },
+          { title: 'Accesorios para iPhone', href: '/accesorios?brand=apple&kind=phone' },
+          { title: 'Accesorios para Apple Watch', href: '/accesorios?kind=watch' },
         ]
       }
     ]
@@ -231,7 +232,6 @@ const categories: CategoryItem[] = [
         title: 'Servicios',
         items: [
           { title: 'Plan Retoma', href: '/shop?category=ofertas' },
-          { title: 'Financiación Addi', href: '/shop?category=ofertas' },
         ]
       }
     ]
@@ -239,12 +239,15 @@ const categories: CategoryItem[] = [
 ];
 
 export default function Header() {
+  const router = useRouter();
   const { openCart, totalCount } = useCart();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const reduce = useReducedMotion();
+  const duration = reduce ? 0 : 0.2;
 
   const handleMouseEnter = (catName: string) => {
     if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
@@ -257,164 +260,207 @@ export default function Header() {
     }, 150);
   };
 
+  const submitSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+    setSearchOpen(false);
+    setMobileMenuOpen(false);
+    setActiveMenu(null);
+    router.push(`/shop?q=${encodeURIComponent(q)}`);
+  };
+
   const activeCategoryData = categories.find((c) => c.name === activeMenu);
 
   return (
-    <header className="sticky top-0 z-50 w-full transition-all duration-300 font-sans">
-      {/* Fondo del Header: Cristal de Apple siempre activo */}
-      <div
-        className="absolute inset-0 w-full h-full -z-10 bg-white/40 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] border-b border-black/5 dark:border-white/5 transition-all duration-300"
-      />
-
-      <nav aria-label="Navegación principal" className="max-w-[1024px] mx-auto px-4 relative">
-        <div className="h-[44px] flex items-center justify-between text-[12px] font-normal tracking-wide">
-          {/* Logo (Apple Style) */}
-          <Link href="/" className="flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity w-8">
-            <Sparkles className="w-[15px] h-[15px] text-[#1D1D1F] dark:text-white" />
-          </Link>
-
-          {/* Enlaces Desktop */}
-          <div
-            className="hidden md:flex items-center justify-between flex-1 px-4 lg:px-8"
-            onMouseLeave={handleMouseLeave}
-          >
-            {categories.map((cat) => (
-              <div
-                key={cat.name}
-                className="h-[44px] flex items-center"
-                onMouseEnter={() => handleMouseEnter(cat.name)}
-              >
-                <Link
-                  href={cat.href}
-                  className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors px-2"
-                >
-                  {cat.name}
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          {/* Iconos de Acción */}
-          <div className="flex items-center justify-end gap-4 md:gap-6 w-auto md:w-16">
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              aria-label="Buscar"
-              className="opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
-            >
-              <Search className="w-3.5 h-3.5 text-[#1D1D1F] dark:text-white" />
-            </button>
-
+    <header className="sticky top-0 z-50 w-full px-3 pt-2 transition-all duration-300 font-sans">
+      {/* Barra de navegación: cristal Apple con bordes redondeados y sombra */}
+      <div className="relative rounded-2xl bg-white/40 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] border border-black/5 dark:border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.18),0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
+        <nav aria-label="Navegación principal" className="max-w-[1024px] mx-auto px-4 relative">
+          <div className="h-[44px] flex items-center justify-between text-[12px] font-normal tracking-wide">
+            {/* Logo (Apple Style) */}
             <Link
-              href="/#contacto"
-              aria-label="Perfil"
-              className="hidden md:flex opacity-80 hover:opacity-100 transition-opacity items-center justify-center"
+              href="/"
+              aria-label="iZone Tech — inicio"
+              className="flex items-center shrink-0 opacity-80 hover:opacity-100 transition-opacity text-[12px] font-semibold tracking-wide text-[#1D1D1F] dark:text-white whitespace-nowrap"
             >
-              <User className="w-4 h-4 text-[#1D1D1F] dark:text-white" />
+              iZone Tech
             </Link>
 
-            <button
-              onClick={openCart}
-              aria-label="Carrito"
-              className="relative opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
+            {/* Enlaces Desktop */}
+            <div
+              className="hidden md:flex items-center justify-between flex-1 px-4 lg:px-8"
+              onMouseLeave={handleMouseLeave}
             >
-              <ShoppingBag className="w-3.5 h-3.5 text-[#1D1D1F] dark:text-white" />
-              {totalCount > 0 && (
-                <span className="absolute -top-1.5 -right-2 text-[#0071E3] font-semibold text-[9px] w-3 h-3 flex items-center justify-center">
-                  {totalCount}
-                </span>
-              )}
-            </button>
+              {categories.map((cat) => (
+                <div
+                  key={cat.name}
+                  className="h-[44px] flex items-center"
+                  onMouseEnter={() => handleMouseEnter(cat.name)}
+                >
+                  <Link
+                    href={cat.href}
+                    className="text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors px-2"
+                  >
+                    {cat.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
 
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Menú"
-              className="md:hidden opacity-80 hover:opacity-100 transition-opacity ml-2"
-            >
-              {mobileMenuOpen ? <X className="w-4 h-4 text-[#1D1D1F]" /> : <Menu className="w-4 h-4 text-[#1D1D1F]" />}
-            </button>
-          </div>
-        </div>
+            {/* Iconos de Acción */}
+            <div className="flex items-center justify-end gap-4 md:gap-6 w-auto md:w-16">
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                aria-label="Buscar"
+                className="opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <Search className="w-3.5 h-3.5 text-[#1D1D1F] dark:text-white" />
+              </button>
 
-        {/* Buscador Desplegable */}
-        {searchOpen && (
-          <div className="absolute top-full left-0 w-full bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl border-b border-black/5 pb-4 px-4 shadow-sm animate-fade-in">
-            <div className="max-w-[680px] mx-auto mt-4 relative">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-              <input
-                type="text"
-                placeholder="Buscar en iZone..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-                className="w-full bg-black/5 dark:bg-white/10 text-[15px] text-[#1D1D1F] dark:text-white pl-10 pr-4 py-2.5 rounded-xl outline-none focus:bg-black/10 transition-colors"
-              />
+              <Link
+                href="/#contacto"
+                aria-label="Perfil"
+                className="hidden md:flex opacity-80 hover:opacity-100 transition-opacity items-center justify-center"
+              >
+                <User className="w-4 h-4 text-[#1D1D1F] dark:text-white" />
+              </Link>
+
+              <button
+                onClick={openCart}
+                aria-label="Carrito"
+                className="relative opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <ShoppingBag className="w-3.5 h-3.5 text-[#1D1D1F] dark:text-white" />
+                {totalCount > 0 && (
+                  <span className="absolute -top-1.5 -right-2 text-[#0071E3] font-semibold text-[9px] w-3 h-3 flex items-center justify-center">
+                    {totalCount}
+                  </span>
+                )}
+              </button>
+
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Menú"
+                className="md:hidden opacity-80 hover:opacity-100 transition-opacity ml-2"
+              >
+                {mobileMenuOpen ? <X className="w-4 h-4 text-[#1D1D1F]" /> : <Menu className="w-4 h-4 text-[#1D1D1F]" />}
+              </button>
             </div>
           </div>
-        )}
-      </nav>
+
+          {/* Buscador Desplegable */}
+          <AnimatePresence>
+            {searchOpen && (
+              <motion.div
+                key="header-search"
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration, ease: easeOut }}
+                className="absolute top-full left-0 w-full rounded-b-2xl bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl border-t border-black/5 pb-4 px-4 shadow-sm"
+              >
+                <form onSubmit={submitSearch} className="max-w-[680px] mx-auto mt-4 relative">
+                  <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+                  <input
+                    type="search"
+                    name="q"
+                    placeholder="Buscar en iZone..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    aria-label="Buscar productos"
+                    className="w-full bg-black/5 dark:bg-white/10 text-[15px] text-[#1D1D1F] dark:text-white pl-10 pr-4 py-2.5 rounded-xl outline-none focus:bg-black/10 transition-colors"
+                  />
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </nav>
+      </div>
 
       {/* Mega Menú (Panel Desplegable al estilo Apple) */}
-      {activeCategoryData && activeCategoryData.groups && (
-        <div
-          onMouseEnter={() => {
-            if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
-          }}
-          onMouseLeave={handleMouseLeave}
-          className="hidden md:block absolute top-full left-0 w-full bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] shadow-sm transition-all duration-300 origin-top animate-in fade-in slide-in-from-top-2"
-        >
-          <div className="max-w-[1024px] mx-auto px-4 py-10 flex gap-12 text-[12px]">
-            {activeCategoryData.groups.map((group, idx) => (
-              <div key={idx} className="flex-1 max-w-[240px]">
-                <h4 className="text-[11px] font-normal text-neutral-500 mb-3 tracking-wide">
-                  {group.title}
-                </h4>
-                <ul className="space-y-2">
-                  {group.items.map((item, itemIdx) => (
-                    <li key={itemIdx}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="block group/link"
-                      >
-                        <span className="font-semibold text-[19px] text-[#1D1D1F] dark:text-white/90 hover:text-black dark:hover:text-white transition-colors">
-                          {item.title}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {activeCategoryData && activeCategoryData.groups && (
+          <motion.div
+            key={activeCategoryData.name}
+            onMouseEnter={() => {
+              if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
+            }}
+            onMouseLeave={handleMouseLeave}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration, ease: easeOut }}
+            className="hidden md:block absolute top-full left-0 w-full bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] shadow-sm origin-top"
+          >
+            <div className="max-w-[1024px] mx-auto px-4 py-10 flex gap-12 text-[12px]">
+              {activeCategoryData.groups.map((group, idx) => (
+                <div key={idx} className="flex-1 max-w-[240px]">
+                  <h4 className="text-[11px] font-normal text-neutral-500 mb-3 tracking-wide">
+                    {group.title}
+                  </h4>
+                  <ul className="space-y-2">
+                    {group.items.map((item, itemIdx) => (
+                      <li key={itemIdx}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="block group/link"
+                        >
+                          <span className="font-semibold text-[19px] text-[#1D1D1F] dark:text-white/90 hover:text-black dark:hover:text-white transition-colors">
+                            {item.title}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Menú Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full h-[calc(100vh-44px)] bg-white dark:bg-black px-4 py-4 space-y-4 animate-fade-in overflow-y-auto">
-          <div className="relative mb-6">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            <input
-              type="text"
-              placeholder="Buscar..."
-              className="w-full bg-[#F5F5F7] dark:bg-neutral-900 text-sm pl-10 pr-4 py-2 rounded-lg outline-none"
-            />
-          </div>
-          <div className="space-y-4">
-            {categories.map((cat) => (
-              <div key={cat.name} className="border-b border-neutral-100 dark:border-neutral-900 pb-3">
-                <Link
-                  href={cat.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-bold text-[#1D1D1F] dark:text-white"
-                >
-                  {cat.name}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration, ease: easeOut }}
+            className="md:hidden absolute top-full left-0 w-full h-[calc(100vh-44px)] bg-white dark:bg-black px-4 py-4 space-y-4 overflow-y-auto"
+          >
+            <form onSubmit={submitSearch} className="relative mb-6">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none" />
+              <input
+                type="search"
+                name="q"
+                placeholder="Buscar..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Buscar productos"
+                className="w-full bg-[#F5F5F7] dark:bg-neutral-900 text-sm pl-10 pr-4 py-2 rounded-lg outline-none"
+              />
+            </form>
+            <div className="space-y-4">
+              {categories.map((cat) => (
+                <div key={cat.name} className="border-b border-neutral-100 dark:border-neutral-900 pb-3">
+                  <Link
+                    href={cat.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-lg font-bold text-[#1D1D1F] dark:text-white"
+                  >
+                    {cat.name}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

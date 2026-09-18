@@ -2,57 +2,22 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { formatCOP } from '@izone/shared-types';
-import { Star, Plus } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { formatCOP, type Product } from '@izone/shared-types';
+import { Plus } from 'lucide-react';
+import { easeOut } from '@/components/motion/FadeIn';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 interface RecommendedAccessoriesProps {
   productName: string;
+  products: Product[];
 }
 
-const ACCESSORIES = [
-  {
-    id: 'case-magsafe',
-    name: 'Funda Transparente MagSafe con protección contra caídas',
-    category: 'FUNDAS Y PROTECCIÓN',
-    price: 189000,
-    rating: 4.8,
-    reviews: 142,
-    sales: '300+ vendidos',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT1E3?wid=400&hei=400&fmt=png-alpha',
-  },
-  {
-    id: 'charger-20w',
-    name: 'Adaptador de corriente USB-C de 20 W oficial',
-    category: 'CARGA RÁPIDA',
-    price: 129000,
-    rating: 4.9,
-    reviews: 580,
-    sales: '1 K+ vendidos',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MU7V2_GEO_US?wid=400&hei=400&fmt=png-alpha',
-  },
-  {
-    id: 'screen-guard',
-    name: 'Protector de Pantalla Cerámico GlassGuard Privacy 9H',
-    category: 'PROTECCIÓN PANTALLA',
-    price: 89000,
-    rating: 4.7,
-    reviews: 89,
-    sales: '500+ vendidos',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/HQ3W2?wid=400&hei=400&fmt=png-alpha',
-  },
-  {
-    id: 'cable-magsafe',
-    name: 'Cargador inalámbrico MagSafe de 15 W (1 m)',
-    category: 'MAGSAFE ACCESORIOS',
-    price: 249000,
-    rating: 4.9,
-    reviews: 210,
-    sales: '250+ vendidos',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHXH3?wid=400&hei=400&fmt=png-alpha',
-  },
-];
+export function RecommendedAccessories({ productName, products }: RecommendedAccessoriesProps) {
+  const reduce = useReducedMotion();
 
-export function RecommendedAccessories({ productName }: RecommendedAccessoriesProps) {
+  if (!products.length) return null;
+
   return (
     <section className="w-full my-14">
       <div className="flex items-center justify-between mb-6 pb-2 border-b border-neutral-200 dark:border-neutral-800">
@@ -65,7 +30,7 @@ export function RecommendedAccessories({ productName }: RecommendedAccessoriesPr
           </h3>
         </div>
         <Link
-          href="/shop?category=accesorios"
+          href="/accesorios"
           className="text-xs font-semibold text-[#0071E3] hover:underline"
         >
           Ver todos los accesorios
@@ -73,58 +38,81 @@ export function RecommendedAccessories({ productName }: RecommendedAccessoriesPr
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {ACCESSORIES.map((acc) => (
-          <div
-            key={acc.id}
-            className="border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 bg-white dark:bg-neutral-900 flex flex-col justify-between hover:shadow-md transition-shadow group"
-          >
-            <div>
-              <div className="w-full aspect-square flex items-center justify-center p-2 mb-3 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl overflow-hidden">
-                <img
-                  src={acc.image}
-                  alt={acc.name}
-                  className="w-3/4 h-3/4 object-contain group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                />
+        {products.map((acc, index) => {
+          const minPrice = Number(acc.variants?.[0]?.price || 0);
+          const image = acc.images?.[0];
+          const colors = (acc.variants || []).filter((v) => v.colorHex).slice(0, 5);
+
+          return (
+            <motion.div
+              key={acc.id}
+              initial={reduce ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: reduce ? 0 : 0.22,
+                delay: reduce ? 0 : index * 0.05,
+                ease: easeOut,
+              }}
+              className="border border-neutral-200 dark:border-neutral-800 rounded-2xl p-4 bg-white dark:bg-neutral-900 flex flex-col justify-between hover:shadow-md transition-shadow group"
+            >
+              <div>
+                <Link
+                  href={`/product/${acc.slug}`}
+                  className="relative w-full aspect-square flex items-center justify-center p-2 mb-3 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl overflow-hidden"
+                >
+                  {image ? (
+                    <SmartImage
+                      src={image}
+                      alt={acc.name}
+                      fill
+                      sizes="(max-width: 768px) 40vw, 160px"
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <span className="text-xs text-neutral-400">{acc.brand?.name}</span>
+                  )}
+                </Link>
+
+                <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wider block mb-1">
+                  {acc.category?.name || acc.brand?.name}
+                </span>
+
+                <Link href={`/product/${acc.slug}`}>
+                  <h4 className="text-xs font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2 mb-2 leading-tight hover:text-[#0071E3]">
+                    {acc.name}
+                  </h4>
+                </Link>
+
+                {colors.length > 0 && (
+                  <div className="flex items-center gap-1.5 mb-2">
+                    {colors.map((v) => (
+                      <span
+                        key={v.id}
+                        title={v.colorName || undefined}
+                        className="w-3 h-3 rounded-full border border-black/10"
+                        style={{ backgroundColor: v.colorHex || undefined }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wider block mb-1">
-                {acc.category}
-              </span>
-
-              <h4 className="text-xs font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-2 mb-2 leading-tight">
-                {acc.name}
-              </h4>
-
-              <div className="flex items-center gap-1 mb-2 text-[11px] text-neutral-500">
-                <span className="font-bold text-neutral-800 dark:text-neutral-200">
-                  {acc.rating}
+              <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+                <span className="text-sm font-bold text-neutral-900 dark:text-white">
+                  {minPrice ? formatCOP(minPrice) : 'Ver opciones'}
                 </span>
-                <div className="flex text-amber-500">
-                  <Star className="w-3 h-3 fill-current" />
-                </div>
-                <span>({acc.reviews})</span>
-                <span className="text-[10px] text-[#0071E3] font-medium ml-1">
-                  · {acc.sales}
-                </span>
+
+                <Link
+                  href={`/product/${acc.slug}`}
+                  className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950/50 hover:bg-[#0071E3] hover:text-white text-[#0071E3] flex items-center justify-center transition-colors"
+                  title="Ver accesorio"
+                >
+                  <Plus className="w-4 h-4" />
+                </Link>
               </div>
-            </div>
-
-            <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
-              <span className="text-sm font-bold text-neutral-900 dark:text-white">
-                {formatCOP(acc.price)}
-              </span>
-
-              <Link
-                href="/shop?category=accesorios"
-                className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950/50 hover:bg-[#0071E3] hover:text-white text-[#0071E3] flex items-center justify-center transition-colors"
-                title="Ver accesorio"
-              >
-                <Plus className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

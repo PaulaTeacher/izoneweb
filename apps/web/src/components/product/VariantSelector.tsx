@@ -4,9 +4,8 @@ import React, { useState } from 'react';
 import { useCart } from '@/lib/cart-context';
 import { checkoutWhatsapp } from '@/lib/api';
 import { ShoppingBag, Check, Truck, Store, RefreshCw } from 'lucide-react';
-import { formatCOP } from '@izone/shared-types';
+import { formatCOP, variantLabel } from '@izone/shared-types';
 import type { Product, Variant } from '@izone/shared-types';
-import { FinancingCalculator } from './FinancingCalculator';
 import { StickyBuyBar } from './StickyBuyBar';
 
 interface VariantSelectorProps {
@@ -25,6 +24,8 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
 
   const { addItem } = useCart();
 
+  const isAccessory = product.productKind === 'accessory';
+
   // Agrupar colores únicos disponibles
   const uniqueColors = Array.from(
     new Map(
@@ -37,12 +38,24 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
     new Set(product.variants.map((v) => v.storage).filter(Boolean))
   );
 
+  const uniqueMaterials = Array.from(
+    new Set(product.variants.map((v) => v.material).filter(Boolean)),
+  );
+
+  const materialLabels: Record<string, string> = {
+    silicona: 'Silicona',
+    cuero: 'Cuero',
+    hibrido: 'Híbrido',
+    diseno: 'Diseño',
+    otro: 'Otro',
+  };
+
   const handleSelectColor = (colorVariant: Variant) => {
-    // Intentar mantener el mismo almacenamiento si existe con el nuevo color
     const match = product.variants.find(
       (v) =>
         (v.colorName === colorVariant.colorName || v.colorHex === colorVariant.colorHex) &&
-        v.storage === selectedVariant?.storage
+        v.storage === selectedVariant?.storage &&
+        v.material === selectedVariant?.material
     ) || colorVariant;
 
     setSelectedVariant(match);
@@ -53,8 +66,22 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
     const match = product.variants.find(
       (v) =>
         v.storage === storage &&
-        (v.colorName === selectedVariant?.colorName || v.colorHex === selectedVariant?.colorHex)
+        (v.colorName === selectedVariant?.colorName || v.colorHex === selectedVariant?.colorHex) &&
+        v.material === selectedVariant?.material
     ) || product.variants.find((v) => v.storage === storage);
+
+    if (match) {
+      setSelectedVariant(match);
+      if (onVariantChange) onVariantChange(match);
+    }
+  };
+
+  const handleSelectMaterial = (material: string) => {
+    const match = product.variants.find(
+      (v) =>
+        v.material === material &&
+        (v.colorName === selectedVariant?.colorName || v.colorHex === selectedVariant?.colorHex)
+    ) || product.variants.find((v) => v.material === material);
 
     if (match) {
       setSelectedVariant(match);
@@ -119,10 +146,7 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
         </div>
       </div>
 
-      {/* 2. Calculadora de Financiación 0% Interés con Bancos y Addi */}
-      <FinancingCalculator price={currentPrice} />
-
-      {/* 3. Selector de Color (Swatches circulares con nombre activo) */}
+      {/* 2. Selector de Color (Swatches circulares con nombre activo) */}
       {uniqueColors.length > 0 && (
         <div className="space-y-2">
           <label className="text-xs font-bold text-neutral-800 dark:text-neutral-200">
@@ -158,6 +182,38 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
                       }`}
                     />
                   )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {uniqueMaterials.length > 0 && (
+        <div className="space-y-2">
+          <label className="text-xs font-bold text-neutral-800 dark:text-neutral-200">
+            Material:{' '}
+            <span className="font-normal text-neutral-500">
+              {selectedVariant?.material
+                ? materialLabels[selectedVariant.material] || selectedVariant.material
+                : 'Por defecto'}
+            </span>
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {uniqueMaterials.map((material) => {
+              const isSelected = selectedVariant?.material === material;
+              return (
+                <button
+                  key={material}
+                  type="button"
+                  onClick={() => handleSelectMaterial(material as string)}
+                  className={`py-2 px-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                    isSelected
+                      ? 'border-[#0071E3] bg-blue-50 text-[#0071E3] dark:bg-blue-950/40 dark:text-blue-300 ring-1 ring-[#0071E3]'
+                      : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-900'
+                  }`}
+                >
+                  {materialLabels[material as string] || material}
                 </button>
               );
             })}
@@ -203,7 +259,8 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
         </span>
       </div>
 
-      {/* 6. Upsell Protección Todo Riesgo (Seguro 12 Meses como en iShop) */}
+      {/* 6. Upsell Protección Todo Riesgo (solo equipos) */}
+      {!isAccessory && (
       <div
         onClick={() => setIncludeProtection(!includeProtection)}
         className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-start gap-3 select-none ${
@@ -230,8 +287,10 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
           </p>
         </div>
       </div>
+      )}
 
       {/* 7. Callout Plan Retoma (Trade-In) */}
+      {!isAccessory && (
       <div className="p-3 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-between bg-white dark:bg-neutral-900 text-xs">
         <div className="flex items-center gap-2">
           <RefreshCw className="w-4 h-4 text-neutral-500 flex-shrink-0" />
@@ -249,6 +308,7 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
           Cotizar
         </button>
       </div>
+      )}
 
       {/* 8. Métodos de Entrega (Retiro en tienda & Envío Gratis) */}
       <div className="space-y-2 pt-2 border-t border-neutral-100 dark:border-neutral-800 text-xs text-neutral-600 dark:text-neutral-400">
@@ -314,7 +374,7 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
       {selectedVariant && (
         <StickyBuyBar
           productName={product.name}
-          variantLabel={`${selectedVariant.colorName || ''} · ${selectedVariant.storage || ''}`}
+          variantLabel={variantLabel(selectedVariant)}
           price={finalPrice}
           image={selectedVariant.featuredImage || product.images?.[0]}
           onAddToCart={handleAddToCart}

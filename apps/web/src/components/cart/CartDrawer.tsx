@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { checkoutWhatsapp, validateCoupon } from '@/lib/api';
 import { formatCOP } from '@izone/shared-types';
 import { X, Trash2, Plus, Minus, Tag, ShieldCheck, Truck } from 'lucide-react';
 import Link from 'next/link';
+import { easeOut } from '@/components/motion/FadeIn';
+import { SmartImage } from '@/components/ui/SmartImage';
+
+const FOCUSABLE =
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, clearCart, subtotal } = useCart();
@@ -16,6 +22,55 @@ export default function CartDrawer() {
   const [customerName, setCustomerName] = useState('');
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    const panel = panelRef.current;
+    const focusables = () =>
+      Array.from(panel?.querySelectorAll<HTMLElement>(FOCUSABLE) || []).filter(
+        (el) => !el.hasAttribute('disabled') && el.offsetParent !== null,
+      );
+
+    requestAnimationFrame(() => {
+      const list = focusables();
+      (list[0] || panel)?.focus();
+    });
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeCart();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const list = focusables();
+      if (list.length === 0) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused.current?.focus?.();
+    };
+  }, [isOpen, closeCart]);
+
 
   const handleApplyCoupon = async () => {
     if (!couponCode.trim()) return;
@@ -59,30 +114,55 @@ export default function CartDrawer() {
     }
   };
 
-  if (!isOpen) return null;
-
   const finalTotal = Math.max(0, subtotal - discountAmount);
+  const reduce = useReducedMotion();
+  const duration = reduce ? 0 : 0.22;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end animate-fade-in">
+    <AnimatePresence>
+      {isOpen && (
+    <motion.div
+      key="cart-drawer"
+      className="fixed inset-0 z-50 flex justify-end"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cart-drawer-title"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration, ease: easeOut }}
+    >
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+      <motion.div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm"
         onClick={closeCart}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration, ease: easeOut }}
       />
 
       {/* Drawer */}
-      <div className="relative w-full max-w-md bg-white dark:bg-neutral-950 h-full shadow-2xl flex flex-col z-10">
+      <motion.div
+        ref={panelRef}
+        tabIndex={-1}
+        className="relative w-full max-w-md bg-white dark:bg-neutral-950 h-full shadow-2xl flex flex-col z-10 outline-none"
+        initial={{ x: '100%' }}
+        animate={{ x: 0 }}
+        exit={{ x: '100%' }}
+        transition={{ duration, ease: easeOut }}
+      >
         {/* Header */}
         <div className="p-6 border-b flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold tracking-tight">Tu Bolsa</h2>
+            <h2 id="cart-drawer-title" className="text-xl font-bold tracking-tight">Tu Bolsa</h2>
             <span className="bg-neutral-100 dark:bg-neutral-800 text-xs px-2.5 py-1 rounded-full font-medium">
               {items.reduce((acc, i) => acc + i.quantity, 0)}
             </span>
           </div>
           <button
             onClick={closeCart}
+            aria-label="Cerrar bolsa"
             className="p-2 text-neutral-400 hover:text-black dark:hover:text-white transition rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800"
           >
             <X className="w-5 h-5" />
@@ -111,11 +191,15 @@ export default function CartDrawer() {
                 className="flex gap-4 p-4 border rounded-2xl bg-neutral-50/50 dark:bg-neutral-900/50 items-center"
               >
                 {item.imageUrl ? (
-                  <img
-                    src={item.imageUrl}
-                    alt={item.productName}
-                    className="w-16 h-16 object-cover rounded-xl border"
-                  />
+                  <div className="relative w-16 h-16 rounded-xl border overflow-hidden flex-shrink-0 bg-white">
+                    <SmartImage
+                      src={item.imageUrl}
+                      alt={item.productName}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                    />
+                  </div>
                 ) : (
                   <div className="w-16 h-16 bg-neutral-200 dark:bg-neutral-800 rounded-xl flex items-center justify-center text-xs text-neutral-500">
                     Apple
@@ -264,7 +348,9 @@ export default function CartDrawer() {
             </button>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

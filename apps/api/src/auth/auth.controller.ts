@@ -1,16 +1,8 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Controller, Post, Body, HttpCode, HttpStatus, Get, Req } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { Public } from './decorators';
-
-class LoginDto {
-  email: string;
-  password: string;
-}
-
-class RefreshTokenDto {
-  refreshToken: string;
-}
+import { LoginDto, RefreshTokenDto } from './dto/auth.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -31,5 +23,12 @@ export class AuthController {
   @ApiOperation({ summary: 'Renovar token de acceso' })
   async refreshToken(@Body() body: RefreshTokenDto) {
     return this.authService.refreshToken(body.refreshToken);
+  }
+
+  @Get('me')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Perfil del admin autenticado' })
+  me(@Req() req: { user: { id: string; email: string; role: string } }) {
+    return req.user;
   }
 }

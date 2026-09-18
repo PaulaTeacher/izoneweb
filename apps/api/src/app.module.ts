@@ -6,11 +6,11 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { WhatsappModule } from './whatsapp/whatsapp.module';
+import { AdminModule } from './admin/admin.module';
 import { AuthModule, JwtAuthGuard, RolesGuard } from './auth';
 
 @Module({
   imports: [
-    // Rate limiting — default: 30 requests per 60 seconds per IP
     ThrottlerModule.forRoot([
       {
         name: 'default',
@@ -27,11 +27,11 @@ import { AuthModule, JwtAuthGuard, RolesGuard } from './auth';
     AuthModule,
     CatalogModule,
     WhatsappModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
-    // Global guards applied in order: Throttler → JWT → Roles
     { provide: APP_GUARD, useClass: ThrottlerGuard },
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },

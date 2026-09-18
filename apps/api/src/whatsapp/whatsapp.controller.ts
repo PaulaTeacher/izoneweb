@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Get, Query } from '@nestjs/common';
-import { WhatsappService, CheckoutRequest } from './whatsapp.service';
+import { WhatsappService } from './whatsapp.service';
+import { CheckoutRequestDto } from './dto/checkout.dto';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Public } from '../auth/decorators';
 
@@ -10,8 +11,8 @@ export class WhatsappController {
   constructor(private readonly whatsappService: WhatsappService) {}
 
   @Post('checkout')
-  @ApiOperation({ summary: 'Validar carrito, registrar orden en Supabase y generar enlace de WhatsApp' })
-  checkout(@Body() body: CheckoutRequest) {
+  @ApiOperation({ summary: 'Validar carrito, reservar stock, registrar orden y generar enlace de WhatsApp' })
+  checkout(@Body() body: CheckoutRequestDto) {
     return this.whatsappService.generateCheckoutLink(body);
   }
 

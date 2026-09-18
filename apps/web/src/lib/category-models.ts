@@ -19,9 +19,9 @@ export const CATEGORY_MODELS: Record<string, ModelCarouselItem[]> = {
       subBadge: 'UNIDADES LIMITADAS',
       price: 'Desde $5.749.000',
       img: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=180',
-      href: '/product/iphone-16-pro',
-      action: 'filter',
-      actionTarget: 'pro',
+      href: '/product/iphone-17-pro',
+      action: 'link',
+      actionTarget: '/product/iphone-17-pro',
     },
     {
       id: '17',

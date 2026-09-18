@@ -7,6 +7,15 @@ import Autoplay from 'embla-carousel-autoplay';
 import { ShieldCheck, Truck, RefreshCw, CreditCard, Star, Info, ArrowRight } from 'lucide-react';
 import { formatCOP, type Product } from '@izone/shared-types';
 import { CategoryModelCarousel, type ModelCarouselItem } from './CategoryModelCarousel';
+import { SmartImage } from '@/components/ui/SmartImage';
+
+function stableCount(seed: string, min: number, max: number) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+  }
+  return min + (Math.abs(hash) % (max - min + 1));
+}
 
 export interface CategoryHubConfig {
   id: string;
@@ -30,7 +39,6 @@ export interface CategoryHubConfig {
     description: string;
     primaryAction: { label: string; filterId: string };
     discountText?: string;
-    installmentsText?: string;
     buttonText?: string;
     image?: string;
     secondaryImage?: string;
@@ -138,19 +146,27 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                   }}
                 >
                   {/* Desktop Image */}
-                  <img
-                    src={slide.image}
-                    alt={slide.alt}
-                    className="w-full h-auto max-h-[500px] object-cover object-center hidden md:block"
-                    loading="eager"
-                  />
+                  <div className="relative hidden md:block w-full aspect-[21/9] max-h-[500px]">
+                    <SmartImage
+                      src={slide.image}
+                      alt={slide.alt}
+                      fill
+                      priority={slide.id === config.hero.slides![0]?.id}
+                      sizes="100vw"
+                      className="object-cover object-center"
+                    />
+                  </div>
                   {/* Mobile Image */}
-                  <img
-                    src={slide.imageMobile || slide.image}
-                    alt={slide.alt}
-                    className="w-full h-auto object-cover object-center md:hidden"
-                    loading="eager"
-                  />
+                  <div className="relative md:hidden w-full aspect-[4/5]">
+                    <SmartImage
+                      src={slide.imageMobile || slide.image}
+                      alt={slide.alt}
+                      fill
+                      priority={slide.id === config.hero.slides![0]?.id}
+                      sizes="100vw"
+                      className="object-cover object-center"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -181,10 +197,13 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
               {/* Lado Izquierdo: Imagen Destacada del Dispositivo */}
               <div className="w-full md:w-1/2 flex items-center justify-center relative">
                 <div className="relative w-[280px] h-[280px] md:w-[420px] md:h-[380px] flex items-center justify-center">
-                  <img
+                  <SmartImage
                     src={config.hero.image || config.chapterItems[0]?.img || ''}
                     alt={config.hero.badge}
-                    className="max-w-full max-h-full object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform duration-700"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 280px, 420px"
+                    className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform duration-700"
                   />
                 </div>
               </div>
@@ -215,13 +234,7 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                 </h1>
 
                 <p className="text-lg md:text-2xl font-light text-neutral-200 mt-2 mb-6">
-                  {config.hero.installmentsText ? (
-                    <span>
-                      Estrena en <strong className="font-bold text-white">24 cuotas</strong> sin interés.**
-                    </span>
-                  ) : (
-                    config.hero.description
-                  )}
+                  {config.hero.description}
                 </p>
 
                 {/* Botón Naranja de Compra */}
@@ -249,7 +262,7 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                 {/* Disclaimer Legal al pie del banner */}
                 <p className="text-[10px] md:text-[11px] text-neutral-400 max-w-lg leading-relaxed">
                   {config.hero.legalNote ||
-                    '**Beneficio válido en tiendas físicas y online. Aplica el beneficio de 0% de tasa de interés por compras diferidas a 24 cuotas con tarjetas de crédito de bancos participantes (Bancolombia, Davivienda, Banco de Bogotá) y Addi. Ver términos y condiciones.'}
+                    '*Descuento válido en tiendas físicas y online, sujeto a disponibilidad. Ver términos y condiciones.'}
                 </p>
               </div>
             </div>
@@ -288,7 +301,7 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
               const currentPrice = Number(defaultVariant?.price || 0);
               const activeImage = defaultVariant?.featuredImage || product.images?.[0];
               const isNew = product.tags?.some((t) => t.name.toLowerCase() === 'nuevo');
-              const reviewCount = Math.floor(Math.random() * (300 - 50 + 1) + 50);
+              const reviewCount = stableCount(product.id, 50, 300);
 
               return (
                 <div
@@ -352,11 +365,15 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                       className="w-full flex justify-center md:justify-end"
                     >
                       {activeImage ? (
-                        <img
-                          src={activeImage}
-                          alt={product.name}
-                          className="w-[85%] md:w-[75%] max-h-[300px] object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500"
-                        />
+                        <div className="relative w-[85%] md:w-[75%] aspect-square max-h-[300px]">
+                          <SmartImage
+                            src={activeImage}
+                            alt={product.name}
+                            fill
+                            sizes="(max-width: 768px) 85vw, 35vw"
+                            className="object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
                       ) : (
                         <div className="w-64 h-64 bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center text-neutral-400 text-sm">
                           Sin imagen
@@ -422,10 +439,10 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                 <CreditCard className="w-6 h-6" />
               </div>
               <h4 className="font-bold text-sm text-neutral-900 dark:text-white mb-1">
-                0% de Interés
+                Pagos seguros
               </h4>
               <p className="text-xs text-neutral-500">
-                Paga hasta en 24 cuotas sin interés con Bancolombia, Davivienda y Addi.
+                Tarjetas, PSE y contraentrega en Bogotá. Transacciones encriptadas.
               </p>
             </div>
           </div>

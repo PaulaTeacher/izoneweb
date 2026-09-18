@@ -37,6 +37,26 @@ export enum ProductCondition {
   OPEN_BOX = 'OPEN_BOX',
 }
 
+export enum ProductKind {
+  EQUIPMENT = 'equipment',
+  ACCESSORY = 'accessory',
+}
+
+export enum DeviceKind {
+  PHONE = 'phone',
+  TABLET = 'tablet',
+  LAPTOP = 'laptop',
+  WATCH = 'watch',
+}
+
+export enum AccessoryMaterial {
+  SILICONA = 'silicona',
+  CUERO = 'cuero',
+  HIBRIDO = 'hibrido',
+  DISENO = 'diseno',
+  OTRO = 'otro',
+}
+
 // ======================== ENTITIES ========================
 
 export interface Brand {
@@ -44,6 +64,24 @@ export interface Brand {
   name: string;
   slug: string;
   logoUrl?: string | null;
+}
+
+export interface DeviceModel {
+  id: string;
+  name: string;
+  slug: string;
+  kind: DeviceKind;
+  year?: number | null;
+  isActive: boolean;
+  sortOrder: number;
+  brandId: string;
+  brand: Brand;
+}
+
+export interface ProductCompatibility {
+  productId: string;
+  deviceModelId: string;
+  deviceModel?: DeviceModel;
 }
 
 export interface Category {
@@ -97,6 +135,7 @@ export interface Variant {
   colorName?: string | null;
   colorHex?: string | null;
   storage?: string | null;
+  material?: AccessoryMaterial | null;
   condition: ProductCondition;
   price: number;
   comparePrice?: number | null;
@@ -146,16 +185,20 @@ export interface Product {
   isActive: boolean;
   isTradeInEligible: boolean;
   warrantyMonths: number;
+  productKind: ProductKind;
   seoTitle?: string | null;
   seoDescription?: string | null;
   brandId: string;
   brand: Brand;
   categoryId: string;
   category: Category;
+  deviceModelId?: string | null;
+  deviceModel?: DeviceModel | null;
   tags: Tag[];
   variants: Variant[];
   specs: ProductSpec[];
   reviews: Review[];
+  compatibilities?: ProductCompatibility[];
   groupedSpecs?: Record<string, { label: string; value: string; unit?: string | null }[]>;
   createdAt: string;
   updatedAt: string;
@@ -171,9 +214,10 @@ export interface ProductListItem {
   images?: string[];
   brand: Brand;
   category: Category;
-  variants: Pick<Variant, 'id' | 'colorName' | 'colorHex' | 'storage' | 'condition' | 'price' | 'comparePrice' | 'stock'>[];
+  variants: Pick<Variant, 'id' | 'colorName' | 'colorHex' | 'storage' | 'material' | 'condition' | 'price' | 'comparePrice' | 'stock'>[];
   isFeatured: boolean;
   isTradeInEligible: boolean;
+  productKind?: ProductKind;
 }
 
 export interface Customer {
@@ -363,6 +407,7 @@ export interface CreateVariantDto {
   colorName?: string;
   colorHex?: string;
   storage?: string;
+  material?: AccessoryMaterial;
   condition?: ProductCondition;
   price: number;
   comparePrice?: number;
@@ -431,6 +476,9 @@ export interface CatalogFilters {
   brand?: string;
   search?: string;
   condition?: ProductCondition;
+  productKind?: ProductKind;
+  compatibleWith?: string;
+  material?: AccessoryMaterial;
   minPrice?: number;
   maxPrice?: number;
   inStock?: boolean;
@@ -458,10 +506,22 @@ export function formatCOP(price: number): string {
 
 /**
  * Genera un label legible para una variante.
- * Ejemplo: "Titanio Natural – 256GB"
+ * Ejemplo: "Titanio Natural – 256GB" o "Negro – Silicona"
  */
-export function variantLabel(variant: Pick<Variant, 'colorName' | 'storage'>): string {
-  const parts = [variant.colorName, variant.storage].filter(Boolean);
+export function variantLabel(
+  variant: Pick<Variant, 'colorName' | 'storage' | 'material'>,
+): string {
+  const materialLabels: Record<string, string> = {
+    silicona: 'Silicona',
+    cuero: 'Cuero',
+    hibrido: 'Híbrido',
+    diseno: 'Diseño',
+    otro: 'Otro',
+  };
+  const material = variant.material
+    ? materialLabels[variant.material] || variant.material
+    : null;
+  const parts = [variant.colorName, material, variant.storage].filter(Boolean);
   return parts.join(' – ') || 'Estándar';
 }
 

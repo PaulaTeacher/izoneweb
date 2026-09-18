@@ -19,6 +19,11 @@ export class CatalogController {
   @ApiQuery({ name: 'minPrice', required: false })
   @ApiQuery({ name: 'maxPrice', required: false })
   @ApiQuery({ name: 'sort', required: false, description: 'price_asc | price_desc | newest | name_asc' })
+  @ApiQuery({ name: 'productKind', required: false, description: 'equipment | accessory' })
+  @ApiQuery({ name: 'compatibleWith', required: false, description: 'Slug de DeviceModel (ej. iphone-16-pro)' })
+  @ApiQuery({ name: 'material', required: false, description: 'silicona | cuero | hibrido | diseno | otro' })
+  @ApiQuery({ name: 'deviceBrand', required: false, description: 'Slug de marca del dispositivo (apple, samsung)' })
+  @ApiQuery({ name: 'deviceKind', required: false, description: 'phone | tablet | laptop | watch' })
   getProducts(
     @Query('category') categorySlug?: string,
     @Query('search') search?: string,
@@ -28,6 +33,11 @@ export class CatalogController {
     @Query('minPrice') minPrice?: string,
     @Query('maxPrice') maxPrice?: string,
     @Query('sort') sort?: string,
+    @Query('productKind') productKind?: string,
+    @Query('compatibleWith') compatibleWith?: string,
+    @Query('material') material?: string,
+    @Query('deviceBrand') deviceBrand?: string,
+    @Query('deviceKind') deviceKind?: string,
   ) {
     return this.catalogService.getProducts({
       categorySlug,
@@ -38,6 +48,11 @@ export class CatalogController {
       minPrice: minPrice ? Number(minPrice) : undefined,
       maxPrice: maxPrice ? Number(maxPrice) : undefined,
       sort,
+      productKind,
+      compatibleWith,
+      material,
+      deviceBrand,
+      deviceKind,
     });
   }
 
@@ -57,6 +72,30 @@ export class CatalogController {
   @ApiOperation({ summary: 'Listar todas las marcas' })
   getBrands() {
     return this.catalogService.getBrands();
+  }
+
+  @Get('device-models')
+  @ApiOperation({ summary: 'Listar modelos de dispositivo para el finder de accesorios' })
+  @ApiQuery({ name: 'brand', required: false })
+  @ApiQuery({ name: 'kind', required: false, description: 'phone | tablet | laptop | watch' })
+  getDeviceModels(
+    @Query('brand') brandSlug?: string,
+    @Query('kind') kind?: string,
+  ) {
+    return this.catalogService.getDeviceModels({ brandSlug, kind });
+  }
+
+  @Get('products/:slug/accessories')
+  @ApiOperation({ summary: 'Accesorios compatibles con un producto o modelo' })
+  @ApiQuery({ name: 'limit', required: false })
+  getAccessoriesForProduct(
+    @Param('slug') slug: string,
+    @Query('limit') limit?: string,
+  ) {
+    return this.catalogService.getAccessoriesForProduct(
+      slug,
+      limit ? Number(limit) : 8,
+    );
   }
 
   @Get('products/:slug')

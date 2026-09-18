@@ -1,0 +1,43 @@
+import type { MetadataRoute } from 'next';
+import { getProducts } from '@/lib/api';
+import { absoluteUrl } from '@/lib/site';
+
+const STATIC_PATHS = [
+  '/',
+  '/iphone',
+  '/mac',
+  '/ipad',
+  '/watch',
+  '/audio',
+  '/accesorios',
+  '/shop',
+  '/shop?category=ofertas',
+] as const;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+
+  const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
+    url: absoluteUrl(path),
+    lastModified: now,
+    changeFrequency: path === '/' ? 'daily' : 'weekly',
+    priority: path === '/' ? 1 : path.startsWith('/shop') ? 0.7 : 0.85,
+  }));
+
+  let productEntries: MetadataRoute.Sitemap = [];
+  try {
+    const products = await getProducts();
+    productEntries = products
+      .filter((p) => p.slug && p.isActive !== false)
+      .map((p) => ({
+        url: absoluteUrl(`/product/${p.slug}`),
+        lastModified: now,
+        changeFrequency: 'daily' as const,
+        priority: 0.9,
+      }));
+  } catch {
+    // API caído: sitemap sigue con hubs
+  }
+
+  return [...staticEntries, ...productEntries];
+}

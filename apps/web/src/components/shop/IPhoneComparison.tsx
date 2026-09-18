@@ -15,6 +15,7 @@ import {
   Check,
   ChevronDown
 } from 'lucide-react';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 interface CompareModel {
   id: string;
@@ -274,11 +275,13 @@ export function IPhoneComparison() {
                 </div>
 
                 {/* Device Image */}
-                <div className="w-full h-48 flex items-center justify-center mb-6">
-                  <img
+                <div className="relative w-full h-48 mb-6">
+                  <SmartImage
                     src={model.image}
                     alt={model.name}
-                    className="max-h-full max-w-full object-contain mix-blend-multiply dark:mix-blend-normal hover:scale-105 transition-transform duration-300"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 220px"
+                    className="object-contain mix-blend-multiply dark:mix-blend-normal hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 

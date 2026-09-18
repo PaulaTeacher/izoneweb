@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 const accessories = [
   {
@@ -13,7 +14,7 @@ const accessories = [
     description: 'Compra aquí accesorios para Mac, teclados, mouse, cables y más',
     price: 'Disponible desde $29.900 COP',
     image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MK2A3?wid=500&hei=500&fmt=png-alpha&qlt=90',
-    link: '/shop?category=accesorios&device=mac'
+    link: '/accesorios?tipo=accesorios-mac'
   },
   {
     id: 'accesorios-ipad',
@@ -22,7 +23,7 @@ const accessories = [
     description: 'Compra accesorios para iPad',
     price: 'Disponible desde $30.000 COP',
     image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-smart-folio-black-202210?wid=500&hei=500&fmt=png-alpha&qlt=90',
-    link: '/shop?category=accesorios&device=ipad'
+    link: '/accesorios?kind=tablet'
   },
   {
     id: 'accesorios-tv',
@@ -40,7 +41,7 @@ const accessories = [
     description: 'Compra accesorios para Watch',
     price: 'Disponible desde $34.900 COP',
     image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MTJQ3?wid=500&hei=500&fmt=png-alpha&qlt=90',
-    link: '/shop?category=accesorios&device=watch'
+    link: '/accesorios?kind=watch'
   },
   {
     id: 'accesorios-iphone',
@@ -49,7 +50,7 @@ const accessories = [
     description: 'Cargadores, fundas MagSafe y más',
     price: 'Disponible desde $45.000 COP',
     image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT223?wid=500&hei=500&fmt=png-alpha&qlt=90',
-    link: '/shop?category=accesorios&device=iphone'
+    link: '/accesorios?brand=apple&kind=phone'
   }
 ];
 
@@ -100,11 +101,13 @@ export function AccessoriesCarousel() {
                   <Link href={item.link} className="block group h-full">
                     <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-7 flex flex-col h-full border border-neutral-100 dark:border-neutral-800 shadow-sm group-hover:shadow-md transition-all duration-300">
                       {/* Imagen */}
-                      <div className="w-full h-48 flex items-center justify-center mb-6">
-                        <img 
-                          src={item.image} 
+                      <div className="relative w-full h-48 mb-6">
+                        <SmartImage
+                          src={item.image}
                           alt={item.title}
-                          className="max-w-full max-h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
+                          fill
+                          sizes="(max-width: 640px) 78vw, (max-width: 1024px) 30vw, 24vw"
+                          className="object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
 

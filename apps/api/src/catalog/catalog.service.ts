@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { AccessoryMaterial, DeviceKind, Prisma, ProductKind } from '@prisma/client';
 
 interface GetProductsParams {
   categorySlug?: string;
@@ -11,6 +11,11 @@ interface GetProductsParams {
   minPrice?: number;
   maxPrice?: number;
   sort?: string;
+  productKind?: string;
+  compatibleWith?: string;
+  material?: string;
+  deviceBrand?: string;
+  deviceKind?: string;
 }
 
 const FAMILY_HREF: Record<string, string> = {
@@ -19,7 +24,7 @@ const FAMILY_HREF: Record<string, string> = {
   ipad: '/ipad',
   'apple-watch': '/watch',
   audio: '/audio',
-  accesorios: '/shop?category=accesorios',
+  accesorios: '/accesorios',
   ofertas: '/shop?category=ofertas',
 };
 
@@ -56,18 +61,28 @@ export class CatalogService {
       minPrice,
       maxPrice,
       sort,
+      productKind,
+      compatibleWith,
+      material,
+      deviceBrand,
+      deviceKind,
     } = params;
 
-    // Build variant filter for price range and condition
     const variantFilter: Prisma.VariantWhereInput = {};
     if (condition) {
-      variantFilter.condition = condition as any;
+      variantFilter.condition = condition as Prisma.VariantWhereInput['condition'];
+    }
+    if (material && Object.values(AccessoryMaterial).includes(material as AccessoryMaterial)) {
+      variantFilter.material = material as AccessoryMaterial;
     }
     if (minPrice !== undefined) {
-      variantFilter.price = { ...(variantFilter.price as any), gte: minPrice };
+      variantFilter.price = { gte: minPrice };
     }
     if (maxPrice !== undefined) {
-      variantFilter.price = { ...(variantFilter.price as any), lte: maxPrice };
+      variantFilter.price = {
+        ...(typeof variantFilter.price === 'object' && variantFilter.price ? variantFilter.price : {}),
+        lte: maxPrice,
+      };
     }
 
     // Build sort
@@ -89,9 +104,30 @@ export class CatalogService {
         categoryId: categoryIds ? { in: categoryIds } : undefined,
         brand: brandSlug ? { slug: brandSlug } : undefined,
         tags: tagSlug ? { some: { slug: tagSlug } } : undefined,
+        productKind:
+          productKind === 'equipment' || productKind === 'accessory'
+            ? (productKind as ProductKind)
+            : undefined,
         name: search
           ? { contains: search, mode: 'insensitive' }
           : undefined,
+        ...(compatibleWith || deviceBrand || deviceKind
+          ? {
+              compatibilities: {
+                some: {
+                  deviceModel: {
+                    isActive: true,
+                    slug: compatibleWith || undefined,
+                    brand: deviceBrand ? { slug: deviceBrand } : undefined,
+                    kind:
+                      deviceKind && Object.values(DeviceKind).includes(deviceKind as DeviceKind)
+                        ? (deviceKind as DeviceKind)
+                        : undefined,
+                  },
+                },
+              },
+            }
+          : {}),
         ...(Object.keys(variantFilter).length > 0
           ? { variants: { some: variantFilter } }
           : {}),
@@ -205,9 +241,25 @@ export class CatalogService {
     return this.prisma.brand.findMany({
       include: {
         _count: {
-          select: { products: true },
+          select: { products: true, deviceModels: true },
         },
       },
+    });
+  }
+
+  async getDeviceModels(params: { brandSlug?: string; kind?: string }) {
+    const { brandSlug, kind } = params;
+    return this.prisma.deviceModel.findMany({
+      where: {
+        isActive: true,
+        brand: brandSlug ? { slug: brandSlug } : undefined,
+        kind:
+          kind && Object.values(DeviceKind).includes(kind as DeviceKind)
+            ? (kind as DeviceKind)
+            : undefined,
+      },
+      include: { brand: true },
+      orderBy: [{ kind: 'asc' }, { sortOrder: 'asc' }, { name: 'asc' }],
     });
   }
 
@@ -232,6 +284,10 @@ export class CatalogService {
         reviews: {
           where: { isApproved: true },
           orderBy: { createdAt: 'desc' },
+        },
+        deviceModel: { include: { brand: true } },
+        compatibilities: {
+          include: { deviceModel: { include: { brand: true } } },
         },
       },
     });
@@ -258,6 +314,65 @@ export class CatalogService {
       ...product,
       groupedSpecs,
     };
+  }
+
+  async getAccessoriesForProduct(slug: string, limit = 8) {
+    const product = await this.prisma.product.findUnique({
+      where: { slug },
+      select: {
+        id: true,
+        deviceModelId: true,
+        slug: true,
+        productKind: true,
+        compatibilities: { select: { deviceModelId: true } },
+      },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Producto "${slug}" no encontrado`);
+    }
+
+    let deviceModelIds: string[] = [];
+
+    if (product.deviceModelId) {
+      deviceModelIds = [product.deviceModelId];
+    } else {
+      const bySlug = await this.prisma.deviceModel.findUnique({
+        where: { slug: product.slug },
+        select: { id: true },
+      });
+      if (bySlug) deviceModelIds = [bySlug.id];
+    }
+
+    if (product.productKind === 'accessory') {
+      deviceModelIds = [
+        ...new Set([
+          ...deviceModelIds,
+          ...product.compatibilities.map((c) => c.deviceModelId),
+        ]),
+      ];
+    }
+
+    if (deviceModelIds.length === 0) {
+      return [];
+    }
+
+    return this.prisma.product.findMany({
+      where: {
+        isActive: true,
+        productKind: 'accessory',
+        id: { not: product.id },
+        compatibilities: { some: { deviceModelId: { in: deviceModelIds } } },
+      },
+      include: {
+        variants: { orderBy: { price: 'asc' } },
+        category: { include: { parent: true } },
+        brand: true,
+        tags: true,
+      },
+      take: Math.min(Math.max(limit, 1), 24),
+      orderBy: { isFeatured: 'desc' },
+    });
   }
 
   async compareProducts(slugs: string[]) {

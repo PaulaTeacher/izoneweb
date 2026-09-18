@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import TopAnnouncementBar from '@/components/layout/TopAnnouncementBar';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import FloatingWhatsApp from '@/components/layout/FloatingWhatsApp';
-import CartDrawer from '@/components/cart/CartDrawer';
-import { CartProvider } from '@/lib/cart-context';
+import { JsonLd } from '@/components/seo/JsonLd';
+import {
+  absoluteUrl,
+  getSiteUrl,
+  localBusinessJsonLd,
+  organizationJsonLd,
+} from '@/lib/site';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,13 +16,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: 'iZone Tech | Especialistas en Apple en Bogotá y Colombia',
     template: '%s | iZone Tech',
   },
   description:
-    'Tienda oficial de tecnología especializada en Apple en Bogotá y Colombia. Compra iPhone 16 Pro, MacBook M3, iPad, Apple Watch y AirPods con garantía oficial de 1 año, pagos seguros con Addi / PSE y despacho nacional inmediato.',
+    'Tienda oficial de tecnología especializada en Apple en Bogotá y Colombia. Compra iPhone 16 Pro, MacBook M3, iPad, Apple Watch y AirPods con garantía oficial de 1 año, pagos seguros con PSE y despacho nacional inmediato.',
   keywords: [
     'Apple Colombia',
     'iZone Tech',
@@ -35,10 +36,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'iZone Tech Colombia' }],
   creator: 'iZone Tech',
+  alternates: {
+    canonical: absoluteUrl('/'),
+  },
   openGraph: {
     type: 'website',
     locale: 'es_CO',
-    url: '/',
+    url: absoluteUrl('/'),
     siteName: 'iZone Tech Colombia',
     title: 'iZone Tech — Especialistas en Apple en Colombia',
     description:
@@ -69,30 +73,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="es" className={`${inter.variable} scroll-smooth`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="font-sans antialiased bg-[#F5F5F7] text-[#1D1D1F] flex flex-col min-h-screen selection:bg-[#0071E3] selection:text-white">
-        <CartProvider>
-          {/* 1. Top Announcement Bar */}
-          <TopAnnouncementBar />
-
-          {/* 2. Header & Mega Menu */}
-          <Header />
-
-          {/* 3. Main Content Container */}
-          <main className="flex-1">{children}</main>
-
-          {/* 4. Cart Slide-Over Drawer */}
-          <CartDrawer />
-
-          {/* 5. Floating WhatsApp Conversion Widget */}
-          <FloatingWhatsApp />
-
-          {/* 6. Comprehensive Footer */}
-          <Footer />
-        </CartProvider>
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={localBusinessJsonLd} />
+        {children}
       </body>
     </html>
   );

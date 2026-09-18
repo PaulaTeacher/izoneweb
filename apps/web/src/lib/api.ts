@@ -3,6 +3,7 @@ import type {
   Category,
   MenuCategory,
   WhatsappCheckoutResponse,
+  DeviceModel,
 } from '@izone/shared-types';
 import { MOCK_PRODUCTS } from './mock-products';
 
@@ -25,12 +26,24 @@ export async function getProducts(params?: {
   category?: string;
   search?: string;
   tag?: string;
+  brand?: string;
+  productKind?: string;
+  compatibleWith?: string;
+  material?: string;
+  deviceBrand?: string;
+  deviceKind?: string;
 }): Promise<Product[]> {
   try {
     const searchParams = new URLSearchParams();
     if (params?.category) searchParams.set('category', params.category);
     if (params?.search) searchParams.set('search', params.search);
     if (params?.tag) searchParams.set('tag', params.tag);
+    if (params?.brand) searchParams.set('brand', params.brand);
+    if (params?.productKind) searchParams.set('productKind', params.productKind);
+    if (params?.compatibleWith) searchParams.set('compatibleWith', params.compatibleWith);
+    if (params?.material) searchParams.set('material', params.material);
+    if (params?.deviceBrand) searchParams.set('deviceBrand', params.deviceBrand);
+    if (params?.deviceKind) searchParams.set('deviceKind', params.deviceKind);
 
     const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
     const res = await fetch(`${API_URL}/catalog/products${query}`, {
@@ -38,7 +51,7 @@ export async function getProducts(params?: {
     });
     if (res.ok) {
       const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
+      if (Array.isArray(data)) {
         return data;
       }
     }
@@ -129,6 +142,43 @@ export async function getProduct(slug: string): Promise<Product | null> {
     // Fallback
   }
   return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
+}
+
+export async function getDeviceModels(params?: {
+  brand?: string;
+  kind?: string;
+}): Promise<DeviceModel[]> {
+  try {
+    const searchParams = new URLSearchParams();
+    if (params?.brand) searchParams.set('brand', params.brand);
+    if (params?.kind) searchParams.set('kind', params.kind);
+    const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
+    const res = await fetch(`${API_URL}/catalog/device-models${query}`, {
+      next: { revalidate: 300 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) return data;
+    }
+  } catch {
+    // API no disponible
+  }
+  return [];
+}
+
+export async function getCompatibleAccessories(slug: string): Promise<Product[]> {
+  try {
+    const res = await fetch(`${API_URL}/catalog/products/${slug}/accessories`, {
+      next: { revalidate: 60 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) return data;
+    }
+  } catch {
+    // API no disponible
+  }
+  return [];
 }
 
 export interface CouponValidationResult {

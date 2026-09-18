@@ -3,6 +3,7 @@
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Link from 'next/link';
+import { SmartImage } from '@/components/ui/SmartImage';
 
 // Usaremos imágenes de referencia que se mezclen con el fondo blanco (mix-blend-multiply)
 const categories = [
@@ -53,7 +54,7 @@ const categories = [
     name: 'Accesorios', 
     price: 'Desde $24.500', 
     image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT223?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1693248280978', 
-    link: '/shop?category=accesorios' 
+    link: '/accesorios' 
   },
   { 
     id: 'airtag', 
@@ -87,11 +88,13 @@ export function CategoryCarousel() {
                     href={cat.link}
                     className="group flex flex-col items-center justify-end h-40 w-28 md:w-36 transition-transform hover:-translate-y-1"
                   >
-                    <div className="flex-1 flex items-end justify-center w-full mb-3">
-                      <img 
-                        src={cat.image} 
+                    <div className="relative flex-1 flex items-end justify-center w-full mb-3 h-20">
+                      <SmartImage
+                        src={cat.image}
                         alt={cat.name}
-                        className="w-full h-20 object-contain mix-blend-multiply dark:mix-blend-normal transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        sizes="144px"
+                        className="object-contain mix-blend-multiply dark:mix-blend-normal transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <span className="text-[15px] font-semibold text-[#1D1D1F] dark:text-white transition-colors">

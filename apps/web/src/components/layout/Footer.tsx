@@ -89,38 +89,38 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-neutral-400">
               <li>
-                <Link href="/product/iphone-16-pro" className="hover:text-white transition">
-                  iPhone 16 Pro & Max
+                <Link href="/iphone" className="hover:text-white transition">
+                  iPhone 18 Pro & Max
                 </Link>
               </li>
               <li>
                 <Link href="/iphone" className="hover:text-white transition">
-                  Línea iPhone 15
+                  iPhone Duo y iPhone 17
                 </Link>
               </li>
               <li>
                 <Link href="/mac" className="hover:text-white transition">
-                  MacBook Air & Pro M3
+                  MacBook Air M5 y MacBook Neo
                 </Link>
               </li>
               <li>
                 <Link href="/ipad" className="hover:text-white transition">
-                  iPad Pro & iPad Air
+                  iPad y Magic Keyboard
                 </Link>
               </li>
               <li>
                 <Link href="/watch" className="hover:text-white transition">
-                  Apple Watch Series 10
+                  Apple Watch Series 11 y SE 3
                 </Link>
               </li>
               <li>
                 <Link href="/audio" className="hover:text-white transition">
-                  AirPods & Audio Beats
+                  AirPods 4, 5 y Pro 3
                 </Link>
               </li>
               <li>
                 <Link href="/accesorios" className="hover:text-white transition">
-                  Accesorios MagSafe
+                  Cargadores, cables y Apple Pencil
                 </Link>
               </li>
             </ul>

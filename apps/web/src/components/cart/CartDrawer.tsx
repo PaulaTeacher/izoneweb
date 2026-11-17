@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
-import { checkoutWhatsapp, getProducts, validateCoupon } from '@/lib/api';
+import { checkoutWhatsapp, getCompatibleAccessories, validateCoupon } from '@/lib/api';
 import { availableStock, formatCOP, type Product } from '@izone/shared-types';
 import { X, Trash2, Plus, Minus, Tag, ShieldCheck, Truck, Store } from 'lucide-react';
 import Link from 'next/link';
@@ -23,27 +23,34 @@ export default function CartDrawer() {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
   const [allAccessories, setAllAccessories] = useState<Product[]>([]);
-  const accessoriesRequested = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
+  // Sugerencias compatibles con lo que hay en la bolsa (no accesorios al azar)
+  const cartSlugsKey = Array.from(new Set(items.map((i) => i.productSlug)))
+    .slice(0, 3)
+    .join(',');
+
   useEffect(() => {
-    if (!isOpen || items.length === 0 || accessoriesRequested.current) return;
-    accessoriesRequested.current = true;
+    if (!isOpen || !cartSlugsKey) {
+      return;
+    }
     let active = true;
-    getProducts({ productKind: 'accessory', take: 12 })
-      .then((res) => {
-        if (active && Array.isArray(res)) {
-          setAllAccessories(res);
-        }
+    Promise.all(cartSlugsKey.split(',').map((slug) => getCompatibleAccessories(slug)))
+      .then((lists) => {
+        if (!active) return;
+        const seen = new Set<string>();
+        setAllAccessories(
+          lists.flat().filter((p) => (seen.has(p.id) ? false : (seen.add(p.id), true))),
+        );
       })
       .catch(() => {
-        accessoriesRequested.current = false;
+        if (active) setAllAccessories([]);
       });
     return () => {
       active = false;
     };
-  }, [isOpen, items.length]);
+  }, [isOpen, cartSlugsKey]);
 
   const inCartProductIds = new Set(items.map((i) => i.productId));
   const suggestedAccessories = allAccessories

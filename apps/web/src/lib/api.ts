@@ -190,16 +190,23 @@ export async function getHomeSummary(): Promise<HomeSummary> {
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {
-  try {
-    const res = await fetchCatalog(`/catalog/products/${slug}`, 60);
-    if (res?.ok) {
+  const res = await fetchCatalog(`/catalog/products/${slug}`, 60);
+  if (res?.ok) {
+    try {
       const data = await res.json();
       if (data && data.id) return data;
+    } catch {
+      // respuesta inválida: tratar como no disponible
     }
-  } catch {
-    // Fallback
+    return null;
   }
-  return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
+  // La API respondió que no existe (4xx): no inventar un producto.
+  if (res && res.status < 500) return null;
+  // API caída o con error de servidor: fallback local solo en desarrollo.
+  if (process.env.NODE_ENV !== 'production') {
+    return MOCK_PRODUCTS.find((p) => p.slug === slug) || null;
+  }
+  return null;
 }
 
 export async function getDeviceModels(params?: {

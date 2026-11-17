@@ -58,11 +58,14 @@ export class WhatsappService {
       productId: string;
       variantId: string;
       name: string;
+      slug: string;
+      sku?: string | null;
       colorName?: string | null;
       storage?: string | null;
       quantity: number;
       unitPrice: number;
       subtotal: number;
+      hasProtection?: boolean;
     };
 
     const formatCOP = (val: number) =>
@@ -110,7 +113,7 @@ export class WhatsappService {
           );
         }
 
-        const priceNum = Number(variant.price);
+        const priceNum = Number(variant.price) + (item.hasProtection ? 189000 : 0);
         const itemSubtotal = priceNum * item.quantity;
         subtotal += itemSubtotal;
 
@@ -118,11 +121,14 @@ export class WhatsappService {
           productId: variant.productId,
           variantId: variant.id,
           name: variant.product.name,
+          slug: variant.product.slug,
+          sku: variant.sku,
           colorName: variant.colorName,
           storage: variant.storage,
           quantity: item.quantity,
           unitPrice: priceNum,
           subtotal: itemSubtotal,
+          hasProtection: item.hasProtection,
         });
       }
 
@@ -164,7 +170,7 @@ export class WhatsappService {
             create: validatedItems.map((i) => ({
               productId: i.productId,
               variantId: i.variantId,
-              name: `${i.name} (${[i.colorName, i.storage].filter(Boolean).join(' - ')})`,
+              name: `${i.name} (${[i.colorName, i.storage].filter(Boolean).join(' - ')})${i.hasProtection ? ' (Con Protección)' : ''}`,
               quantity: i.quantity,
               price: i.unitPrice,
             })),
@@ -189,7 +195,13 @@ export class WhatsappService {
 
     for (const item of result.validatedItems) {
       const details = [item.colorName, item.storage].filter(Boolean).join(' / ');
-      message += `• *${item.quantity}x* ${item.name} ${details ? `(${details})` : ''}\n  Precio: ${formatCOP(item.unitPrice)}\n`;
+      const protectionNote = item.hasProtection ? ' *(Con Protección 12 Meses)*' : '';
+      message += `• *${item.quantity}x* ${item.name}${details ? ` (${details})` : ''}${protectionNote}\n`;
+      if (item.sku) {
+        message += `  SKU: ${item.sku}\n`;
+      }
+      message += `  Link: /product/${item.slug}\n`;
+      message += `  Precio: ${formatCOP(item.unitPrice)}\n`;
     }
 
     message += `\n──────────────\n`;

@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
+  IsBoolean,
   IsInt,
   IsOptional,
   IsString,
@@ -18,6 +19,10 @@ export class CheckoutItemDto {
   @IsInt()
   @Min(1)
   quantity!: number;
+
+  @IsOptional()
+  @IsBoolean()
+  hasProtection?: boolean;
 }
 
 export class CheckoutShippingDto {

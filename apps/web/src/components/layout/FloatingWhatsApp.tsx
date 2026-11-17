@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { MessageCircle, X, Send } from 'lucide-react';
+import { getWhatsappNumber } from '@/lib/whatsapp';
 
 interface FloatingWhatsAppProps {
   phoneNumber?: string;
@@ -10,17 +12,23 @@ interface FloatingWhatsAppProps {
 }
 
 export default function FloatingWhatsApp({
-  phoneNumber = '573001234567',
+  phoneNumber,
   defaultMessage = 'Hola iZone Tech, estoy visitando su tienda web y deseo asesoría para comprar un equipo Apple.',
   agentName = 'Asesor iZone Tech Bogotá',
 }: FloatingWhatsAppProps) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [customMsg, setCustomMsg] = useState('');
+  const number = phoneNumber || getWhatsappNumber();
+
+  // PDP already has sticky WhatsApp CTA — avoid competing FAB
+  if (pathname?.startsWith('/product/')) {
+    return null;
+  }
 
   const handleSendMessage = () => {
     const text = encodeURIComponent(customMsg.trim() || defaultMessage);
-    const url = `https://wa.me/${phoneNumber}?text=${text}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/${number}?text=${text}`, '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   };
 

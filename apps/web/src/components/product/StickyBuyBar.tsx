@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { formatCOP } from '@izone/shared-types';
-import { ShoppingBag, Truck, Store } from 'lucide-react';
+import { ShoppingBag, MessageCircle } from 'lucide-react';
 import { SmartImage } from '@/components/ui/SmartImage';
 
 interface StickyBuyBarProps {
@@ -10,8 +10,11 @@ interface StickyBuyBarProps {
   variantLabel: string;
   price: number;
   image?: string;
+  onWhatsapp: () => void;
   onAddToCart: () => void;
+  whatsappLoading?: boolean;
   disabled?: boolean;
+  outOfStock?: boolean;
 }
 
 export function StickyBuyBar({
@@ -19,19 +22,17 @@ export function StickyBuyBar({
   variantLabel,
   price,
   image,
+  onWhatsapp,
   onAddToCart,
+  whatsappLoading = false,
   disabled = false,
+  outOfStock = false,
 }: StickyBuyBarProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Mostrar la barra cuando el usuario ha scrolleado más de 450px
-      if (window.scrollY > 450) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
+      setVisible(window.scrollY > 280);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -44,23 +45,8 @@ export function StickyBuyBar({
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
-      <div className="max-w-[1240px] mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
-        {/* Lado Izquierdo: Métodos de Entrega (Oculto en móvil) */}
-        <div className="hidden lg:flex flex-col text-[11px] text-neutral-600 dark:text-neutral-400">
-          <div className="flex items-center gap-1.5">
-            <Store className="w-3.5 h-3.5 text-[#0071E3]" />
-            <span>
-              <strong>Recoger en Tienda:</strong> Cra. 15 # 93-60 (En 1h)
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 mt-0.5">
-            <Truck className="w-3.5 h-3.5" />
-            <span>Envío a domicilio GRATIS prioritario</span>
-          </div>
-        </div>
-
-        {/* Centro: Info del Producto y Miniatura */}
-        <div className="flex items-center gap-3">
+      <div className="max-w-[1240px] mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           {image && (
             <div className="relative w-11 h-11 flex-shrink-0 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 overflow-hidden">
               <SmartImage
@@ -72,32 +58,46 @@ export function StickyBuyBar({
               />
             </div>
           )}
-          <div className="flex flex-col text-left">
-            <span className="text-xs md:text-sm font-bold text-neutral-900 dark:text-white truncate max-w-[200px] md:max-w-[320px]">
+          <div className="flex flex-col text-left min-w-0">
+            <span className="text-xs md:text-sm font-bold text-neutral-900 dark:text-white truncate max-w-[140px] sm:max-w-[220px]">
               {productName}
             </span>
-            <span className="text-[11px] text-neutral-500 truncate max-w-[180px]">
+            <span className="text-[11px] text-neutral-400 truncate max-w-[140px] sm:max-w-[200px]">
               {variantLabel}
             </span>
           </div>
         </div>
 
-        {/* Lado Derecho: Precio y Botón CTA */}
-        <div className="flex items-center gap-4">
-          <div className="text-right flex flex-col justify-center">
-            <span className="text-sm md:text-lg font-black text-neutral-900 dark:text-white tracking-tight leading-tight">
-              {formatCOP(price)}
-            </span>
-          </div>
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          <span className="text-sm md:text-lg font-black text-neutral-900 dark:text-white tracking-tight leading-tight">
+            {formatCOP(price)}
+          </span>
 
           <button
             type="button"
             onClick={onAddToCart}
-            disabled={disabled}
-            className="bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white font-bold text-xs md:text-sm px-6 py-3 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+            disabled={disabled || outOfStock}
+            aria-label="Agregar al carrito"
+            className="hidden sm:flex border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 font-semibold text-xs px-3 py-2.5 rounded-full transition-all items-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
             <ShoppingBag className="w-4 h-4" />
-            <span className="whitespace-nowrap">Agregar al carrito</span>
+            <span className="whitespace-nowrap">Carrito</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={onWhatsapp}
+            disabled={disabled || whatsappLoading}
+            className="bg-[#25D366] hover:bg-[#1EBE5D] active:scale-95 text-white font-bold text-xs md:text-sm px-4 sm:px-5 py-3 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+          >
+            <MessageCircle className="w-4 h-4 fill-current" />
+            <span className="whitespace-nowrap">
+              {whatsappLoading
+                ? '…'
+                : outOfStock
+                  ? 'Consultar'
+                  : 'WhatsApp'}
+            </span>
           </button>
         </div>
       </div>

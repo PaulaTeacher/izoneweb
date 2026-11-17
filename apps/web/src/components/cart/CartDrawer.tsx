@@ -95,7 +95,7 @@ export default function CartDrawer() {
     setLoading(true);
     try {
       const res = await checkoutWhatsapp({
-        items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity })),
+        items: items.map((i) => ({ variantId: i.variantId, quantity: i.quantity, hasProtection: i.hasProtection })),
         customerName: customerName.trim(),
         couponCode: appliedCoupon || undefined,
         shipping: city ? { name: customerName, city } : undefined,
@@ -216,6 +216,11 @@ export default function CartDrawer() {
                   <p className="text-xs text-neutral-500 mb-2 truncate">
                     {item.variantDetails}
                   </p>
+                  {item.hasProtection && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0071E3] bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded-md mb-2">
+                      <ShieldCheck className="w-3 h-3" /> Protección 12 Meses
+                    </span>
+                  )}
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-sm">{formatCOP(item.price)}</span>
                     <div className="flex items-center border rounded-lg overflow-hidden bg-white dark:bg-neutral-950">
@@ -320,7 +325,7 @@ export default function CartDrawer() {
             </div>
 
             {/* Badges de Confianza */}
-            <div className="flex items-center justify-center gap-4 text-[11px] text-neutral-500 py-1">
+            <div className="flex items-center justify-center gap-4 text-[11px] text-neutral-400 py-1">
               <span className="flex items-center gap-1">
                 <Truck className="w-3.5 h-3.5 text-blue-500" /> Envío seguro nacional
               </span>

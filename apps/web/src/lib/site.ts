@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { getWhatsappNumber } from '@/lib/whatsapp';
 
 /** Canonical social profiles for iZone Tech Colombia. */
 export const SOCIAL_LINKS = {
@@ -71,7 +72,7 @@ export const organizationJsonLd = {
       contactType: 'customer service',
       areaServed: 'CO',
       availableLanguage: ['Spanish'],
-      telephone: `+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '573001234567'}`,
+      telephone: `+${getWhatsappNumber()}`,
     },
   ],
 };
@@ -83,14 +84,14 @@ export const localBusinessJsonLd = {
   name: 'iZone Tech',
   image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200',
   url: getSiteUrl(),
-  telephone: `+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '573001234567'}`,
+  telephone: `+${getWhatsappNumber()}`,
   priceRange: '$$$',
   currenciesAccepted: 'COP',
   paymentAccepted: 'Cash, Credit Card, Debit Card, PSE',
   sameAs: [SOCIAL_LINKS.instagram.href, SOCIAL_LINKS.tiktok.href],
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Cra. 15 # 93-60, Chicó Norte',
+    streetAddress: 'CC Unilago, Local L 1-143',
     addressLocality: 'Bogotá',
     addressRegion: 'Cundinamarca',
     postalCode: '110221',
@@ -98,8 +99,8 @@ export const localBusinessJsonLd = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 4.6761,
-    longitude: -74.0485,
+    latitude: 4.66335,
+    longitude: -74.06083,
   },
   openingHoursSpecification: [
     {

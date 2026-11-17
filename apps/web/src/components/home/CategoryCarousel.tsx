@@ -86,21 +86,21 @@ export function CategoryCarousel() {
                 <div key={cat.id} className="flex-[0_0_auto]">
                   <Link
                     href={cat.link}
-                    className="group flex flex-col items-center justify-end h-40 w-28 md:w-36 transition-transform hover:-translate-y-1"
+                    className="group flex flex-col items-center justify-end h-40 w-28 md:w-36"
                   >
-                    <div className="relative flex-1 flex items-end justify-center w-full mb-3 h-20">
+                    <div className="relative w-20 h-20 md:w-24 md:h-24 mb-3 shrink-0">
                       <SmartImage
                         src={cat.image}
                         alt={cat.name}
                         fill
-                        sizes="144px"
+                        sizes="96px"
                         className="object-contain mix-blend-multiply dark:mix-blend-normal transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <span className="text-[15px] font-semibold text-[#1D1D1F] dark:text-white transition-colors">
                       {cat.name}
                     </span>
-                    <span className="text-[11px] text-neutral-500 mt-1">
+                    <span className="text-[11px] text-neutral-400 mt-1">
                       {cat.price}
                     </span>
                   </Link>

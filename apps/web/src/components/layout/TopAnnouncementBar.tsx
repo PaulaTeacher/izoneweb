@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Truck, ShieldCheck, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { buildWaMeUrl } from '@/lib/whatsapp';
 
 const announcements = [
   {
@@ -41,11 +42,11 @@ export default function TopAnnouncementBar() {
         <div className="hidden lg:flex items-center gap-4 text-neutral-400">
           <span className="flex items-center gap-1.5 hover:text-white transition">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Tienda Bogotá: Cra. 15 # 93-60
+            Tienda Bogotá: CC Unilago L 1-143
           </span>
           <span className="text-neutral-600">|</span>
           <a
-            href="https://wa.me/573001234567?text=Hola%20iZone%20Tech,%20deseo%20asesor%C3%ADa%20personalizada"
+            href={buildWaMeUrl('Hola iZone Tech, deseo asesoría personalizada')}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition flex items-center gap-1 text-emerald-400 font-medium"

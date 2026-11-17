@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { Product, Variant } from '@izone/shared-types';
 import { absoluteUrl, getSiteUrl, SOCIAL_LINKS } from '@/lib/site';
+import { getWhatsappNumber } from '@/lib/whatsapp';
 
 export const SITE = {
   name: 'iZone Tech',
@@ -248,8 +249,8 @@ con presencia digital, atención por WhatsApp y foco en productos Apple y acceso
 Usa URLs canónicas del dominio anterior (no inventes rutas).
 
 ## Contacto
-- WhatsApp: +${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '573001234567'}
-- Ubicación referencial: Cra. 15 # 93-60, Chicó Norte, Bogotá D.C., Colombia
+- WhatsApp: +${getWhatsappNumber()}
+- Ubicación referencial: CC Unilago, Local L 1-143, Bogotá D.C., Colombia
 
 ## Notas para crawlers de IA
 - El catálogo de productos está en ${site}/sitemap.xml

@@ -49,11 +49,25 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
   }, [emblaApi, onSelect, products.length]);
 
   if (!products.length) {
-    return null;
+    return (
+      <section
+        className="py-16 bg-white dark:bg-neutral-950 min-h-[420px]"
+        aria-hidden
+      />
+    );
   }
+
+  const pageCount =
+    scrollSnaps.length > 0
+      ? scrollSnaps.length
+      : Math.max(1, Math.ceil(products.length / 3));
 
   return (
     <section className="py-16 bg-white dark:bg-neutral-950">
@@ -62,8 +76,8 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
           Los favoritos del momento
         </h2>
 
-        <div className="relative">
-          <div className="overflow-hidden" ref={emblaRef}>
+        <div className="relative min-h-[420px] md:min-h-[480px]">
+          <div className="overflow-hidden -mx-3 px-3 py-4" ref={emblaRef}>
             <div className="flex -ml-4 touch-pan-y">
               {products.map((product) => {
                 const variant = product.variants?.[0];
@@ -83,9 +97,9 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
                     key={product.id}
                     className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_33.333%] pl-4"
                   >
-                    <div className="flex flex-col items-center group">
+                    <div className="flex flex-col items-center group px-1.5">
                       <Link href={href} className="w-full">
-                        <div className="w-full aspect-square border border-neutral-200 dark:border-neutral-800 rounded-2xl flex items-center justify-center p-8 bg-white dark:bg-neutral-900 transition-all group-hover:border-neutral-300 dark:group-hover:border-neutral-700 group-hover:shadow-sm mb-5 relative">
+                        <div className="w-full aspect-square rounded-2xl flex items-center justify-center p-8 bg-white dark:bg-neutral-900 mb-5 relative shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_4px_rgba(0,0,0,0.04)] transition-shadow duration-300 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.10),0_4px_12px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] dark:group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]">
                           <SmartImage
                             src={image}
                             alt={product.name}
@@ -165,19 +179,23 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
           </button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-12">
-          {scrollSnaps.map((_, index) => (
+        <div className="flex justify-center mt-6">
+          {Array.from({ length: pageCount }, (_, index) => (
             <button
               key={index}
               type="button"
               onClick={() => scrollTo(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                index === selectedIndex
-                  ? 'bg-black dark:bg-white scale-110'
-                  : 'bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400'
-              }`}
+              className="flex h-12 w-12 items-center justify-center"
               aria-label={`Ir a la página ${index + 1}`}
-            />
+            >
+              <span
+                className={`block h-2.5 w-2.5 rounded-full transition-colors duration-300 ${
+                  index === selectedIndex
+                    ? 'bg-black dark:bg-white'
+                    : 'bg-neutral-300 dark:bg-neutral-700 hover:bg-neutral-400'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

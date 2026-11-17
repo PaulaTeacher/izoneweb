@@ -27,16 +27,18 @@ const platforms = [
     description: 'Lanzamientos, unboxings y tip del día.',
     cta: 'Seguir en Instagram',
     Icon: InstagramIcon,
-    accent: 'from-[#F58529]/25 via-[#DD2A7B]/20 to-[#8134AF]/25',
+    accent: 'from-[#F58529]/30 via-[#DD2A7B]/25 to-[#8134AF]/30',
     iconBg: 'bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF]',
+    focusRing: 'focus-visible:ring-[#DD2A7B]',
   },
   {
     ...SOCIAL_LINKS.tiktok,
     description: 'Reviews reales y ofertas que se agotan.',
     cta: 'Seguir en TikTok',
     Icon: TikTokIcon,
-    accent: 'from-cyan-400/20 via-transparent to-rose-400/20',
+    accent: 'from-[#25F4EE]/25 via-transparent to-[#FE2C55]/25',
     iconBg: 'bg-neutral-950',
+    focusRing: 'focus-visible:ring-[#25F4EE]',
   },
 ] as const;
 
@@ -53,18 +55,10 @@ export function SocialFollow() {
     <section
       id="redes"
       aria-labelledby="social-follow-heading"
-      className="relative overflow-hidden bg-[#0B0B0C] text-white scroll-mt-24"
+      className="relative overflow-hidden bg-[#141416] text-white scroll-mt-24"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(0,113,227,0.28),transparent_55%),radial-gradient(ellipse_at_90%_80%,rgba(221,42,123,0.14),transparent_45%)]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-        }}
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(255,255,255,0.18),transparent_55%),radial-gradient(ellipse_at_90%_80%,rgba(255,255,255,0.10),transparent_50%),radial-gradient(ellipse_at_50%_50%,rgba(255,255,255,0.05),transparent_70%)]"
         aria-hidden
       />
 
@@ -76,7 +70,7 @@ export function SocialFollow() {
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.45, ease: easeOut }}
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7DB7F5]">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400">
               Comunidad iZone
             </p>
             <h2
@@ -128,7 +122,7 @@ export function SocialFollow() {
                   viewport={{ once: true, amount: 0.4 }}
                   transition={{ duration: 0.4, ease: easeOut, delay: 0.1 + index * 0.08 }}
                   whileHover={reduce ? undefined : { y: -2 }}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 outline-none transition-[border-color,background-color] hover:border-white/25 hover:bg-white/[0.07] focus-visible:ring-2 focus-visible:ring-[#0071E3] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0C] sm:p-6"
+                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 outline-none transition-[border-color,background-color] hover:border-white/25 hover:bg-white/[0.07] focus-visible:ring-2 ${platform.focusRing} focus-visible:ring-offset-2 focus-visible:ring-offset-[#141416] sm:p-6`}
                 >
                   <div
                     className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${platform.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
@@ -163,7 +157,7 @@ export function SocialFollow() {
               transition={{ duration: 0.4, delay: 0.35 }}
               className="flex items-center gap-2 px-1 pt-1 text-xs text-neutral-500"
             >
-              <Play className="h-3.5 w-3.5 text-[#0071E3]" aria-hidden />
+              <Play className="h-3.5 w-3.5 text-neutral-400" aria-hidden />
               Contenido nuevo cada semana: demos, stock y lanzamientos Apple.
             </motion.p>
           </div>

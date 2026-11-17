@@ -74,7 +74,7 @@ export function CategoryModelCarousel({
 
   return (
     <div
-      className={`relative w-full bg-white dark:bg-[#121212] select-none h-[108px] max-h-[108px] overflow-hidden shadow-[inset_0px_-0.5px_0px_#d2d2d2] dark:shadow-[inset_0px_-0.5px_0px_#262626] ${className}`}
+      className={`relative w-full bg-white dark:bg-[#161617] select-none h-[108px] max-h-[108px] overflow-hidden shadow-[inset_0px_-0.5px_0px_#d2d2d2] dark:shadow-[inset_0px_-0.5px_0px_#262626] ${className}`}
     >
       <div className="max-w-[1300px] mx-auto h-full px-2 md:px-4 relative flex items-center">
         {/* Flecha Izquierda */}
@@ -82,7 +82,7 @@ export function CategoryModelCarousel({
           <button
             onClick={scrollPrev}
             aria-label="Anterior"
-            className="absolute left-0 z-20 w-9 h-[84px] bg-white/95 dark:bg-[#121212]/95 border-r border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm"
+            className="absolute left-0 z-20 w-9 h-[84px] bg-white dark:bg-[#161617] border-r border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm"
           >
             <ChevronLeft className="w-5 h-5 stroke-[2]" />
           </button>
@@ -191,7 +191,7 @@ export function CategoryModelCarousel({
           <button
             onClick={scrollNext}
             aria-label="Siguiente"
-            className="absolute right-0 z-20 w-9 h-[84px] bg-white/95 dark:bg-[#121212]/95 border-l border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm"
+            className="absolute right-0 z-20 w-9 h-[84px] bg-white dark:bg-[#161617] border-l border-neutral-200 dark:border-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-all cursor-pointer shadow-sm"
           >
             <ChevronRight className="w-5 h-5 stroke-[2]" />
           </button>

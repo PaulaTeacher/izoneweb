@@ -50,8 +50,6 @@ const iphoneConfig: CategoryHubConfig = {
     { id: 'pro', label: 'Serie Pro', matchStrings: ['pro'] },
     { id: '17', label: 'iPhone 17', matchStrings: ['17'] },
     { id: '16', label: 'iPhone 16', matchStrings: ['16'] },
-    { id: '15', label: 'iPhone 15', matchStrings: ['15'] },
-    { id: 'se', label: 'iPhone SE', matchStrings: ['se'] },
   ],
   comparisonComponent: <IPhoneComparison />,
 };

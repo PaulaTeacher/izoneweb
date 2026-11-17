@@ -90,7 +90,7 @@ export default async function ShopPage({
     <div className="w-full flex flex-col min-h-[60vh]">
       {/* Carrusel horizontal de modelos si está filtrado por categoría */}
       {categoryModels && (
-        <section className="w-full bg-white dark:bg-[#121212] sticky top-[44px] z-30 shadow-sm">
+        <section className="bg-white dark:bg-[#161617]">
           <CategoryModelCarousel items={categoryModels} />
         </section>
       )}

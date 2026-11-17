@@ -8,6 +8,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { WhatsappModule } from './whatsapp/whatsapp.module';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule, JwtAuthGuard, RolesGuard } from './auth';
+import { CronModule } from './cron/cron.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AuthModule, JwtAuthGuard, RolesGuard } from './auth';
     CatalogModule,
     WhatsappModule,
     AdminModule,
+    CronModule,
   ],
   controllers: [AppController],
   providers: [

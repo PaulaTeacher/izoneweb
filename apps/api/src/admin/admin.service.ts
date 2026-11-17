@@ -5,11 +5,13 @@ import {
 } from '@nestjs/common';
 import {
   AccessoryMaterial,
+  OrderStatus,
   Prisma,
   ProductCondition,
   ProductKind,
 } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { catalogCache } from '../catalog/memory-cache';
 import {
   CreateProductDto,
   CreateVariantDto,
@@ -17,10 +19,21 @@ import {
   UpdateProductDto,
   UpdateVariantDto,
 } from './dto/admin-catalog.dto';
+import { UpdateOrderStatusDto } from './dto/admin-orders.dto';
+
+const RESERVED_PIPELINE: OrderStatus[] = [
+  OrderStatus.reserved,
+  OrderStatus.wa_contacted,
+  OrderStatus.payment_pending,
+];
 
 @Injectable()
 export class AdminService {
   constructor(private prisma: PrismaService) {}
+
+  private invalidateCatalogCache() {
+    catalogCache.clear();
+  }
 
   listProducts(params: { search?: string; productKind?: string; take?: number }) {
     const take = Math.min(Math.max(params.take || 100, 1), 300);
@@ -67,7 +80,7 @@ export class AdminService {
 
   async updateProduct(id: string, data: UpdateProductDto) {
     await this.ensureProduct(id);
-    return this.prisma.product.update({
+    const product = await this.prisma.product.update({
       where: { id },
       data: {
         name: data.name,
@@ -86,6 +99,8 @@ export class AdminService {
         variants: { orderBy: { price: 'asc' } },
       },
     });
+    this.invalidateCatalogCache();
+    return product;
   }
 
   /**
@@ -160,6 +175,7 @@ export class AdminService {
       this.rethrowUnique(error, 'Slug o SKU ya existe');
     }
 
+    this.invalidateCatalogCache();
     return this.getProduct(id);
   }
 
@@ -168,7 +184,7 @@ export class AdminService {
     if (!variant) throw new NotFoundException('Variante no encontrada');
 
     try {
-      return await this.prisma.variant.update({
+      const updated = await this.prisma.variant.update({
         where: { id },
         data: {
           sku: data.sku,
@@ -189,6 +205,8 @@ export class AdminService {
         },
         include: { product: { select: { id: true, slug: true, name: true } } },
       });
+      this.invalidateCatalogCache();
+      return updated;
     } catch (error) {
       this.rethrowUnique(error, 'SKU ya existe');
     }
@@ -197,7 +215,7 @@ export class AdminService {
   async createVariant(productId: string, data: CreateVariantDto) {
     await this.ensureProduct(productId);
     try {
-      return await this.prisma.variant.create({
+      const created = await this.prisma.variant.create({
         data: {
           productId,
           sku: data.sku.trim(),
@@ -213,6 +231,8 @@ export class AdminService {
         },
         include: { product: { select: { id: true, slug: true, name: true } } },
       });
+      this.invalidateCatalogCache();
+      return created;
     } catch (error) {
       this.rethrowUnique(error, 'SKU ya existe');
     }
@@ -220,7 +240,7 @@ export class AdminService {
 
   async createProduct(data: CreateProductDto) {
     try {
-      return await this.prisma.product.create({
+      const created = await this.prisma.product.create({
         data: {
           name: data.name.trim(),
           slug: data.slug.trim(),
@@ -257,6 +277,8 @@ export class AdminService {
           variants: { orderBy: { price: 'asc' } },
         },
       });
+      this.invalidateCatalogCache();
+      return created;
     } catch (error) {
       this.rethrowUnique(error, 'Slug o SKU ya existe');
     }
@@ -271,6 +293,124 @@ export class AdminService {
       where: { isActive: true },
       orderBy: [{ sortOrder: 'asc' }, { name: 'asc' }],
       include: { parent: true },
+    });
+  }
+
+  listOrders(params: { search?: string; status?: OrderStatus; take?: number }) {
+    const take = Math.min(Math.max(params.take || 50, 1), 200);
+    const where: Prisma.OrderWhereInput = {};
+
+    if (params.status) where.status = params.status;
+    if (params.search?.trim()) {
+      const q = params.search.trim();
+      where.OR = [
+        { id: { contains: q, mode: 'insensitive' } },
+        { orderRef: { contains: q, mode: 'insensitive' } },
+        { shippingName: { contains: q, mode: 'insensitive' } },
+        { shippingPhone: { contains: q, mode: 'insensitive' } },
+        { shippingCity: { contains: q, mode: 'insensitive' } },
+        { couponCode: { contains: q, mode: 'insensitive' } },
+      ];
+    }
+
+    return this.prisma.order.findMany({
+      where,
+      include: {
+        items: { orderBy: { name: 'asc' } },
+        customer: true,
+      },
+      orderBy: { createdAt: 'desc' },
+      take,
+    });
+  }
+
+  async getOrder(id: string) {
+    const order = await this.prisma.order.findUnique({
+      where: { id },
+      include: {
+        items: {
+          include: {
+            product: { select: { id: true, slug: true, name: true, images: true } },
+            variant: {
+              select: {
+                id: true,
+                sku: true,
+                colorName: true,
+                storage: true,
+                featuredImage: true,
+              },
+            },
+          },
+        },
+        customer: true,
+      },
+    });
+    if (!order) throw new NotFoundException('Pedido no encontrado');
+    return order;
+  }
+
+  async updateOrderStatus(id: string, data: UpdateOrderStatusDto) {
+    const order = await this.prisma.order.findUnique({
+      where: { id },
+      include: { items: true },
+    });
+    if (!order) throw new NotFoundException('Pedido no encontrado');
+
+    const next = data.status;
+    const prev = order.status;
+
+    return this.prisma.$transaction(async (tx) => {
+      if (
+        next === OrderStatus.cancelled &&
+        RESERVED_PIPELINE.includes(prev)
+      ) {
+        for (const item of order.items) {
+          if (!item.variantId) continue;
+          const variant = await tx.variant.findUnique({
+            where: { id: item.variantId },
+            select: { reservedStock: true },
+          });
+          if (!variant) continue;
+          await tx.variant.update({
+            where: { id: item.variantId },
+            data: {
+              reservedStock: Math.max(0, variant.reservedStock - item.quantity),
+            },
+          });
+        }
+      }
+
+      if (
+        (next === OrderStatus.paid ||
+          next === OrderStatus.preparing ||
+          next === OrderStatus.completed) &&
+        RESERVED_PIPELINE.includes(prev)
+      ) {
+        for (const item of order.items) {
+          if (!item.variantId) continue;
+          const variant = await tx.variant.findUnique({
+            where: { id: item.variantId },
+            select: { stock: true, reservedStock: true },
+          });
+          if (!variant) continue;
+          await tx.variant.update({
+            where: { id: item.variantId },
+            data: {
+              stock: Math.max(0, variant.stock - item.quantity),
+              reservedStock: Math.max(0, variant.reservedStock - item.quantity),
+            },
+          });
+        }
+      }
+
+      return tx.order.update({
+        where: { id },
+        data: { status: next },
+        include: {
+          items: true,
+          customer: true,
+        },
+      });
     });
   }
 

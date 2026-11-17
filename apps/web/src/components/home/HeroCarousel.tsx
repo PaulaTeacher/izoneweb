@@ -57,14 +57,18 @@ export function HeroCarousel() {
     onSelect();
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative overflow-hidden bg-neutral-100">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex touch-pan-y">
+    <section className="relative overflow-hidden bg-neutral-100 h-[600px] md:h-[700px]">
+      <div className="overflow-hidden h-full" ref={emblaRef}>
+        <div className="flex touch-pan-y h-full">
           {slides.map((slide) => (
-            <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 min-h-[600px] md:min-h-[700px]">
+            <div key={slide.id} className="relative flex-[0_0_100%] min-w-0 h-full">
               <SmartImage
                 src={slide.image}
                 alt={slide.title}
@@ -74,14 +78,11 @@ export function HeroCarousel() {
                 className="object-cover object-center"
               />
               
-              {/* Dark overlay for dark theme slides */}
-              <div className={`absolute inset-0 ${slide.theme === 'dark' ? 'bg-black/50' : 'bg-black/20'}`} />
-
               <div className="relative z-10 container mx-auto h-full flex flex-col items-center justify-center text-center px-4 pt-32 pb-24">
-                <h1 className={`text-5xl md:text-7xl font-bold tracking-tight mb-4 ${slide.theme === 'dark' || slide.theme === 'light' ? 'text-white' : 'text-neutral-900'}`}>
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
                   {slide.title}
                 </h1>
-                <p className={`text-xl md:text-2xl mb-8 max-w-2xl font-light ${slide.theme === 'dark' || slide.theme === 'light' ? 'text-neutral-200' : 'text-neutral-600'}`}>
+                <p className="text-xl md:text-2xl mb-8 max-w-2xl font-light text-white/90 drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]">
                   {slide.description}
                 </p>
 
@@ -92,7 +93,7 @@ export function HeroCarousel() {
                   >
                     Comprar ahora <ArrowRight className="w-4 h-4" />
                   </Link>
-                  <span className={`text-sm ${slide.theme === 'dark' || slide.theme === 'light' ? 'text-white/80' : 'text-neutral-500'}`}>
+                  <span className="text-sm text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                     {slide.priceText}
                   </span>
                 </div>
@@ -102,19 +103,24 @@ export function HeroCarousel() {
         </div>
       </div>
 
-      {/* Pagination Dots */}
+      {/* Pagination Dots — fixed footprint to avoid CLS when active width changes */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
+            type="button"
             onClick={() => scrollTo(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-              index === selectedIndex
-                ? 'bg-white w-8'
-                : 'bg-white/50 hover:bg-white/80'
-            }`}
+            className="flex h-2.5 w-8 items-center justify-center"
             aria-label={`Ir a la diapositiva ${index + 1}`}
-          />
+          >
+            <span
+              className={`block h-2.5 rounded-full transition-all duration-300 ${
+                index === selectedIndex
+                  ? 'w-8 bg-white'
+                  : 'w-2.5 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          </button>
         ))}
       </div>
     </section>

@@ -22,6 +22,26 @@ export function productMatchesCategory(product: Product, category: string): bool
   return slugs.some((s) => own === s || parent === s);
 }
 
+const CATALOG_FETCH_TIMEOUT_MS = 4000;
+
+async function fetchCatalog(
+  path: string,
+  revalidateSeconds = 180,
+): Promise<Response | null> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), CATALOG_FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(`${API_URL}${path}`, {
+      signal: controller.signal,
+      next: { revalidate: revalidateSeconds, tags: ['catalog'] },
+    });
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function getProducts(params?: {
   category?: string;
   search?: string;
@@ -34,6 +54,7 @@ export async function getProducts(params?: {
   deviceKind?: string;
   featured?: boolean;
   take?: number;
+  sort?: string;
 }): Promise<Product[]> {
   try {
     const searchParams = new URLSearchParams();
@@ -48,12 +69,11 @@ export async function getProducts(params?: {
     if (params?.deviceKind) searchParams.set('deviceKind', params.deviceKind);
     if (params?.featured) searchParams.set('featured', 'true');
     if (params?.take) searchParams.set('take', String(params.take));
+    if (params?.sort) searchParams.set('sort', params.sort);
 
     const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
-    const res = await fetch(`${API_URL}/catalog/products${query}`, {
-      next: { revalidate: 30, tags: ['catalog'] },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog(`/catalog/products${query}`);
+    if (res?.ok) {
       const data = await res.json();
       if (Array.isArray(data)) {
         return data;
@@ -95,6 +115,10 @@ export async function getProducts(params?: {
     );
   }
 
+  if (params?.sort === 'featured') {
+    results.sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured));
+  }
+
   if (params?.take) {
     results = results.slice(0, params.take);
   }
@@ -102,19 +126,15 @@ export async function getProducts(params?: {
   return results;
 }
 
-/** Destacados para Home: prioriza isFeatured; si no hay, usa los más recientes. */
+/** Destacados para Home: un solo request, featured primero. */
 export async function getFeaturedProducts(take = 8): Promise<Product[]> {
-  const featured = await getProducts({ featured: true, take });
-  if (featured.length > 0) return featured;
-  return getProducts({ take });
+  return getProducts({ take, sort: 'featured' });
 }
 
 export async function getCategories(): Promise<Category[]> {
   try {
-    const res = await fetch(`${API_URL}/catalog/categories`, {
-      next: { revalidate: 300 },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog('/catalog/categories', 300);
+    if (res?.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) return data;
     }
@@ -134,10 +154,8 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function getMenu(): Promise<MenuCategory[]> {
   try {
-    const res = await fetch(`${API_URL}/catalog/menu`, {
-      next: { revalidate: 300 },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog('/catalog/menu', 300);
+    if (res?.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) return data;
     }
@@ -149,10 +167,8 @@ export async function getMenu(): Promise<MenuCategory[]> {
 
 export async function getProduct(slug: string): Promise<Product | null> {
   try {
-    const res = await fetch(`${API_URL}/catalog/products/${slug}`, {
-      next: { revalidate: 60, tags: ['catalog', `product:${slug}`] },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog(`/catalog/products/${slug}`, 60);
+    if (res?.ok) {
       const data = await res.json();
       if (data && data.id) return data;
     }
@@ -171,10 +187,8 @@ export async function getDeviceModels(params?: {
     if (params?.brand) searchParams.set('brand', params.brand);
     if (params?.kind) searchParams.set('kind', params.kind);
     const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
-    const res = await fetch(`${API_URL}/catalog/device-models${query}`, {
-      next: { revalidate: 300 },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog(`/catalog/device-models${query}`, 300);
+    if (res?.ok) {
       const data = await res.json();
       if (Array.isArray(data)) return data;
     }
@@ -186,10 +200,8 @@ export async function getDeviceModels(params?: {
 
 export async function getCompatibleAccessories(slug: string): Promise<Product[]> {
   try {
-    const res = await fetch(`${API_URL}/catalog/products/${slug}/accessories`, {
-      next: { revalidate: 60 },
-    });
-    if (res.ok) {
+    const res = await fetchCatalog(`/catalog/products/${slug}/accessories`, 60);
+    if (res?.ok) {
       const data = await res.json();
       if (Array.isArray(data)) return data;
     }
@@ -222,7 +234,7 @@ export async function validateCoupon(
 }
 
 export interface CheckoutPayload {
-  items: { variantId: string; quantity: number }[];
+  items: { variantId: string; quantity: number; hasProtection?: boolean }[];
   customerName: string;
   couponCode?: string;
   shipping?: {

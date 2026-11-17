@@ -13,6 +13,7 @@ export interface CartItem {
   imageUrl?: string;
   price: number;
   quantity: number;
+  hasProtection?: boolean;
 }
 
 interface CartContextType {
@@ -20,7 +21,7 @@ interface CartContextType {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
-  addItem: (product: Product, variant: Variant, quantity?: number) => void;
+  addItem: (product: Product, variant: Variant, quantity?: number, hasProtection?: boolean) => void;
   removeItem: (variantId: string) => void;
   updateQuantity: (variantId: string, quantity: number) => void;
   clearCart: () => void;
@@ -56,7 +57,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
 
-  const addItem = (product: Product, variant: Variant, quantity = 1) => {
+  const addItem = (product: Product, variant: Variant, quantity = 1, hasProtection = false) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.variantId === variant.id);
       if (existing) {
@@ -76,8 +77,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         productSlug: product.slug,
         variantDetails: details,
         imageUrl: variant.featuredImage || product.images?.[0],
-        price: Number(variant.price),
+        price: Number(variant.price) + (hasProtection ? 189000 : 0),
         quantity,
+        hasProtection,
       };
 
       return [...prev, newItem];

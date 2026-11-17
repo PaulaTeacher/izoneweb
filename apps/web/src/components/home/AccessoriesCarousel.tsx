@@ -101,7 +101,7 @@ export function AccessoriesCarousel() {
                   <Link href={item.link} className="block group h-full">
                     <div className="bg-white dark:bg-[#1C1C1E] rounded-3xl p-7 flex flex-col h-full border border-neutral-100 dark:border-neutral-800 shadow-sm group-hover:shadow-md transition-all duration-300">
                       {/* Imagen */}
-                      <div className="relative w-full h-48 mb-6">
+                      <div className="relative w-full aspect-square max-h-48 mb-6">
                         <SmartImage
                           src={item.image}
                           alt={item.title}
@@ -124,7 +124,7 @@ export function AccessoriesCarousel() {
                         <p className="text-[13px] text-neutral-600 dark:text-neutral-400 mb-6 flex-grow leading-relaxed">
                           {item.description}
                         </p>
-                        <p className="text-[11px] text-neutral-500 font-medium">
+                        <p className="text-[11px] text-neutral-400 font-medium">
                           {item.price}
                         </p>
                       </div>

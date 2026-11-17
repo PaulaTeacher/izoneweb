@@ -70,13 +70,9 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar iPhone',
         items: [
-          { title: 'iPhone 16 Pro', href: '/product/iphone-16-pro', description: 'Lo último en titanio', badge: 'Nuevo' },
-          { title: 'iPhone 16', href: '/iphone', description: 'Potente y colorido', badge: 'Nuevo' },
-          { title: 'iPhone 15 Pro', href: '/iphone' },
-          { title: 'iPhone 15', href: '/iphone' },
-          { title: 'iPhone 14', href: '/iphone' },
-          { title: 'iPhone 13', href: '/iphone' },
-          { title: 'iPhone SE', href: '/iphone' },
+          { title: 'iPhone 17 Pro', href: '/product/iphone-17-pro', badge: 'Oferta' },
+          { title: 'iPhone 16 Pro Max', href: '/product/iphone-16-pro-max', badge: 'Nuevo' },
+          { title: 'iPhone 16 Pro', href: '/product/iphone-16-pro' },
         ]
       },
       {
@@ -105,10 +101,7 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar iPad',
         items: [
-          { title: 'iPad Pro', href: '/ipad', description: 'El más avanzado' },
-          { title: 'iPad Air', href: '/ipad', description: 'Ligero y potente' },
-          { title: 'iPad', href: '/ipad', description: '10.ª generación' },
-          { title: 'iPad mini', href: '/ipad', description: 'Potencia en tu mano' },
+          { title: 'Ver todos', href: '/ipad' },
         ]
       },
       {
@@ -136,10 +129,7 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar Apple Watch',
         items: [
-          { title: 'Apple Watch Ultra 2', href: '/watch' },
-          { title: 'Apple Watch Series 10', href: '/watch', badge: 'Nuevo' },
-          { title: 'Apple Watch Series 9', href: '/watch' },
-          { title: 'Apple Watch SE', href: '/watch' },
+          { title: 'Ver todos', href: '/watch' },
         ]
       },
       {
@@ -166,11 +156,7 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar Audio',
         items: [
-          { title: 'AirPods Pro (2.ª generación)', href: '/audio' },
-          { title: 'AirPods 4', href: '/audio', badge: 'Nuevo' },
-          { title: 'AirPods Max', href: '/audio' },
-          { title: 'AirPods (3.ª generación)', href: '/audio' },
-          { title: 'EarPods', href: '/audio' },
+          { title: 'AirPods Pro (2.ª generación)', href: '/product/airpods-pro-2' },
         ]
       },
       {
@@ -274,22 +260,21 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-2 transition-all duration-300 font-sans">
-      {/* Barra de navegación: cristal Apple con bordes redondeados y sombra */}
-      <div className="relative rounded-2xl bg-white/40 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] border border-black/5 dark:border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.18),0_12px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
-        <nav aria-label="Navegación principal" className="max-w-[1024px] mx-auto px-4 relative">
+      <div className="relative mx-auto max-w-[1024px] rounded-3xl bg-white/20 dark:bg-[#161617]/45 backdrop-blur-2xl saturate-[1.8] shadow-[0_4px_16px_rgba(0,0,0,0.12),0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
+        <nav aria-label="Navegación principal" className="px-6 md:px-8 relative">
           <div className="h-[44px] flex items-center justify-between text-[12px] font-normal tracking-wide">
             {/* Logo (Apple Style) */}
             <Link
               href="/"
               aria-label="iZone Tech — inicio"
-              className="flex items-center shrink-0 opacity-80 hover:opacity-100 transition-opacity text-[12px] font-semibold tracking-wide text-[#1D1D1F] dark:text-white whitespace-nowrap"
+              className="flex items-center shrink-0 opacity-80 hover:opacity-100 transition-opacity text-[12px] font-semibold tracking-wide text-[#1D1D1F] dark:text-white whitespace-nowrap pl-1"
             >
               iZone Tech
             </Link>
 
             {/* Enlaces Desktop */}
             <div
-              className="hidden md:flex items-center justify-between flex-1 px-4 lg:px-8"
+              className="hidden md:flex items-center justify-center flex-1 gap-4 lg:gap-5 px-2 lg:px-4"
               onMouseLeave={handleMouseLeave}
             >
               {categories.map((cat) => (
@@ -309,7 +294,7 @@ export default function Header() {
             </div>
 
             {/* Iconos de Acción */}
-            <div className="flex items-center justify-end gap-4 md:gap-6 w-auto md:w-16">
+            <div className="flex items-center justify-end gap-4 md:gap-5 shrink-0 pr-1">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 aria-label="Buscar"
@@ -392,23 +377,23 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration, ease: easeOut }}
-            className="hidden md:block absolute top-full left-0 w-full bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] shadow-sm origin-top"
+            className="hidden md:block absolute top-full left-0 right-0 mx-auto mt-2 w-full max-w-[1024px] rounded-3xl border border-black/5 dark:border-white/10 bg-white/70 dark:bg-[#161617]/70 backdrop-blur-2xl saturate-[1.8] shadow-[0_8px_24px_rgba(0,0,0,0.12)] origin-top overflow-hidden"
           >
-            <div className="max-w-[1024px] mx-auto px-4 py-10 flex gap-12 text-[12px]">
+            <div className="px-4 py-5 md:py-6 flex gap-6 md:gap-8 text-[12px]">
               {activeCategoryData.groups.map((group, idx) => (
-                <div key={idx} className="flex-1 max-w-[240px]">
-                  <h4 className="text-[11px] font-normal text-neutral-500 mb-3 tracking-wide">
+                <div key={idx} className="flex-1 min-w-0 max-w-[200px]">
+                  <h4 className="text-[10px] font-normal text-neutral-500 mb-2 tracking-wide uppercase">
                     {group.title}
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-1">
                     {group.items.map((item, itemIdx) => (
                       <li key={itemIdx}>
                         <Link
                           href={item.href}
                           onClick={() => setActiveMenu(null)}
-                          className="block group/link"
+                          className="block group/link py-0.5"
                         >
-                          <span className="font-semibold text-[19px] text-[#1D1D1F] dark:text-white/90 hover:text-black dark:hover:text-white transition-colors">
+                          <span className="font-semibold text-[14px] leading-snug text-[#1D1D1F] dark:text-white/90 hover:text-black dark:hover:text-white transition-colors">
                             {item.title}
                           </span>
                         </Link>

@@ -1,6 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException, OnApplicationBootstrap } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AccessoryMaterial, DeviceKind, Prisma, ProductKind } from '@prisma/client';
+import { catalogCache } from './memory-cache';
+
+/** Match Next.js catalog revalidate so SSR and API drop cache together. */
+const LIST_CACHE_TTL_MS = 180_000;
 
 interface GetProductsParams {
   categorySlug?: string;
@@ -39,21 +43,62 @@ function familyHref(slug: string): string {
 }
 
 @Injectable()
-export class CatalogService {
+export class CatalogService implements OnApplicationBootstrap {
+  private readonly logger = new Logger(CatalogService.name);
+
   constructor(private prisma: PrismaService) {}
 
+  async onApplicationBootstrap() {
+    const started = Date.now();
+    try {
+      await Promise.all([
+        this.getMenu(),
+        this.getCategories(),
+        this.getProducts({ take: 8, sort: 'featured' }),
+        this.getProducts({ take: 12 }),
+        this.getProducts({ categorySlug: 'iphone' }),
+        this.getProducts({ categorySlug: 'mac' }),
+        this.getProducts({ categorySlug: 'ipad' }),
+        this.getProducts({ categorySlug: 'watch' }),
+        this.getProducts({ categorySlug: 'audio' }),
+        this.getProducts({ productKind: 'accessory' }),
+      ]);
+      this.logger.log(`Catalog cache warmed in ${Date.now() - started}ms`);
+    } catch (error) {
+      this.logger.warn(
+        `Catalog warmup skipped: ${error instanceof Error ? error.message : 'unknown error'}`,
+      );
+    }
+  }
+
   /** Family (iphone) or leaf (iphone-16-pro) → that node plus children. */
-  private async resolveCategoryAndDescendantIds(slug: string): Promise<string[]> {
+  private categoryScope(slug: string): Prisma.CategoryWhereInput {
     const aliases = slug === 'watch' ? ['watch', 'apple-watch'] : [slug];
-    const category = await this.prisma.category.findFirst({
-      where: { slug: { in: aliases }, isActive: true },
-      include: { children: { where: { isActive: true }, select: { id: true } } },
-    });
-    if (!category) return [];
-    return [category.id, ...category.children.map((c) => c.id)];
+    return {
+      isActive: true,
+      OR: [{ slug: { in: aliases } }, { parent: { slug: { in: aliases }, isActive: true } }],
+    };
+  }
+
+  private productsCacheKey(params: GetProductsParams): string {
+    const stable: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(params)) {
+      if (value === undefined || value === false || value === '') continue;
+      stable[key] = value;
+    }
+    const ordered = Object.fromEntries(
+      Object.keys(stable)
+        .sort()
+        .map((key) => [key, stable[key]]),
+    );
+    return `products:${JSON.stringify(ordered)}`;
   }
 
   async getProducts(params: GetProductsParams) {
+    const cacheKey = this.productsCacheKey(params);
+    const cached = catalogCache.get<unknown>(cacheKey);
+    if (cached) return cached;
+
     const {
       categorySlug,
       search,
@@ -98,19 +143,13 @@ export class CatalogService {
       orderBy = [{ isFeatured: 'desc' }, { updatedAt: 'desc' }];
     }
 
-    const categoryIds = categorySlug
-      ? await this.resolveCategoryAndDescendantIds(categorySlug)
-      : undefined;
-
-    if (categorySlug && categoryIds && categoryIds.length === 0) {
-      return [];
-    }
-
+    const started = Date.now();
     const products = await this.prisma.product.findMany({
+      relationLoadStrategy: 'join',
       where: {
         isActive: true,
         isFeatured: featured ? true : undefined,
-        categoryId: categoryIds ? { in: categoryIds } : undefined,
+        category: categorySlug ? this.categoryScope(categorySlug) : undefined,
         brand: brandSlug ? { slug: brandSlug } : undefined,
         tags: tagSlug ? { some: { slug: tagSlug } } : undefined,
         productKind:
@@ -152,6 +191,10 @@ export class CatalogService {
       orderBy,
       take: take ? Math.min(Math.max(take, 1), 48) : undefined,
     });
+    const elapsed = Date.now() - started;
+    if (elapsed > 400) {
+      this.logger.warn(`getProducts query ${elapsed}ms`);
+    }
 
     // Post-query sort by price if needed (since price is on variants)
     if (sort === 'price_asc') {
@@ -169,27 +212,35 @@ export class CatalogService {
       });
     }
 
-    return products;
+    return catalogCache.set(cacheKey, products, LIST_CACHE_TTL_MS);
   }
 
   async getCategories() {
-    return this.prisma.category.findMany({
-      where: { parentId: null, isActive: true },
-      orderBy: { sortOrder: 'asc' },
-      include: {
-        children: {
-          where: { isActive: true },
-          orderBy: { sortOrder: 'asc' },
+    return catalogCache.getOrSet('categories', LIST_CACHE_TTL_MS, () =>
+      this.prisma.category.findMany({
+        relationLoadStrategy: 'join',
+        where: { parentId: null, isActive: true },
+        orderBy: { sortOrder: 'asc' },
+        include: {
+          children: {
+            where: { isActive: true },
+            orderBy: { sortOrder: 'asc' },
+          },
+          _count: {
+            select: { products: true },
+          },
         },
-        _count: {
-          select: { products: true },
-        },
-      },
-    });
+      }),
+    );
   }
 
   async getMenu() {
+    return catalogCache.getOrSet('menu', LIST_CACHE_TTL_MS, () => this.buildMenu());
+  }
+
+  private async buildMenu() {
     const families = await this.prisma.category.findMany({
+      relationLoadStrategy: 'join',
       where: { parentId: null, isActive: true },
       orderBy: { sortOrder: 'asc' },
       include: {
@@ -200,20 +251,28 @@ export class CatalogService {
       },
     });
 
-    const menu = [];
-    for (const family of families) {
-      const familyCategoryIds = [family.id, ...family.children.map((c) => c.id)];
-      const href = familyHref(family.slug);
+    const categoryIds = families.flatMap((family) => [
+      family.id,
+      ...family.children.map((child) => child.id),
+    ]);
 
-      const featured = await this.prisma.product.findFirst({
-        where: {
-          categoryId: { in: familyCategoryIds },
-          isFeatured: true,
-          isActive: true,
-        },
-        include: { variants: { orderBy: { price: 'asc' }, take: 1 } },
-        orderBy: { createdAt: 'desc' },
-      });
+    const featuredProducts = categoryIds.length
+      ? await this.prisma.product.findMany({
+          relationLoadStrategy: 'join',
+          where: {
+            categoryId: { in: categoryIds },
+            isFeatured: true,
+            isActive: true,
+          },
+          include: { variants: { orderBy: { price: 'asc' }, take: 1 } },
+          orderBy: { createdAt: 'desc' },
+        })
+      : [];
+
+    return families.map((family) => {
+      const href = familyHref(family.slug);
+      const familyIds = new Set([family.id, ...family.children.map((child) => child.id)]);
+      const featured = featuredProducts.find((product) => familyIds.has(product.categoryId));
 
       let featuredProduct: unknown = undefined;
       if (featured) {
@@ -229,7 +288,7 @@ export class CatalogService {
         };
       }
 
-      menu.push({
+      return {
         name: family.name,
         slug: family.slug,
         href,
@@ -241,10 +300,8 @@ export class CatalogService {
           description: child.description ?? undefined,
         })),
         featuredProduct,
-      });
-    }
-
-    return menu;
+      };
+    });
   }
 
   async getBrands() {
@@ -275,6 +332,7 @@ export class CatalogService {
 
   async getProductBySlug(slug: string) {
     const product = await this.prisma.product.findUnique({
+      relationLoadStrategy: 'join',
       where: { slug },
       include: {
         variants: {
@@ -373,6 +431,7 @@ export class CatalogService {
     }
 
     return this.prisma.product.findMany({
+      relationLoadStrategy: 'join',
       where: {
         isActive: true,
         productKind: 'accessory',
@@ -392,6 +451,7 @@ export class CatalogService {
 
   async compareProducts(slugs: string[]) {
     const products = await this.prisma.product.findMany({
+      relationLoadStrategy: 'join',
       where: {
         slug: { in: slugs },
         isActive: true,

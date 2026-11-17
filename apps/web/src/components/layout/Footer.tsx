@@ -12,6 +12,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/lib/site';
+import { buildWaMeUrl } from '@/lib/whatsapp';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -47,12 +48,15 @@ export default function Footer() {
           <form onSubmit={handleSubscribe} className="w-full lg:w-auto flex-1 max-w-md">
             <div className="flex flex-col sm:flex-row gap-2">
               <input
+                id="newsletter-email"
+                name="email"
                 type="email"
                 placeholder="Ingresa tu correo electrónico..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                aria-label="Correo electrónico"
                 required
-                className="w-full bg-[#1D1D1F] border border-neutral-700 text-white placeholder-neutral-500 text-sm px-4 py-3 rounded-full outline-none focus:border-[#0071E3] transition"
+                className="w-full bg-[#1D1D1F] border border-neutral-700 text-white placeholder-neutral-400 text-sm px-4 py-3 rounded-full outline-none focus:border-[#0071E3] transition"
               />
               <button
                 type="submit"
@@ -70,7 +74,7 @@ export default function Footer() {
                 )}
               </button>
             </div>
-            <p className="text-[11px] text-neutral-500 mt-2 text-center sm:text-left">
+            <p className="text-[11px] text-neutral-400 mt-2 text-center sm:text-left">
               Al suscribirte aceptas nuestras políticas de tratamiento de datos personales.
             </p>
           </form>
@@ -130,7 +134,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-neutral-400">
               <li>
                 <a
-                  href="https://wa.me/573001234567?text=Hola%20iZone%20Tech,%20necesito%20soporte%20con%20una%20compra"
+                  href={buildWaMeUrl('Hola iZone Tech, necesito soporte con una compra')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-emerald-400 transition flex items-center gap-1.5"
@@ -236,9 +240,9 @@ export default function Footer() {
               Ubicación & Contacto
             </h4>
             <div className="space-y-3 text-neutral-400 text-xs">
-              <div id="tiendas" className="flex items-start gap-2.5 scroll-mt-28">
+              <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#0071E3] shrink-0 mt-0.5" />
-                <span>Cra. 15 # 93-60, Chicó Norte, Bogotá D.C., Colombia</span>
+                <span>CC Unilago, Local L 1-143, Bogotá D.C., Colombia</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -300,7 +304,7 @@ export default function Footer() {
         {/* Copyright Legal Mac Center Benchmark */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>© {new Date().getFullYear()} iZone Tech Colombia S.A.S. NIT: 901.458.789-2. Todos los derechos reservados.</p>
-          <p className="text-[11px] text-neutral-500 max-w-xl text-center md:text-right">
+          <p className="text-[11px] text-neutral-400 max-w-xl text-center md:text-right">
             Apple, el logotipo de Apple, iPhone, iPad, Mac, Apple Watch y AirPods son marcas registradas de Apple Inc., registradas en EE. UU. y otros países. iZone Tech es un distribuidor y comercializador de tecnología en Colombia.
           </p>
         </div>

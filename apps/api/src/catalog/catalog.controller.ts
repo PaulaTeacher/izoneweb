@@ -1,4 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 import { CatalogService } from './catalog.service';
 import { ApiTags, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { Public } from '../auth/decorators';
@@ -6,6 +7,7 @@ import { Public } from '../auth/decorators';
 @ApiTags('Catalog')
 @Controller('catalog')
 @Public()
+@SkipThrottle({ default: true, checkout: true })
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
 
@@ -57,7 +59,7 @@ export class CatalogController {
       material,
       deviceBrand,
       deviceKind,
-      featured: featured === 'true' || featured === '1',
+      featured: featured === 'true' || featured === '1' ? true : undefined,
       take: take && Number.isFinite(Number(take)) ? Math.trunc(Number(take)) : undefined,
     });
   }

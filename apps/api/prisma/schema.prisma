@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -107,6 +108,7 @@ model Category {
 
   @@index([parentId])
   @@index([parentId, sortOrder])
+  @@index([isActive, parentId, sortOrder])
 }
 
 model Brand {
@@ -162,6 +164,8 @@ model Product {
   @@index([deviceModelId])
   @@index([brandId])
   @@index([categoryId])
+  @@index([isActive, categoryId])
+  @@index([isActive, isFeatured, updatedAt])
 }
 
 model Variant {
@@ -240,6 +244,7 @@ model ProductSpec {
   value     String
 
   @@unique([productId, specId])
+  @@index([specId])
 }
 
 // ======================== TRADE-IN ========================
@@ -285,6 +290,9 @@ model TradeInRequest {
   notes           String?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+
+  @@index([customerId])
+  @@index([tradeInModelId])
 }
 
 // ======================== REVIEWS ========================
@@ -298,6 +306,8 @@ model Review {
   comment      String
   isApproved   Boolean  @default(false)
   createdAt    DateTime @default(now())
+
+  @@index([productId])
 }
 
 // ======================== COUPONS ========================
@@ -343,6 +353,8 @@ model Order {
   sync_status        SyncStatus  @default(pending_sync)
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @updatedAt
+
+  @@index([customerId])
 }
 
 model OrderItem {
@@ -356,4 +368,8 @@ model OrderItem {
   name      String
   quantity  Int
   price     Decimal
+
+  @@index([orderId])
+  @@index([productId])
+  @@index([variantId])
 }

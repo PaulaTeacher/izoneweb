@@ -12,7 +12,7 @@ const slides = [
     id: 1,
     title: 'iPhone 16 Pro',
     description: 'Diseñado en titanio aeroespacial con el chip A18 Pro más rápido hasta la fecha.',
-    image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200&auto=format&fit=crop',
+    image: '/images/products/iphone-17-silver.jpg',
     link: '/product/iphone-16-pro',
     priceText: 'Desde $ 5.499.000',
     theme: 'dark' // dark text or white text depending on background

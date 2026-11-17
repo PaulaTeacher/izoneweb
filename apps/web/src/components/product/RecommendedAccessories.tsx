@@ -1,12 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { formatCOP, type Product } from '@izone/shared-types';
-import { Plus } from 'lucide-react';
+import { Check, Plus } from 'lucide-react';
 import { easeOut } from '@/components/motion/FadeIn';
 import { SmartImage } from '@/components/ui/SmartImage';
+import { useCart } from '@/lib/cart-context';
 
 interface RecommendedAccessoriesProps {
   productName: string;
@@ -15,17 +16,28 @@ interface RecommendedAccessoriesProps {
 
 export function RecommendedAccessories({ productName, products }: RecommendedAccessoriesProps) {
   const reduce = useReducedMotion();
+  const { addItem } = useCart();
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!addedId) return;
+    const timer = window.setTimeout(() => setAddedId(null), 1500);
+    return () => window.clearTimeout(timer);
+  }, [addedId]);
 
   if (!products.length) return null;
 
   return (
-    <section className="w-full my-14">
+    <section className="w-full my-14" aria-labelledby="recommended-accessories-heading">
       <div className="flex items-center justify-between mb-6 pb-2 border-b border-neutral-200 dark:border-neutral-800">
         <div>
           <span className="text-[11px] font-bold tracking-wider text-[#0071E3] uppercase">
             Completa tu experiencia
           </span>
-          <h3 className="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+          <h3
+            id="recommended-accessories-heading"
+            className="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white"
+          >
             Los más elegidos con {productName}
           </h3>
         </div>
@@ -39,12 +51,15 @@ export function RecommendedAccessories({ productName, products }: RecommendedAcc
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((acc, index) => {
-          const minPrice = Number(acc.variants?.[0]?.price || 0);
+          const primaryVariant = acc.variants?.[0];
+          const minPrice = Number(primaryVariant?.price || 0);
+          const inStock = Boolean(primaryVariant && primaryVariant.stock > 0);
+          const isAdded = addedId === acc.id;
           const image = acc.images?.[0];
           const colors = (acc.variants || []).filter((v) => v.colorHex).slice(0, 5);
 
           return (
-            <motion.div
+            <motion.article
               key={acc.id}
               initial={reduce ? false : { opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -58,7 +73,7 @@ export function RecommendedAccessories({ productName, products }: RecommendedAcc
               <div>
                 <Link
                   href={`/product/${acc.slug}`}
-                  className="relative w-full aspect-square flex items-center justify-center p-2 mb-3 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl overflow-hidden"
+                  className="relative w-full aspect-square flex items-center justify-center p-2 mb-3 bg-neutral-50 dark:bg-neutral-800/40 rounded-xl overflow-clip"
                 >
                   {image ? (
                     <SmartImage
@@ -97,20 +112,42 @@ export function RecommendedAccessories({ productName, products }: RecommendedAcc
                 )}
               </div>
 
-              <div className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+              <footer className="mt-2 pt-2 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between gap-2">
                 <span className="text-sm font-bold text-neutral-900 dark:text-white">
                   {minPrice ? formatCOP(minPrice) : 'Ver opciones'}
                 </span>
 
-                <Link
-                  href={`/product/${acc.slug}`}
-                  className="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-950/50 hover:bg-[#0071E3] hover:text-white text-[#0071E3] flex items-center justify-center transition-colors"
-                  title="Ver accesorio"
+                <button
+                  type="button"
+                  disabled={!inStock}
+                  onClick={() => {
+                    if (!primaryVariant || !inStock) return;
+                    addItem(acc, primaryVariant, 1);
+                    setAddedId(acc.id);
+                  }}
+                  aria-label={`Agregar ${acc.name} al carrito`}
+                  className={`h-9 px-3 rounded-full text-xs font-semibold inline-flex items-center justify-center gap-1 transition-colors touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3] ${
+                    !inStock
+                      ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 cursor-not-allowed'
+                      : isAdded
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-blue-50 dark:bg-blue-950/50 hover:bg-[#0071E3] hover:text-white text-[#0071E3]'
+                  }`}
                 >
-                  <Plus className="w-4 h-4" />
-                </Link>
-              </div>
-            </motion.div>
+                  {isAdded ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" aria-hidden="true" />
+                      Agregado
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-3.5 h-3.5" aria-hidden="true" />
+                      Agregar
+                    </>
+                  )}
+                </button>
+              </footer>
+            </motion.article>
           );
         })}
       </div>

@@ -21,8 +21,8 @@ export function TrustBanner() {
               <Truck className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Envío Seguro</p>
-              <p className="text-xs text-neutral-500 mt-1">A nivel nacional</p>
+              <p className="text-sm font-semibold">Envío Hoy en Bogotá</p>
+              <p className="text-xs text-neutral-500 mt-1">Retiro en CC Unilago o despacho nacional asegurado</p>
             </div>
           </div>
 
@@ -31,8 +31,8 @@ export function TrustBanner() {
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Múltiples Pagos</p>
-              <p className="text-xs text-neutral-500 mt-1">Tarjetas, PSE y contraentrega</p>
+              <p className="text-sm font-semibold">Pago Seguro en Tienda o Contraentrega</p>
+              <p className="text-xs text-neutral-500 mt-1">Tarjetas en punto físico (Unilago) y contraentrega Bogotá</p>
             </div>
           </div>
 

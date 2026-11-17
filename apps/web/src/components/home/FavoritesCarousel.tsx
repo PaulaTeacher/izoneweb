@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import type { Product } from '@izone/shared-types';
 import { formatCOP } from '@izone/shared-types';
@@ -28,11 +28,12 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [addedId, setAddedId] = useState<string | null>(null);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    (index: number) => emblaApi?.scrollTo(index),
     [emblaApi],
   );
 
@@ -55,12 +56,30 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
     };
   }, [emblaApi, onSelect, products.length]);
 
+  useEffect(() => {
+    if (!addedId) return;
+    const timer = window.setTimeout(() => setAddedId(null), 1500);
+    return () => window.clearTimeout(timer);
+  }, [addedId]);
+
   if (!products.length) {
     return (
-      <section
-        className="py-16 bg-white dark:bg-neutral-950 min-h-[420px]"
-        aria-hidden
-      />
+      <section aria-labelledby="favorites-heading" className="py-16 bg-white dark:bg-neutral-950">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 id="favorites-heading" className="text-3xl font-bold text-[#1D1D1F] dark:text-white mb-4">
+            Los favoritos del momento
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+            Explora nuestro catálogo completo de equipos y accesorios Apple disponibles.
+          </p>
+          <Link
+            href="/shop"
+            className="inline-flex items-center justify-center rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white text-sm font-semibold px-6 py-3 transition-colors"
+          >
+            Ver catálogo completo
+          </Link>
+        </div>
+      </section>
     );
   }
 
@@ -70,9 +89,16 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
       : Math.max(1, Math.ceil(products.length / 3));
 
   return (
-    <section className="py-16 bg-white dark:bg-neutral-950">
+    <section
+      aria-labelledby="favorites-heading"
+      aria-roledescription="carousel"
+      className="py-16 bg-white dark:bg-neutral-950"
+    >
       <div className="container mx-auto px-4 md:px-12 max-w-7xl relative">
-        <h2 className="text-3xl font-bold text-center text-[#1D1D1F] dark:text-white mb-10">
+        <h2
+          id="favorites-heading"
+          className="text-3xl font-bold text-center text-[#1D1D1F] dark:text-white mb-10"
+        >
           Los favoritos del momento
         </h2>
 
@@ -86,6 +112,8 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
                 const compare =
                   variant.comparePrice != null ? Number(variant.comparePrice) : null;
                 const discount = discountLabel(price, compare);
+                const inStock = variant.stock == null || variant.stock > 0;
+                const isAdded = addedId === product.id;
                 const image =
                   variant.featuredImage ||
                   product.images?.[0] ||
@@ -98,7 +126,10 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
                     className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_33.333%] pl-4"
                   >
                     <div className="flex flex-col items-center group px-1.5">
-                      <Link href={href} className="w-full">
+                      <Link
+                        href={href}
+                        className="w-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3]"
+                      >
                         <div className="w-full aspect-square rounded-2xl flex items-center justify-center p-8 bg-white dark:bg-neutral-900 mb-5 relative shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_4px_rgba(0,0,0,0.04)] transition-shadow duration-300 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.10),0_4px_12px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] dark:group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.5)]">
                           <SmartImage
                             src={image}
@@ -111,7 +142,10 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
                       </Link>
 
                       <div className="text-center w-full px-2">
-                        <Link href={href}>
+                        <Link
+                          href={href}
+                          className="inline-block rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3]"
+                        >
                           <h3 className="text-[15px] font-bold text-[#1D1D1F] dark:text-white leading-tight min-h-[44px] mb-2 hover:text-[#0071E3] transition-colors">
                             {product.name}
                           </h3>
@@ -135,13 +169,31 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
 
                         <button
                           type="button"
+                          disabled={!inStock}
                           onClick={(e) => {
                             e.preventDefault();
+                            if (!inStock) return;
                             addItem(product, variant, 1);
+                            setAddedId(product.id);
                           }}
-                          className="bg-[#0071E3] hover:bg-[#0077ED] text-white text-[13px] font-semibold py-2.5 px-8 rounded-full transition-colors w-auto inline-block"
+                          className={`text-[13px] font-semibold py-2.5 px-8 rounded-full transition-colors inline-flex items-center justify-center gap-1.5 touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3] ${
+                            !inStock
+                              ? 'bg-neutral-200 dark:bg-neutral-800 text-neutral-500 cursor-not-allowed'
+                              : isAdded
+                                ? 'bg-emerald-600 text-white'
+                                : 'bg-[#0071E3] hover:bg-[#0077ED] text-white'
+                          }`}
                         >
-                          Añadir al carrito
+                          {!inStock ? (
+                            'Agotado'
+                          ) : isAdded ? (
+                            <>
+                              <Check className="w-4 h-4" aria-hidden="true" />
+                              Añadido
+                            </>
+                          ) : (
+                            'Añadir al carrito'
+                          )}
                         </button>
                       </div>
                     </div>
@@ -155,27 +207,27 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
             type="button"
             onClick={scrollPrev}
             disabled={!prevBtnEnabled}
-            className={`absolute top-1/2 -left-4 md:-left-12 -translate-y-[100%] w-10 h-10 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-md transition-all ${
+            className={`absolute top-1/2 -left-4 md:-left-12 -translate-y-[100%] w-11 h-11 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-md transition-all touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3] ${
               !prevBtnEnabled
-                ? 'opacity-0 cursor-default'
+                ? 'opacity-0 cursor-default pointer-events-none'
                 : 'opacity-100 hover:bg-[#0077ED] hover:scale-105'
             }`}
-            aria-label="Anterior"
+            aria-label="Productos anteriores"
           >
-            <ChevronLeft className="w-6 h-6 ml-[-2px]" />
+            <ChevronLeft className="w-6 h-6 ml-[-2px]" aria-hidden="true" />
           </button>
           <button
             type="button"
             onClick={scrollNext}
             disabled={!nextBtnEnabled}
-            className={`absolute top-1/2 -right-4 md:-right-12 -translate-y-[100%] w-10 h-10 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-md transition-all ${
+            className={`absolute top-1/2 -right-4 md:-right-12 -translate-y-[100%] w-11 h-11 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-md transition-all touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3] ${
               !nextBtnEnabled
-                ? 'opacity-0 cursor-default'
+                ? 'opacity-0 cursor-default pointer-events-none'
                 : 'opacity-100 hover:bg-[#0077ED] hover:scale-105'
             }`}
-            aria-label="Siguiente"
+            aria-label="Siguientes productos"
           >
-            <ChevronRight className="w-6 h-6 mr-[-2px]" />
+            <ChevronRight className="w-6 h-6 mr-[-2px]" aria-hidden="true" />
           </button>
         </div>
 
@@ -185,8 +237,9 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
               key={index}
               type="button"
               onClick={() => scrollTo(index)}
-              className="flex h-12 w-12 items-center justify-center"
-              aria-label={`Ir a la página ${index + 1}`}
+              aria-current={index === selectedIndex ? 'true' : undefined}
+              className="flex h-11 w-11 items-center justify-center touch-manipulation rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0071E3]"
+              aria-label={`Ir a la página ${index + 1} de ${pageCount}`}
             >
               <span
                 className={`block h-2.5 w-2.5 rounded-full transition-colors duration-300 ${

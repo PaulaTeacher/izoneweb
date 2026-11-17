@@ -54,6 +54,7 @@ export class CatalogService implements OnApplicationBootstrap {
       await Promise.all([
         this.getMenu(),
         this.getCategories(),
+        this.getHomeSummary(),
         this.getProducts({ take: 8, sort: 'featured' }),
         this.getProducts({ take: 12 }),
         this.getProducts({ categorySlug: 'iphone' }),
@@ -236,6 +237,134 @@ export class CatalogService implements OnApplicationBootstrap {
 
   async getMenu() {
     return catalogCache.getOrSet('menu', LIST_CACHE_TTL_MS, () => this.buildMenu());
+  }
+
+  async getHomeSummary() {
+    return catalogCache.getOrSet('home-summary', LIST_CACHE_TTL_MS, () =>
+      this.buildHomeSummary(),
+    );
+  }
+
+  private async buildHomeSummary() {
+    const [featuredEquipment, categories, activeProducts] = await Promise.all([
+      this.prisma.product.findMany({
+        relationLoadStrategy: 'join',
+        where: {
+          isActive: true,
+          isFeatured: true,
+          productKind: ProductKind.equipment,
+        },
+        include: {
+          variants: {
+            orderBy: { price: 'asc' },
+            take: 1,
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      }),
+      this.prisma.category.findMany({
+        where: { isActive: true },
+        select: { id: true, slug: true, parentId: true },
+      }),
+      this.prisma.product.findMany({
+        where: { isActive: true },
+        select: {
+          categoryId: true,
+          productKind: true,
+          variants: {
+            select: { price: true },
+            orderBy: { price: 'asc' },
+            take: 1,
+          },
+          compatibilities: {
+            select: {
+              deviceModel: {
+                select: { kind: true },
+              },
+            },
+          },
+        },
+      }),
+    ]);
+
+    const heroPriority = new Map([
+      ['iphone-duo', 0],
+      ['iphone-18-pro-max', 1],
+      ['macbook-air-13-m5', 2],
+    ]);
+
+    const heroSlides = featuredEquipment
+      .slice()
+      .sort(
+        (a, b) =>
+          (heroPriority.get(a.slug) ?? 99) - (heroPriority.get(b.slug) ?? 99),
+      )
+      .map((product) => {
+        const minPrice = product.variants[0] ? Number(product.variants[0].price) : 0;
+        const image = product.variants[0]?.featuredImage || product.images?.[0] || '';
+        return {
+          id: product.id,
+          title: product.name,
+          description: product.subtitle || product.description,
+          image,
+          link: `/product/${product.slug}`,
+          priceText: minPrice > 0 ? `Desde ${formatCOP(minPrice)}` : '',
+          badge: product.heroBadge ?? undefined,
+        };
+      })
+      .filter((slide) => slide.image.length > 0)
+      .slice(0, 3);
+
+    const categoryById = new Map(categories.map((c) => [c.id, c]));
+    const categoryMinPrices: Record<string, number> = {};
+    const accessoryMinPrices: Record<string, number> = {};
+
+    const recordMin = (map: Record<string, number>, key: string, price: number) => {
+      if (price <= 0) return;
+      if (map[key] === undefined || price < map[key]) {
+        map[key] = price;
+      }
+    };
+
+    for (const product of activeProducts) {
+      const minPrice = product.variants[0] ? Number(product.variants[0].price) : 0;
+      if (minPrice <= 0) continue;
+
+      const cat = categoryById.get(product.categoryId);
+      if (cat) {
+        recordMin(categoryMinPrices, cat.slug, minPrice);
+        if (cat.parentId) {
+          const parent = categoryById.get(cat.parentId);
+          if (parent) {
+            recordMin(categoryMinPrices, parent.slug, minPrice);
+          }
+        }
+      }
+
+      if (product.productKind === ProductKind.accessory) {
+        for (const comp of product.compatibilities) {
+          const kind = comp.deviceModel?.kind;
+          if (kind) {
+            recordMin(accessoryMinPrices, kind, minPrice);
+          }
+        }
+        if (cat) {
+          recordMin(accessoryMinPrices, cat.slug, minPrice);
+        }
+      }
+    }
+
+    if (categoryMinPrices['apple-watch'] && !categoryMinPrices['watch']) {
+      categoryMinPrices['watch'] = categoryMinPrices['apple-watch'];
+    } else if (categoryMinPrices['watch'] && !categoryMinPrices['apple-watch']) {
+      categoryMinPrices['apple-watch'] = categoryMinPrices['watch'];
+    }
+
+    return {
+      heroSlides,
+      categoryMinPrices,
+      accessoryMinPrices,
+    };
   }
 
   private async buildMenu() {

@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { useCart } from '@/lib/cart-context';
 import { checkoutWhatsapp } from '@/lib/api';
 import { buildWaMeUrl } from '@/lib/whatsapp';
-import { ShoppingBag, Check, Truck, Store, RefreshCw, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
+import { ShoppingBag, Check, Truck, Store, RefreshCw, MessageCircle, CreditCard } from 'lucide-react';
 import { formatCOP, variantLabel } from '@izone/shared-types';
 import type { Product, Variant } from '@izone/shared-types';
 import { StickyBuyBar } from './StickyBuyBar';
@@ -288,6 +289,12 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
             <strong>Envío a domicilio GRATIS:</strong> Entrega el mismo día en Bogotá y 24-48h a nivel nacional.
           </span>
         </div>
+        <div className="flex items-center gap-2.5">
+          <CreditCard className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
+          <span>
+            <strong>Medios de pago:</strong> Tarjetas débito/crédito en punto físico (CC Unilago), transferencia o contraentrega en Bogotá.
+          </span>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2.5 pt-2">
@@ -367,28 +374,36 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
       )}
 
       {!isAccessory && (
-        <div className="p-3 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-between bg-white dark:bg-neutral-900 text-xs">
+        <div className="p-3 rounded-2xl border border-dashed border-neutral-300 dark:border-neutral-700 flex flex-wrap items-center justify-between gap-2 bg-white dark:bg-neutral-900 text-xs">
           <div className="flex items-center gap-2">
             <RefreshCw className="w-4 h-4 text-neutral-500 flex-shrink-0" />
             <span className="text-neutral-700 dark:text-neutral-300">
               ¿Tienes un dispositivo actual? <strong>Entrega en parte de pago</strong>
             </span>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              window.open(
-                buildWaMeUrl(
-                  `Hola iZone Tech, quisiera cotizar mi equipo en plan retoma. Me interesa: ${product.name}.`,
-                ),
-                '_blank',
-                'noopener,noreferrer',
-              );
-            }}
-            className="text-[#0071E3] hover:underline font-semibold whitespace-nowrap ml-2"
-          >
-            Cotizar
-          </button>
+          <div className="flex items-center gap-3 ml-auto">
+            <Link
+              href={`/trade-in?target=${product.slug}`}
+              className="text-[#0071E3] hover:underline font-semibold whitespace-nowrap"
+            >
+              Simular retoma
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                window.open(
+                  buildWaMeUrl(
+                    `Hola iZone Tech, quisiera cotizar mi equipo en plan retoma. Me interesa: ${product.name}.`,
+                  ),
+                  '_blank',
+                  'noopener,noreferrer',
+                );
+              }}
+              className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold whitespace-nowrap"
+            >
+              WhatsApp
+            </button>
+          </div>
         </div>
       )}
 

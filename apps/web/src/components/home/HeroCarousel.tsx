@@ -128,7 +128,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
       aria-label="Productos destacados"
       className="relative overflow-hidden bg-white dark:bg-neutral-950"
     >
-      <div className="relative h-[580px] md:h-[660px]">
+      <div className="relative h-[700px] sm:h-[740px] md:h-[660px]">
         <div className="overflow-hidden h-full" ref={emblaRef}>
         <div className="flex touch-pan-y h-full">
           {slides.map((slide, index) => {
@@ -145,8 +145,8 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                   aria-label={`${index + 1} de ${slides.length}: ${slide.title}`}
                   className="relative flex-[0_0_100%] min-w-0 h-full bg-white"
                 >
-                  <div className="container mx-auto h-full max-w-7xl px-4 md:px-10 pt-20 pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
-                    <div className="relative h-[260px] sm:h-[340px] md:h-[520px] md:col-span-7 self-end">
+                  <div className="container mx-auto h-full max-w-7xl px-4 md:px-10 pt-24 md:pt-20 pb-8 md:pb-20 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
+                    <div className="relative h-[250px] sm:h-[330px] md:h-[520px] md:col-span-7 self-end">
                       <SmartImage
                         src="/images/hero/hero-iphone-duo-figma.png"
                         alt="iPhone Duo"
@@ -194,7 +194,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                   aria-label={`${index + 1} de ${slides.length}: ${slide.title}`}
                   className="relative flex-[0_0_100%] min-w-0 h-full bg-white"
                 >
-                  <div className="container mx-auto h-full max-w-7xl px-4 md:px-10 pt-20 pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
+                  <div className="container mx-auto h-full max-w-7xl px-4 md:px-10 pt-24 md:pt-20 pb-8 md:pb-20 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
                     <div className="md:col-span-5 flex flex-col items-center text-center gap-4 order-2 md:order-1 pb-6 md:pb-0">
                       <Heading className="text-5xl sm:text-6xl lg:text-[78px] leading-none tracking-tight flex items-baseline justify-center gap-3">
                         <span className="font-light text-black">MacBook</span>
@@ -218,7 +218,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                       </Link>
                     </div>
 
-                    <div className="relative h-[240px] sm:h-[320px] md:h-[460px] md:col-span-7 order-1 md:order-2">
+                    <div className="relative h-[230px] sm:h-[310px] md:h-[460px] md:col-span-7 order-1 md:order-2">
                       <SmartImage
                         src="/images/hero/hero-macbook-air-m5-figma.png"
                         alt="MacBook Air M5"
@@ -251,8 +251,8 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                     }}
                     aria-hidden="true"
                   />
-                  <div className="relative z-10 container mx-auto h-full max-w-7xl px-4 md:px-10 pt-20 pb-0 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
-                    <div className="relative z-20 md:col-span-6 flex flex-col items-center text-center gap-4 order-2 md:order-1 pb-10 md:pb-16">
+                  <div className="relative z-10 container mx-auto h-full max-w-7xl px-4 md:px-10 pt-24 md:pt-20 pb-0 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
+                    <div className="relative z-20 md:col-span-6 flex flex-col items-center text-center gap-4 order-2 md:order-1 pb-12 md:pb-16">
                       <Heading className="font-sans leading-none tracking-tight flex flex-col items-center">
                         <span className="text-4xl sm:text-5xl lg:text-[68px] font-bold text-white">
                           iPhone
@@ -283,7 +283,15 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                       </Link>
                     </div>
 
-                    <div className="relative z-10 h-[280px] sm:h-[360px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none">
+                    <div
+                      className="relative z-10 h-[260px] sm:h-[340px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none"
+                      style={{
+                        WebkitMaskImage:
+                          'radial-gradient(ellipse 70% 80% at 50% 45%, #000 55%, transparent 100%)',
+                        maskImage:
+                          'radial-gradient(ellipse 70% 80% at 50% 45%, #000 55%, transparent 100%)',
+                      }}
+                    >
                       <SmartImage
                         src="/images/hero/hero-iphone-18-pro-figma.png"
                         alt="iPhone 18 Pro Burgundy"

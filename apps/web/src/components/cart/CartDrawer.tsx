@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
 import { checkoutWhatsapp, getProducts, validateCoupon } from '@/lib/api';
-import { formatCOP, type Product } from '@izone/shared-types';
+import { availableStock, formatCOP, type Product } from '@izone/shared-types';
 import { X, Trash2, Plus, Minus, Tag, ShieldCheck, Truck, Store } from 'lucide-react';
 import Link from 'next/link';
 import { easeOut } from '@/components/motion/FadeIn';
@@ -23,25 +23,31 @@ export default function CartDrawer() {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
   const [allAccessories, setAllAccessories] = useState<Product[]>([]);
+  const accessoriesRequested = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!isOpen || items.length === 0 || allAccessories.length > 0) return;
+    if (!isOpen || items.length === 0 || accessoriesRequested.current) return;
+    accessoriesRequested.current = true;
     let active = true;
-    getProducts({ productKind: 'accessory', take: 6 }).then((res) => {
-      if (active && Array.isArray(res)) {
-        setAllAccessories(res);
-      }
-    });
+    getProducts({ productKind: 'accessory', take: 12 })
+      .then((res) => {
+        if (active && Array.isArray(res)) {
+          setAllAccessories(res);
+        }
+      })
+      .catch(() => {
+        accessoriesRequested.current = false;
+      });
     return () => {
       active = false;
     };
-  }, [isOpen, items.length, allAccessories.length]);
+  }, [isOpen, items.length]);
 
   const inCartProductIds = new Set(items.map((i) => i.productId));
   const suggestedAccessories = allAccessories
-    .filter((acc) => !inCartProductIds.has(acc.id) && (acc.variants?.[0]?.stock ?? 0) > 0)
+    .filter((acc) => !inCartProductIds.has(acc.id) && acc.variants?.some((v) => availableStock(v) > 0))
     .slice(0, 2);
 
   useEffect(() => {
@@ -276,7 +282,7 @@ export default function CartDrawer() {
               </p>
               <div className="space-y-2">
                 {suggestedAccessories.map((acc) => {
-                  const variant = acc.variants[0];
+                  const variant = acc.variants.find((v) => availableStock(v) > 0);
                   if (!variant) return null;
                   const price = Number(variant.price || 0);
                   const image = variant.featuredImage || acc.images?.[0];

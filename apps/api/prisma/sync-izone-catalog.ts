@@ -740,6 +740,13 @@ async function upsertCategory(
 }
 
 async function main() {
+  if (!process.argv.includes('--force')) {
+    console.error(
+      'Este script sobrescribe precios, nombres y descripciones, y desactiva productos fuera del catálogo.\n' +
+        'Vuelve a ejecutarlo con --force para confirmar.',
+    );
+    process.exit(1);
+  }
   const brandApple = await prisma.brand.upsert({
     where: { slug: 'apple' },
     update: { name: 'Apple' },
@@ -802,7 +809,7 @@ async function main() {
     deviceModelBySlug[dm.slug] = record.id;
   }
 
-  // Desactivar productos antiguos fuera del catálogo oficial de 30 SKUs
+  // Desactivar productos antiguos fuera del catálogo oficial
   const activeSlugs = CATALOG.map((p) => p.slug);
   const deactivated = await prisma.product.updateMany({
     where: { slug: { notIn: activeSlugs }, isActive: true },
@@ -863,7 +870,7 @@ async function main() {
           condition: v.condition ?? ProductCondition.NUEVO_SELLADO,
           price: v.price,
           featuredImage: v.featuredImage ?? item.images[0] ?? null,
-          stock: v.stock ?? 10,
+          // stock NO se toca en update: conserva el inventario real
         },
         create: {
           productId: product.id,

@@ -30,6 +30,9 @@ export function AdminShell({
               <Link href="/admin" className="hover:text-neutral-900">
                 Productos
               </Link>
+              <Link href="/admin/orders" className="hover:text-neutral-900">
+                Pedidos
+              </Link>
               <Link href="/" className="hover:text-neutral-900" target="_blank">
                 Tienda ↗
               </Link>

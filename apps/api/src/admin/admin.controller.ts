@@ -18,8 +18,15 @@ import {
   UpdateProductDto,
   UpdateVariantDto,
 } from './dto/admin-catalog.dto';
+import { UpdateOrderStatusDto } from './dto/admin-orders.dto';
 
 const CATALOG_ROLES = ['SUPERADMIN', 'ADMIN_INVENTARIO', 'EDITOR'] as const;
+const ORDER_ROLES = [
+  'SUPERADMIN',
+  'ADMIN_INVENTARIO',
+  'ASESOR_VENTAS',
+  'EDITOR',
+] as const;
 
 @ApiTags('Admin')
 @ApiBearerAuth()
@@ -99,5 +106,37 @@ export class AdminController {
   @Roles(...CATALOG_ROLES)
   listCategories() {
     return this.adminService.listCategories();
+  }
+
+  @Get('orders')
+  @Roles(...ORDER_ROLES)
+  @ApiOperation({ summary: 'Listar pedidos / leads WhatsApp' })
+  listOrders(
+    @Query('search') search?: string,
+    @Query('status') status?: string,
+    @Query('take') take?: string,
+  ) {
+    return this.adminService.listOrders({
+      search,
+      status: status as never,
+      take: take ? Number(take) : undefined,
+    });
+  }
+
+  @Get('orders/:id')
+  @Roles(...ORDER_ROLES)
+  @ApiOperation({ summary: 'Detalle de pedido' })
+  getOrder(@Param('id') id: string) {
+    return this.adminService.getOrder(id);
+  }
+
+  @Patch('orders/:id/status')
+  @Roles(...ORDER_ROLES)
+  @ApiOperation({ summary: 'Actualizar estado del pedido' })
+  updateOrderStatus(
+    @Param('id') id: string,
+    @Body() body: UpdateOrderStatusDto,
+  ) {
+    return this.adminService.updateOrderStatus(id, body);
   }
 }

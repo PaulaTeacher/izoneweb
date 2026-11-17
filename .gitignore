@@ -10,7 +10,7 @@ out/
 *.tsbuildinfo
 
 # Graphify (keep graph; drop regenerable cache)
-graphify-out/cache/
+graphify-out/
 **/__pycache__/
 
 # Environment variables

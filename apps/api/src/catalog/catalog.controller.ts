@@ -58,7 +58,7 @@ export class CatalogController {
       deviceBrand,
       deviceKind,
       featured: featured === 'true' || featured === '1',
-      take: take ? Number(take) : undefined,
+      take: take && Number.isFinite(Number(take)) ? Math.trunc(Number(take)) : undefined,
     });
   }
 

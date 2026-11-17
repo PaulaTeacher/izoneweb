@@ -2,6 +2,8 @@ import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+// Mismos roles que pueden editar el catálogo en la API (admin.controller.ts)
+const CATALOG_ROLES = ['SUPERADMIN', 'ADMIN_INVENTARIO', 'EDITOR'];
 
 /**
  * Invalida caché del catálogo tras cambios en Admin.
@@ -20,6 +22,10 @@ export async function POST(req: NextRequest) {
     });
     if (!me.ok) {
       return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    }
+    const user = (await me.json().catch(() => null)) as { role?: string } | null;
+    if (!user?.role || !CATALOG_ROLES.includes(user.role)) {
+      return NextResponse.json({ ok: false, error: 'Forbidden' }, { status: 403 });
     }
   } catch {
     return NextResponse.json(

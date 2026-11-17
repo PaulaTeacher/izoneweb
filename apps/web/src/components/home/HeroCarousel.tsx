@@ -283,7 +283,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                       </Link>
                     </div>
 
-                    <div className="relative z-10 -mr-4 ml-auto w-[80%] sm:w-[70%] md:mr-0 md:ml-0 md:w-auto h-[360px] sm:h-[420px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent_100%),linear-gradient(to_right,transparent_0%,#000_28%)] [-webkit-mask-composite:source-in] [mask-composite:intersect] md:[mask-image:radial-gradient(ellipse_70%_80%_at_50%_45%,#000_55%,transparent_100%)] md:[mask-composite:add] md:[-webkit-mask-composite:source-over]">
+                    <div className="relative z-10 -mr-4 ml-auto w-[80%] sm:w-[70%] md:mr-0 md:ml-0 md:w-auto h-[360px] sm:h-[420px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent_100%),linear-gradient(to_right,transparent_0%,#000_9%)] [-webkit-mask-composite:source-in] [mask-composite:intersect] md:[mask-image:radial-gradient(ellipse_70%_80%_at_50%_45%,#000_55%,transparent_100%)] md:[mask-composite:add] md:[-webkit-mask-composite:source-over]">
                       <SmartImage
                         src="/images/hero/hero-iphone-18-pro-figma.png"
                         alt="iPhone 18 Pro Burgundy"

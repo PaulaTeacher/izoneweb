@@ -283,15 +283,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                       </Link>
                     </div>
 
-                    <div
-                      className="relative z-10 h-[260px] sm:h-[340px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none"
-                      style={{
-                        WebkitMaskImage:
-                          'radial-gradient(ellipse 70% 80% at 50% 45%, #000 55%, transparent 100%)',
-                        maskImage:
-                          'radial-gradient(ellipse 70% 80% at 50% 45%, #000 55%, transparent 100%)',
-                      }}
-                    >
+                    <div className="relative z-10 -mx-4 md:mx-0 h-[320px] sm:h-[380px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent_100%)] md:[mask-image:radial-gradient(ellipse_70%_80%_at_50%_45%,#000_55%,transparent_100%)]">
                       <SmartImage
                         src="/images/hero/hero-iphone-18-pro-figma.png"
                         alt="iPhone 18 Pro Burgundy"
@@ -299,7 +291,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                         fetchPriority="low"
                         loading="lazy"
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-contain object-bottom mix-blend-lighten"
+                        className="object-cover object-top md:object-contain md:object-bottom mix-blend-lighten"
                       />
                     </div>
                   </div>

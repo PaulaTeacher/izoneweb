@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description: SITE.defaultDescription,
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200',
+        url: '/images/products/iphone-17-silver.jpg',
         width: 1200,
         height: 630,
         alt: 'iZone Tech — Apple en Bogotá, Colombia',

@@ -82,7 +82,7 @@ export const localBusinessJsonLd = {
   '@type': 'ElectronicsStore',
   '@id': `${getSiteUrl()}/#store`,
   name: 'iZone Tech',
-  image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1200',
+  image: `${getSiteUrl()}/images/products/iphone-17-silver.jpg`,
   url: getSiteUrl(),
   telephone: `+${getWhatsappNumber()}`,
   priceRange: '$$$',

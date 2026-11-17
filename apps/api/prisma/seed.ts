@@ -289,7 +289,7 @@ async function main() {
       seoTitle: 'Comprar iPhone 16 Pro Max en Bogotá | iZone Tech',
       seoDescription: 'Encuentra el nuevo iPhone 16 Pro Max al mejor precio en Colombia. Titanio, chip A18 Pro, cámara de 48MP.',
       images: [
-        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop',
+        '/images/products/iphone-17-silver.jpg',
       ],
       brandId: brandApple.id,
       categoryId: catId['iphone-16-pro'],
@@ -338,7 +338,7 @@ async function main() {
       seoTitle: 'Comprar iPhone 16 Pro en Bogotá | iZone Tech',
       seoDescription: 'Encuentra el nuevo iPhone 16 Pro al mejor precio en Colombia.',
       images: [
-        'https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=1000&auto=format&fit=crop',
+        '/images/products/iphone-17-silver.jpg',
       ],
       brandId: brandApple.id,
       categoryId: catId['iphone-16-pro'],
@@ -470,7 +470,7 @@ async function main() {
       isActive: true,
       productKind: 'accessory',
       warrantyMonths: 6,
-      images: ['https://images.unsplash.com/photo-1601593346740-925612d1d395?q=80&w=800&auto=format&fit=crop'],
+      images: ['/images/chapternav/accessories.png'],
       brandId: brandSpigen.id,
       categoryId: catId['fundas'],
       erp_product_id: 'ERP-CASE-SIL-MS',

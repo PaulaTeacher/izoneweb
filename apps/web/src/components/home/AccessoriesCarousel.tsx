@@ -22,7 +22,7 @@ const accessories = [
     isNew: true,
     description: 'Compra accesorios para iPad',
     price: 'Disponible desde $30.000 COP',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-smart-folio-black-202210?wid=500&hei=500&fmt=png-alpha&qlt=90',
+    image: '/images/chapternav/accessories.png',
     link: '/accesorios?kind=tablet'
   },
   {
@@ -40,7 +40,7 @@ const accessories = [
     isNew: true,
     description: 'Compra accesorios para Watch',
     price: 'Disponible desde $34.900 COP',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MTJQ3?wid=500&hei=500&fmt=png-alpha&qlt=90',
+    image: '/images/chapternav/accessories.png',
     link: '/accesorios?kind=watch'
   },
   {

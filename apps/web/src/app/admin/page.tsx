@@ -4,33 +4,16 @@ import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AdminShell } from '@/components/admin/AdminShell';
 import {
+  ProductEditor,
+  type AdminProduct,
+} from '@/components/admin/ProductEditor';
+import {
   adminFetch,
   clearAdminSession,
   getAdminToken,
   getAdminUser,
   type AdminSessionUser,
 } from '@/lib/admin-api';
-
-type VariantRow = {
-  id: string;
-  sku: string;
-  price: number | string;
-  comparePrice?: number | string | null;
-  stock: number;
-  colorName?: string | null;
-  storage?: string | null;
-};
-
-type ProductRow = {
-  id: string;
-  name: string;
-  slug: string;
-  isActive: boolean;
-  productKind: string;
-  brand?: { name: string } | null;
-  category?: { name: string } | null;
-  variants: VariantRow[];
-};
 
 const cop = new Intl.NumberFormat('es-CO', {
   style: 'currency',
@@ -48,14 +31,14 @@ export default function AdminProductsPage() {
   const [user, setUser] = useState<AdminSessionUser | null>(null);
   const [ready, setReady] = useState(false);
   const [search, setSearch] = useState('');
-  const [products, setProducts] = useState<ProductRow[]>([]);
+  const [products, setProducts] = useState<AdminProduct[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [editing, setEditing] = useState<{
-    product: ProductRow;
-    variant: VariantRow;
-  } | null>(null);
-  const [saving, setSaving] = useState(false);
+  const [editor, setEditor] = useState<
+    | { mode: 'create'; product: null }
+    | { mode: 'edit'; product: AdminProduct }
+    | null
+  >(null);
 
   useEffect(() => {
     const token = getAdminToken();
@@ -72,7 +55,7 @@ export default function AdminProductsPage() {
     setError('');
     try {
       const qs = q?.trim() ? `?search=${encodeURIComponent(q.trim())}` : '';
-      const data = await adminFetch<ProductRow[]>(`/admin/products${qs}`);
+      const data = await adminFetch<AdminProduct[]>(`/admin/products${qs}`);
       setProducts(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al cargar');
@@ -90,38 +73,13 @@ export default function AdminProductsPage() {
     void load(search);
   };
 
-  const saveVariant = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!editing) return;
-    setSaving(true);
+  const openEdit = async (product: AdminProduct) => {
     setError('');
-    const fd = new FormData(e.currentTarget);
-    const price = Number(fd.get('price'));
-    const stock = Number(fd.get('stock'));
-    const compareRaw = String(fd.get('comparePrice') || '').trim();
-    const productActive = fd.get('isActive') === 'on';
-
     try {
-      await adminFetch(`/admin/variants/${editing.variant.id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          price,
-          stock,
-          comparePrice: compareRaw === '' ? null : Number(compareRaw),
-        }),
-      });
-      if (productActive !== editing.product.isActive) {
-        await adminFetch(`/admin/products/${editing.product.id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({ isActive: productActive }),
-        });
-      }
-      setEditing(null);
-      await load(search);
+      const full = await adminFetch<AdminProduct>(`/admin/products/${product.id}`);
+      setEditor({ mode: 'edit', product: full });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'No se pudo guardar');
-    } finally {
-      setSaving(false);
+      setError(err instanceof Error ? err.message : 'No se pudo abrir el producto');
     }
   };
 
@@ -139,23 +97,34 @@ export default function AdminProductsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Productos</h1>
           <p className="text-sm text-neutral-500 mt-1">
-            Edita precio, stock y visibilidad. El catálogo público usa ISR.
+            Crea productos con variantes, stock, precios e imágenes. El check{' '}
+            <span className="font-medium text-neutral-700">Destacado</span> alimenta
+            “Los favoritos del momento” en el Home.
           </p>
         </div>
-        <form onSubmit={onSearch} className="flex gap-2">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar nombre, slug o SKU"
-            className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm w-64 outline-none focus:border-neutral-900"
-          />
+        <div className="flex flex-wrap gap-2">
+          <form onSubmit={onSearch} className="flex gap-2">
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar nombre, slug o SKU"
+              className="rounded-xl border border-neutral-200 bg-white px-3 py-2 text-sm w-56 outline-none focus:border-neutral-900"
+            />
+            <button
+              type="submit"
+              className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium"
+            >
+              Buscar
+            </button>
+          </form>
           <button
-            type="submit"
+            type="button"
+            onClick={() => setEditor({ mode: 'create', product: null })}
             className="rounded-xl bg-neutral-900 text-white px-4 py-2 text-sm font-medium"
           >
-            Buscar
+            Nuevo producto
           </button>
-        </form>
+        </div>
       </div>
 
       {error ? (
@@ -193,13 +162,28 @@ export default function AdminProductsPage() {
                   (min, v) => Math.min(min, Number(v.price)),
                   Infinity,
                 );
-                const totalStock = p.variants.reduce((s, v) => s + v.stock, 0);
+                const totalStock = p.variants.reduce((s, v) => s + Number(v.stock || 0), 0);
+                const thumb = p.images?.[0];
                 return (
                   <tr key={p.id} className="border-t border-neutral-100">
                     <td className="px-4 py-3">
-                      <div className="font-medium">{p.name}</div>
-                      <div className="text-xs text-neutral-400 mt-0.5">
-                        {p.brand?.name} · {p.slug}
+                      <div className="flex items-center gap-3">
+                        {thumb ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={thumb}
+                            alt=""
+                            className="h-10 w-10 rounded-lg object-cover border border-neutral-100 bg-neutral-50"
+                          />
+                        ) : (
+                          <div className="h-10 w-10 rounded-lg bg-neutral-100" />
+                        )}
+                        <div>
+                          <div className="font-medium">{p.name}</div>
+                          <div className="text-xs text-neutral-400 mt-0.5">
+                            {p.brand?.name} · {p.slug}
+                          </div>
+                        </div>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-neutral-500 hidden md:table-cell">
@@ -210,27 +194,28 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="px-4 py-3 tabular-nums">{totalStock}</td>
                     <td className="px-4 py-3">
-                      <span
-                        className={
-                          p.isActive
-                            ? 'text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md text-xs'
-                            : 'text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md text-xs'
-                        }
-                      >
-                        {p.isActive ? 'Activo' : 'Oculto'}
-                      </span>
+                      <div className="flex flex-col gap-1 items-start">
+                        <span
+                          className={
+                            p.isActive
+                              ? 'text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md text-xs'
+                              : 'text-neutral-500 bg-neutral-100 px-2 py-0.5 rounded-md text-xs'
+                          }
+                        >
+                          {p.isActive ? 'Activo' : 'Oculto'}
+                        </span>
+                        {p.isFeatured ? (
+                          <span className="text-[#0071E3] bg-blue-50 px-2 py-0.5 rounded-md text-xs">
+                            Home
+                          </span>
+                        ) : null}
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-right">
                       <button
                         type="button"
-                        onClick={() =>
-                          setEditing({
-                            product: p,
-                            variant: p.variants[0],
-                          })
-                        }
-                        disabled={!p.variants.length}
-                        className="text-neutral-900 font-medium hover:underline disabled:opacity-40"
+                        onClick={() => void openEdit(p)}
+                        className="text-neutral-900 font-medium hover:underline"
                       >
                         Editar
                       </button>
@@ -243,114 +228,13 @@ export default function AdminProductsPage() {
         </table>
       </div>
 
-      {editing ? (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 p-4">
-          <form
-            onSubmit={saveVariant}
-            className="w-full max-w-md bg-white rounded-2xl p-6 space-y-4 shadow-xl"
-          >
-            <div>
-              <h2 className="text-lg font-semibold">{editing.product.name}</h2>
-              <p className="text-xs text-neutral-500 mt-1">
-                Variante · {editing.variant.sku}
-                {editing.variant.colorName ? ` · ${editing.variant.colorName}` : ''}
-                {editing.variant.storage ? ` · ${editing.variant.storage}` : ''}
-              </p>
-            </div>
-
-            {editing.product.variants.length > 1 ? (
-              <label className="block text-sm">
-                <span className="text-neutral-600">Variante</span>
-                <select
-                  className="mt-1 w-full rounded-xl border border-neutral-200 px-3 py-2.5"
-                  value={editing.variant.id}
-                  onChange={(e) => {
-                    const v = editing.product.variants.find((x) => x.id === e.target.value);
-                    if (v) setEditing({ ...editing, variant: v });
-                  }}
-                >
-                  {editing.product.variants.map((v) => (
-                    <option key={v.id} value={v.id}>
-                      {v.sku} · {money(v.price)} · stock {v.stock}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : null}
-
-            <label className="block text-sm">
-              <span className="text-neutral-600">Precio (COP)</span>
-              <input
-                key={`price-${editing.variant.id}`}
-                name="price"
-                type="number"
-                min={0}
-                step={1}
-                required
-                defaultValue={Number(editing.variant.price)}
-                className="mt-1 w-full rounded-xl border border-neutral-200 px-3 py-2.5"
-              />
-            </label>
-
-            <label className="block text-sm">
-              <span className="text-neutral-600">Precio tachado (opcional)</span>
-              <input
-                key={`compare-${editing.variant.id}`}
-                name="comparePrice"
-                type="number"
-                min={0}
-                step={1}
-                defaultValue={
-                  editing.variant.comparePrice != null
-                    ? Number(editing.variant.comparePrice)
-                    : ''
-                }
-                className="mt-1 w-full rounded-xl border border-neutral-200 px-3 py-2.5"
-              />
-            </label>
-
-            <label className="block text-sm">
-              <span className="text-neutral-600">Stock</span>
-              <input
-                key={`stock-${editing.variant.id}`}
-                name="stock"
-                type="number"
-                min={0}
-                step={1}
-                required
-                defaultValue={editing.variant.stock}
-                className="mt-1 w-full rounded-xl border border-neutral-200 px-3 py-2.5"
-              />
-            </label>
-
-            <label className="flex items-center gap-2 text-sm">
-              <input
-                name="isActive"
-                type="checkbox"
-                defaultChecked={editing.product.isActive}
-                className="rounded border-neutral-300"
-              />
-              Producto visible en tienda
-            </label>
-
-            <div className="flex gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setEditing(null)}
-                className="flex-1 rounded-xl border border-neutral-200 py-2.5 text-sm"
-              >
-                Cancelar
-              </button>
-              <button
-                type="submit"
-                disabled={saving}
-                className="flex-1 rounded-xl bg-neutral-900 text-white py-2.5 text-sm font-semibold disabled:opacity-60"
-              >
-                {saving ? 'Guardando…' : 'Guardar'}
-              </button>
-            </div>
-          </form>
-        </div>
+      {editor ? (
+        <ProductEditor
+          mode={editor.mode}
+          product={editor.product}
+          onClose={() => setEditor(null)}
+          onSaved={() => void load(search)}
+        />
       ) : null}
 
       <p className="mt-4 text-xs text-neutral-400">

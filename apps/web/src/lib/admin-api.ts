@@ -45,6 +45,14 @@ export function saveAdminSession(data: {
   localStorage.setItem(USER_KEY, JSON.stringify(data.user));
 }
 
+function formatApiError(err: unknown, fallback: string) {
+  if (!err || typeof err !== 'object') return fallback;
+  const message = (err as { message?: unknown }).message;
+  if (Array.isArray(message)) return message.filter(Boolean).join('. ');
+  if (typeof message === 'string' && message.trim()) return message;
+  return fallback;
+}
+
 export async function adminLogin(email: string, password: string) {
   const res = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
@@ -53,7 +61,7 @@ export async function adminLogin(email: string, password: string) {
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || 'Credenciales inválidas');
+    throw new Error(formatApiError(err, 'Credenciales inválidas'));
   }
   const data = await res.json();
   saveAdminSession(data);
@@ -79,8 +87,25 @@ export async function adminFetch<T = unknown>(
   }
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `Error ${res.status}`);
+    throw new Error(formatApiError(err, `Error ${res.status}`));
   }
   if (res.status === 204) return undefined as T;
   return res.json();
+}
+
+/** Invalida caché ISR de la tienda tras guardar en Admin (best-effort). */
+export async function bustStorefrontCache() {
+  try {
+    const token = getAdminToken();
+    await fetch('/api/revalidate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify({ tag: 'catalog' }),
+    });
+  } catch {
+    // No bloquea el guardado si la revalidación falla
+  }
 }

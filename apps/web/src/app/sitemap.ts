@@ -11,7 +11,6 @@ const STATIC_PATHS = [
   '/audio',
   '/accesorios',
   '/shop',
-  '/shop?category=ofertas',
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -23,6 +22,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: path === '/' ? 'daily' : 'weekly',
     priority: path === '/' ? 1 : path.startsWith('/shop') ? 0.7 : 0.85,
   }));
+
+  // AI discovery surface
+  staticEntries.push({
+    url: absoluteUrl('/llms.txt'),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.3,
+  });
 
   let productEntries: MetadataRoute.Sitemap = [];
   try {

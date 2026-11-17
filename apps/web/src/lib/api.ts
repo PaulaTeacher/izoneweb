@@ -32,6 +32,8 @@ export async function getProducts(params?: {
   material?: string;
   deviceBrand?: string;
   deviceKind?: string;
+  featured?: boolean;
+  take?: number;
 }): Promise<Product[]> {
   try {
     const searchParams = new URLSearchParams();
@@ -44,10 +46,12 @@ export async function getProducts(params?: {
     if (params?.material) searchParams.set('material', params.material);
     if (params?.deviceBrand) searchParams.set('deviceBrand', params.deviceBrand);
     if (params?.deviceKind) searchParams.set('deviceKind', params.deviceKind);
+    if (params?.featured) searchParams.set('featured', 'true');
+    if (params?.take) searchParams.set('take', String(params.take));
 
     const query = searchParams.toString() ? `?${searchParams.toString()}` : '';
     const res = await fetch(`${API_URL}/catalog/products${query}`, {
-      next: { revalidate: 30 },
+      next: { revalidate: 30, tags: ['catalog'] },
     });
     if (res.ok) {
       const data = await res.json();
@@ -61,6 +65,9 @@ export async function getProducts(params?: {
 
   // Fallback con productos mock realistas (compatible 100% con schema backend)
   let results = [...MOCK_PRODUCTS];
+  if (params?.featured) {
+    results = results.filter((p) => p.isFeatured);
+  }
   if (params?.category) {
     const cat = params.category.toLowerCase();
     results = results.filter(
@@ -88,7 +95,18 @@ export async function getProducts(params?: {
     );
   }
 
+  if (params?.take) {
+    results = results.slice(0, params.take);
+  }
+
   return results;
+}
+
+/** Destacados para Home: prioriza isFeatured; si no hay, usa los más recientes. */
+export async function getFeaturedProducts(take = 8): Promise<Product[]> {
+  const featured = await getProducts({ featured: true, take });
+  if (featured.length > 0) return featured;
+  return getProducts({ take });
 }
 
 export async function getCategories(): Promise<Category[]> {
@@ -132,7 +150,7 @@ export async function getMenu(): Promise<MenuCategory[]> {
 export async function getProduct(slug: string): Promise<Product | null> {
   try {
     const res = await fetch(`${API_URL}/catalog/products/${slug}`, {
-      next: { revalidate: 60 },
+      next: { revalidate: 60, tags: ['catalog', `product:${slug}`] },
     });
     if (res.ok) {
       const data = await res.json();

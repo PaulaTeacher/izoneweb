@@ -24,6 +24,8 @@ export class CatalogController {
   @ApiQuery({ name: 'material', required: false, description: 'silicona | cuero | hibrido | diseno | otro' })
   @ApiQuery({ name: 'deviceBrand', required: false, description: 'Slug de marca del dispositivo (apple, samsung)' })
   @ApiQuery({ name: 'deviceKind', required: false, description: 'phone | tablet | laptop | watch' })
+  @ApiQuery({ name: 'featured', required: false, description: 'true = solo productos destacados (Home)' })
+  @ApiQuery({ name: 'take', required: false, description: 'Límite de resultados (máx. 48)' })
   getProducts(
     @Query('category') categorySlug?: string,
     @Query('search') search?: string,
@@ -38,6 +40,8 @@ export class CatalogController {
     @Query('material') material?: string,
     @Query('deviceBrand') deviceBrand?: string,
     @Query('deviceKind') deviceKind?: string,
+    @Query('featured') featured?: string,
+    @Query('take') take?: string,
   ) {
     return this.catalogService.getProducts({
       categorySlug,
@@ -53,6 +57,8 @@ export class CatalogController {
       material,
       deviceBrand,
       deviceKind,
+      featured: featured === 'true' || featured === '1',
+      take: take && Number.isFinite(Number(take)) ? Math.trunc(Number(take)) : undefined,
     });
   }
 

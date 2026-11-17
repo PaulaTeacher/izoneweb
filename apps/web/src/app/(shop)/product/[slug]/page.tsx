@@ -6,10 +6,14 @@ import { ProductSpecsAccordion } from '@/components/product/ProductSpecsAccordio
 import { RecommendedAccessories } from '@/components/product/RecommendedAccessories';
 import { CATEGORY_MODELS } from '@/lib/category-models';
 import type { Metadata } from 'next';
-import type { Variant } from '@izone/shared-types';
 import Link from 'next/link';
 import { ChevronRight, Star, Info, Sparkles } from 'lucide-react';
-import { absoluteUrl, pageMetadata } from '@/lib/site';
+import {
+  buildBreadcrumbJsonLd,
+  buildPageMetadata,
+  buildProductJsonLd,
+} from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { SmartImage } from '@/components/ui/SmartImage';
 
 interface PageProps {
@@ -20,14 +24,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = await getProduct(params.slug);
   if (!product) return { title: 'No encontrado', robots: { index: false, follow: true } };
 
-  const title = product.seoTitle || `${product.name} en Colombia | iZone Tech`;
-  const description = product.seoDescription || product.description;
+  const title = product.seoTitle || `${product.name} precio Colombia | iZone Tech Bogotá`;
+  const description =
+    product.seoDescription ||
+    `${product.description.slice(0, 140)}${product.description.length > 140 ? '…' : ''} Compra en iZone Tech Bogotá con garantía y envíos a Colombia.`;
 
-  return pageMetadata({
+  return buildPageMetadata({
     title,
     description,
     path: `/product/${product.slug}`,
     images: product.images?.[0] ? [product.images[0]] : undefined,
+    type: 'product',
+    keywords: [
+      product.name,
+      `${product.name} Colombia`,
+      `${product.name} Bogotá`,
+      product.brand?.name,
+      'iZone Tech',
+    ].filter(Boolean) as string[],
   });
 }
 
@@ -72,30 +86,18 @@ export default async function ProductPage({ params }: PageProps) {
   const sku = product.variants?.[0]?.sku || `IZ-${product.id.slice(0, 8).toUpperCase()}`;
   const barcode = '195950627541';
 
-  // JSON-LD SEO nativo
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.name,
-    description: product.description,
-    brand: { '@type': 'Brand', name: product.brand?.name || 'Apple' },
-    image: mainImage,
-    offers: product.variants.map((v: Variant) => ({
-      '@type': 'Offer',
-      priceCurrency: 'COP',
-      price: v.price,
-      itemCondition: 'https://schema.org/NewCondition',
-      availability:
-        v.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      url: absoluteUrl(`/product/${product.slug}`),
-    })),
-  };
+  const hubPath = isAccessory ? '/accesorios' : `/${categoryKey || 'shop'}`;
+  const hubName = isAccessory ? 'Accesorios' : categoryKey || 'Catálogo';
 
   return (
     <div className="flex flex-col w-full bg-white dark:bg-black font-sans">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <JsonLd data={buildProductJsonLd(product, { image: mainImage })} />
+      <JsonLd
+        data={buildBreadcrumbJsonLd([
+          { name: 'Inicio', path: '/' },
+          { name: hubName, path: hubPath },
+          { name: product.name, path: `/product/${product.slug}` },
+        ])}
       />
 
       {/* 1. Carrusel Horizontal de Modelos Persistente (Exacto a iShop) */}
@@ -110,19 +112,22 @@ export default async function ProductPage({ params }: PageProps) {
 
       <div className="max-w-[1240px] mx-auto px-4 py-6 w-full flex-1">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs text-neutral-400 mb-6">
+        <nav
+          aria-label="Migas de pan"
+          className="flex items-center gap-2 text-xs text-neutral-400 mb-6"
+        >
           <Link href="/" className="hover:text-black dark:hover:text-white transition">
             Inicio
           </Link>
           <ChevronRight className="w-3 h-3" />
           <Link
-            href={isAccessory ? '/accesorios' : `/${categoryKey}`}
+            href={hubPath}
             className="hover:text-black dark:hover:text-white transition capitalize"
           >
-            {isAccessory ? 'Accesorios' : categoryKey || 'Catálogo'}
+            {hubName}
           </Link>
           <ChevronRight className="w-3 h-3" />
-          <span className="text-neutral-900 dark:text-white font-medium truncate max-w-[200px]">
+          <span className="text-neutral-700 dark:text-neutral-200 truncate max-w-[40ch]">
             {product.name}
           </span>
         </nav>

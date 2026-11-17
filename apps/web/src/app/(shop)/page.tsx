@@ -5,13 +5,16 @@ import { AccessoriesCarousel } from '@/components/home/AccessoriesCarousel';
 import { TrustBanner } from '@/components/home/TrustBanner';
 import { SocialFollow } from '@/components/home/SocialFollow';
 import { PromoBanners } from '@/components/home/PromoBanners';
+import { getFeaturedProducts } from '@/lib/api';
 
-export default function Home() {
+export default async function Home() {
+  const featured = await getFeaturedProducts(8);
+
   return (
     <div className="flex flex-col -mt-16">
       <HeroCarousel />
       <CategoryCarousel />
-      <FavoritesCarousel />
+      <FavoritesCarousel products={featured} />
       <AccessoriesCarousel />
       <TrustBanner />
       <SocialFollow />

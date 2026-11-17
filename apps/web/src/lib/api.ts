@@ -4,6 +4,7 @@ import type {
   MenuCategory,
   WhatsappCheckoutResponse,
   DeviceModel,
+  HomeSummary,
 } from '@izone/shared-types';
 import { MOCK_PRODUCTS } from './mock-products';
 
@@ -163,6 +164,29 @@ export async function getMenu(): Promise<MenuCategory[]> {
     // Header sigue hardcodeado; este cliente es para la siguiente fase.
   }
   return [];
+}
+
+export async function getHomeSummary(): Promise<HomeSummary> {
+  try {
+    const res = await fetchCatalog('/catalog/home-summary', 180);
+    if (res?.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data.heroSlides)) {
+        return {
+          heroSlides: data.heroSlides,
+          categoryMinPrices: data.categoryMinPrices ?? {},
+          accessoryMinPrices: data.accessoryMinPrices ?? {},
+        };
+      }
+    }
+  } catch {
+    // Fallback estático en los componentes del Home
+  }
+  return {
+    heroSlides: [],
+    categoryMinPrices: {},
+    accessoryMinPrices: {},
+  };
 }
 
 export async function getProduct(slug: string): Promise<Product | null> {

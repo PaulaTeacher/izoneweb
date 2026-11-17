@@ -494,6 +494,22 @@ export interface ApiError {
   error?: string;
 }
 
+export interface HomeHeroSlide {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  priceText: string;
+  badge?: string;
+}
+
+export interface HomeSummary {
+  heroSlides: HomeHeroSlide[];
+  categoryMinPrices: Record<string, number>;
+  accessoryMinPrices: Record<string, number>;
+}
+
 // ======================== UTILITIES ========================
 
 /**

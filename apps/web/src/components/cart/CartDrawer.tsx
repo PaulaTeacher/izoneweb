@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useCart } from '@/lib/cart-context';
-import { checkoutWhatsapp, validateCoupon } from '@/lib/api';
-import { formatCOP } from '@izone/shared-types';
-import { X, Trash2, Plus, Minus, Tag, ShieldCheck, Truck } from 'lucide-react';
+import { checkoutWhatsapp, getProducts, validateCoupon } from '@/lib/api';
+import { availableStock, formatCOP, type Product } from '@izone/shared-types';
+import { X, Trash2, Plus, Minus, Tag, ShieldCheck, Truck, Store } from 'lucide-react';
 import Link from 'next/link';
 import { easeOut } from '@/components/motion/FadeIn';
 import { SmartImage } from '@/components/ui/SmartImage';
@@ -14,7 +14,7 @@ const FOCUSABLE =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function CartDrawer() {
-  const { items, isOpen, closeCart, removeItem, updateQuantity, clearCart, subtotal } = useCart();
+  const { items, isOpen, closeCart, addItem, removeItem, updateQuantity, clearCart, subtotal } = useCart();
   const [couponCode, setCouponCode] = useState('');
   const [discountAmount, setDiscountAmount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState<string | null>(null);
@@ -22,8 +22,33 @@ export default function CartDrawer() {
   const [customerName, setCustomerName] = useState('');
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
+  const [allAccessories, setAllAccessories] = useState<Product[]>([]);
+  const accessoriesRequested = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!isOpen || items.length === 0 || accessoriesRequested.current) return;
+    accessoriesRequested.current = true;
+    let active = true;
+    getProducts({ productKind: 'accessory', take: 12 })
+      .then((res) => {
+        if (active && Array.isArray(res)) {
+          setAllAccessories(res);
+        }
+      })
+      .catch(() => {
+        accessoriesRequested.current = false;
+      });
+    return () => {
+      active = false;
+    };
+  }, [isOpen, items.length]);
+
+  const inCartProductIds = new Set(items.map((i) => i.productId));
+  const suggestedAccessories = allAccessories
+    .filter((acc) => !inCartProductIds.has(acc.id) && acc.variants?.some((v) => availableStock(v) > 0))
+    .slice(0, 2);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -170,7 +195,7 @@ export default function CartDrawer() {
         </div>
 
         {/* Item List */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto overscroll-contain p-6 space-y-4">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center py-12 text-neutral-400">
               <p className="text-lg font-medium mb-2">Tu bolsa está vacía</p>
@@ -249,6 +274,56 @@ export default function CartDrawer() {
               </div>
             ))
           )}
+
+          {items.length > 0 && suggestedAccessories.length > 0 && (
+            <div className="pt-4 mt-2 border-t border-neutral-200 dark:border-neutral-800 space-y-2.5">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
+                Completa tu pedido
+              </p>
+              <div className="space-y-2">
+                {suggestedAccessories.map((acc) => {
+                  const variant = acc.variants.find((v) => availableStock(v) > 0);
+                  if (!variant) return null;
+                  const price = Number(variant.price || 0);
+                  const image = variant.featuredImage || acc.images?.[0];
+                  return (
+                    <div
+                      key={acc.id}
+                      className="flex items-center gap-3 p-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900"
+                    >
+                      {image ? (
+                        <div className="relative w-10 h-10 rounded-lg border overflow-hidden shrink-0 bg-white">
+                          <SmartImage
+                            src={image}
+                            alt={acc.name}
+                            fill
+                            sizes="40px"
+                            className="object-contain p-1"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-neutral-900 dark:text-white truncate">
+                          {acc.name}
+                        </p>
+                        <p className="text-[11px] text-neutral-500 font-medium">
+                          {formatCOP(price)}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => addItem(acc, variant, 1)}
+                        className="shrink-0 inline-flex items-center gap-1 rounded-full bg-blue-50 dark:bg-blue-950/50 hover:bg-[#0071E3] hover:text-white text-[#0071E3] px-3 py-1.5 text-[11px] font-semibold transition-colors touch-manipulation"
+                      >
+                        <Plus className="w-3 h-3" aria-hidden="true" />
+                        Agregar
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer & Checkout */}
@@ -325,12 +400,12 @@ export default function CartDrawer() {
             </div>
 
             {/* Badges de Confianza */}
-            <div className="flex items-center justify-center gap-4 text-[11px] text-neutral-400 py-1">
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-neutral-500 dark:text-neutral-400 py-1 text-center">
               <span className="flex items-center gap-1">
-                <Truck className="w-3.5 h-3.5 text-blue-500" /> Envío seguro nacional
+                <Store className="w-3.5 h-3.5 text-[#0071E3]" /> Tarjeta en tienda (Unilago) o contraentrega Bogotá
               </span>
               <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-green-500" /> Garantía 1 año Apple
+                <Truck className="w-3.5 h-3.5 text-emerald-500" /> Envío seguro nacional
               </span>
             </div>
 

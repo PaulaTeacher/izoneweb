@@ -35,13 +35,9 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar Mac',
         items: [
-          { title: 'MacBook Air', href: '/mac', description: 'Chip M2 y M3' },
-          { title: 'MacBook Pro', href: '/mac', description: 'Chip M3, M3 Pro y M3 Max' },
-          { title: 'iMac', href: '/mac', description: '24 pulgadas' },
-          { title: 'Mac mini', href: '/mac', description: 'Chip M2 y M2 Pro' },
-          { title: 'Mac Studio', href: '/mac', description: 'Chip M2 Max y M2 Ultra' },
-          { title: 'Mac Pro', href: '/mac' },
-          { title: 'Monitores', href: '/mac', description: 'Studio Display y Pro Display XDR' },
+          { title: 'MacBook Air 13" (M5)', href: '/product/macbook-air-13-m5', badge: 'M5', description: 'Chip M5 · 16GB / 512GB' },
+          { title: 'MacBook Neo 13" (A18 Pro)', href: '/product/macbook-neo-13-a18-pro', badge: 'Nuevo', description: '8GB / 256GB y 512GB' },
+          { title: 'Ver todos los Mac', href: '/mac' },
         ]
       },
       {
@@ -70,18 +66,19 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar iPhone',
         items: [
-          { title: 'iPhone 17 Pro', href: '/product/iphone-17-pro', badge: 'Oferta' },
-          { title: 'iPhone 16 Pro Max', href: '/product/iphone-16-pro-max', badge: 'Nuevo' },
-          { title: 'iPhone 16 Pro', href: '/product/iphone-16-pro' },
+          { title: 'iPhone Duo', href: '/product/iphone-duo', badge: 'Nuevo' },
+          { title: 'iPhone 18 Pro Max', href: '/product/iphone-18-pro-max', badge: 'Nuevo' },
+          { title: 'iPhone 18 Pro', href: '/product/iphone-18-pro', badge: 'Nuevo' },
+          { title: 'iPhone 17 Pro Max', href: '/product/iphone-17-pro-max' },
+          { title: 'iPhone 17 Pro', href: '/product/iphone-17-pro' },
         ]
       },
       {
         title: 'Comprar iPhone',
         items: [
           { title: 'Comprar iPhone', href: '/iphone' },
-          { title: 'Accesorios para iPhone', href: '/accesorios?brand=apple&kind=phone' },
-          { title: 'MagSafe', href: '/accesorios?tipo=magsafe' },
-          { title: 'Plan Retoma', href: '/shop?category=ofertas' },
+          { title: 'Cargadores y Cables iPhone', href: '/accesorios?brand=apple&kind=phone' },
+          { title: 'Plan Retoma', href: '/trade-in' },
         ]
       },
       {
@@ -89,7 +86,7 @@ const categories: CategoryItem[] = [
         items: [
           { title: 'Soporte para iPhone', href: '/#contacto' },
           { title: 'AppleCare+', href: '/#contacto' },
-          { title: 'iOS 18', href: '/iphone' },
+          { title: 'iOS 27', href: '/iphone' },
         ]
       }
     ]
@@ -101,15 +98,17 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar iPad',
         items: [
+          { title: 'iPad 11 (A16)', href: '/product/ipad-11-a16', description: '128GB Wi-Fi' },
           { title: 'Ver todos', href: '/ipad' },
         ]
       },
       {
         title: 'Accesorios para iPad',
         items: [
-          { title: 'Apple Pencil', href: '/accesorios' },
-          { title: 'Teclados', href: '/accesorios?tipo=accesorios-mac', description: 'Magic Keyboard' },
-          { title: 'Fundas', href: '/accesorios?tipo=fundas' },
+          { title: 'Apple Pencil Pro', href: '/product/apple-pencil-pro' },
+          { title: 'Apple Pencil (USB-C)', href: '/product/apple-pencil-usb-c' },
+          { title: 'Magic Keyboard iPad Pro 11"', href: '/product/magic-keyboard-ipad-pro-11' },
+          { title: 'Magic Keyboard iPad Air 11"', href: '/product/magic-keyboard-ipad-air-11' },
         ]
       },
       {
@@ -129,6 +128,8 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar Apple Watch',
         items: [
+          { title: 'Apple Watch Series 11', href: '/product/apple-watch-series-11', description: '42mm y 46mm GPS' },
+          { title: 'Apple Watch SE 3', href: '/product/apple-watch-se-3', description: '40mm Starlight' },
           { title: 'Ver todos', href: '/watch' },
         ]
       },
@@ -156,7 +157,10 @@ const categories: CategoryItem[] = [
       {
         title: 'Explorar Audio',
         items: [
-          { title: 'AirPods Pro (2.ª generación)', href: '/product/airpods-pro-2' },
+          { title: 'AirPods Pro 3', href: '/product/airpods-pro-3', badge: 'Nuevo' },
+          { title: 'AirPods 5 (Sin MagSafe)', href: '/product/airpods-5-sin-magsafe' },
+          { title: 'AirPods 4 ANC', href: '/product/airpods-4-anc' },
+          { title: 'AirPods 4', href: '/product/airpods-4' },
         ]
       },
       {
@@ -180,13 +184,12 @@ const categories: CategoryItem[] = [
     href: '/accesorios',
     groups: [
       {
-        title: 'Por Categoría',
+        title: 'Cargadores y Cables',
         items: [
-          { title: 'Fundas y Protección', href: '/accesorios?tipo=fundas' },
-          { title: 'Energía y Power Banks', href: '/accesorios?tipo=energia' },
-          { title: 'Cables y Hubs', href: '/accesorios?tipo=cables-hubs' },
-          { title: 'Almacenamiento', href: '/accesorios?tipo=almacenamiento' },
-          { title: 'MagSafe', href: '/accesorios?tipo=magsafe' },
+          { title: '20W USB-C Power Adapter', href: '/product/20w-usb-c-power-adapter' },
+          { title: '40W Dynamic Adapter (60W Max)', href: '/product/40w-dynamic-power-adapter-60w-max' },
+          { title: 'Cable USB-C 1m', href: '/product/usb-c-cable-1m-open-box' },
+          { title: 'Cable USB-C a Lightning 1m', href: '/product/usb-c-to-lightning-cable-1m-open-box' },
         ]
       },
       {

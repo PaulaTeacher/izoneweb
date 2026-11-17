@@ -76,6 +76,12 @@ export class CatalogController {
     return this.catalogService.getMenu();
   }
 
+  @Get('home-summary')
+  @ApiOperation({ summary: 'Resumen para Home: slides del hero y precios mínimos por categoría y accesorio' })
+  getHomeSummary() {
+    return this.catalogService.getHomeSummary();
+  }
+
   @Get('brands')
   @ApiOperation({ summary: 'Listar todas las marcas' })
   getBrands() {

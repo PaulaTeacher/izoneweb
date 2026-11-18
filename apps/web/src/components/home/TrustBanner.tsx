@@ -31,8 +31,8 @@ export function TrustBanner() {
               <CreditCard className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Pago Seguro en Tienda o Contraentrega</p>
-              <p className="text-xs text-neutral-500 mt-1">Tarjetas en punto físico (Unilago) y contraentrega Bogotá</p>
+              <p className="text-sm font-semibold">Pago Seguro en Tienda y En Línea</p>
+              <p className="text-xs text-neutral-500 mt-1">Tarjetas en punto físico (Unilago), PSE y transferencia</p>
             </div>
           </div>
 

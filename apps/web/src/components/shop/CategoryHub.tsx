@@ -223,7 +223,7 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                 Pagos seguros
               </h4>
               <p className="text-xs text-neutral-500">
-                Tarjetas, PSE y contraentrega en Bogotá. Transacciones encriptadas.
+                Tarjetas en punto físico, PSE y transferencia. Asesoría directa.
               </p>
             </div>
           </div>

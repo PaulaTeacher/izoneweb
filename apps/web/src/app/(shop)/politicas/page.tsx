@@ -74,18 +74,18 @@ export default function PoliticasPage() {
                 <ShieldCheck className="w-5 h-5" aria-hidden="true" />
               </div>
               <h2 className="text-xl md:text-2xl font-bold text-[#1D1D1F] dark:text-white">
-                Políticas de Garantía Oficial (1 Año)
+                Políticas de Garantía
               </h2>
             </div>
             <div className="space-y-3 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
               <p>
-                Todos los equipos Apple nuevos sellados comercializados por <strong>iZone Tech Colombia S.A.S.</strong> cuentan con <strong>12 meses (1 año) de garantía directa</strong> por defectos de fabricación, verificable con el número de serie oficial de Apple y respaldada conforme a la Ley 1480 de 2011 (Estatuto del Consumidor).
+                Los <strong>equipos Apple nuevos</strong> comercializados por <strong>iZone Tech Colombia S.A.S.</strong> cuentan con <strong>1 año de garantía internacional directamente con Apple</strong> por defectos de fabricación, verificable con el número de serie oficial de Apple.
               </p>
               <p>
-                Los equipos en condición <strong>Seminuevo Certificado</strong> o <strong>Open Box</strong> incluyen garantía técnica escrita cuya vigencia se especifica en la ficha del producto y en la factura de venta. Los accesorios originales cuentan con garantía por defectos de fábrica desde la fecha de entrega.
+                En <strong>accesorios y demás productos</strong> no aplica la garantía de 1 año: la vigencia y cobertura dependen del tipo de producto y se indican según cada referencia o directamente con tu asesor al momento de la compra.
               </p>
               <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                La garantía no cubre daños ocasionados por humedad/líquidos, golpes, caídas, alteraciones de software no autorizadas, intervención de terceros o desgaste natural de consumibles (puntas, cables doblados o degradación normal de batería por ciclos).
+                La garantía no cubre daños ocasionados por humedad/líquidos, golpes, caídas, alteraciones de software no autorizadas, intervención de terceros o desgaste natural de consumibles.
               </p>
             </div>
           </section>
@@ -105,10 +105,10 @@ export default function PoliticasPage() {
             </div>
             <ul className="space-y-2.5 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed list-disc pl-5">
               <li>
-                <strong>Bogotá D.C. (mismo día o siguiente día hábil):</strong> Entregas con mensajería asegurada propia. Puedes elegir pago contraentrega o recogida presencial sin costo en nuestro punto físico: <strong>CC Unilago, Local L 1-143</strong>.
+                <strong>Bogotá D.C. (mismo día o siguiente día hábil):</strong> Entregas con mensajería asegurada o recogida presencial sin costo en nuestro punto físico: <strong>CC Unilago, Local L 1-143</strong>.
               </li>
               <li>
-                <strong>Envíos nacionales asegurados (1 a 3 días hábiles):</strong> Despachos a ciudades principales e intermedias en Colombia mediante transportadoras certificadas con seguro por el 100% del valor declarado.
+                <strong>Envíos nacionales (1 a 3 días hábiles):</strong> Despachos a ciudades principales e intermedias en Colombia mediante transportadoras certificadas.
               </li>
               <li>
                 <strong>Rastreo:</strong> Una vez confirmado el despacho, enviamos el número de guía y enlace de seguimiento directamente a tu WhatsApp registrado.
@@ -131,12 +131,11 @@ export default function PoliticasPage() {
             </div>
             <div className="space-y-3 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
               <p>
-                Al finalizar tu bolsa por WhatsApp, un asesor de iZone Tech valida disponibilidad inmediata y te habilita el medio de pago de tu preferencia:
+                Al finalizar tu bolsa por WhatsApp, un asesor de iZone Tech valida disponibilidad inmediata y te proporciona los detalles del medio de pago que prefieras:
               </p>
               <ul className="list-disc pl-5 space-y-1.5">
-                <li><strong>PSE y transferencia bancaria:</strong> Bancolombia, Nequi, Daviplata y cuentas empresariales verificadas a nombre de iZone Tech Colombia S.A.S.</li>
+                <li><strong>PSE y transferencia bancaria:</strong> Bancolombia, Nequi, Daviplata y cuentas verificadas indicadas directamente por tu asesor.</li>
                 <li><strong>Tarjetas débito y crédito:</strong> Visa, Mastercard y datáfono presencial en nuestro local de CC Unilago.</li>
-                <li><strong>Pago contraentrega en Bogotá:</strong> Disponible previa confirmación de cobertura y datos de entrega por WhatsApp.</li>
               </ul>
             </div>
           </section>
@@ -185,10 +184,10 @@ export default function PoliticasPage() {
               </div>
               <div>
                 <dt className="font-bold text-[#1D1D1F] dark:text-white">
-                  ¿Entregan factura electrónica?
+                  ¿Cómo funciona la garantía?
                 </dt>
                 <dd className="text-neutral-600 dark:text-neutral-300 mt-1">
-                  Sí, todas las compras incluyen factura electrónica válida ante la DIAN con los datos fiscales que nos suministres al confirmar tu pedido.
+                  Los equipos Apple nuevos cuentan con 1 año de garantía internacional directa con Apple. En accesorios y otros productos la cobertura varía según cada referencia y te la confirma tu asesor antes de finalizar la compra.
                 </dd>
               </div>
             </dl>
@@ -252,7 +251,7 @@ export default function PoliticasPage() {
                 <a href="mailto:izonetech.co@gmail.com" className="text-[#0071E3] hover:underline">
                   izonetech.co@gmail.com
                 </a>{' '}
-                indicando tu número de factura o referencia de pedido.
+                indicando tu referencia de pedido.
               </p>
             </div>
           </section>
@@ -275,7 +274,7 @@ export default function PoliticasPage() {
                 En cumplimiento de la Ley Estatutaria 1581 de 2012 y el Decreto 1377 de 2013, <strong>iZone Tech Colombia S.A.S.</strong> actúa como responsable del tratamiento de los datos personales suministrados voluntariamente al realizar un pedido, solicitar una cotización de Plan Retoma o enviar una reseña.
               </p>
               <p>
-                <strong>Finalidad:</strong> Gestionar reservas, facturación electrónica, despachos asegurados, atención de garantías, soporte posventa y envío de comunicaciones comerciales únicamente cuando el usuario lo autorice expresamente.
+                <strong>Finalidad:</strong> Gestionar reservas, despachos, atención de garantías, soporte posventa y envío de comunicaciones comerciales únicamente cuando el usuario lo autorice expresamente.
               </p>
               <p>
                 <strong>Derechos del titular (Habeas Data):</strong> Puedes conocer, actualizar, rectificar o solicitar la supresión de tus datos y revocar la autorización escribiendo a{' '}

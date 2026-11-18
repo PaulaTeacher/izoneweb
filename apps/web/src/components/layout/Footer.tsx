@@ -157,7 +157,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/politicas#garantia" className="hover:text-white transition">
-                  Políticas de Garantía (1 Año)
+                  Políticas de Garantía
                 </Link>
               </li>
               <li>
@@ -305,7 +305,6 @@ export default function Footer() {
             <span className="px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 font-medium">Visa</span>
             <span className="px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 font-medium">Mastercard</span>
             <span className="px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 font-medium">Bancolombia</span>
-            <span className="px-2.5 py-1 rounded bg-emerald-950 text-emerald-400 font-semibold">Contraentrega Bogotá</span>
           </div>
           <div className="flex items-center gap-2 text-neutral-500">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />

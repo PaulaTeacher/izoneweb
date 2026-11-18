@@ -47,7 +47,7 @@ export function PromoBanners() {
                 Garantía oficial. Envío seguro.
               </h3>
               <p className="text-neutral-700 dark:text-neutral-300 mb-8 text-sm md:text-base">
-                Todos los equipos incluyen 1 año de garantía oficial Apple. Paga con tarjeta en nuestra tienda física (CC Unilago), transferencia o contraentrega en Bogotá.
+                Equipos Apple nuevos con 1 año de garantía internacional Apple. Paga con tarjeta en nuestra tienda física (CC Unilago) o coordina tu medio de pago con un asesor.
               </p>
               <Link
                 href="/#garantia"

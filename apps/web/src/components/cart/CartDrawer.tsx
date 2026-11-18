@@ -524,7 +524,7 @@ export default function CartDrawer() {
             {/* Badges de Confianza */}
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-neutral-500 dark:text-neutral-400 py-1 text-center">
               <span className="flex items-center gap-1">
-                <Store className="w-3.5 h-3.5 text-[#0071E3]" /> Tarjeta en tienda (Unilago) o contraentrega Bogotá
+                <Store className="w-3.5 h-3.5 text-[#0071E3]" /> Tarjeta en tienda (Unilago) o transferencia
               </span>
               <span className="flex items-center gap-1">
                 <Truck className="w-3.5 h-3.5 text-emerald-500" /> Envío seguro nacional

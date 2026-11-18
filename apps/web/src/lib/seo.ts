@@ -256,7 +256,7 @@ export function buildLlmsTxt() {
   return `# ${SITE.name} Colombia
 
 > Tienda especializada en productos Apple y accesorios premium en Bogotá, Colombia.
-> Garantía, pagos PSE/tarjetas/contraentrega y atención por WhatsApp.
+> Garantía internacional Apple (1 año en equipos; accesorios según producto), pagos PSE/tarjetas y atención por WhatsApp.
 
 ## Identidad
 - Nombre comercial: ${SITE.name}
@@ -268,7 +268,7 @@ export function buildLlmsTxt() {
 ## Qué vendemos
 - iPhone, MacBook, iPad, Apple Watch, AirPods y accesorios compatibles
 - Equipos nuevos con garantía
-- Envíos a nivel nacional; contraentrega en Bogotá
+- Envíos a nivel nacional y recogida en tienda física (CC Unilago, Bogotá)
 
 ## Páginas clave
 - Inicio: ${site}/

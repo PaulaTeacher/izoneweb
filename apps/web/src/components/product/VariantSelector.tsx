@@ -292,7 +292,7 @@ export default function VariantSelector({ product, onVariantChange }: VariantSel
         <div className="flex items-center gap-2.5">
           <CreditCard className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" />
           <span>
-            <strong>Medios de pago:</strong> Tarjetas débito/crédito en punto físico (CC Unilago), transferencia o contraentrega en Bogotá.
+            <strong>Medios de pago:</strong> Tarjetas débito/crédito en punto físico (CC Unilago), PSE o transferencia (detalles con tu asesor).
           </span>
         </div>
       </div>

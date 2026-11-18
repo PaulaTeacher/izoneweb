@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getProducts } from '@/lib/api';
+import { CatalogUnavailableError, getProducts } from '@/lib/api';
 import { absoluteUrl } from '@/lib/site';
 
 const STATIC_PATHS = [
@@ -43,8 +43,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: 'daily' as const,
         priority: 0.9,
       }));
-  } catch {
-    // API caído: sitemap sigue con hubs
+  } catch (err) {
+    // API caída: en producción no publicar (ni cachear) un sitemap sin productos.
+    if (err instanceof CatalogUnavailableError) throw err;
   }
 
   return [...staticEntries, ...productEntries];

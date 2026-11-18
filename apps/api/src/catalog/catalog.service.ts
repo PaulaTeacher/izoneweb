@@ -49,7 +49,17 @@ export class CatalogService implements OnApplicationBootstrap {
 
   constructor(private prisma: PrismaService) {}
 
-  async onApplicationBootstrap() {
+  /**
+   * Precalienta la caché en segundo plano: NO se espera, para que la app empiece a
+   * escuchar en $PORT de inmediato (Cloud Run mide el arranque hasta ese momento).
+   * Desactivable con CATALOG_WARMUP=false.
+   */
+  onApplicationBootstrap() {
+    if (process.env.CATALOG_WARMUP?.trim().toLowerCase() === 'false') return;
+    void this.warmCache();
+  }
+
+  async warmCache(): Promise<void> {
     const started = Date.now();
     try {
       await Promise.all([

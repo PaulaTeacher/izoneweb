@@ -79,9 +79,13 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT || 3001;
-  await app.listen(port);
-  console.log(`🚀 iZone Tech API running on http://localhost:${port}`);
+  // Cloud Run envía SIGTERM antes de apagar la instancia: cerrar Prisma limpiamente.
+  app.enableShutdownHooks();
+
+  // Cloud Run inyecta PORT y exige escuchar en todas las interfaces.
+  const port = Number(process.env.PORT) || 3001;
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 iZone Tech API running on http://0.0.0.0:${port}`);
   console.log(`📖 Swagger docs at http://localhost:${port}/api/docs`);
 }
 

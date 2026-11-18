@@ -35,7 +35,7 @@ jobs:
         run: pnpm --filter api build
 
   web:
-    name: Web (lint, typecheck)
+    name: Web (lint, typecheck, test)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -50,6 +50,8 @@ jobs:
         run: pnpm --filter web lint
       - name: Typecheck
         run: pnpm --filter web exec tsc --noEmit
+      - name: Unit tests
+        run: pnpm --filter web test
 
   api-image:
     name: API image (docker build + /health)

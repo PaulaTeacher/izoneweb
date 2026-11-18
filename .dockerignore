@@ -1,0 +1,32 @@
+# Contexto mínimo para el Dockerfile de la API.
+**/node_modules
+**/dist
+**/.next
+**/.turbo
+**/*.tsbuildinfo
+**/coverage
+
+# Secretos: nunca dentro de la imagen
+**/.env
+**/.env.*
+!**/.env.example
+
+# La web no se construye aquí; solo su package.json (para --frozen-lockfile)
+apps/web/*
+!apps/web/package.json
+
+# Repo, docs y herramientas
+.git
+.github
+.cursor
+.claude
+.agents
+.vscode
+.idea
+docs
+lh-report
+graphify-out
+**/.DS_Store
+*.md
+Dockerfile
+.dockerignore

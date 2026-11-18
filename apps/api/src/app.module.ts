@@ -9,6 +9,7 @@ import { WhatsappModule } from './whatsapp/whatsapp.module';
 import { AdminModule } from './admin/admin.module';
 import { AuthModule, JwtAuthGuard, RolesGuard } from './auth';
 import { CronModule } from './cron/cron.module';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { CronModule } from './cron/cron.module';
     AdminModule,
     CronModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [
     AppService,
     { provide: APP_GUARD, useClass: ThrottlerGuard },

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -19,6 +20,7 @@ import {
   UpdateVariantDto,
 } from './dto/admin-catalog.dto';
 import { UpdateOrderStatusDto } from './dto/admin-orders.dto';
+import { UpdateReviewDto } from './dto/admin-reviews.dto';
 
 const CATALOG_ROLES = ['SUPERADMIN', 'ADMIN_INVENTARIO', 'EDITOR'] as const;
 const ORDER_ROLES = [
@@ -138,5 +140,27 @@ export class AdminController {
     @Body() body: UpdateOrderStatusDto,
   ) {
     return this.adminService.updateOrderStatus(id, body);
+  }
+
+  @Get('reviews')
+  @Roles(...CATALOG_ROLES)
+  @ApiOperation({ summary: 'Listar reseñas (pending | approved | all)' })
+  listReviews(@Query('status') status?: string) {
+    const s = status === 'approved' || status === 'all' ? status : 'pending';
+    return this.adminService.listReviews(s);
+  }
+
+  @Patch('reviews/:id')
+  @Roles(...CATALOG_ROLES)
+  @ApiOperation({ summary: 'Aprobar u ocultar una reseña' })
+  updateReview(@Param('id') id: string, @Body() body: UpdateReviewDto) {
+    return this.adminService.setReviewApproval(id, body.isApproved);
+  }
+
+  @Delete('reviews/:id')
+  @Roles(...CATALOG_ROLES)
+  @ApiOperation({ summary: 'Eliminar una reseña' })
+  deleteReview(@Param('id') id: string) {
+    return this.adminService.deleteReview(id);
   }
 }

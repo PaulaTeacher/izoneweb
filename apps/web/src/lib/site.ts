@@ -15,6 +15,17 @@ export const SOCIAL_LINKS = {
   },
 } as const;
 
+/**
+ * Cifras de redes que se muestran en el home. Deben coincidir con lo que se ve
+ * en los perfiles públicos (el widget de TikTok muestra los números reales).
+ * Cifras confirmadas por el cliente el 2026-11-18; actualizarlas aquí cuando cambien.
+ */
+export const SOCIAL_STATS = [
+  { value: '+10 mil', label: 'Seguidores en Instagram y TikTok' },
+  { value: '+7 M', label: 'Vistas en nuestros videos' },
+  { value: '+370 mil', label: 'Likes en TikTok' },
+] as const;
+
 export function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
 }
@@ -23,6 +34,14 @@ export function absoluteUrl(path = '/') {
   const base = getSiteUrl();
   if (!path || path === '/') return base;
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
+/**
+ * The root layout appends "| iZone Tech" via its title template. Titles that
+ * already name the brand opt out of the template so it is not repeated.
+ */
+export function brandTitle(title: string): NonNullable<Metadata['title']> {
+  return /izone/i.test(title) ? { absolute: title } : title;
 }
 
 /** Lightweight metadata helper (canonical + OG). Prefer buildPageMetadata from @/lib/seo for richer pages. */
@@ -41,7 +60,7 @@ export function pageMetadata({
 }): Metadata {
   const canonical = absoluteUrl(path);
   return {
-    ...(title ? { title } : {}),
+    ...(title ? { title: brandTitle(title) } : {}),
     ...(description ? { description } : {}),
     alternates: { canonical },
     openGraph: {

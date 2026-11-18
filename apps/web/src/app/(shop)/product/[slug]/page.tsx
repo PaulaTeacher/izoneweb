@@ -4,6 +4,8 @@ import VariantSelector from '@/components/product/VariantSelector';
 import { CategoryModelCarousel } from '@/components/shop/CategoryModelCarousel';
 import { ProductSpecsAccordion } from '@/components/product/ProductSpecsAccordion';
 import { RecommendedAccessories } from '@/components/product/RecommendedAccessories';
+import { ProductReviews } from '@/components/product/ProductReviews';
+import { RatingSummary } from '@/components/product/StarRating';
 import { CATEGORY_MODELS } from '@/lib/category-models';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -54,15 +56,10 @@ export default async function ProductPage({ params }: PageProps) {
     .map((c) => c.deviceModel)
     .filter((m): m is NonNullable<typeof m> => Boolean(m));
 
-  const isPlaceholder = !product.images?.[0] || product.images[0].includes('unsplash');
-  const mainImage = isPlaceholder
-    ? product.name.toLowerCase().includes('iphone')
-      ? 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-model-unselect-gallery-1-202409?wid=1000&hei=800&fmt=png-alpha'
-      : product.name.toLowerCase().includes('macbook')
-      ? 'https://co.tiendasishop.com/cdn/shop/files/AMZ_FamilyStripe_MacBook_Air_15_in_M4__en-US.avif?v=1772739119&width=800'
-      : product.images?.[0] || 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-model-unselect-gallery-1-202409?wid=1000&hei=800&fmt=png-alpha'
-    : (product.images?.[0] ??
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-model-unselect-gallery-1-202409?wid=1000&hei=800&fmt=png-alpha');
+  const mainImage =
+    product.images?.[0] ||
+    product.variants?.find((v) => v.featuredImage)?.featuredImage ||
+    '/images/chapternav/accessories.png';
 
   const catSlug = product.category?.slug?.toLowerCase() || '';
   const categoryKey = isAccessory
@@ -154,6 +151,12 @@ export default async function ProductPage({ params }: PageProps) {
 
           <p className="text-[11px] text-neutral-400 mt-1">SKU: {sku}</p>
 
+          {product.reviewCount ? (
+            <a href="#resenas" className="inline-block mt-2">
+              <RatingSummary average={product.ratingAverage} count={product.reviewCount} />
+            </a>
+          ) : null}
+
           {isAccessory && compatibleModels.length > 0 && (
             <div className="mt-4">
               <p className="text-xs font-bold text-neutral-800 dark:text-neutral-200 mb-2">
@@ -179,6 +182,14 @@ export default async function ProductPage({ params }: PageProps) {
         <RecommendedAccessories productName={product.name} products={compatibleAccessories} />
 
         {!isAccessory && <ProductSpecsAccordion product={product} />}
+
+        <ProductReviews
+          slug={product.slug}
+          productName={product.name}
+          reviews={product.reviews || []}
+          average={product.ratingAverage}
+          count={product.reviewCount}
+        />
       </div>
     </div>
   );

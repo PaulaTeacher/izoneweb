@@ -117,7 +117,7 @@ export function FavoritesCarousel({ products }: { products: Product[] }) {
                 const image =
                   variant.featuredImage ||
                   product.images?.[0] ||
-                  'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309?wid=500&hei=500&fmt=png-alpha';
+                  '/images/products/iphone-17-pro-deep-blue.webp';
                 const href = `/product/${product.slug}`;
 
                 return (

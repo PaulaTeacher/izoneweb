@@ -17,7 +17,8 @@ import {
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-sans',
+  // Debe coincidir con tailwind.config.ts (fontFamily.sans → var(--font-inter)).
+  variable: '--font-inter',
   display: 'swap',
   adjustFontFallback: true,
 });

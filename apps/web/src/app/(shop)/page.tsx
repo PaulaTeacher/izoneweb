@@ -11,7 +11,7 @@ import StoreMap from '@/components/layout/StoreMap';
 import { getFeaturedProducts, getHomeSummary } from '@/lib/api';
 
 export const metadata: Metadata = {
-  title: 'iZone Colombia | Tienda Apple, iPhone, Mac, iPad y Accesorios',
+  title: { absolute: 'iZone Tech Colombia | Tienda Apple en Bogotá: iPhone, Mac, iPad y Accesorios' },
   description:
     'Compra productos Apple originales en Colombia con garantía oficial de 1 año, envíos seguros a nivel nacional y Trade-in en Bogotá.',
 };

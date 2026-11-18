@@ -10,6 +10,7 @@ const STATIC_PATHS = [
   '/watch',
   '/audio',
   '/accesorios',
+  '/trade-in',
   '/shop',
 ] as const;
 

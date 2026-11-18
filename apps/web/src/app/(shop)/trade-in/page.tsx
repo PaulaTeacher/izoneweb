@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { TradeInCalculator } from '@/components/shop/TradeInCalculator';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Plan Retoma Apple en Bogotá | iZone Tech',
   description:
     'Cotiza tu iPhone actual como parte de pago para llevarte el nuevo iPhone Duo, iPhone 18 Pro Max o MacBook Air M5 en iZone Tech (CC Unilago, Bogotá).',
-};
+  path: '/trade-in',
+});
 
 export default function TradeInPage({
   searchParams,

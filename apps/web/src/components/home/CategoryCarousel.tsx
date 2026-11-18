@@ -13,57 +13,43 @@ const categories = [
     id: 'mac',
     name: 'Mac',
     fallbackPrice: 'Desde $3.699.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mac-card-40-macbook-air-202110?wid=400&hei=300&fmt=png-alpha&qlt=90&.v=1633726242000',
+    image: '/images/hero/hero-macbook-air-m5.webp',
     link: '/shop?category=mac',
   },
   {
     id: 'iphone',
     name: 'iPhone',
     fallbackPrice: 'Desde $2.899.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-card-40-iphone15prohero-202309?wid=340&hei=264&fmt=png-alpha&qlt=95&.v=1693086290559',
+    image: '/images/products/iphone-17-pro-deep-blue.webp',
     link: '/shop?category=iphone',
   },
   {
     id: 'ipad',
     name: 'iPad',
     fallbackPrice: 'Desde $2.069.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-card-40-pro-202210?wid=340&hei=264&fmt=png-alpha&qlt=95&.v=1664578844510',
+    image: '/images/products/ipad-11-blue.webp',
     link: '/shop?category=ipad',
   },
   {
     id: 'watch',
     name: 'Apple Watch',
     fallbackPrice: 'Desde $1.199.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/watch-card-40-ultra2-202309?wid=340&hei=264&fmt=png-alpha&qlt=95&.v=1693611634594',
+    image: '/images/products/watch-series-11-rose-gold.webp',
     link: '/shop?category=watch',
   },
   {
     id: 'audio',
     name: 'Audio',
     fallbackPrice: 'Desde $99.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-max-select-silver-202011?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1604021221000',
+    image: '/images/products/airpods-pro-3.webp',
     link: '/shop?category=audio',
-  },
-  {
-    id: 'tv',
-    name: 'Apple TV & Hogar',
-    fallbackPrice: 'Desde $809.000',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/apple-tv-4k-hero-select-202210?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1664896361164',
-    link: '/shop?category=tv',
   },
   {
     id: 'accesorios',
     name: 'Accesorios',
     fallbackPrice: 'Desde $24.500',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT223?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1693248280978',
+    image: '/images/products/cargador-20w-usb-c.webp',
     link: '/accesorios',
-  },
-  {
-    id: 'airtag',
-    name: 'AirTag',
-    fallbackPrice: 'Desde $38.350',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airtag-single-select-202104?wid=400&hei=400&fmt=jpeg&qlt=90&.v=1617761673000',
-    link: '/shop?category=accesorios',
   },
 ];
 
@@ -103,6 +89,9 @@ export function CategoryCarousel({ minPrices = {} }: { minPrices?: Record<string
       className="py-16 bg-white dark:bg-neutral-950 border-b border-neutral-100 dark:border-neutral-900"
     >
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <h1 className="text-sm font-semibold uppercase tracking-wider text-[#0071E3] mb-2">
+          Tienda Apple en Bogotá · iPhone, Mac, iPad y accesorios con envío a toda Colombia
+        </h1>
         <div className="flex items-center justify-between gap-4 mb-10">
           <h2
             id="categories-heading"

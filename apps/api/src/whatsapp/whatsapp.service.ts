@@ -6,6 +6,7 @@ import {
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CheckoutRequestDto } from './dto/checkout.dto';
+import { getStoreWhatsappNumber } from './whatsapp-number';
 
 @Injectable()
 export class WhatsappService {
@@ -213,7 +214,7 @@ export class WhatsappService {
     message += `──────────────\n\n`;
     message += `¿Me confirman disponibilidad y los datos para realizar la transferencia? ¡Gracias!`;
 
-    const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '573001234567';
+    const phone = getStoreWhatsappNumber();
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     return {

@@ -414,6 +414,42 @@ export class AdminService {
     });
   }
 
+  // ======================== REVIEWS ========================
+  listReviews(status: 'pending' | 'approved' | 'all' = 'pending') {
+    return this.prisma.review.findMany({
+      where:
+        status === 'all' ? {} : { isApproved: status === 'approved' },
+      include: { product: { select: { name: true, slug: true } } },
+      orderBy: { createdAt: 'desc' },
+      take: 200,
+    });
+  }
+
+  async setReviewApproval(id: string, isApproved: boolean) {
+    await this.ensureReview(id);
+    const review = await this.prisma.review.update({
+      where: { id },
+      data: { isApproved },
+    });
+    this.invalidateCatalogCache();
+    return review;
+  }
+
+  async deleteReview(id: string) {
+    await this.ensureReview(id);
+    await this.prisma.review.delete({ where: { id } });
+    this.invalidateCatalogCache();
+    return { ok: true };
+  }
+
+  private async ensureReview(id: string) {
+    const exists = await this.prisma.review.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!exists) throw new NotFoundException('Reseña no encontrada');
+  }
+
   private cleanImages(images?: string[]) {
     if (!images?.length) return [];
     return images.map((url) => url.trim()).filter(Boolean);

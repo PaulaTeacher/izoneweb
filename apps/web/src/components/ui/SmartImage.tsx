@@ -1,7 +1,7 @@
 import Image, { type ImageProps } from 'next/image';
 
 const FALLBACK =
-  'https://images.unsplash.com/photo-1591337676887-a217a6970a8a?q=80&w=600&auto=format&fit=crop';
+  '/images/chapternav/accessories.png';
 
 type SmartImageProps = Omit<ImageProps, 'src' | 'alt'> & {
   src?: string | null;

@@ -198,6 +198,10 @@ export interface Product {
   variants: Variant[];
   specs: ProductSpec[];
   reviews: Review[];
+  /** Promedio de reseñas aprobadas (null si no hay). */
+  ratingAverage?: number | null;
+  /** Número de reseñas aprobadas. */
+  reviewCount?: number;
   compatibilities?: ProductCompatibility[];
   groupedSpecs?: Record<string, { label: string; value: string; unit?: string | null }[]>;
   createdAt: string;
@@ -418,7 +422,6 @@ export interface CreateVariantDto {
 export interface UpdateProductDto extends Partial<CreateProductDto> {}
 
 export interface CreateReviewDto {
-  productId: string;
   customerName: string;
   rating: number;
   comment: string;

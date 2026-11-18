@@ -84,7 +84,10 @@ export async function getProducts(params?: {
     // API no disponible, usar datos locales estructurados
   }
 
-  // Fallback con productos mock realistas (compatible 100% con schema backend)
+  // En producción nunca mostrar (ni indexar en el sitemap) productos de prueba.
+  if (process.env.NODE_ENV === 'production') return [];
+
+  // Fallback de desarrollo con productos mock (compatible con schema backend)
   let results = [...MOCK_PRODUCTS];
   if (params?.featured) {
     results = results.filter((p) => p.isFeatured);
@@ -290,4 +293,29 @@ export async function checkoutWhatsapp(
     throw new Error(err.message || 'Error en checkout');
   }
   return res.json();
+}
+
+export interface ReviewSubmission {
+  customerName: string;
+  rating: number;
+  comment: string;
+  /** Honeypot: must stay empty. */
+  website?: string;
+}
+
+/** Envía una reseña; queda pendiente hasta que un admin la apruebe. */
+export async function submitReview(slug: string, payload: ReviewSubmission): Promise<void> {
+  const res = await fetch(`${API_URL}/catalog/products/${encodeURIComponent(slug)}/reviews`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (res.status === 429) {
+    throw new Error('Has enviado varias reseñas seguidas. Intenta de nuevo en unos minutos.');
+  }
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    const msg = Array.isArray(err.message) ? err.message[0] : err.message;
+    throw new Error(msg || 'No pudimos enviar tu reseña. Intenta de nuevo.');
+  }
 }

@@ -4,11 +4,15 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { getStoreWhatsappNumber } from './whatsapp/whatsapp-number';
 
 // Supabase pooler often hangs ~2–3s on IPv6 before falling back to IPv4.
 dns.setDefaultResultOrder('ipv4first');
 
 async function bootstrap() {
+  // Fail fast in production if the store WhatsApp number is missing.
+  getStoreWhatsappNumber();
+
   const app = await NestFactory.create(AppModule);
 
   // ======================== SECURITY HEADERS ========================

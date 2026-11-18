@@ -2,18 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Truck, RefreshCw, CreditCard, Star, Info } from 'lucide-react';
+import { ShieldCheck, Truck, RefreshCw, CreditCard } from 'lucide-react';
 import { formatCOP, type Product } from '@izone/shared-types';
 import { CategoryModelCarousel, type ModelCarouselItem } from './CategoryModelCarousel';
 import { SmartImage } from '@/components/ui/SmartImage';
-
-function stableCount(seed: string, min: number, max: number) {
-  let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    hash = (hash * 31 + seed.charCodeAt(i)) | 0;
-  }
-  return min + (Math.abs(hash) % (max - min + 1));
-}
+import { RatingSummary } from '@/components/product/StarRating';
 
 export interface CategoryHubConfig {
   id: string;
@@ -31,27 +24,6 @@ export interface CategoryHubConfig {
     action?: 'filter' | 'scroll' | 'link';
     actionTarget?: string;
   }[];
-  /** @deprecated Hero banner removed from CategoryHub; kept optional for existing page configs. */
-  hero?: {
-    badge: string;
-    title: string;
-    description: string;
-    primaryAction: { label: string; filterId: string };
-    discountText?: string;
-    buttonText?: string;
-    image?: string;
-    secondaryImage?: string;
-    bannerImage?: string;
-    bannerMobileImage?: string;
-    slides?: {
-      id: string;
-      image: string;
-      imageMobile?: string;
-      alt: string;
-      link?: string;
-    }[];
-    legalNote?: string;
-  };
   filters: { id: string; label: string; matchStrings?: string[] }[];
   comparisonComponent?: React.ReactNode;
 }
@@ -124,7 +96,6 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
               const currentPrice = Number(defaultVariant?.price || 0);
               const activeImage = defaultVariant?.featuredImage || product.images?.[0];
               const isNew = product.tags?.some((t) => t.name.toLowerCase() === 'nuevo');
-              const reviewCount = stableCount(product.id, 50, 300);
 
               return (
                 <div
@@ -153,24 +124,11 @@ export function CategoryHub({ initialProducts, config }: CategoryHubProps) {
                       Desde {formatCOP(currentPrice)}*
                     </div>
 
-                    <div className="flex flex-col gap-1.5 mb-6">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-[13px] font-bold">4.9</span>
-                        <div className="flex text-[#F59E0B]">
-                          <Star className="w-4 h-4 fill-current" />
-                          <Star className="w-4 h-4 fill-current" />
-                          <Star className="w-4 h-4 fill-current" />
-                          <Star className="w-4 h-4 fill-current" />
-                          <Star className="w-4 h-4 fill-current" />
-                        </div>
-                        <span className="text-[13px] text-neutral-500">
-                          ({Math.floor(reviewCount / 5)})
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-[12px] font-semibold text-[#0071E3] dark:text-[#4da1ff]">
-                        {reviewCount}+ vendidos en 30 días
-                        <Info className="w-3.5 h-3.5 text-neutral-400" />
-                      </div>
+                    <div className="mb-6">
+                      <RatingSummary
+                        average={product.ratingAverage}
+                        count={product.reviewCount}
+                      />
                     </div>
 
                     <Link

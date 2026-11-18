@@ -14,7 +14,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=800',
+      '/images/products/iphone-17-pro-silver.webp',
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
@@ -35,7 +35,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6499000,
         sku: 'IPH17PRO-NAT-256',
         stock: 10,
-        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2025-09-09T00:00:00.000Z',
         updatedAt: '2025-09-09T00:00:00.000Z',
       },
@@ -48,7 +48,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6499000,
         sku: 'IPH17PRO-BLK-256',
         stock: 8,
-        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2025-09-09T00:00:00.000Z',
         updatedAt: '2025-09-09T00:00:00.000Z',
       },
@@ -61,7 +61,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 7499000,
         sku: 'IPH17PRO-WHT-512',
         stock: 4,
-        featuredImage: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_iPhone_17_pro_max.avif?v=1757555392&width=500',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2025-09-09T00:00:00.000Z',
         updatedAt: '2025-09-09T00:00:00.000Z',
       },
@@ -81,8 +81,8 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-model-unselect-gallery-1-202409?wid=5120&hei=2880&fmt=png-alpha',
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-model-unselect-gallery-2-202409?wid=5120&hei=2880&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp',
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
@@ -104,7 +104,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6999000,
         sku: 'MYX83LZ/A',
         stock: 12,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-desert-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -117,7 +117,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6999000,
         sku: 'MYX73LZ/A',
         stock: 8,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-natural-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -130,7 +130,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6999000,
         sku: 'MYX93LZ/A',
         stock: 10,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-white-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -143,7 +143,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6999000,
         sku: 'MYX63LZ/A',
         stock: 15,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-black-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -156,7 +156,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 7999000,
         sku: 'MYXD3LZ/A',
         stock: 5,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-natural-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -169,7 +169,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 8999000,
         sku: 'MYXJ3LZ/A',
         stock: 3,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-desert-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       }
@@ -189,7 +189,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-finish-select-202409-6-3inch-deserttitanium?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
@@ -210,7 +210,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 5899000,
         sku: 'MYNG3LZ/A',
         stock: 14,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-desert-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -223,7 +223,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6399000,
         sku: 'MYNL3LZ/A',
         stock: 10,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-natural-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -236,7 +236,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6399000,
         sku: 'MYNJ3LZ/A',
         stock: 7,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-pro-black-titanium-select-202409?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       }
@@ -256,7 +256,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-7inch-ultramarine?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' }
@@ -276,7 +276,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 5399000,
         sku: 'MXVM3LZ/A',
         stock: 9,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-7inch-ultramarine?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -289,7 +289,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 5399000,
         sku: 'MXVN3LZ/A',
         stock: 6,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-7inch-teal?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -302,7 +302,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 5399000,
         sku: 'MXVP3LZ/A',
         stock: 11,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-7inch-pink?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       }
@@ -322,7 +322,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-ultramarine?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
@@ -343,7 +343,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 4799000,
         sku: 'MYE73LZ/A',
         stock: 20,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-ultramarine?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -356,7 +356,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 4799000,
         sku: 'MYE93LZ/A',
         stock: 14,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-white?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       },
@@ -369,7 +369,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 4799000,
         sku: 'MYE63LZ/A',
         stock: 18,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-16-finish-select-202409-6-1inch-black?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2024-09-20T00:00:00.000Z',
         updatedAt: '2024-09-20T00:00:00.000Z'
       }
@@ -389,7 +389,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-natural-titanium-select-202309?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-oferta', name: 'Oferta Especial', slug: 'oferta-especial' }
@@ -409,7 +409,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6199000,
         sku: 'MU773LZ/A',
         stock: 7,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-natural-titanium-select-202309?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2023-09-22T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       },
@@ -422,7 +422,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 6099000,
         sku: 'MU7A3LZ/A',
         stock: 4,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-blue-titanium-select-202309?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2023-09-22T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -442,7 +442,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [
       { id: 'tag-pop', name: 'Favorito', slug: 'favorito' }
@@ -462,7 +462,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 4099000,
         sku: 'MTP43LZ/A',
         stock: 15,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2023-09-22T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       },
@@ -475,7 +475,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 4099000,
         sku: 'MTP03LZ/A',
         stock: 12,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-black?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2023-09-22T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -495,7 +495,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-midnight?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [],
     isFeatured: false,
@@ -513,7 +513,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 3399000,
         sku: 'MPUF3LZ/A',
         stock: 14,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-midnight?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2022-09-16T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       },
@@ -526,7 +526,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 3399000,
         sku: 'MPUG3LZ/A',
         stock: 8,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-starlight?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2022-09-16T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -546,7 +546,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-finish-select-202207-6-1inch-midnight?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [],
     isFeatured: false,
@@ -564,7 +564,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 2899000,
         sku: 'MLPF3LZ/A',
         stock: 22,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-finish-select-202207-6-1inch-midnight?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2021-09-24T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -584,7 +584,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-iphone',
     category: { id: 'cat-iphone', name: 'iPhone', slug: 'iphone', sortOrder: 2 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-se-finish-select-202207-midnight?wid=500&hei=500&fmt=png-alpha'
+      '/images/products/iphone-17-pro-silver.webp'
     ],
     tags: [],
     isFeatured: false,
@@ -602,7 +602,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 2399000,
         sku: 'MMX53LZ/A',
         stock: 10,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-se-finish-select-202207-midnight?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/products/iphone-17-pro-silver.webp',
         createdAt: '2022-03-18T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -622,7 +622,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-mac',
     category: { id: 'cat-mac', name: 'Mac', slug: 'mac', sortOrder: 1 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-m3-midnight-select-202402?wid=500&hei=500&fmt=png-alpha'
+      '/images/chapternav/accessories.png'
     ],
     tags: [
       { id: 'tag-nuevo', name: 'Nuevo', slug: 'nuevo' },
@@ -643,7 +643,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         comparePrice: 5999000,
         sku: 'MRXU3E/A',
         stock: 15,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mba13-m3-midnight-select-202402?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/chapternav/accessories.png',
         createdAt: '2024-03-08T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }
@@ -663,7 +663,7 @@ export const MOCK_PRODUCTS: Product[] = ([
     categoryId: 'cat-audio',
     category: { id: 'cat-audio', name: 'Audio', slug: 'audio', sortOrder: 5 },
     images: [
-      'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MTJV3?wid=500&hei=500&fmt=png-alpha'
+      '/images/chapternav/accessories.png'
     ],
     tags: [
       { id: 'tag-destacado', name: 'Más Vendido', slug: 'mas-vendido' }
@@ -682,7 +682,7 @@ export const MOCK_PRODUCTS: Product[] = ([
         compareAtPrice: 1299000,
         sku: 'MTJV3AM/A',
         stock: 35,
-        featuredImage: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MTJV3?wid=500&hei=500&fmt=png-alpha',
+        featuredImage: '/images/chapternav/accessories.png',
         createdAt: '2023-09-22T00:00:00.000Z',
         updatedAt: '2024-09-01T00:00:00.000Z'
       }

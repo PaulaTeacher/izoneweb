@@ -133,7 +133,8 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
         <div className="flex touch-pan-y h-full">
           {slides.map((slide, index) => {
             const isFirst = index === 0;
-            const Heading = isFirst ? 'h1' : 'h2';
+            // The page H1 lives in CategoryCarousel (keyword-focused); slides are h2.
+            const Heading = 'h2';
             const isFigmaDuo = slide.link === '/product/iphone-duo';
 
             if (isFigmaDuo) {
@@ -148,7 +149,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
                   <div className="container mx-auto h-full max-w-7xl px-4 md:px-10 pt-24 md:pt-20 pb-8 md:pb-20 grid grid-cols-1 md:grid-cols-12 items-center gap-6">
                     <div className="relative h-[250px] sm:h-[330px] md:h-[520px] md:col-span-7 self-end">
                       <SmartImage
-                        src="/images/hero/hero-iphone-duo-figma.png"
+                        src="/images/hero/hero-iphone-duo-figma.webp"
                         alt="iPhone Duo"
                         fill
                         priority={isFirst}
@@ -220,7 +221,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
 
                     <div className="relative h-[230px] sm:h-[310px] md:h-[460px] md:col-span-7 order-1 md:order-2">
                       <SmartImage
-                        src="/images/hero/hero-macbook-air-m5-figma.png"
+                        src="/images/hero/hero-macbook-air-m5-figma.webp"
                         alt="MacBook Air M5"
                         fill
                         fetchPriority="low"
@@ -285,7 +286,7 @@ export function HeroCarousel({ slides: initialSlides }: { slides?: HomeHeroSlide
 
                     <div className="relative z-10 -mr-4 ml-auto w-[80%] sm:w-[70%] md:mr-0 md:ml-0 md:w-auto h-[360px] sm:h-[420px] md:h-[500px] md:col-span-6 order-1 md:order-2 self-end pointer-events-none [mask-image:linear-gradient(to_bottom,#000_60%,transparent_100%),linear-gradient(to_right,transparent_0%,#000_9%)] [-webkit-mask-composite:source-in] [mask-composite:intersect] md:[mask-image:radial-gradient(ellipse_70%_80%_at_50%_45%,#000_55%,transparent_100%)] md:[mask-composite:add] md:[-webkit-mask-composite:source-over]">
                       <SmartImage
-                        src="/images/hero/hero-iphone-18-pro-figma.png"
+                        src="/images/hero/hero-iphone-18-pro-figma.webp"
                         alt="iPhone 18 Pro Burgundy"
                         fill
                         fetchPriority="low"

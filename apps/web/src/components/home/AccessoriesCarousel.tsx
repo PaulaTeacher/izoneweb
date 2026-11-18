@@ -15,7 +15,7 @@ const accessories = [
     isNew: true,
     description: 'Compra aquí accesorios para Mac, teclados, mouse, cables y más',
     fallbackPrice: 'Disponible desde $29.900 COP',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MK2A3?wid=500&hei=500&fmt=png-alpha&qlt=90',
+    image: '/images/products/cable-usb-c-1m.webp',
     link: '/accesorios?tipo=accesorios-mac',
   },
   {
@@ -27,16 +27,6 @@ const accessories = [
     fallbackPrice: 'Disponible desde $30.000 COP',
     image: '/images/chapternav/accessories.png',
     link: '/accesorios?kind=tablet',
-  },
-  {
-    id: 'accesorios-tv',
-    priceKey: 'tv',
-    title: 'Accesorios Apple TV',
-    isNew: true,
-    description: 'Compra accesorios para TV',
-    fallbackPrice: 'Disponible desde $55.900 COP',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/apple-tv-4k-hero-select-202210?wid=500&hei=500&fmt=png-alpha&qlt=90',
-    link: '/shop?category=accesorios&device=tv',
   },
   {
     id: 'accesorios-watch',
@@ -55,7 +45,7 @@ const accessories = [
     isNew: true,
     description: 'Cargadores, fundas MagSafe y más',
     fallbackPrice: 'Disponible desde $45.000 COP',
-    image: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT223?wid=500&hei=500&fmt=png-alpha&qlt=90',
+    image: '/images/products/cargador-20w-usb-c.webp',
     link: '/accesorios?brand=apple&kind=phone',
   },
 ];

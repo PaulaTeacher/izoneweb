@@ -15,15 +15,6 @@ const macConfig: CategoryHubConfig = {
   id: 'mac',
   title: 'Mac',
   chapterItems: CATEGORY_MODELS.mac,
-  hero: {
-    badge: 'MacBook Pro M5',
-    title: 'Descuento hasta de: $1.200.000*',
-    description: 'Garantía oficial de 1 año y envío a toda Colombia.',
-    discountText: '$ 1.200.000*',
-    primaryAction: { label: 'Comprar MacBook Pro', filterId: 'macbook-pro' },
-    image: 'https://co.tiendasishop.com/cdn/shop/files/AMZ_Family-Stripe_MacBook_Pro_14-inch_M5__en-US.webp?v=1761188756&width=500',
-    legalNote: '*Descuento válido en tiendas físicas y online, sujeto a disponibilidad. Ver términos y condiciones.',
-  },
   filters: [
     { id: 'neo', label: 'MacBook Neo', matchStrings: ['neo'] },
     { id: 'air', label: 'MacBook Air', matchStrings: ['air'] },

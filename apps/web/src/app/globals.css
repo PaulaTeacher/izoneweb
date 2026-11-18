@@ -103,3 +103,26 @@
     transition: none !important;
   }
 }
+
+/*
+ * Entrada al hacer scroll sin JavaScript: el contenido es visible por defecto
+ * (HTML del servidor, sin JS, navegadores sin soporte o "reducir movimiento").
+ * Solo se anima donde hay soporte de animation-timeline y el usuario no pidió
+ * reducir el movimiento.
+ */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}

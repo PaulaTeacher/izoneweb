@@ -2,6 +2,7 @@ import { Injectable, Logger, NotFoundException, OnApplicationBootstrap } from '@
 import { PrismaService } from '../prisma/prisma.service';
 import { AccessoryMaterial, DeviceKind, Prisma, ProductKind } from '@prisma/client';
 import { catalogCache } from './memory-cache';
+import { summarizeRatings } from './ratings';
 
 /** Match Next.js catalog revalidate so SSR and API drop cache together. */
 const LIST_CACHE_TTL_MS = 180_000;
@@ -145,7 +146,7 @@ export class CatalogService implements OnApplicationBootstrap {
     }
 
     const started = Date.now();
-    const products = await this.prisma.product.findMany({
+    const rawProducts = await this.prisma.product.findMany({
       relationLoadStrategy: 'join',
       where: {
         isActive: true,
@@ -188,10 +189,15 @@ export class CatalogService implements OnApplicationBootstrap {
         category: { include: { parent: true } },
         brand: true,
         tags: true,
+        reviews: { where: { isApproved: true }, select: { rating: true } },
       },
       orderBy,
       take: take ? Math.min(Math.max(take, 1), 48) : undefined,
     });
+    const products = rawProducts.map(({ reviews, ...p }) => ({
+      ...p,
+      ...summarizeRatings(reviews),
+    }));
     const elapsed = Date.now() - started;
     if (elapsed > 400) {
       this.logger.warn(`getProducts query ${elapsed}ms`);
@@ -514,6 +520,7 @@ export class CatalogService implements OnApplicationBootstrap {
 
     return {
       ...product,
+      ...summarizeRatings(product.reviews),
       groupedSpecs,
     };
   }

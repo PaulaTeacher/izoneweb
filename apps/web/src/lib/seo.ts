@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { Product, Variant } from '@izone/shared-types';
-import { absoluteUrl, getSiteUrl, SOCIAL_LINKS } from '@/lib/site';
+import { absoluteUrl, brandTitle, getSiteUrl, SOCIAL_LINKS } from '@/lib/site';
 import { getWhatsappNumber } from '@/lib/whatsapp';
 
 export const SITE = {
@@ -61,7 +61,7 @@ export function buildPageMetadata({
   }));
 
   return {
-    ...(title ? { title } : {}),
+    ...(title ? { title: brandTitle(title) } : {}),
     ...(description ? { description } : {}),
     ...(keywords?.length ? { keywords } : {}),
     alternates: { canonical },
@@ -135,6 +135,21 @@ export function buildBreadcrumbJsonLd(
   };
 }
 
+/**
+ * schema.org itemCondition for a variant. Google Merchant treats "open box"
+ * as used, and certified pre-owned as refurbished.
+ */
+export function schemaItemCondition(condition?: Variant['condition'] | null) {
+  switch (condition) {
+    case 'OPEN_BOX':
+      return 'https://schema.org/UsedCondition';
+    case 'SEMINUEVO_CERTIFICADO':
+      return 'https://schema.org/RefurbishedCondition';
+    default:
+      return 'https://schema.org/NewCondition';
+  }
+}
+
 export function buildProductJsonLd(
   product: Product,
   opts?: { image?: string },
@@ -167,7 +182,7 @@ export function buildProductJsonLd(
         .toISOString()
         .slice(0, 10),
       availability,
-      itemCondition: 'https://schema.org/NewCondition',
+      itemCondition: schemaItemCondition(v.condition),
       seller: {
         '@type': 'Organization',
         name: SITE.legalName,
@@ -208,6 +223,30 @@ export function buildProductJsonLd(
     category: product.category?.name,
     url,
     offers,
+    // Solo reseñas reales aprobadas por un admin (la API filtra isApproved).
+    ...(product.reviewCount && product.ratingAverage
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.ratingAverage,
+            reviewCount: product.reviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: (product.reviews || []).slice(0, 10).map((r) => ({
+            '@type': 'Review',
+            author: { '@type': 'Person', name: r.customerName },
+            datePublished: r.createdAt.slice(0, 10),
+            reviewBody: r.comment,
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: r.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          })),
+        }
+      : {}),
   };
 }
 

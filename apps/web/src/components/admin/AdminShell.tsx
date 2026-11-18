@@ -33,6 +33,9 @@ export function AdminShell({
               <Link href="/admin/orders" className="hover:text-neutral-900">
                 Pedidos
               </Link>
+              <Link href="/admin/reviews" className="hover:text-neutral-900">
+                Reseñas
+              </Link>
               <Link href="/" className="hover:text-neutral-900" target="_blank">
                 Tienda ↗
               </Link>

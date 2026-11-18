@@ -1,9 +1,6 @@
-'use client';
-
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Play } from 'lucide-react';
-import { SOCIAL_LINKS } from '@/lib/site';
-import { easeOut } from '@/components/motion/FadeIn';
+import { ArrowUpRight } from 'lucide-react';
+import { SOCIAL_LINKS, SOCIAL_STATS } from '@/lib/site';
+import { TikTokFacade } from './TikTokFacade';
 
 function InstagramIcon({ className }: { className?: string }) {
   return (
@@ -25,32 +22,27 @@ const platforms = [
   {
     ...SOCIAL_LINKS.instagram,
     description: 'Lanzamientos, unboxings y tip del día.',
-    cta: 'Seguir en Instagram',
     Icon: InstagramIcon,
     accent: 'from-[#F58529]/30 via-[#DD2A7B]/25 to-[#8134AF]/30',
     iconBg: 'bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF]',
-    focusRing: 'focus-visible:ring-[#DD2A7B]',
+    focus: 'focus-visible:outline-[#DD2A7B]',
   },
   {
     ...SOCIAL_LINKS.tiktok,
     description: 'Reviews reales y ofertas que se agotan.',
-    cta: 'Seguir en TikTok',
     Icon: TikTokIcon,
     accent: 'from-[#25F4EE]/25 via-transparent to-[#FE2C55]/25',
-    iconBg: 'bg-neutral-950',
-    focusRing: 'focus-visible:ring-[#25F4EE]',
+    iconBg: 'bg-neutral-950 ring-1 ring-white/10',
+    focus: 'focus-visible:outline-[#25F4EE]',
   },
 ] as const;
 
-const stats = [
-  { value: '+10 mil', label: 'Seguidores' },
-  { value: '+7 M', label: 'Vistas' },
-  { value: 'Bogotá', label: 'Apple & accesorios' },
-] as const;
-
+/**
+ * Componente de servidor: todo el contenido llega visible en el HTML. La
+ * animación de entrada es CSS (.reveal en globals.css) y solo corre si el
+ * navegador la soporta y el usuario no pidió reducir el movimiento.
+ */
 export function SocialFollow() {
-  const reduce = useReducedMotion();
-
   return (
     <section
       id="redes"
@@ -58,109 +50,86 @@ export function SocialFollow() {
       className="relative overflow-hidden bg-[#141416] text-white scroll-mt-24"
     >
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(255,255,255,0.18),transparent_55%),radial-gradient(ellipse_at_90%_80%,rgba(255,255,255,0.10),transparent_50%),radial-gradient(ellipse_at_50%_50%,rgba(255,255,255,0.05),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(255,255,255,0.18),transparent_55%),radial-gradient(ellipse_at_90%_80%,rgba(255,255,255,0.10),transparent_50%)]"
         aria-hidden
       />
 
-      <div className="relative container mx-auto px-4 py-16 md:py-20 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-16">
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.45, ease: easeOut }}
-          >
+      <div className="relative container mx-auto px-4 py-14 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14">
+          <div className="reveal">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400">
               Comunidad iZone
             </p>
             <h2
               id="social-follow-heading"
-              className="mt-3 max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="mt-3 max-w-xl text-3xl font-bold tracking-tight text-white sm:text-4xl"
             >
               Síguenos en Instagram y TikTok
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-400 md:text-lg">
-              Con más de{' '}
-              <span className="font-medium text-white">10 mil seguidores</span> y más de{' '}
-              <span className="font-medium text-white">7 millones de vistas</span>, somos uno de los
-              comercios más destacados en venta de productos Apple y accesorios en Bogotá.
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-300">
+              Somos uno de los comercios más activos en venta de productos Apple y accesorios en
+              Bogotá: lanzamientos, demos y entregas reales cada semana.
             </p>
 
-            <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-white/10 pt-8 sm:max-w-lg">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={reduce ? false : { opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: 0.4, ease: easeOut, delay: 0.08 * index }}
-                >
-                  <dt className="sr-only">{stat.label}</dt>
-                  <dd>
-                    <p className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 text-xs text-neutral-500 sm:text-sm">{stat.label}</p>
+            <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-white/10 pt-6 sm:max-w-lg">
+              {SOCIAL_STATS.map((stat) => (
+                <div key={stat.label} className="flex flex-col-reverse">
+                  <dt className="mt-1 text-xs leading-snug text-neutral-400 sm:text-sm">
+                    {stat.label}
+                  </dt>
+                  <dd className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                    {stat.value}
                   </dd>
-                </motion.div>
+                </div>
               ))}
             </dl>
-          </motion.div>
+          </div>
 
-          <div className="flex flex-col gap-3">
-            {platforms.map((platform, index) => {
-              const Icon = platform.Icon;
-              return (
-                <motion.a
-                  key={platform.href}
+          <ul className="reveal flex flex-col gap-3">
+            {platforms.map(({ Icon, ...platform }) => (
+              <li key={platform.href}>
+                <a
                   href={platform.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${platform.cta} (${platform.handle})`}
-                  initial={reduce ? false : { opacity: 0, x: 18 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.4, ease: easeOut, delay: 0.1 + index * 0.08 }}
-                  whileHover={reduce ? undefined : { y: -2 }}
-                  className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 outline-none transition-[border-color,background-color] hover:border-white/25 hover:bg-white/[0.07] focus-visible:ring-2 ${platform.focusRing} focus-visible:ring-offset-2 focus-visible:ring-offset-[#141416] sm:p-6`}
+                  className={`group relative block overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 outline outline-2 outline-offset-2 outline-transparent transition-[border-color,background-color,translate] hover:border-white/25 hover:bg-white/[0.07] motion-safe:hover:-translate-y-0.5 ${platform.focus}`}
                 >
-                  <div
+                  <span
                     className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${platform.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                     aria-hidden
                   />
-                  <div className="relative flex items-center gap-4">
+                  <span className="relative flex items-center gap-4">
                     <span
                       className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white shadow-lg ${platform.iconBg}`}
                     >
                       <Icon className="h-5 w-5" />
                     </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <p className="text-base font-semibold text-white">{platform.label}</p>
-                        <span className="truncate text-sm text-neutral-500">{platform.handle}</span>
-                      </div>
-                      <p className="mt-0.5 text-sm text-neutral-400">{platform.description}</p>
-                    </div>
+                    <span className="min-w-0 flex-1">
+                      <span className="flex flex-wrap items-baseline gap-x-2">
+                        <span className="text-base font-semibold text-white">{platform.label}</span>
+                        <span className="truncate text-sm text-neutral-400">{platform.handle}</span>
+                      </span>
+                      <span className="mt-0.5 block text-sm text-neutral-300">
+                        {platform.description}
+                      </span>
+                    </span>
                     <span className="hidden items-center gap-1 text-sm font-medium text-white sm:inline-flex">
                       Seguir
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight
+                        className="h-4 w-4 transition-transform duration-300 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
                     </span>
-                  </div>
-                </motion.a>
-              );
-            })}
+                    <span className="sr-only">(abre en una pestaña nueva)</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-            <motion.p
-              initial={reduce ? false : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.35 }}
-              className="flex items-center gap-2 px-1 pt-1 text-xs text-neutral-500"
-            >
-              <Play className="h-3.5 w-3.5 text-neutral-400" aria-hidden />
-              Contenido nuevo cada semana: demos, stock y lanzamientos Apple.
-            </motion.p>
-          </div>
+        <div className="reveal mt-10">
+          <TikTokFacade username="izonetechbogota" href={SOCIAL_LINKS.tiktok.href} />
         </div>
       </div>
     </section>

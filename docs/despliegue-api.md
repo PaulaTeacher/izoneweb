@@ -33,14 +33,17 @@ Ver [`apps/api/.env.example`](../apps/api/.env.example). La imagen fija `NODE_EN
 
 | | Antes | Ahora |
 |---|---|---|
-| Hasta que el puerto escucha / `GET /health` responde | 5,8 s | **2,5–2,8 s** |
-| Conexión Prisma (`$connect`) | ~1,7 s | ~1,7 s |
-| Precalentado de caché (11 consultas) | 3,1 s **bloqueando** `listen` | ~2,5–2,8 s en segundo plano |
+| Hasta que el puerto escucha / `GET /health` responde | 5,8 s | **0,6–0,8 s** |
+| Conexión Prisma (`$connect`) | ~1,7 s **bloqueando** `listen` | ~1,2 s en segundo plano |
+| Precalentado de caché (11 consultas) | 3,1 s **bloqueando** `listen` | ~3 s en segundo plano |
 
-El precalentado ya no bloquea el arranque. La primera petición de catálogo que llega
-mientras se precalienta tarda ~2 s; las siguientes salen de la caché en memoria (~3 ms).
-En Cloud Run se espera algo más (CPU más lenta que un Mac); conviene volver a medir
-tras la Fase 4 en los logs (`Nest application successfully started`).
+Ni la conexión a la BD ni el precalentado bloquean ya el arranque. Una petición de catálogo
+que llega mientras se precalienta tarda ~1–2 s; después sale de la caché en memoria (~4 ms).
+Si la BD no está disponible al arrancar, `/health` sigue respondiendo, el error queda en el log
+(`Database connection failed`) y el catálogo responde 500 (la web lo trata como "API no
+disponible", Fase 1). Prisma reintenta la conexión en la siguiente consulta.
+En Cloud Run se espera algo más (CPU más lenta que un Mac); volver a medir tras la Fase 4
+con los logs (`Nest application successfully started`, `Database connected in`).
 
 ## Endpoints operativos
 

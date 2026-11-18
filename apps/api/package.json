@@ -24,6 +24,7 @@
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:import": "ts-node prisma/import-catalog.ts",
+    "db:load-stock": "ts-node prisma/load-stock.ts",
     "db:create-admin": "ts-node prisma/create-admin.ts",
     "postinstall": "prisma generate || exit 0"
   },

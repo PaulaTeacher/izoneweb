@@ -278,6 +278,8 @@ export function buildLlmsTxt() {
 - Apple Watch: ${site}/watch
 - Audio: ${site}/audio
 - Accesorios: ${site}/accesorios
+- Plan Retoma: ${site}/trade-in
+- Políticas, garantía y envíos: ${site}/politicas
 - Catálogo / búsqueda: ${site}/shop
 - Instagram: ${SOCIAL_LINKS.instagram.href}
 - TikTok: ${SOCIAL_LINKS.tiktok.href}
@@ -289,6 +291,7 @@ Usa URLs canónicas del dominio anterior (no inventes rutas).
 
 ## Contacto
 - WhatsApp: +${getWhatsappNumber()}
+- Correo: izonetech.co@gmail.com
 - Ubicación referencial: CC Unilago, Local L 1-143, Bogotá D.C., Colombia
 
 ## Notas para crawlers de IA

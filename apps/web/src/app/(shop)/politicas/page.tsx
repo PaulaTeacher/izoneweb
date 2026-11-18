@@ -210,8 +210,8 @@ export default function PoliticasPage() {
             <div className="space-y-3 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
               <p>
                 Este sitio web es operado por <strong>iZone Tech Colombia S.A.S.</strong> (CC Unilago, Local L 1-143, Bogotá D.C., Colombia; correo{' '}
-                <a href="mailto:contacto@izonetech.com.co" className="text-[#0071E3] hover:underline">
-                  contacto@izonetech.com.co
+                <a href="mailto:izonetech.co@gmail.com" className="text-[#0071E3] hover:underline">
+                  izonetech.co@gmail.com
                 </a>
                 ). Todos los precios se muestran en pesos colombianos (COP) y están sujetos a disponibilidad de inventario y verificación al momento de confirmar el pedido vía WhatsApp o en tienda física.
               </p>
@@ -249,8 +249,8 @@ export default function PoliticasPage() {
                   WhatsApp oficial
                 </a>{' '}
                 o al correo{' '}
-                <a href="mailto:contacto@izonetech.com.co" className="text-[#0071E3] hover:underline">
-                  contacto@izonetech.com.co
+                <a href="mailto:izonetech.co@gmail.com" className="text-[#0071E3] hover:underline">
+                  izonetech.co@gmail.com
                 </a>{' '}
                 indicando tu número de factura o referencia de pedido.
               </p>
@@ -279,8 +279,8 @@ export default function PoliticasPage() {
               </p>
               <p>
                 <strong>Derechos del titular (Habeas Data):</strong> Puedes conocer, actualizar, rectificar o solicitar la supresión de tus datos y revocar la autorización escribiendo a{' '}
-                <a href="mailto:contacto@izonetech.com.co" className="text-[#0071E3] hover:underline">
-                  contacto@izonetech.com.co
+                <a href="mailto:izonetech.co@gmail.com" className="text-[#0071E3] hover:underline">
+                  izonetech.co@gmail.com
                 </a>
                 .
               </p>

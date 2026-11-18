@@ -258,11 +258,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>+57 (601) 745-8920</span>
+                <span>+57 323 264 8303</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#0071E3] shrink-0" />
-                <span>contacto@izonetech.com.co</span>
+                <span>izonetech.co@gmail.com</span>
               </div>
             </div>
 

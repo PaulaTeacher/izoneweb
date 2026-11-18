@@ -52,3 +52,26 @@ jobs:
         run: pnpm --filter web exec tsc --noEmit
       - name: Unit tests
         run: pnpm --filter web test
+
+  api-image:
+    name: API image (docker build + /health)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build image
+        run: docker build --platform linux/amd64 -t izone-api:ci .
+      - name: Smoke test /health (sin BD; Prisma conecta a un host inexistente)
+        run: |
+          docker run -d --name api -p 8080:8080 \
+            -e DATABASE_URL="postgresql://ci:ci@127.0.0.1:1/ci?pgbouncer=true&connection_limit=1" \
+            -e JWT_SECRET=ci-only -e CATALOG_WARMUP=false \
+            izone-api:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/health; then echo; docker logs api | tail -5; exit 0; fi
+            sleep 1
+          done
+          docker logs api; exit 1
+      - name: Image size
+        if: always()
+        run: docker image ls izone-api:ci

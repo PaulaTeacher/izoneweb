@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { TradeInCalculator } from '@/components/shop/TradeInCalculator';
+import { TradeInCalculator, type TargetDevice } from '@/components/shop/TradeInCalculator';
+import { getProducts } from '@/lib/api';
 import { buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -9,11 +10,25 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/trade-in',
 });
 
-export default function TradeInPage({
+export default async function TradeInPage({
   searchParams,
 }: {
   searchParams?: { target?: string };
 }) {
+  const iphones = await getProducts({ category: 'iphone' }).catch(() => []);
+  const targetDevices: TargetDevice[] = iphones
+    .filter((p) => p.isActive !== false)
+    .flatMap((p) => {
+      const pricedVariants = (p.variants ?? [])
+        .map((v) => ({ variant: v, price: Number(v.price) }))
+        .filter((entry) => Number.isFinite(entry.price) && entry.price > 0)
+        .sort((a, b) => a.price - b.price);
+      if (pricedVariants.length === 0) return [];
+      const minEntry = pricedVariants[0];
+      const storageSuffix = minEntry.variant.storage ? ` (${minEntry.variant.storage})` : '';
+      return [{ slug: p.slug, name: `${p.name}${storageSuffix}`, price: minEntry.price }];
+    });
+
   return (
     <div className="min-h-screen bg-[#F5F5F7] dark:bg-black py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-8 max-w-6xl">
@@ -29,7 +44,7 @@ export default function TradeInPage({
           </p>
         </div>
 
-        <TradeInCalculator initialTargetSlug={searchParams?.target} />
+        <TradeInCalculator initialTargetSlug={searchParams?.target} targetDevices={targetDevices} />
       </div>
     </div>
   );

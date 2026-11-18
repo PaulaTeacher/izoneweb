@@ -20,7 +20,15 @@ export default function Footer() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim() || !email.includes('@')) return;
+    const cleanedEmail = email.trim();
+    if (!cleanedEmail || !cleanedEmail.includes('@')) return;
+    window.open(
+      buildWaMeUrl(
+        `Hola iZone Tech, quiero suscribirme al Newsletter de ofertas y lanzamientos Apple. Mi correo es: ${cleanedEmail}`,
+      ),
+      '_blank',
+      'noopener,noreferrer',
+    );
     setSubscribed(true);
     setTimeout(() => {
       setEmail('');
@@ -51,6 +59,10 @@ export default function Footer() {
                 id="newsletter-email"
                 name="email"
                 type="email"
+                autoComplete="email"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck={false}
                 placeholder="Ingresa tu correo electrónico..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -144,22 +156,22 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/#garantia" className="hover:text-white transition">
+                <Link href="/politicas#garantia" className="hover:text-white transition">
                   Políticas de Garantía (1 Año)
                 </Link>
               </li>
               <li>
-                <Link href="/#envios" className="hover:text-white transition">
+                <Link href="/politicas#envios" className="hover:text-white transition">
                   Rastreo y Tiempos de Envío
                 </Link>
               </li>
               <li>
-                <Link href="/#medios-pago" className="hover:text-white transition">
+                <Link href="/politicas#medios-pago" className="hover:text-white transition">
                   Medios de Pago
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="hover:text-white transition">
+                <Link href="/politicas#faq" className="hover:text-white transition">
                   Preguntas Frecuentes (FAQ)
                 </Link>
               </li>
@@ -172,28 +184,28 @@ export default function Footer() {
               Términos & Políticas
             </h4>
             <ul className="space-y-2.5 text-neutral-400">
-              <li id="terminos" className="scroll-mt-28">
-                <Link href="/#terminos" className="hover:text-white transition">
+              <li>
+                <Link href="/politicas#terminos" className="hover:text-white transition">
                   Términos y Condiciones
                 </Link>
               </li>
-              <li id="privacidad" className="scroll-mt-28">
-                <Link href="/#privacidad" className="hover:text-white transition">
+              <li>
+                <Link href="/politicas#privacidad" className="hover:text-white transition">
                   Política de Privacidad
                 </Link>
               </li>
-              <li id="devoluciones" className="scroll-mt-28">
-                <Link href="/#devoluciones" className="hover:text-white transition">
+              <li>
+                <Link href="/politicas#devoluciones" className="hover:text-white transition">
                   Cambios y Devoluciones
                 </Link>
               </li>
-              <li id="tratamiento-datos" className="scroll-mt-28">
-                <Link href="/#tratamiento-datos" className="hover:text-white transition">
+              <li>
+                <Link href="/politicas#tratamiento-datos" className="hover:text-white transition">
                   Tratamiento de Datos Personales
                 </Link>
               </li>
-              <li id="superintendencia" className="scroll-mt-28">
-                <Link href="/#superintendencia" className="hover:text-white transition">
+              <li>
+                <Link href="/politicas#superintendencia" className="hover:text-white transition">
                   Superintendencia de Industria y Comercio (SIC)
                 </Link>
               </li>

@@ -45,7 +45,7 @@ const categories: CategoryItem[] = [
         items: [
           { title: 'Comprar Mac', href: '/mac' },
           { title: 'Accesorios para Mac', href: '/accesorios?tipo=accesorios-mac' },
-          { title: 'Plan Retoma', href: '/shop?category=ofertas' },
+          { title: 'Plan Retoma', href: '/trade-in' },
         ]
       },
       {
@@ -220,7 +220,7 @@ const categories: CategoryItem[] = [
       {
         title: 'Servicios',
         items: [
-          { title: 'Plan Retoma', href: '/shop?category=ofertas' },
+          { title: 'Plan Retoma', href: '/trade-in' },
         ]
       }
     ]
@@ -357,6 +357,9 @@ export default function Header() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     autoFocus
+                    autoCorrect="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
                     aria-label="Buscar productos"
                     className="w-full bg-black/5 dark:bg-white/10 text-[15px] text-[#1D1D1F] dark:text-white pl-10 pr-4 py-2.5 rounded-xl outline-none focus:bg-black/10 transition-colors"
                   />

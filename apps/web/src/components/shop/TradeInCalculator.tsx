@@ -12,7 +12,7 @@ interface TradeInSourceDevice {
   baseValue: number;
 }
 
-interface TargetDevice {
+export interface TargetDevice {
   slug: string;
   name: string;
   price: number;
@@ -58,9 +58,19 @@ const TARGET_DEVICES: TargetDevice[] = [
   { slug: 'iphone-17-pro-max', name: 'iPhone 17 Pro Max (256GB)', price: 4100000 },
 ];
 
-export function TradeInCalculator({ initialTargetSlug }: { initialTargetSlug?: string }) {
+export function TradeInCalculator({
+  initialTargetSlug,
+  targetDevices,
+}: {
+  initialTargetSlug?: string;
+  targetDevices?: TargetDevice[];
+}) {
+  const activeTargets = useMemo(
+    () => (targetDevices && targetDevices.length > 0 ? targetDevices : TARGET_DEVICES),
+    [targetDevices],
+  );
   const defaultTarget =
-    TARGET_DEVICES.find((d) => d.slug === initialTargetSlug)?.slug ?? TARGET_DEVICES[0].slug;
+    activeTargets.find((d) => d.slug === initialTargetSlug)?.slug ?? activeTargets[0].slug;
 
   const [sourceSlug, setSourceSlug] = useState(SOURCE_DEVICES[0].slug);
   const [storageLabel, setStorageLabel] = useState<string>('256GB');
@@ -80,7 +90,7 @@ export function TradeInCalculator({ initialTargetSlug }: { initialTargetSlug?: s
     const rawValue = (source.baseValue + storageBonus) * (1 - totalDeduction);
     const estimatedValue = Math.max(300000, Math.round(rawValue / 50000) * 50000);
 
-    const target = TARGET_DEVICES.find((t) => t.slug === targetSlug) ?? TARGET_DEVICES[0];
+    const target = activeTargets.find((t) => t.slug === targetSlug) ?? activeTargets[0];
     const balanceToPay = Math.max(0, target.price - estimatedValue);
 
     return {
@@ -89,7 +99,7 @@ export function TradeInCalculator({ initialTargetSlug }: { initialTargetSlug?: s
       estimatedValue,
       balanceToPay,
     };
-  }, [sourceSlug, storageLabel, screenState, functionState, batteryState, targetSlug]);
+  }, [sourceSlug, storageLabel, screenState, functionState, batteryState, targetSlug, activeTargets]);
 
   const handleScheduleWhatsapp = () => {
     const screenText = SCREEN_OPTIONS.find((s) => s.id === screenState)?.label ?? '';
@@ -253,7 +263,7 @@ export function TradeInCalculator({ initialTargetSlug }: { initialTargetSlug?: s
             onChange={(e) => setTargetSlug(e.target.value)}
             className="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-950 px-4 py-3 text-sm font-semibold text-neutral-900 dark:text-white outline-none focus:ring-2 focus:ring-[#0071E3]"
           >
-            {TARGET_DEVICES.map((device) => (
+            {activeTargets.map((device) => (
               <option key={device.slug} value={device.slug}>
                 {device.name} — {formatCOP(device.price)}
               </option>

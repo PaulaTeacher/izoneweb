@@ -46,6 +46,8 @@ export async function POST(req: NextRequest) {
   revalidatePath('/watch');
   revalidatePath('/audio');
   revalidatePath('/accesorios');
+  revalidatePath('/trade-in');
+  revalidatePath('/politicas');
   revalidatePath('/sitemap.xml');
 
   return NextResponse.json({ ok: true, revalidated: true, tag, at: new Date().toISOString() });

@@ -25,7 +25,17 @@ const ipadConfig: CategoryHubConfig = {
 };
 
 export default async function IPadHubPage() {
-  const initialProducts = await getProducts({ category: 'ipad' });
+  const [ipadProducts, tabletAccessories] = await Promise.all([
+    getProducts({ category: 'ipad' }),
+    getProducts({ deviceKind: 'tablet', productKind: 'accessory' }),
+  ]);
+
+  const seen = new Set<string>();
+  const initialProducts = [...ipadProducts, ...tabletAccessories].filter((product) => {
+    if (seen.has(product.id)) return false;
+    seen.add(product.id);
+    return true;
+  });
 
   return (
     <CategoryHub

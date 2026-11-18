@@ -11,6 +11,7 @@ const STATIC_PATHS = [
   '/audio',
   '/accesorios',
   '/trade-in',
+  '/politicas',
   '/shop',
 ] as const;
 

@@ -5,15 +5,15 @@
 
 ## 1. Estado de los PRs (repo `PaulaTeacher/izoneweb`)
 
-| PR | Fase | Rama | Estado |
-|---|---|---|---|
-| #8 | Links sin mocks en 404 | `fix/product-links-no-mock-404` | abierto |
-| #9 | 1 — Web resistente al arranque en frío | `fix/web-cold-start-resilience` (apilado sobre #8) | CI verde |
-| #10 | 2 — `POST /cron/release-expired` con `X-Cron-Secret` | `feat/api-cron-endpoint` | CI verde |
-| #11 | 3 — `Dockerfile`, `/health`, arranque en 0,8 s | `feat/api-docker` | CI verde (incluye `docker build` real) |
-| #12 | 6 — Cargador de stock/SKUs (`db:load-stock`) | `feat/stock-sku-loader` | abierto |
+| PR | Fase | Estado |
+|---|---|---|
+| #8 | Links sin mocks en 404 | ✅ fusionado |
+| #10 | 2 — `POST /cron/release-expired` con `X-Cron-Secret` | ✅ fusionado |
+| #11 | 3 — `Dockerfile`, `/health`, arranque en 0,8 s | ✅ fusionado |
+| #13 | 1 — Web resistente al arranque en frío (reemplaza a #9) | fusionar antes de la Fase 5 |
+| #12 | 6 — Cargador de stock/SKUs (`db:load-stock`) | abierto; no bloquea el despliegue |
 
-**Antes de desplegar, fusionar en `main`: #10 y #11** (la API). Para la web (Fase 5): #8 y luego #9.
+**`main` ya tiene todo lo necesario para desplegar la API (Fase 4).**
 La usuaria decide los merges.
 
 ## 2. Reglas
